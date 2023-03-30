@@ -1,0 +1,196 @@
+import React from 'react'
+
+import Link from 'next/link'
+
+import { getPresetForGame, getPresetsForGame } from '@app/src/domains/legacy/livingdex/games'
+import {
+  generateDexFromPreset,
+  loadPresets,
+  PresetDexMap,
+} from '@app/src/domains/legacy/livingdex/livingdex'
+import { PkBoxGroup } from '@app/src/domains/legacy/livingdex/views/PkBox'
+import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
+import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
+import Button from '@app/src/primitives/legacy/Button/Button'
+import { abs_url } from '@app/src/primitives/legacy/Link/Links'
+import { CmsEntry } from '@app/src/services/legacy/cms/HeadlessCms'
+import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
+import { classNameIf } from '@app/src/utils/legacyUtils'
+
+export async function getStaticProps() {
+  //const entry = await getStaticPropsForEntry(CmsEntryType.Page, 'livingdex', '/', 60 * 60 * 24)
+  const presets = await loadPresets()
+
+  return {
+    props: {
+      //entry,
+      entry: null,
+      presets,
+    },
+  }
+}
+
+const Page = ({ entry, presets }: { entry: CmsEntry | null; presets: PresetDexMap }) => {
+  const [selectedPreset, setSelectedPreset] = React.useState<string>('grouped-region')
+  const dex = getPresetForGame('home', selectedPreset, presets)
+  const homePresets = getPresetsForGame('home', presets)
+
+  // if (!entry) {
+  //   return <LoadingBanner/>
+  // }
+
+  if (!dex) {
+    return (
+      <LoadingBanner
+        content={'Unexpected error. Cannot load the Living Pokédex. Please let us know.'}
+      />
+    )
+  }
+
+  return (
+    <div className={'page-container dex-game dex-game-home'} style={{ maxWidth: 'none' }}>
+      <PkSpriteStyles />
+      <PageMeta
+        metaTitle={
+          'Full Living Pokédex - All Regions | Pokédex Tracker Online Tool - SuperEffective.gg'
+        }
+        metaDescription={
+          'Full Living Pokédex visual guide. Overview of all Pokémon species and forms that ' +
+          'are currently storable in Pokémon HOME.'
+        }
+        robots={'index, follow'}
+        imageUrl={abs_url('/assets/livingdex.png')}
+        canonicalUrl={abs_url('/apps/livingdex/national')}
+        lang={'en'}
+      />
+      <div className={'inner-container text-center'}>
+        <h2>Full National Living Pokédex - All Regions</h2>
+        <div>
+          Overview of all Pokémon species and forms that are currently storable in Pokémon HOME.
+        </div>
+        <div>
+          <small>
+            <i>
+              You can change the sorting / grouping presets by clicking on one of the following
+              buttons:
+            </i>
+          </small>
+        </div>
+        <div className={'buttonera'} style={{ margin: '2.0rem 0 0rem 0' }}>
+          {Object.values(homePresets).map(preset => {
+            return (
+              <Button
+                key={preset.id}
+                title={preset.description}
+                className={'switch-btn ' + classNameIf(selectedPreset === preset.id, 'active')}
+                onClick={() => setSelectedPreset(preset.id)}
+              >
+                {preset.name}
+              </Button>
+            )
+          })}
+        </div>
+        <div style={{ maxWidth: '860px', margin: '3rem auto 1rem auto' }}>
+          <p>
+            <b>{dex.name}</b>: <br /> {dex.description}
+          </p>
+        </div>
+
+        <Link href={'/apps/livingdex/new'} className={'switch-btn hero-btn'}>
+          Track your progress
+        </Link>
+        <style>
+          {`
+            .pkBoxGroupWr-separator {
+              display:none;
+            }
+
+            .buttonera {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                gap: 0.4rem;
+                justify-content: center;
+            }
+            .switch-btn {
+              margin:0;
+              background-color: #333333ee;
+              color:#fff;
+              padding: 0.2rem 1.2rem;
+              border-radius: 5rem;
+              font-size: 0.7rem;
+              cursor: pointer;
+              display: inline-flex;
+              align-content: center;
+              justify-content: center;
+              align-items: center;
+              justify-items: center;
+              text-align: center;
+              text-decoration: none;
+              max-width: 200px;
+              line-height: 1rem;
+
+            }
+            .switch-btn:hover {
+              background-color: var(--color-orange);
+              color:#fff;
+              text-decoration: none;
+            }
+            .switch-btn.active {
+              background-color: #fff;
+              color: #000;
+            }
+
+            /*.buttonera .switch-btn:first-child {
+              margin-left: 0;
+              margin-right:0;
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+              border-right: 1px solid #888;
+            }
+            .buttonera .switch-btn:last-child {
+              margin-left: 0;
+              margin-right:0;
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+            .switch-btn ~ .switch-btn {
+              margin-left:0;
+              margin-right:0;
+            }
+            .switch-btn ~ .switch-btn:not(:last-child) {
+              border-radius: 0;
+              border-right: 1px solid #888;
+            }
+            */
+            .hero-btn {
+              margin-top:2rem;
+              font-size: 1rem;
+              padding: 0.7rem 2.5rem;
+              background-color: var(--color-orange);
+              color: #fff;
+            }
+            .hero-btn:hover{
+              background-color: var(--color-orange-lighter);
+            }
+            .hero-btn:active{
+              background-color: var(--color-orange);
+            }
+          `}
+        </style>
+      </div>
+      <PkBoxGroup
+        dex={generateDexFromPreset('home', dex, undefined)}
+        showNonShiny={true}
+        showShiny={false}
+        selectMode={'cell'}
+        viewMode={'boxed'}
+        usePixelIcons={false}
+        revealPokemon={true}
+        editable={false}
+        markTypes={['shiny']}
+      />
+    </div>
+  )
+}
+
+export default Page

@@ -1,0 +1,16 @@
+version: '3.8'
+volumes:
+  node_modules:
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    command: ['pnpm', 'dev']
+    environment:
+      - PNPM_VERSION=latest
+    ports:
+      - '3001:3001'
+    volumes:
+      - './:/usr/src/app'
+      - node_modules:/usr/src/app/node_modules/ # do not share dependencies with host, as they might be different platforms

@@ -1,0 +1,15 @@
+.silhouette {
+  filter: contrast(0) brightness(0.2);
+  transition: filter 200ms ease;
+}
+
+.silhouette-gray {
+  filter: contrast(0) brightness(1.2);
+  transition: filter 200ms ease;
+}
+
+.silhouette:hover,
+.silhouette-gray:hover {
+  filter: none;
+  transition: filter 200ms ease;
+}

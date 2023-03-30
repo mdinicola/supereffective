@@ -1,0 +1,36 @@
+/** {*/
+/*    position: relative;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-purple-darker);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+a {
+  /*color: #0070f3;*/ /* TODO set a color, and fix all others */
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

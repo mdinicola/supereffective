@@ -1,0 +1,48 @@
+{
+  "name": "supereffective",
+  "version": "3.4.0",
+  "siteName": "Supereffective",
+  "twitter": "@itsupereffectiv",
+  "defaultMetaTitle": "Supereffective - Latest Pokémon news & Scarlet/Violet rumors",
+  "defaultMetaDescription": "Supereffective is a new Pokémon website with news and various tools to assist you in your journey as a trainer. Follow us to stay up-to-date.",
+  "baseUrls": {
+    "develop": "http://localhost:3008",
+    "develop_vercel": "https://supereffective.vercel.app",
+    "preview": "https://beta.supereffective.gg",
+    "production": "https://supereffective.gg"
+  },
+  "webAppColors": {
+    "androidTheme": "#1f1f1f",
+    "windowsTile": "#9200b0",
+    "safariPinnedTab": "#9200b0"
+  },
+  "social": {
+    "twitter": "https://twitter.com/supereffectiv",
+    "github": "https://github.com/itsjavi",
+    "github_repos": "https://github.com/itsjavi/supereffective-assets",
+    "github_dataset": "https://github.com/itsjavi/supereffective-assets",
+    "discord": "https://discord.gg/3fRXQFtrkN",
+    "issue_report": "https://github.com/itsjavi/supereffective.gg/issues",
+    "paypal_donate": "https://www.paypal.me/metaunicorn/10"
+  },
+  "contentful": {
+    "spaceId": "z3n4wfihq8mj",
+    "mediaBaseUrl": "https://images.ctfassets.net/z3n4wfihq8mj/"
+  },
+  "firebase": {
+    "apiKey": "AIzaSyDtCh5Bs9YaGXqisXcuXJFLop0w9DaunKQ",
+    "authDomain": "supereffective-gg.firebaseapp.com",
+    "projectId": "supereffective-gg",
+    "storageBucket": "supereffective-gg.appspot.com",
+    "messagingSenderId": "956042036019",
+    "appId": "1:956042036019:web:d3c55e9466d3b7708b3446",
+    "measurementId": "G-48QLCEFF33"
+  },
+  "limits": {
+    "saveBtnDelay": 4000,
+    "maxDexes": 4,
+    "maxPokemonPerBox": 30,
+    "maxBoxTitleSize": 15,
+    "maxDexTitleSize": 32
+  }
+}

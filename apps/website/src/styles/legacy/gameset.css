@@ -1,0 +1,128 @@
+/* ------------------------------------------ */
+
+.gameset-tag {
+  border-radius: 0.5rem;
+  background-color: #a4a4a4;
+  border: 1px solid #737373;
+  color: #fff;
+  margin: 2px;
+  display: inline-block;
+  padding: 2px 4px;
+  font-style: normal;
+  text-shadow: 1px 1px black;
+  /*opacity: 0.7;*/
+  cursor: default;
+  user-select: none;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.gameset-e,
+.gameset-c,
+.gameset-y {
+  padding: 2px 8px;
+}
+
+.gameset-rb {
+  background: linear-gradient(to right, #ff0000 50%, #0000ff 50%);
+}
+
+.gameset-y {
+  background: linear-gradient(to right, #ffff37 50%, #ffff37 50%);
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
+.gameset-gs {
+  background: linear-gradient(to right, #ffb702 50%, #85939f 50%);
+}
+
+.gameset-c {
+  background: linear-gradient(to right, #a38eff 50%, #a38eff 50%);
+}
+
+.gameset-rs {
+  background: linear-gradient(to right, #ff0000 0%, #0000ff 100%);
+}
+
+.gameset-e {
+  background: linear-gradient(to right, #5aab3c 50%, #5aab3c 50%);
+  padding: 2px 8px;
+}
+
+.gameset-frlg {
+  background: linear-gradient(to right, #ff6a00 50%, #5aab3c 50%);
+}
+
+.gameset-dp {
+  background: linear-gradient(to right, #7ab6f6 50%, #de9ad9 50%);
+}
+
+.gameset-pt {
+  background: linear-gradient(to right, #ead6b8 0%, #838383 100%);
+  color: black;
+  text-shadow: 1px 1px #fff;
+}
+
+.gameset-hgss {
+  background: linear-gradient(to right, #ffb702 0%, #85939f 100%);
+}
+
+.gameset-bw {
+  background: linear-gradient(to right, #000 50%, #fff 50%);
+  text-shadow: 1px 1px black;
+}
+
+.gameset-b2w2 {
+  background: linear-gradient(to right, #000 1%, #fff 100%);
+}
+
+.gameset-xy {
+  background: linear-gradient(to right, #365ea6 50%, #d22f4b 50%);
+}
+
+.gameset-oras {
+  background: linear-gradient(to right, #ff0000 0%, #0000ff 100%);
+}
+
+.gameset-sm {
+  background: linear-gradient(to right, #ff8000 50%, #5e00ff 50%);
+}
+
+.gameset-usum {
+  background: linear-gradient(to right, #ff8000 0%, #5e00ff 100%);
+}
+
+.gameset-go {
+  background: linear-gradient(to right, #00c4ff 0%, #0066ff 70%);
+}
+
+.gameset-lgpe {
+  background: linear-gradient(to right, #ffd500 50%, #986734 50%);
+}
+
+.gameset-swsh {
+  background: linear-gradient(to right, #32b1c7 50%, #d22f86 50%);
+}
+
+.gameset-home {
+  background: linear-gradient(to right, #6fc209 10%, #07c9bc 100%);
+}
+
+.gameset-bdsp {
+  background: linear-gradient(to right, #7ab6f6 0%, #de9ad9 100%);
+}
+
+.gameset-la {
+  background: linear-gradient(to right, #ffffff 10%, #ffc70e 100%);
+  color: black;
+  text-shadow: 1px 1px #fff;
+}
+
+.gameset-sv {
+  background: linear-gradient(to right, #f84830 50%, #b05eff 50%);
+}
+
+.gameset-none {
+  background: #bbb;
+}

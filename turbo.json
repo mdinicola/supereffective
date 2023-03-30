@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_ENV",
+    "CONTENTFUL_ACCESS_TOKEN",
+    "PREVIEW_MODE_TOKEN",
+    "CONTENTFUL_PREVIEW_ACCESS_TOKEN",
+    "NEXT_PUBLIC_GOOGLE_ANALYTICS_ID",
+    "ANALYZE"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

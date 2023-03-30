@@ -1,0 +1,16 @@
+{
+  // "extends": ["next", "turbo", "next/core-web-vitals", "prettier"],
+  "extends": ["next", "turbo", "next/core-web-vitals", "prettier"],
+  "plugins": ["react-hooks"],
+  "rules": {
+    // "@next/next/no-html-link-for-pages": "off",
+    // images
+    "@next/next/no-img-element": "warn",
+    "jsx-a11y/alt-text": "error",
+    // components
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-key": "error",
+    "react/no-unescaped-entities": "off"
+  }
+}

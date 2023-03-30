@@ -1,0 +1,15 @@
+# Ignore:
+build
+.next
+.turbo
+data
+node_modules
+public
+.yarn/
+.cache/
+coverage/
+pnpm-*.yaml
+.history/
+v8-compile-cache-*
+.pnpm-store
+.vercel/
