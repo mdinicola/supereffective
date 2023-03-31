@@ -1,0 +1,16 @@
+{
+  "texts": {
+    "title": "SuperEffective",
+    "standaloneTitle": "SuperEffective"
+  },
+  "colors": {
+    "$primary": "#A692EB",
+    "$faviconBg": "#A692EB",
+    "marine": "#3F35BA",
+    "magenta": "#E93E65",
+    "purple": "#863B98",
+    "purpleLight": "#A692EB",
+    "slate": "#5A667A",
+    "slateLight": "#94A3B8"
+  }
+}
