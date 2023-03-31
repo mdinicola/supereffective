@@ -13,7 +13,6 @@ import { useScrollToLocation } from '@app/src/hooks/legacy/useScrollToLocation'
 import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
 import { ButtonInternalLink } from '@app/src/primitives/legacy/Button/Button'
 import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
-
 import styles from './GamePresetSelector.module.css'
 
 export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {

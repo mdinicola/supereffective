@@ -5,7 +5,6 @@ import { PokemonEntryMinimal } from '@app/src/domains/legacy/livingdex/pokemon'
 import PkImage from '@app/src/domains/legacy/livingdex/views/PkImage'
 import Button from '@app/src/primitives/legacy/Button/Button'
 import { classNameIf, classNames, titleize } from '@app/src/utils/legacyUtils'
-
 import css from './Pokedex.module.css'
 
 export interface PokedexProps {

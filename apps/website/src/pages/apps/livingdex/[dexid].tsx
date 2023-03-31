@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { GetServerSidePropsContext } from 'next'
 
 import { GameId, getGameSet } from '@app/src/domains/legacy/livingdex/games'

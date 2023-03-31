@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-
 import Link from 'next/link'
 
 import { classNameIf, classNames, clog } from '@app/src/utils/legacyUtils'
-
 import styles from './ToolbarButton.module.css'
 
 export type ToolbarButtonStatus =

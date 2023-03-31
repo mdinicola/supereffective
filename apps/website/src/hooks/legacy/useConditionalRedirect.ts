@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-
 import { useRouter } from 'next/router'
 
 import { clog } from '@app/src/utils/legacyUtils'

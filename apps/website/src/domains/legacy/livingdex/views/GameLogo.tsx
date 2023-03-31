@@ -1,9 +1,7 @@
 import React from 'react'
-
 import Image from 'next/image'
 
 import { GameId, getGame } from '@app/src/domains/legacy/livingdex/games'
-
 import styles from './GameLogo.module.css'
 
 interface GameLogoProps {

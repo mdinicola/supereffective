@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Link from 'next/link'
 
 import { getPresetForGame, getPresetsForGame } from '@app/src/domains/legacy/livingdex/games'

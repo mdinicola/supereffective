@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react'
-
 import { useRouter } from 'next/router'
 
 import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,7 +6,6 @@ import CommentsSection from '@app/src/primitives/legacy/Comments/CommentsSection
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
 import { CmsImage } from '@app/src/services/legacy/cms/HeadlessCms'
 import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
-
 import PageMeta, { PageMetaProps } from '../../../../layouts/LegacyLayout/PageMeta'
 import { ButtonLink } from '../../../../primitives/legacy/Button/Button'
 import styles from './ArticleEntry.module.css'

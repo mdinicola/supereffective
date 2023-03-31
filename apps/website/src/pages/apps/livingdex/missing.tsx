@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-
 import Link from 'next/link'
 
 import pokemonEntries from '@app/data/builds/pokemon/pokemon-entries-minimal.min.json'
@@ -15,7 +14,6 @@ import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
 import { DexPokemon, NullableDexPokemon } from '@app/src/services/legacy/datastore/Entities'
 import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
-
 import styles from './missing.module.css'
 
 export async function getServerSideProps() {

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef } from 'react'
-
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 

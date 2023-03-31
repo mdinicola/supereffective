@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Head from 'next/head'
 
 const envName = (process.env.NEXT_PUBLIC_ENV as string) || 'develop'

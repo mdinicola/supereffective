@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-
 import Link from 'next/link'
 
 import { getGameSet } from '@app/src/domains/legacy/livingdex/games'
@@ -12,7 +11,6 @@ import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
 import { ButtonInternalLink } from '@app/src/primitives/legacy/Button/Button'
 import { Dex } from '@app/src/services/legacy/datastore/Entities'
 import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
-
 import styles from './Dashboard.module.css'
 
 const GameCard = ({ dex }: { dex: Dex }) => {

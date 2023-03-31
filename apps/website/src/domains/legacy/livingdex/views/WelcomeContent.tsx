@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,7 +9,6 @@ import { useScrollToLocation } from '@app/src/hooks/legacy/useScrollToLocation'
 import { ButtonInternalLink } from '@app/src/primitives/legacy/Button/Button'
 import { SiteLink } from '@app/src/primitives/legacy/Link/Links'
 import tracker from '@app/src/services/legacy/metrics/tracker'
-
 import styles from './WelcomeContent.module.css'
 
 export const WelcomeContent = () => {

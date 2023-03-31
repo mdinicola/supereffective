@@ -1,7 +1,5 @@
 import { UserCredential } from '@firebase/auth'
-
 import React, { ReactNode, useContext, useRef, useState } from 'react'
-
 import { useRouter } from 'next/router'
 
 import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'

@@ -7,12 +7,12 @@
   "arrowParens": "avoid",
   "jsxSingleQuote": false,
   "plugins": ["@ianvs/prettier-plugin-sort-imports"],
-  "importOrder": ["^[Rr]eact(.*)$", "^@?next(.*)$", "^@app/(.*)$", "^@/(.*)$", "^[./]"],
+  "importOrderSeparation": false,
+  "importOrder": ["^[Rr]eact(.*)$", "^@?next(.*)$", "", "^@app/(.*)$", "^@/(.*)$", "^[./]"],
   "importOrderBuiltinModulesToTop": true,
   "importOrderCaseInsensitive": true,
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "importOrderMergeDuplicateImports": true,
   "importOrderCombineTypeAndValueImports": true,
-  "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
