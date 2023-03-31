@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Dashboard } from '@app/src/domains/legacy/livingdex/views/Dashboard'
 import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
 import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
@@ -7,6 +9,7 @@ import {
   CmsEntryType,
   getStaticPropsForEntry,
 } from '@app/src/services/legacy/cms/HeadlessCms'
+import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
 
 export async function getStaticProps() {
   return await getStaticPropsForEntry(CmsEntryType.Page, 'livingdex', '/', 60 * 60 * 24)
@@ -28,6 +31,7 @@ const Page = ({ entry }: { entry: CmsEntry | null }) => {
         lang={'en'}
       />
       <>
+        <PkSpriteStyles />
         <Dashboard />
       </>
     </div>
