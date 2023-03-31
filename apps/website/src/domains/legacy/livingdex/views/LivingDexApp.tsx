@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
-
 import { useRouter } from 'next/router'
 
-import config from '@app/src/config/legacy'
+import config from '@app/src/config'
+import legacyConfig from '@app/src/config/legacyConfig'
 import {
   getGameSet,
   getPresetForGame,
@@ -41,7 +41,6 @@ import { Dex, DexBox, DexPokemon } from '@app/src/services/legacy/datastore/Enti
 import { removeDex, saveDex } from '@app/src/services/legacy/datastore/Firebase'
 import tracker from '@app/src/services/legacy/metrics/tracker'
 import { classNameIf, clog } from '@app/src/utils/legacyUtils'
-
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
 
@@ -202,8 +201,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       return
     }
 
-    if (newTitle.length > config.limits.maxDexTitleSize) {
-      newTitle = newTitle.slice(0, config.limits.maxDexTitleSize)
+    if (newTitle.length > legacyConfig.limits.maxDexTitleSize) {
+      newTitle = newTitle.slice(0, legacyConfig.limits.maxDexTitleSize)
     }
 
     app.setDexTitle(newTitle)
@@ -214,8 +213,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       return
     }
 
-    if (newTitle.length > config.limits.maxBoxTitleSize) {
-      newTitle = newTitle.slice(0, config.limits.maxBoxTitleSize)
+    if (newTitle.length > legacyConfig.limits.maxBoxTitleSize) {
+      newTitle = newTitle.slice(0, legacyConfig.limits.maxBoxTitleSize)
     }
 
     app.setBoxTitle(boxIndex, newTitle)
@@ -225,7 +224,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     setSavingState('saved')
     setTimeout(() => {
       setSavingState('ready')
-    }, config.limits.saveBtnDelay)
+    }, legacyConfig.limits.saveBtnDelay)
   }
 
   const handleSave = () => {
@@ -473,8 +472,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 actionName: 'catch',
                 icon: 'pkg-pokeball',
                 label: 'Caught Marker Tool',
-              },
-              // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
+              }, // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
               {
                 actionName: 'gmax',
                 icon: 'pkg-dynamax',
@@ -571,8 +569,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   status: status,
                   className: styles.saveBtn,
                   showLabel: true,
-                },
-                // {
+                }, // {
                 //   actionName: null,
                 //   icon: 'help',
                 //   href: '/apps/livingdex#howto',
@@ -723,7 +720,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             <h2 className={styles.dexTitle}>
               {isEditable && (
                 <InlineTextEditor
-                  maxLength={config.limits.maxDexTitleSize}
+                  maxLength={legacyConfig.limits.maxDexTitleSize}
                   afterEdit={handleDexTitleChange}
                 >
                   {dex.title}
@@ -756,7 +753,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         {isEditable && false && (
           <div className={'inner-container text-center ' + styles.dexMessageBanner}>
             Missing something? You can find all the data and presets used to organize all boxes in
-            our <ExternLink href={config.social.github_dataset}>Dataset Repository</ExternLink>.
+            our <ExternLink href={config.links.github_dataset}>Dataset Repository</ExternLink>.
           </div>
         )}
 

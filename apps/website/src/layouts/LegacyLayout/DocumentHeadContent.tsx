@@ -1,8 +1,8 @@
-import config from '@app/src/config/config.json'
+import config from '@app/src/config'
 import { GoogleAnalyticsScript } from '@app/src/layouts/LegacyLayout/GoogleAnalytics'
 
 export default function DocumentHeadContent(): JSX.Element {
-  const bgColor = config.colors.$faviconBg
+  const bgColor = config.theme.colors.$faviconBg
 
   return (
     <>

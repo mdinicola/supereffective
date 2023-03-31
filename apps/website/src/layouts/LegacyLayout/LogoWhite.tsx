@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import config from '@app/src/config/legacy'
+import config from '@app/src/config'
 
 export interface LogoWhiteProps {
   opacity: number
@@ -12,10 +12,10 @@ export interface LogoWhiteProps {
 export const LogoWhite = ({ opacity, ...props }: LogoWhiteProps) => {
   return (
     <div className="logoContainer" {...props}>
-      <Link href="/pages">
+      <Link href="/">
         <Image src="/assets/logo/logo-white.png" width="48" height="48" alt="logo" />
         <br />
-        <span className="title typo-compact">{config.siteName}</span>
+        <span className="title typo-compact">{config.texts.siteName}</span>
       </Link>
       <style jsx>{`
         .logoContainer {

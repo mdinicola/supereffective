@@ -1,12 +1,10 @@
 import { useState } from 'react'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import config from '@app/src/config/legacy'
+import config from '@app/src/config'
 import UserMenu from '@app/src/layouts/LegacyLayout/UserMenu'
-
 import { ExternLink, SiteLink } from '../../primitives/legacy/Link/Links'
 import styles from './MainHeader.module.css'
 
@@ -27,7 +25,7 @@ export default function MainHeader() {
           <Link href="/" className={styles.headerLogo} tabIndex={0}>
             <Image src="/assets/logo/logo.png" width="64" height="64" alt="logo" />
             <h1>
-              {config.siteName}
+              {config.texts.siteName}
               <small>.gg</small>
             </h1>
           </Link>
@@ -46,7 +44,7 @@ export default function MainHeader() {
             <SiteLink activeClass={styles.active} tabIndex={2} href="/apps/livingdex">
               <i className={'icon-pkg-box-home margin-r icon--2x'} /> Dex Tracker
             </SiteLink>
-            <ExternLink href={config.social.twitter} tabIndex={3} title={'Twitter'}>
+            <ExternLink href={config.links.twitter} tabIndex={3} title={'Twitter'}>
               <i
                 style={{ color: '#56c2e3', fontSize: '1.4rem' }}
                 className={'icon-brand-twitter'}
@@ -55,7 +53,7 @@ export default function MainHeader() {
                 Twitter
               </span>
             </ExternLink>
-            <ExternLink href={config.social.discord} tabIndex={4} title={'Discord'}>
+            <ExternLink href={config.links.discord} tabIndex={4} title={'Discord'}>
               <i
                 style={{ color: '#5667E3', fontSize: '1.4rem' }}
                 className={'icon-brand-discord'}

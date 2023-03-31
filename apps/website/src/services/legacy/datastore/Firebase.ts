@@ -45,8 +45,7 @@ import {
 } from '@app/src/domains/legacy/livingdex/livingdex'
 import tracker from '@app/src/services/legacy/metrics/tracker'
 import { clog, getUtcTimestamp } from '@app/src/utils/legacyUtils'
-
-import config from '../../../config/legacy'
+import config from '../../../config'
 import {
   CollectionType,
   Dex,
@@ -62,7 +61,7 @@ import {
 // Initialize Firebase
 if (!getApps().length) {
   // to avoid initializing multiple times (this will run in the client and server)
-  initializeApp(config.firebase)
+  initializeApp(config.services.firebase)
 }
 
 const app = getApp()

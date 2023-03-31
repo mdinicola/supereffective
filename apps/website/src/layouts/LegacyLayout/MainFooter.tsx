@@ -1,7 +1,6 @@
 import React from 'react'
 
-import config from '@app/src/config/legacy'
-
+import config from '@app/src/config'
 import { ExternLink, links_to_li, SiteLink, siteLinks } from '../../primitives/legacy/Link/Links'
 import { LogoWhite } from './LogoWhite'
 import styles from './MainFooter.module.css'
@@ -13,7 +12,7 @@ export default function MainFooter() {
       <section className={styles.main}>
         <div className={[styles.mainItem, styles.logoContainer].join(' ')}>
           <LogoWhite opacity={0.5} />
-          <div className={styles.siteVersion}>v{config.version}</div>
+          <div className={styles.siteVersion}>v{config.version.num}</div>
         </div>
         <nav className={styles.mainItem}>
           <p className={titleClass}>Articles</p>
@@ -25,7 +24,7 @@ export default function MainFooter() {
               <SiteLink href="/about">About This Site</SiteLink>
             </li>
             <li>
-              <ExternLink href={config.social.github}>Github Projects</ExternLink>
+              <ExternLink href={config.links.github}>Github Projects</ExternLink>
             </li>
           </ul>
         </nav>
@@ -47,13 +46,13 @@ export default function MainFooter() {
               </SiteLink>
             </li>
             <li>
-              <ExternLink href={config.social.github_repos} title={''}>
+              <ExternLink href={config.links.github_repos} title={''}>
                 <i className="icon-embed2" title="Discord" />
                 <span>Data Repository</span>
               </ExternLink>
             </li>
             <li>
-              <ExternLink href={config.social.issue_report} title={''}>
+              <ExternLink href={config.links.issue_report} title={''}>
                 <i className="icon-bug" title="Discord" />
                 <span>Report an issue</span>
               </ExternLink>
@@ -79,13 +78,13 @@ export default function MainFooter() {
           <p className={titleClass}>Follow Us</p>
           <ul>
             <li className={styles.socialList}>
-              <ExternLink href={config.social.twitter}>
+              <ExternLink href={config.links.twitter}>
                 <i className="icon-brand-twitter" title="Twitter" />
               </ExternLink>
-              <ExternLink href={config.social.github}>
+              <ExternLink href={config.links.github}>
                 <i className="icon-brand-github" title="Github" />
               </ExternLink>
-              <ExternLink href={config.social.discord}>
+              <ExternLink href={config.links.discord}>
                 <i className="icon-brand-discord" title="Discord" />
               </ExternLink>
             </li>

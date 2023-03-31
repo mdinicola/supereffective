@@ -1,9 +1,8 @@
 import React from 'react'
-
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
 
-import config from '@app/src/config/legacy'
+import config from '@app/src/config'
 
 export interface LinkDefinition {
   url: string
@@ -15,6 +14,7 @@ export interface LinkDefinition {
 interface NavLinkProps extends LinkProps {
   children: React.ReactElement | any
   activeClass?: string
+
   [key: string]: any
 }
 

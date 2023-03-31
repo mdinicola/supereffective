@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react'
 
-import config from '@app/src/config/legacy'
+import legacyConfig from '@app/src/config/legacyConfig'
 import { canGmax, getPokemonEntry } from '@app/src/domains/legacy/livingdex/pokemon'
 import InlineTextEditor from '@app/src/primitives/legacy/Input/InlineTextEditor'
 import { Dex, DexBox, DexPokemon } from '@app/src/services/legacy/datastore/Entities'
 import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
-
 import styles from './PkBox.module.css'
 import PkImage from './PkImage'
 
@@ -159,7 +158,7 @@ export function PkBox(props: PkBoxProps) {
           {!props.editable && props.title}
           {props.editable && (
             <InlineTextEditor
-              maxLength={config.limits.maxBoxTitleSize}
+              maxLength={legacyConfig.limits.maxBoxTitleSize}
               className={styles.pkBoxHeaderTitleEditor}
               afterEdit={(value: string) => {
                 if (props.onBoxTitleEdit) {
@@ -239,7 +238,10 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
 
     box.pokemon.forEach((cellPkm, cellIndex) => {
       let cellTabIndex: number | undefined =
-        initialTabIndex + dex.boxes.length + boxIndex * config.limits.maxPokemonPerBox + cellIndex
+        initialTabIndex +
+        dex.boxes.length +
+        boxIndex * legacyConfig.limits.maxPokemonPerBox +
+        cellIndex
 
       if (props.selectMode === 'box') {
         cellTabIndex = undefined

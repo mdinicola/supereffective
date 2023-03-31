@@ -1,12 +1,10 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { ContentfulClientApi, createClient } from 'contentful'
-
 import React from 'react'
-
 import Image from 'next/image'
 
-import config from '@app/src/config/legacy'
+import config from '@app/src/config'
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
 
 export enum CmsEntryType {
@@ -67,7 +65,7 @@ const createContentfulClient = (isPreview: boolean): ContentfulClientApi => {
   }
 
   return createClient({
-    space: config.contentful.spaceId,
+    space: config.services.contentful.spaceId,
     host: isPreview ? 'preview.contentful.com' : 'cdn.contentful.com',
     accessToken: isPreview
       ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
