@@ -1,6 +1,7 @@
+import { getEnvName } from '@app/src/config/env'
 import servicesConfig from './services'
 
-const envName = (process.env.NEXT_PUBLIC_ENV as string) || 'develop'
+const envName = getEnvName()
 
 const baseUrls: Record<string, string> = {
   develop: 'http://localhost:3001',

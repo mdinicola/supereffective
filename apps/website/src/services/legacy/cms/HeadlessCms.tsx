@@ -66,6 +66,7 @@ const createContentfulClient = (isPreview: boolean): ContentfulClientApi => {
 
   return createClient({
     space: config.services.contentful.spaceId,
+    environment: config.services.contentful.environment,
     host: isPreview ? 'preview.contentful.com' : 'cdn.contentful.com',
     accessToken: isPreview
       ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN

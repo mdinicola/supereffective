@@ -1,7 +1,10 @@
+import { isProduction } from '@app/src/config/env'
+
 const servicesConfig = {
   contentful: {
     spaceId: 'z3n4wfihq8mj',
     mediaBaseUrl: 'https://images.ctfassets.net/z3n4wfihq8mj/',
+    environment: isProduction() ? 'master' : 'development',
   },
   firebase: {
     apiKey: 'AIzaSyDtCh5Bs9YaGXqisXcuXJFLop0w9DaunKQ',

@@ -83,3 +83,6 @@ v8-compile-cache-*
 
 # pnpm
 .pnpm-store
+
+# cms
+.contentlayer/

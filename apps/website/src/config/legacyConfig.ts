@@ -1,4 +1,4 @@
-const envName = (process.env.NEXT_PUBLIC_ENV as string) || 'develop'
+import { isDevelopment } from '@app/src/config/env'
 
 const legacyConfig = {
   limits: {
@@ -10,7 +10,7 @@ const legacyConfig = {
   },
 }
 
-if (envName === 'develop') {
+if (isDevelopment()) {
   legacyConfig.limits.maxDexes = 20
 }
 
