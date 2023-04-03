@@ -2,11 +2,6 @@
 
 Source code for supereffective.gg 's website.
 
-> IMPORTANT: This project, as well as [supereffective-assets](https://github.com/itsjavi/supereffective-assets)
-> are being rewritten from scratch under [supereffective-next](https://github.com/itsjavi/supereffective-next),
-> so contributions to this repository should not add new features, but rather fix bugs or pave the way
-> to migrate to the new version of the website.
-
 ## Software Stack
 
 We use the following technologies, services and tools:
