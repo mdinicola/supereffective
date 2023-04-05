@@ -37,7 +37,7 @@ export default function UserMenu({ loginLink }: { loginLink: ReactElement }) {
       {/*</SiteLink>*/}
       <a
         tabIndex={5}
-        href="apps/website/src/layouts/BaseLayout#"
+        href="#"
         onClick={() => {
           onLogoutClick()
           return false
