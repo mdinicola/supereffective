@@ -23,10 +23,10 @@ This repository is a Turbo monorepo, meaning it contains multiple packages and a
 
 ## Project Structure
 
-The main application is the website, which is located in `apps/website`. It is a NextJS application with
+The main application is the website, which is located in `packages/website`. It is a NextJS application with
 the following structure:
 
-**`./apps/website`:**
+**`./packages/website`:**
 
 - `data`: data imported from `itsjavi/supereffective-assets`. This should never be edited manually.
 - `public`: static assets

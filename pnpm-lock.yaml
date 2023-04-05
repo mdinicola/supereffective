@@ -41,7 +41,7 @@ importers:
         specifier: ^4.9.5
         version: 4.9.5
 
-  apps/website:
+  packages/website:
     dependencies:
       '@contentlayer/source-files':
         specifier: ^0.3.1

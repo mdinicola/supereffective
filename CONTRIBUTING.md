@@ -25,7 +25,7 @@ pnpm install
 
 ## Developing
 
-The main package can be found in `apps/website`. You can quickly test and debug your
+The main package can be found in `packages/website`. You can quickly test and debug your
 changes by running:
 
 ```sh

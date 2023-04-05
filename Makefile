@@ -7,13 +7,13 @@ dev: # because make dev is quicker to type than pnpm dev:docker
 	pnpm dev:docker
 
 postinstall-dev:
-	if [[ ! -f "apps/website/.env.local" ]]; then cp .env.dist apps/website/.env.local; fi;
+	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
 	pnpm husky install
 	pnpm format:packages
-	cd apps/website && pnpm data:sync
+	cd packages/website && pnpm data:sync
 
 postinstall-prod:
-	cd apps/website && pnpm data:sync
+	cd packages/website && pnpm data:sync
 
 # These are only relevant if you have access to the Vercel team:
 

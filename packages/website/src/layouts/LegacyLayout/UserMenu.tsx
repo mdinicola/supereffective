@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react'
 
 import { useLoginDetection } from '@app/src/domains/legacy/users/hooks/useLoginDetection'
 import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
@@ -19,7 +19,7 @@ export default function UserMenu({ loginLink }: { loginLink: ReactElement }) {
 
   if (state.loading) {
     return (
-      <a href="apps/website/src/layouts/BaseLayout#" style={{ background: 'none !important' }}>
+      <a href="#" style={{ background: 'none !important' }}>
         Loading...
       </a>
     )

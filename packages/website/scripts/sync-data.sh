@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# run this from inside the apps/website/ directory
+# run this from inside the packages/website/ directory
 
 echo "  >>>  Importing supereffective-assets..."
 

@@ -96,6 +96,6 @@ export const Article = defineDocumentType<'Article'>(() => ({
 }))
 
 export default makeSource({
-  contentDirPath: 'cms',
+  contentDirPath: '../../cms',
   documentTypes: [Page, Article],
 })

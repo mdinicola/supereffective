@@ -4,7 +4,7 @@ module.exports = {
   rules: {},
   settings: {
     next: {
-      rootDir: ['apps/*/'],
+      rootDir: ['packages/*/'],
     },
   },
 }
