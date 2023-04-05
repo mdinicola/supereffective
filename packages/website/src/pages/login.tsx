@@ -1,22 +1,22 @@
 import { UserCredential } from '@firebase/auth'
-import React, { ReactNode, useContext, useRef, useState } from 'react'
+import { ReactNode, useContext, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import { useConditionalRedirect } from '@app/src/hooks/legacy/useConditionalRedirect'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import Button from '@app/src/primitives/legacy/Button/Button'
-import { abs_url, SiteLink } from '@app/src/primitives/legacy/Link/Links'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import Button from '#/primitives/legacy/Button/Button'
+import { abs_url, SiteLink } from '#/primitives/legacy/Link/Links'
 import {
   createUserWithEmail,
   loginWithEmail,
   loginWithGithub,
   loginWithGoogle,
   loginWithTwitter,
-} from '@app/src/services/legacy/datastore/Firebase'
-import tracker from '@app/src/services/legacy/metrics/tracker'
-import { debug } from '@app/src/utils/legacyUtils'
+} from '#/services/legacy/datastore/Firebase'
+import tracker from '#/services/legacy/metrics/tracker'
+import { debug } from '#/utils/legacyUtils'
 
 const Page = () => {
   const router = useRouter()

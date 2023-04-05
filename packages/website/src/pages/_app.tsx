@@ -1,4 +1,4 @@
-import '@app/src/styles/legacy/styles.css'
-import LegacyApp from '@app/src/apps/LegacyApp'
+import LegacyApp from '#/apps/LegacyApp'
+import '#/styles/legacy/styles.css'
 
 export default LegacyApp

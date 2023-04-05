@@ -1,5 +1,5 @@
-import config from '@app/src/config'
-import { debug } from '@app/src/utils/legacyUtils'
+import config from '#/config'
+import { debug } from '#/utils/legacyUtils'
 
 const GTAG_ID = config.services.analytics.googleAnalyticsId
 

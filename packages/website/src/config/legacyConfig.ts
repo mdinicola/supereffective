@@ -1,4 +1,4 @@
-import { isDevelopmentEnv } from '@app/src/config/env'
+import { isDevelopmentEnv } from '#/config/env'
 
 const legacyConfig = {
   limits: {

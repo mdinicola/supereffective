@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { UserContextType } from '@app/src/domains/legacy/users/state/UserContext'
-import { DexList } from '@app/src/services/legacy/datastore/Entities'
-import { findDexesByUser } from '@app/src/services/legacy/datastore/Firebase'
-import { debug } from '@app/src/utils/legacyUtils'
+import { UserContextType } from '#/features/legacy/users/state/UserContext'
+import { DexList } from '#/services/legacy/datastore/Entities'
+import { findDexesByUser } from '#/services/legacy/datastore/Firebase'
+import { debug } from '#/utils/legacyUtils'
 
 export const useUserDexes = (
   userCtx: UserContextType

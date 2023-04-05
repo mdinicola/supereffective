@@ -5,10 +5,10 @@ import {
   isNotCatchable,
   normalizeDexWithPreset,
   PresetDex,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import { Dex, DexList, NullableDexPokemon } from '@app/src/services/legacy/datastore/Entities'
-import tracker from '@app/src/services/legacy/metrics/tracker'
-import { debug } from '@app/src/utils/legacyUtils'
+} from '#/features/legacy/livingdex/livingdex'
+import { Dex, DexList, NullableDexPokemon } from '#/services/legacy/datastore/Entities'
+import tracker from '#/services/legacy/metrics/tracker'
+import { debug } from '#/utils/legacyUtils'
 
 // ===========================
 //          TYPES

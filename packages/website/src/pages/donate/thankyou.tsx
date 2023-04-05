@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-import useBackgroundTheme from '@app/src/hooks/legacy/useBackgroundTheme'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
+import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
   useBackgroundTheme('teal-pattern')

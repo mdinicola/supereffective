@@ -1,4 +1,4 @@
-import shinyLockedPokemon from '@app/data/builds/pokemon/pokemon-unobtainable-shiny.min.json'
+import shinyLockedPokemon from '#/data/builds/pokemon/pokemon-unobtainable-shiny.min.json'
 import {
   GAME_SETS,
   GameId,
@@ -8,8 +8,8 @@ import {
   getPresetForGameSet,
   SUPPORTED_GAME_SETS,
   SUPPORTED_GAMES,
-} from '@app/src/domains/legacy/livingdex/games'
-import { getPokemonEntry } from '@app/src/domains/legacy/livingdex/pokemon'
+} from '#/features/legacy/livingdex/games'
+import { getPokemonEntry } from '#/features/legacy/livingdex/pokemon'
 import {
   Dex,
   DEX_SCHEMA_VERSION,
@@ -22,8 +22,8 @@ import {
   StorableDex,
   StorableDexBox,
   StorableDexPokemon,
-} from '@app/src/services/legacy/datastore/Entities'
-import { debug, getUtcTimestamp } from '@app/src/utils/legacyUtils'
+} from '#/services/legacy/datastore/Entities'
+import { debug, getUtcTimestamp } from '#/utils/legacyUtils'
 
 const shinyLockedPokemonMap: { [key: string]: true | undefined } = shinyLockedPokemon.reduce(
   (acc, pokemon) => {
@@ -187,7 +187,7 @@ export const getAvailableGameSets = (dexes: DexList): GameSetId[] => {
 
 export const loadPresets = async (): Promise<PresetDexMap> => {
   //return await import(`./dummy-box-presets.json`).then(module => module.default)
-  return await import('@app/data/builds/box-presets-full.min.json').then(module => module.default)
+  return await import('#/data/builds/box-presets-full.min.json').then(module => module.default)
 }
 
 const _pidToDexPokemon = (

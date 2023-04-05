@@ -36,8 +36,8 @@ Website is a NextJS application with the following structure:
 - `src`:
   - `apps`: root-level app components (this is not a NextJS 13 `app` dir structure)
   - `config`: general app config (e.g. from env vars, json files or ts code)
-  - `domains`: business logic in bounded contexts
-    - `/**/`: name of the domain
+  - `features`: business logic in bounded contexts, following some DDD principles
+    - `/**/`: name of the domain / feature
       - `hooks`: hooks specific to this domain
       - `state`: domain state: contexts, objects and types
       - `views`: domain views: components and page components

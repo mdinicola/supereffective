@@ -1,4 +1,4 @@
-import { GameId, GameSetId } from '@app/src/domains/legacy/livingdex/games'
+import { GameId, GameSetId } from '#/features/legacy/livingdex/games'
 
 export type CollectionType = 'users' | 'dexes'
 export const DEX_SCHEMA_VERSION = 3

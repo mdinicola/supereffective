@@ -42,9 +42,9 @@ import {
   documentToDex,
   normalizeDocumentToDex,
   PresetDexMap,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import tracker from '@app/src/services/legacy/metrics/tracker'
-import { debug, getUtcTimestamp } from '@app/src/utils/legacyUtils'
+} from '#/features/legacy/livingdex/livingdex'
+import tracker from '#/services/legacy/metrics/tracker'
+import { debug, getUtcTimestamp } from '#/utils/legacyUtils'
 import config from '../../../config'
 import {
   CollectionType,

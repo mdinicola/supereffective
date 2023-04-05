@@ -1,4 +1,4 @@
-import { isDevelopmentEnv } from '@app/src/config/env'
+import { isDevelopmentEnv } from '#/config/env'
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {
   if (navigator === undefined || navigator.clipboard === undefined) {

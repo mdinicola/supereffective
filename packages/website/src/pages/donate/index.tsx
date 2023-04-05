@@ -1,9 +1,7 @@
-import React from 'react'
-
-import useBackgroundTheme from '@app/src/hooks/legacy/useBackgroundTheme'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { ButtonLink } from '@app/src/primitives/legacy/Button/Button'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
+import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { ButtonLink } from '#/primitives/legacy/Button/Button'
+import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
   useBackgroundTheme('gold-pattern')

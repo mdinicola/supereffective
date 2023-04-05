@@ -1,6 +1,6 @@
-import gameList from '@app/data/builds/games.json'
-import gameSetList from '@app/data/sources/games/game-sets.json'
-import { PresetDex, PresetDexMap } from '@app/src/domains/legacy/livingdex/livingdex'
+import gameList from '#/data/builds/games.json'
+import gameSetList from '#/data/sources/games/game-sets.json'
+import { PresetDex, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
 
 export const GAMESET_IDS: readonly string[] = [
   'rb',

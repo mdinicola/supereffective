@@ -1,14 +1,13 @@
-import React from 'react'
 import { GetServerSidePropsContext } from 'next'
 
-import { GameId, getGameSet } from '@app/src/domains/legacy/livingdex/games'
-import { loadPresets, PresetDexMap } from '@app/src/domains/legacy/livingdex/livingdex'
-import LivingDexApp from '@app/src/domains/legacy/livingdex/views/LivingDexApp'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { Dex } from '@app/src/services/legacy/datastore/Entities'
-import { getNormalizedDex } from '@app/src/services/legacy/datastore/Firebase'
-import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
+import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
+import { loadPresets, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
+import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
+import { Dex } from '#/services/legacy/datastore/Entities'
+import { getNormalizedDex } from '#/services/legacy/datastore/Firebase'
+import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 const Page = ({ dex, presets }: { dex: Dex; presets: PresetDexMap }) => {
   const metaTitle = `${dex.title} | Supereffective.gg Pokédex Tracker`

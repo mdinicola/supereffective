@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './Button.module.css'
 import stylesCtrl from './Control.module.css'
 

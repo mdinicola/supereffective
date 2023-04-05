@@ -1,11 +1,9 @@
-import React from 'react'
-
-import { Dashboard } from '@app/src/domains/legacy/livingdex/views/Dashboard'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { getPageStaticProps, PageEntry } from '@app/src/services/cms'
-import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
+import { Dashboard } from '#/features/legacy/livingdex/views/Dashboard'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
+import { getPageStaticProps, PageEntry } from '#/services/cms'
+import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 export function getStaticProps() {
   return getPageStaticProps('livingdex', 60 * 60 * 24) // 24h

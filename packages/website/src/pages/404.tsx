@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const page = () => {
   const randFrom0to4 = Math.floor(Math.random() * 5)

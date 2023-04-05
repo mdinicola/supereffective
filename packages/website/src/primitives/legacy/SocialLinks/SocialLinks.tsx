@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
+import { abs_url } from '#/primitives/legacy/Link/Links'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './SocialLinks.module.css'
 
 export interface SocialLinkProps {

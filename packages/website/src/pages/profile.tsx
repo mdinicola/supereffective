@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import useBackgroundTheme from '@app/src/hooks/legacy/useBackgroundTheme'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
   const router = useRouter()

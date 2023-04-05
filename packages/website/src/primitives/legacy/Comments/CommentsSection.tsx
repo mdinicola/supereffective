@@ -1,6 +1,4 @@
-import * as React from 'react'
-
-import { ButtonLink } from '@app/src/primitives/legacy/Button/Button'
+import { ButtonLink } from '#/primitives/legacy/Button/Button'
 
 export default function CommentsSection({
   pageUrl,

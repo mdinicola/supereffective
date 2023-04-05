@@ -1,4 +1,4 @@
-import { getBaseUrl } from '@app/src/config/env'
+import { getBaseUrl } from '#/config/env'
 import servicesConfig from './services'
 import themeConfig from './theme'
 

@@ -2,45 +2,36 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useRouter } from 'next/router'
 
-import config from '@app/src/config'
-import legacyConfig from '@app/src/config/legacyConfig'
-import {
-  getGameSet,
-  getPresetForGame,
-  getPresetsForGame,
-} from '@app/src/domains/legacy/livingdex/games'
+import config from '#/config'
+import legacyConfig from '#/config/legacyConfig'
+import { getGameSet, getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
 import {
   isNotCatchable,
   normalizeDexWithPreset,
   PresetDex,
   PresetDexMap,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import { GameLogo } from '@app/src/domains/legacy/livingdex/views/GameLogo'
-import {
-  MarkType,
-  PkBoxGroup,
-  SelectMode,
-  ViewMode,
-} from '@app/src/domains/legacy/livingdex/views/PkBox'
-import PkImage from '@app/src/domains/legacy/livingdex/views/PkImage'
-import { useUserDexes } from '@app/src/domains/legacy/users/hooks/useUserDexes'
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import { useScrollToLocation } from '@app/src/hooks/legacy/useScrollToLocation'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import Button from '@app/src/primitives/legacy/Button/Button'
-import InlineTextEditor from '@app/src/primitives/legacy/Input/InlineTextEditor'
-import { ExternLink, SiteLink } from '@app/src/primitives/legacy/Link/Links'
-import { DexSocialLinks } from '@app/src/primitives/legacy/SocialLinks/SocialLinks'
+} from '#/features/legacy/livingdex/livingdex'
+import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
+import { MarkType, PkBoxGroup, SelectMode, ViewMode } from '#/features/legacy/livingdex/views/PkBox'
+import PkImage from '#/features/legacy/livingdex/views/PkImage'
+import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import Button from '#/primitives/legacy/Button/Button'
+import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
+import { ExternLink, SiteLink } from '#/primitives/legacy/Link/Links'
+import { DexSocialLinks } from '#/primitives/legacy/SocialLinks/SocialLinks'
 import {
   ToolbarButton,
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
-} from '@app/src/primitives/legacy/Toolbar/ToolbarButton'
-import { Dex, DexBox, DexPokemon } from '@app/src/services/legacy/datastore/Entities'
-import { removeDex, saveDex } from '@app/src/services/legacy/datastore/Firebase'
-import tracker from '@app/src/services/legacy/metrics/tracker'
-import { classNameIf, debug } from '@app/src/utils/legacyUtils'
+} from '#/primitives/legacy/Toolbar/ToolbarButton'
+import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/Entities'
+import { removeDex, saveDex } from '#/services/legacy/datastore/Firebase'
+import tracker from '#/services/legacy/metrics/tracker'
+import { classNameIf, debug } from '#/utils/legacyUtils'
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
 

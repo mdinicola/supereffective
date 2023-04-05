@@ -1,13 +1,7 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
 
-import {
-  ArticleEntry,
-  Entry,
-  getAllPages,
-  getPageStaticProps,
-  toSortedIndex,
-} from '@app/src/services/cms'
-import ArticlePageView from '@app/src/services/cms/ArticlePageView'
+import { ArticleEntry, Entry, getAllPages, getPageStaticProps, toSortedIndex } from '#/services/cms'
+import ArticlePageView from '#/services/cms/ArticlePageView'
 
 export function getStaticPaths(): GetStaticPathsResult {
   const paths = toSortedIndex(getAllPages()).map((page: Entry) => ({

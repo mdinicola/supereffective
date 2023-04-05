@@ -1,6 +1,6 @@
-import pokemonGmaxable from '@app/data/builds/pokemon/gigantamaxable-pokemon.min.json'
-import pokemonEntries from '@app/data/builds/pokemon/pokemon-entries-minimal.min.json'
-import { GameId, GameSetId } from '@app/src/domains/legacy/livingdex/games'
+import pokemonGmaxable from '#/data/builds/pokemon/gigantamaxable-pokemon.min.json'
+import pokemonEntries from '#/data/builds/pokemon/pokemon-entries-minimal.min.json'
+import { GameId, GameSetId } from '#/features/legacy/livingdex/games'
 
 // TODO use API/fetch/useEffect for loading big JSON files . getServerProps might be too much and bad for PageSpeed
 

@@ -1,8 +1,8 @@
-import { getFullUrl } from '@app/src/config/env'
-import { ArticlePage } from '@app/src/domains/legacy/news/views/ArticleEntry'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import { Entry } from '@app/src/services/cms'
-import { cleanupSpaces as clean } from '@app/src/utils/strings'
+import { getFullUrl } from '#/config/env'
+import { ArticlePage } from '#/features/legacy/news/views/ArticleEntry'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import { Entry } from '#/services/cms'
+import { cleanupSpaces as clean } from '#/utils/strings'
 import MDXContent from './MDXContent'
 
 export type ArticlePageViewProps = {

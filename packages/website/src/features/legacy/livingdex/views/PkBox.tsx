@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 
-import legacyConfig from '@app/src/config/legacyConfig'
-import { canGmax, getPokemonEntry } from '@app/src/domains/legacy/livingdex/pokemon'
-import InlineTextEditor from '@app/src/primitives/legacy/Input/InlineTextEditor'
-import { Dex, DexBox, DexPokemon } from '@app/src/services/legacy/datastore/Entities'
-import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
+import legacyConfig from '#/config/legacyConfig'
+import { canGmax, getPokemonEntry } from '#/features/legacy/livingdex/pokemon'
+import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
+import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/Entities'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './PkBox.module.css'
 import PkImage from './PkImage'
 

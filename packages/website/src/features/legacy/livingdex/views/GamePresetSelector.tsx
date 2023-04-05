@@ -1,18 +1,14 @@
 import React, { useContext } from 'react'
 
-import { GameId, getGame, getPresetsForGame } from '@app/src/domains/legacy/livingdex/games'
-import {
-  getAvailableGames,
-  PresetDex,
-  PresetDexMap,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import { GameLogo } from '@app/src/domains/legacy/livingdex/views/GameLogo'
-import { useUserDexes } from '@app/src/domains/legacy/users/hooks/useUserDexes'
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import { useScrollToLocation } from '@app/src/hooks/legacy/useScrollToLocation'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import { ButtonInternalLink } from '@app/src/primitives/legacy/Button/Button'
-import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
+import { GameId, getGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
+import { getAvailableGames, PresetDex, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
+import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
+import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './GamePresetSelector.module.css'
 
 export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DefaultBackgroundTheme } from '@app/src/hooks/legacy/useBackgroundTheme'
+import { DefaultBackgroundTheme } from '#/hooks/legacy/useBackgroundTheme'
 import MainFooter from './MainFooter'
 import MainHeader from './MainHeader'
 import styles from './PageSkeleton.module.css'

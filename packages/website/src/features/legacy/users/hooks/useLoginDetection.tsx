@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-import { UserContextType } from '@app/src/domains/legacy/users/state/UserContext'
-import { onAuthStateChanged } from '@app/src/services/legacy/datastore/Firebase'
-import tracker from '@app/src/services/legacy/metrics/tracker'
-import { debug } from '@app/src/utils/legacyUtils'
+import { UserContextType } from '#/features/legacy/users/state/UserContext'
+import { onAuthStateChanged } from '#/services/legacy/datastore/Firebase'
+import tracker from '#/services/legacy/metrics/tracker'
+import { debug } from '#/utils/legacyUtils'
 
 export const useLoginDetection = (userCtx: UserContextType): void => {
   useEffect(() => {

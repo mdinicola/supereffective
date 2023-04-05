@@ -1,6 +1,6 @@
-import { GameId } from '@app/src/domains/legacy/livingdex/games'
-import { Dex } from '@app/src/services/legacy/datastore/Entities'
-import fb from '@app/src/services/legacy/datastore/Firebase'
+import { GameId } from '#/features/legacy/livingdex/games'
+import { Dex } from '#/services/legacy/datastore/Entities'
+import fb from '#/services/legacy/datastore/Firebase'
 
 const setUser = (userId: string) => {
   fb.setAnalyticsUserId(userId)

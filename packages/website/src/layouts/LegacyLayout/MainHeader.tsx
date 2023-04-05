@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import config from '@app/src/config'
-import UserMenu from '@app/src/layouts/LegacyLayout/UserMenu'
+import config from '#/config'
+import UserMenu from '#/layouts/LegacyLayout/UserMenu'
 import { ExternLink, SiteLink } from '../../primitives/legacy/Link/Links'
 import styles from './MainHeader.module.css'
 

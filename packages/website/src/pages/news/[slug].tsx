@@ -6,8 +6,8 @@ import {
   getAllArticles,
   getArticleStaticProps,
   toSortedIndex,
-} from '@app/src/services/cms'
-import ArticlePageView from '@app/src/services/cms/ArticlePageView'
+} from '#/services/cms'
+import ArticlePageView from '#/services/cms/ArticlePageView'
 
 export function getStaticPaths(): GetStaticPathsResult {
   const paths = toSortedIndex(getAllArticles()).map((page: Entry) => ({

@@ -18,8 +18,8 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
-      "@app/data/*": ["./data/*"],
-      "@app/*": ["./*"],
+      "#/data/*": ["./data/*"],
+      "#/*": ["./src/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },

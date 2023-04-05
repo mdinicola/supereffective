@@ -1,9 +1,9 @@
 import { ReactElement, useContext } from 'react'
 
-import { useLoginDetection } from '@app/src/domains/legacy/users/hooks/useLoginDetection'
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import { logout as firebaseLogout } from '@app/src/services/legacy/datastore/Firebase'
-import tracker from '@app/src/services/legacy/metrics/tracker'
+import { useLoginDetection } from '#/features/legacy/users/hooks/useLoginDetection'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import { logout as firebaseLogout } from '#/services/legacy/datastore/Firebase'
+import tracker from '#/services/legacy/metrics/tracker'
 
 export default function UserMenu({ loginLink }: { loginLink: ReactElement }) {
   const userCtx = useContext(UserContext)

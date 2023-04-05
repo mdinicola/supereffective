@@ -1,7 +1,7 @@
-import { getFullUrl } from '@app/src/config/env'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { ArticleEntry, getAllArticles, getPageBySlug, toSortedIndex } from '@app/src/services/cms'
-import ArticlePageView from '@app/src/services/cms/ArticlePageView'
+import { getFullUrl } from '#/config/env'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { ArticleEntry, getAllArticles, getPageBySlug, toSortedIndex } from '#/services/cms'
+import ArticlePageView from '#/services/cms/ArticlePageView'
 
 export async function getStaticProps() {
   const entries = toSortedIndex(getAllArticles())

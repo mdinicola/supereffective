@@ -1,25 +1,25 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
-import { GameId, getGameSet } from '@app/src/domains/legacy/livingdex/games'
+import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
 import {
   canCreateMoreDexes,
   generateDexFromPreset,
   loadPresets,
   PresetDexMap,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import { LivingDexContext } from '@app/src/domains/legacy/livingdex/state/LivingDexContext'
-import { GamePresetSelector } from '@app/src/domains/legacy/livingdex/views/GamePresetSelector'
-import LivingDexApp from '@app/src/domains/legacy/livingdex/views/LivingDexApp'
-import { useUserDexes } from '@app/src/domains/legacy/users/hooks/useUserDexes'
-import { UserContext } from '@app/src/domains/legacy/users/state/UserContext'
-import { useConditionalRedirect } from '@app/src/hooks/legacy/useConditionalRedirect'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { Dex } from '@app/src/services/legacy/datastore/Entities'
-import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
+} from '#/features/legacy/livingdex/livingdex'
+import { LivingDexContext } from '#/features/legacy/livingdex/state/LivingDexContext'
+import { GamePresetSelector } from '#/features/legacy/livingdex/views/GamePresetSelector'
+import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
+import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
+import { UserContext } from '#/features/legacy/users/state/UserContext'
+import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import { abs_url } from '#/primitives/legacy/Link/Links'
+import { Dex } from '#/services/legacy/datastore/Entities'
+import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 interface PageProps {
   presets: PresetDexMap

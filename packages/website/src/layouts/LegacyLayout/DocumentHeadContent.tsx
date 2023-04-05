@@ -1,5 +1,5 @@
-import config from '@app/src/config'
-import { GoogleAnalyticsScript } from '@app/src/layouts/LegacyLayout/GoogleAnalytics'
+import config from '#/config'
+import { GoogleAnalyticsScript } from '#/layouts/LegacyLayout/GoogleAnalytics'
 
 export default function DocumentHeadContent(): JSX.Element {
   const bgColor = config.theme.colors.$faviconBg

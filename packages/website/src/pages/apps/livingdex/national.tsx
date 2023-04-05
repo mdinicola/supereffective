@@ -1,19 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { getPresetForGame, getPresetsForGame } from '@app/src/domains/legacy/livingdex/games'
+import { getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
 import {
   generateDexFromPreset,
   loadPresets,
   PresetDexMap,
-} from '@app/src/domains/legacy/livingdex/livingdex'
-import { PkBoxGroup } from '@app/src/domains/legacy/livingdex/views/PkBox'
-import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import Button from '@app/src/primitives/legacy/Button/Button'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
-import { classNameIf } from '@app/src/utils/legacyUtils'
+} from '#/features/legacy/livingdex/livingdex'
+import { PkBoxGroup } from '#/features/legacy/livingdex/views/PkBox'
+import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
+import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import Button from '#/primitives/legacy/Button/Button'
+import { abs_url } from '#/primitives/legacy/Link/Links'
+import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
+import { classNameIf } from '#/utils/legacyUtils'
 
 export async function getStaticProps() {
   const presets = await loadPresets()

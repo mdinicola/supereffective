@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getLocationHash } from '@app/src/utils/legacyUtils'
+import { getLocationHash } from '#/utils/legacyUtils'
 
 export const useScrollToLocation = () => {
   const scrolledRef = React.useRef(false)
