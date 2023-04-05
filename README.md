@@ -23,17 +23,18 @@ This repository is a Turbo monorepo, meaning it contains multiple packages and a
 
 ## Project Structure
 
-The main application is the website, which is located in `packages/website`. It is a NextJS application with
-the following structure:
+The main application is the website, which is located in `./packages/website`.
+The MDX files for pages and articles are located under the `./cms` directory.
+
+Website is a NextJS application with the following structure:
 
 **`./packages/website`:**
 
 - `data`: data imported from `itsjavi/supereffective-assets`. This should never be edited manually.
-- `public`: static assets
+- `public`: static assets (for the UI and also for the CMS pages)
 - `scripts`: build and maintenance scripts
 - `src`:
   - `apps`: root-level app components (this is not a NextJS 13 `app` dir structure)
-  - `cms`: MDX files for pages and articles/posts
   - `config`: general app config (e.g. from env vars, json files or ts code)
   - `domains`: business logic in bounded contexts
     - `/**/`: name of the domain
