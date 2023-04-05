@@ -1,5 +1,9 @@
-import { defineComputedFields } from '@contentlayer/source-files'
-import { defineDocumentType, FieldDefs, makeSource } from 'contentlayer/source-files'
+import {
+  defineComputedFields,
+  defineDocumentType,
+  FieldDefs,
+  makeSource,
+} from 'contentlayer/source-files'
 
 const commonFields: FieldDefs = {
   id: {

@@ -24,6 +24,8 @@ export function getBaseUrl(): string {
 }
 
 export function getFullUrl(path?: string): string {
+  if (!path) return getBaseUrl()
+
   const sanitizedPath = path.replace(/^\/|\/$/g, '')
   return `${getBaseUrl()}${sanitizedPath ? '/' + sanitizedPath : '/'}`
 }
