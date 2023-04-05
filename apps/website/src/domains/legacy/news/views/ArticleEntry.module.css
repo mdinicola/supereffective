@@ -147,12 +147,25 @@
   color: var(--color-pink);
 }
 
-.article .content img {
-  max-width: 100%;
-  height: auto;
+.contentWrapper,
+.contentWrapper > p {
+  position: relative;
+  display: block;
+}
+
+.article .content :global(.responsive-img) {
+  position: relative;
   display: block;
   margin: 1.5rem auto;
+  text-align: center;
+}
+
+.article .content :global(.responsive-img) img[data-nimg='fill'] {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
   border-radius: 8px;
+  max-width: 60%;
 }
 
 .article .content li > p:only-child {
@@ -170,12 +183,19 @@
 */
 
 .article > figure {
+  position: relative;
+  display: block;
   padding: 0;
   margin: 0;
   overflow: hidden;
   max-height: 350px;
   border-top-left-radius: 0.7rem;
   border-top-right-radius: 0.7rem;
+}
+
+.article > figure a {
+  position: relative;
+  display: block;
 }
 
 .article.fullEntry > figure {

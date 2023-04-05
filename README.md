@@ -12,7 +12,7 @@ We use the following technologies, services and tools:
 - NextJS 13 + React 18 for the website
 - CSS Modules for styling (no styling libraries)
 - React Context for state management (to be replaced by Redux Toolkit)
-- Contentful as the CMS for news (to be replaced by local MDX files + FrontMatter CMS)
+- [ContentLayer](https://www.contentlayer.dev/) + [FrontMater CMS](https://frontmatter.codes/) + MDX files as the local/static CMS
 - Firebase for authentication and dex data storage (to be replaced by Auth.js and Prisma + PlanetScale)
 - Vercel (Pro tier) for hosting and deployments
 - GitHub for hosting [static data and spritesheets](https://github.com/itsjavi/supereffective-assets)
@@ -26,13 +26,14 @@ This repository is a Turbo monorepo, meaning it contains multiple packages and a
 The main application is the website, which is located in `apps/website`. It is a NextJS application with
 the following structure:
 
-**./apps/website:**
+**`./apps/website`:**
 
 - `data`: data imported from `itsjavi/supereffective-assets`. This should never be edited manually.
 - `public`: static assets
 - `scripts`: build and maintenance scripts
 - `src`:
   - `apps`: root-level app components (this is not a NextJS 13 `app` dir structure)
+  - `cms`: MDX files for pages and articles/posts
   - `config`: general app config (e.g. from env vars, json files or ts code)
   - `domains`: business logic in bounded contexts
     - `/**/`: name of the domain
@@ -56,16 +57,12 @@ the following structure:
 You will need Node v18 LTS and pnpm v8.
 As an alternative, you can also run the project using Docker with the provided configuration files.
 
-You will also need access tokens for Contentful. Ask an admin to create and share them for you.
-[.env.local](..%2Fsupereffective-next%2F.env.local)
-
 ## Quick Start
 
 1. Clone the repository
 2. Install dependencies: `pnpm install`
 3. Run the website in development mode: `pnpm dev` (natively) or `pnpm dev:docker` (with Docker)
 4. Open http://localhost:3001 or run `pnpm open` to open the website in your browser
-5. Set your Contentful tokens in `apps/website/.env.local` to be able to fetch data.
 
 ## Maintenance scripts
 

@@ -23,7 +23,7 @@ import {
   StorableDexBox,
   StorableDexPokemon,
 } from '@app/src/services/legacy/datastore/Entities'
-import { clog, getUtcTimestamp } from '@app/src/utils/legacyUtils'
+import { debug, getUtcTimestamp } from '@app/src/utils/legacyUtils'
 
 const shinyLockedPokemonMap: { [key: string]: true | undefined } = shinyLockedPokemon.reduce(
   (acc, pokemon) => {
@@ -545,7 +545,7 @@ export const normalizeDexWithPreset = (oldDex: Dex, preset: PresetDex): Dex => {
     })
 
     if (dupesBox.pokemon.length > 0) {
-      clog('These pokemon do not fit in the current dex: ', dupesBox)
+      debug('These pokemon do not fit in the current dex: ', dupesBox)
     }
 
     return [newBoxes, dupesBox]

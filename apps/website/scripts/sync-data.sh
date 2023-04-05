@@ -23,5 +23,6 @@ fi
 # remove and copy again the data dir
 echo "Copying supereffective-assets/data ..."
 echo $PWD
-rm -rf ./data ./.next
+rm -rf ./data
+rm -rf ./.next
 cp -r "${ASSETS_DATA_FOLDER_DIR}" ./

@@ -2,20 +2,27 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { ButtonLink } from '@app/src/primitives/legacy/Button/Button'
 import CommentsSection from '@app/src/primitives/legacy/Comments/CommentsSection'
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { CmsImage } from '@app/src/services/legacy/cms/HeadlessCms'
 import { classNameIf, classNames } from '@app/src/utils/legacyUtils'
 import PageMeta, { PageMetaProps } from '../../../../layouts/LegacyLayout/PageMeta'
-import { ButtonLink } from '../../../../primitives/legacy/Button/Button'
 import styles from './ArticleEntry.module.css'
 
+export interface CmsImage {
+  url: string
+  alt: string
+  width?: number | string
+  height?: number | string
+}
+
 export interface ArticleEntryProps {
-  id: string
+  id?: string
   title?: string
   children?: React.ReactNode // content
+  relativeUrl: string
   canonicalUrl: string
-  bannerImage?: CmsImage | null
+  bannerImageUrl?: string
   publishDate?: Date
   category?: string
   tags?: string[]
@@ -45,19 +52,20 @@ export function ArticleEntry(props: ArticleEntryProps) {
     props.isExcerpt ? styles.listEntry : styles.fullEntry,
   ].join(' ')
 
-  const bannerImageImg = props.bannerImage ? (
+  const bannerImageImg = props.bannerImageUrl ? (
     <Image
-      src={props.bannerImage.url}
-      width={parseInt(String(props.bannerImage.width))}
-      height={parseInt(String(props.bannerImage.height))}
-      alt={props.bannerImage.alt}
-      quality={100}
+      src={props.bannerImageUrl}
+      // width={parseInt(String(props.bannerImage.width))}
+      // height={parseInt(String(props.bannerImage.height))}
+      alt={props.bannerImageUrl.split('/').pop() || ''}
+      fill
+      style={{ objectFit: 'cover' }}
     />
   ) : null
 
-  const bannerImage = props.bannerImage ? (
+  const bannerImage = props.bannerImageUrl ? (
     <figure>
-      {props.isExcerpt ? <a href={props.canonicalUrl}>{bannerImageImg}</a> : bannerImageImg}
+      {props.isExcerpt ? <a href={props.relativeUrl}>{bannerImageImg}</a> : bannerImageImg}
     </figure>
   ) : null
 
@@ -125,13 +133,13 @@ export function ArticleEntry(props: ArticleEntryProps) {
         {categoryPill}
         <div className={containerClass(styles.title)}>
           <h2>
-            <a href={props.canonicalUrl}>{props.title}</a>
+            <a href={props.relativeUrl}>{props.title}</a>
           </h2>
         </div>
         {publishDate}
         {contentContainer}
         <footer className={containerClass(styles.readMore, 'text-right')}>
-          <ButtonLink href={props.canonicalUrl}>Read more</ButtonLink>
+          <ButtonLink href={props.relativeUrl}>Read more</ButtonLink>
         </footer>
       </article>
     )
@@ -210,7 +218,7 @@ export function ArticlePage(props: ArticlePageProps) {
       '@id': props.canonicalUrl,
     },
     headline: props.title?.replace(/"/g, '\\"'),
-    image: [props.bannerImage?.url?.replace(/"/g, '\\"')],
+    image: [meta.imageUrl?.replace(/"/g, '\\"')],
     datePublished: isoDate,
     dateModified: isoDate,
     author: {
@@ -228,10 +236,16 @@ export function ArticlePage(props: ArticlePageProps) {
     },
   }
   const jsonLdArticleStr = JSON.stringify(jsonLdArticle, null, 0)
-  return (
-    <div className={'page-container'}>
+
+  const pageMeta = (
+    <>
       <PageMeta {...meta} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdArticleStr }} />
+    </>
+  )
+  return (
+    <div className={'page-container'}>
+      {props.isExcerpt !== true && pageMeta}
       <ArticleEntry {...articleProps} />
     </div>
   )

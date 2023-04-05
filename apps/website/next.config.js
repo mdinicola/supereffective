@@ -1,8 +1,10 @@
+const { withContentlayer } = require('next-contentlayer')
+
 /** @type {import('next').NextConfig} */
 let nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.ctfassets.net', 'itsjavi.com'],
+    domains: ['images.ctfassets.net', 'itsjavi.com', 'localhost'],
     minimumCacheTTL: 60 * 60 * 24 * 7 * 4, // 4 weeks
   },
   async rewrites() {
@@ -15,4 +17,4 @@ let nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)

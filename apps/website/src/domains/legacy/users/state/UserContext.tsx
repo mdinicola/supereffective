@@ -2,7 +2,7 @@ import { createContext, ReactNode, useReducer } from 'react'
 
 import { withCountedPokemon } from '@app/src/domains/legacy/livingdex/state/LivingDexContext'
 import { DexList, User } from '@app/src/services/legacy/datastore/Entities'
-import { clog } from '@app/src/utils/legacyUtils'
+import { debug } from '@app/src/utils/legacyUtils'
 
 // ===========================
 //          TYPES
@@ -81,7 +81,7 @@ const userActionReducer = (
         loading: true,
       }
     default:
-      clog('Unknown action type', action.type)
+      debug('Unknown action type', action.type)
       return state
   }
 }

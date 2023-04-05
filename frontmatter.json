@@ -1,0 +1,4 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.extends": ["apps/website/src/services/cms/frontmatter.json"]
+}

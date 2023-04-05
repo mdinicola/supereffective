@@ -1,4 +1,4 @@
-import { isDevelopment } from '@app/src/config/env'
+import { isDevelopmentEnv } from '@app/src/config/env'
 
 const legacyConfig = {
   limits: {
@@ -10,7 +10,7 @@ const legacyConfig = {
   },
 }
 
-if (isDevelopment()) {
+if (isDevelopmentEnv()) {
   legacyConfig.limits.maxDexes = 20
 }
 

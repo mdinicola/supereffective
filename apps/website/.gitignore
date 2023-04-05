@@ -47,3 +47,6 @@ yarn-error.log*
 
 # app
 .cache/
+
+# CMS
+.contentlayer/

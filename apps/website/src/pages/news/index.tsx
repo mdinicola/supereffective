@@ -1,53 +1,42 @@
-import { ArticleEntry } from '@app/src/domains/legacy/news/views/ArticleEntry'
+import { getFullUrl } from '@app/src/config/env'
 import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
-import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import {
-  CmsEntry,
-  CmsEntryType,
-  getCmsEntries,
-  getCmsEntry,
-  transformRichContent,
-} from '@app/src/services/legacy/cms/HeadlessCms'
+import { ArticleEntry, getAllArticles, getPageBySlug, toSortedIndex } from '@app/src/services/cms'
+import ArticlePageView from '@app/src/services/cms/ArticlePageView'
 
 export async function getStaticProps() {
-  const entries = await getCmsEntries(CmsEntryType.NewsArticle, '/news/', '-sys.createdAt', 10)
-  const homeEntry = await getCmsEntry(CmsEntryType.Page, '__news__', '/news')
+  const entries = toSortedIndex(getAllArticles())
+  const indexEntry = getPageBySlug('news')
   return {
     props: {
       entries,
-      homeEntry,
+      indexEntry,
     },
     revalidate: 60 * 5, // 5 minutes
   }
 }
 
-const IndexPage = ({ entries, homeEntry }: { entries: Array<CmsEntry>; homeEntry: CmsEntry }) => {
+const IndexPage = ({
+  entries,
+  indexEntry,
+}: {
+  entries: Array<ArticleEntry>
+  indexEntry: ArticleEntry
+}) => {
   return (
     <>
       <PageMeta
-        metaTitle={homeEntry.metaTitle}
-        metaDescription={homeEntry.metaDescription}
-        canonicalUrl={abs_url('/')}
+        metaTitle={indexEntry.metaTitle}
+        metaDescription={indexEntry.metaDescription}
+        robots={indexEntry.robots}
+        imageUrl={indexEntry.bannerImageUrl}
+        ogType="website"
+        canonicalUrl={getFullUrl('news')}
         lang={'en'}
       />
       <div className="page-container">
         <section className="news-index">
-          {entries.map((entry: CmsEntry) => {
-            return (
-              <ArticleEntry
-                id={entry.id}
-                key={entry.id}
-                title={entry.title}
-                canonicalUrl={entry.canonicalUrl}
-                publishDate={new Date(entry.publishDate)}
-                bannerImage={entry.bannerImage}
-                category={entry.category}
-                tags={entry.tags}
-                isExcerpt={true}
-              >
-                {transformRichContent(entry.summary)}
-              </ArticleEntry>
-            )
+          {entries.map((entry: ArticleEntry) => {
+            return <ArticlePageView key={entry.slug} entry={entry} isExcerpt={true} />
           })}
           <style jsx>{`
             .news-index :global(article) {

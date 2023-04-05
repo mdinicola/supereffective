@@ -40,7 +40,7 @@ import {
 import { Dex, DexBox, DexPokemon } from '@app/src/services/legacy/datastore/Entities'
 import { removeDex, saveDex } from '@app/src/services/legacy/datastore/Firebase'
 import tracker from '@app/src/services/legacy/metrics/tracker'
-import { classNameIf, clog } from '@app/src/utils/legacyUtils'
+import { classNameIf, debug } from '@app/src/utils/legacyUtils'
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
 
@@ -91,14 +91,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const [userDexes, loadingUserDexes, setUserDexes] = useUserDexes(currentUser)
 
   useEffect(() => {
-    clog('useEffect init')
+    debug('useEffect init')
     if (
       livingdex.state === null ||
       loadedDex.id !== livingdex.state.id ||
       loadedDex.gameId !== livingdex.state.gameId
       // || (loadedDex.preset !== livingdex.state.preset)
     ) {
-      clog('useEffect calling setDex')
+      debug('useEffect calling setDex')
       livingdex.actions.setDex(loadedDex)
     }
   }, [loadedDex, livingdex.state])

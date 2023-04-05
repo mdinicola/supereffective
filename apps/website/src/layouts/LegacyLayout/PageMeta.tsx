@@ -1,7 +1,5 @@
-import React from 'react'
 import Head from 'next/head'
 
-const envName = (process.env.NEXT_PUBLIC_ENV as string) || 'develop'
 export type PageLang = 'en' | 'es' | 'it' | 'de' | 'fr' | 'jp' | 'ch' | 'cs' | 'ko'
 
 export interface PageMetaProps {
@@ -31,9 +29,9 @@ export default function PageMeta({
   const truncatedDescription = (metaDescription || '').substring(0, 150)
   let _robots = Array.isArray(robots) ? robots : [robots ? robots : '']
 
-  if (envName !== 'production') {
-    _robots = ['noindex', 'nofollow']
-  }
+  // if (!isProduction()) {
+  //   _robots = ['noindex', 'nofollow']
+  // }
 
   return (
     <Head>

@@ -44,7 +44,7 @@ import {
   PresetDexMap,
 } from '@app/src/domains/legacy/livingdex/livingdex'
 import tracker from '@app/src/services/legacy/metrics/tracker'
-import { clog, getUtcTimestamp } from '@app/src/utils/legacyUtils'
+import { debug, getUtcTimestamp } from '@app/src/utils/legacyUtils'
 import config from '../../../config'
 import {
   CollectionType,
@@ -198,7 +198,7 @@ export const saveDex = async (dex: Dex): Promise<string> => {
   const storableDex = dexToDocument(dex)
   const dexId = dex.id
 
-  clog('saveDex', storableDex)
+  debug('saveDex', storableDex)
 
   if (dexId === null) {
     return addDocument('dexes', storableDex).then(dexId => {

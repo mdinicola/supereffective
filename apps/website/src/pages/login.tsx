@@ -16,7 +16,7 @@ import {
   loginWithTwitter,
 } from '@app/src/services/legacy/datastore/Firebase'
 import tracker from '@app/src/services/legacy/metrics/tracker'
-import { clog } from '@app/src/utils/legacyUtils'
+import { debug } from '@app/src/utils/legacyUtils'
 
 const Page = () => {
   const router = useRouter()
@@ -74,7 +74,7 @@ const Page = () => {
       user.operationType === 'signIn' &&
       isTodayAndSameHour(user.user.metadata.creationTime)
     ) {
-      clog('QR conversion lead detected for new signup', user.user.metadata.creationTime)
+      debug('QR conversion lead detected for new signup', user.user.metadata.creationTime)
       tracker.tshirtQrNewUSer()
       conversionLeadTracked.current = true
     }

@@ -12,6 +12,9 @@ postinstall-dev:
 	pnpm format:packages
 	cd apps/website && pnpm data:sync
 
+postinstall-prod:
+	cd apps/website && pnpm data:sync
+
 # These are only relevant if you have access to the Vercel team:
 
 vercel-login:

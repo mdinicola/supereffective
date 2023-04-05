@@ -28,7 +28,7 @@ const Page = ({ dex, presets }: { dex: Dex; presets: PresetDexMap }) => {
         metaTitle={metaTitle}
         metaDescription={metaDescription}
         imageUrl={abs_url('/assets/livingdex.png')}
-        robots={'index, follow'}
+        robots={'noindex, nofollow'}
         canonicalUrl={abs_url('/apps/livingdex/' + dex.id)}
         lang={'en'}
       />

@@ -1,6 +1,7 @@
-import { clog } from '@app/src/utils/legacyUtils'
+import config from '@app/src/config'
+import { debug } from '@app/src/utils/legacyUtils'
 
-const GTAG_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+const GTAG_ID = config.services.analytics.googleAnalyticsId
 
 export const isGaEnabled = () => {
   // @ts-ignore
@@ -9,7 +10,7 @@ export const isGaEnabled = () => {
 
 export const GoogleAnalyticsScript = function () {
   if (!GTAG_ID) {
-    clog('Google Analytics ID not found')
+    debug('Google Analytics ID not found')
     return null
   }
 

@@ -4,18 +4,14 @@ import { Dashboard } from '@app/src/domains/legacy/livingdex/views/Dashboard'
 import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
 import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import {
-  CmsEntry,
-  CmsEntryType,
-  getStaticPropsForEntry,
-} from '@app/src/services/legacy/cms/HeadlessCms'
+import { getPageStaticProps, PageEntry } from '@app/src/services/cms'
 import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
 
-export async function getStaticProps() {
-  return await getStaticPropsForEntry(CmsEntryType.Page, 'livingdex', '/', 60 * 60 * 24)
+export function getStaticProps() {
+  return getPageStaticProps('livingdex', 60 * 60 * 24) // 24h
 }
 
-const Page = ({ entry }: { entry: CmsEntry | null }) => {
+const Page = ({ entry }: { entry: PageEntry | null }) => {
   if (!entry) {
     return <LoadingBanner />
   }

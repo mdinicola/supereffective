@@ -1,13 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": [
-    "NEXT_PUBLIC_ENV",
-    "CONTENTFUL_ACCESS_TOKEN",
-    "PREVIEW_MODE_TOKEN",
-    "CONTENTFUL_PREVIEW_ACCESS_TOKEN",
-    "NEXT_PUBLIC_GOOGLE_ANALYTICS_ID",
-    "ANALYZE"
-  ],
+  "globalEnv": ["VERCEL_ENV", "VERCEL_URL", "NEXT_PUBLIC_GOOGLE_ANALYTICS_ID"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

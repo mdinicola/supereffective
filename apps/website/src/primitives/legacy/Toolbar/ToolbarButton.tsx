@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 
-import { classNameIf, classNames, clog } from '@app/src/utils/legacyUtils'
+import { classNameIf, classNames, debug } from '@app/src/utils/legacyUtils'
 import styles from './ToolbarButton.module.css'
 
 export type ToolbarButtonStatus =
@@ -131,17 +131,17 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
   let selectedActionIcon: string | null = null
 
   const handleFocus = (e: FocusEvent | any) => {
-    clog('dd focused')
+    debug('dd focused')
     setDropdownOpen(true)
     e.stopPropagation()
   }
   const handleBlur = (e: FocusEvent | any) => {
-    clog('dd blurred')
+    debug('dd blurred')
     setDropdownOpen(false)
     e.stopPropagation()
   }
   const handleDropdownClick = (e: MouseEvent | any) => {
-    clog('dd clicked')
+    debug('dd clicked')
     if (!dropdownOpen) {
       setDropdownOpen(true)
     }

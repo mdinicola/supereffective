@@ -12,24 +12,20 @@ import { LoadingBanner } from '@app/src/layouts/LegacyLayout/LoadingBanner'
 import PageMeta from '@app/src/layouts/LegacyLayout/PageMeta'
 import Button from '@app/src/primitives/legacy/Button/Button'
 import { abs_url } from '@app/src/primitives/legacy/Link/Links'
-import { CmsEntry } from '@app/src/services/legacy/cms/HeadlessCms'
 import PkSpriteStyles from '@app/src/styles/legacy/PkSpriteStyles'
 import { classNameIf } from '@app/src/utils/legacyUtils'
 
 export async function getStaticProps() {
-  //const entry = await getStaticPropsForEntry(CmsEntryType.Page, 'livingdex', '/', 60 * 60 * 24)
   const presets = await loadPresets()
 
   return {
     props: {
-      //entry,
-      entry: null,
       presets,
     },
   }
 }
 
-const Page = ({ entry, presets }: { entry: CmsEntry | null; presets: PresetDexMap }) => {
+const Page = ({ presets }: { presets: PresetDexMap }) => {
   const [selectedPreset, setSelectedPreset] = React.useState<string>('grouped-region')
   const dex = getPresetForGame('home', selectedPreset, presets)
   const homePresets = getPresetsForGame('home', presets)

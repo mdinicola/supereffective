@@ -8,7 +8,7 @@ import {
 } from '@app/src/domains/legacy/livingdex/livingdex'
 import { Dex, DexList, NullableDexPokemon } from '@app/src/services/legacy/datastore/Entities'
 import tracker from '@app/src/services/legacy/metrics/tracker'
-import { clog } from '@app/src/utils/legacyUtils'
+import { debug } from '@app/src/utils/legacyUtils'
 
 // ===========================
 //          TYPES
@@ -245,7 +245,7 @@ const livingDexActionReducer = (state: Dex | null, action: LivingDexContextActio
     case 'ALPHAIZE_BOX':
       return changeBoxAllPokemonProperty(state, payload.boxIndex, 'alpha', payload.value)
     default:
-      clog('Unknown action type', action.type)
+      debug('Unknown action type', action.type)
       return state
   }
 }

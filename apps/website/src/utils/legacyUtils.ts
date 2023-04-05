@@ -1,5 +1,4 @@
-const envName = (process.env.NEXT_PUBLIC_ENV as string) || 'develop'
-const isDevelop = envName === 'develop'
+import { isDevelopmentEnv } from '@app/src/config/env'
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {
   if (navigator === undefined || navigator.clipboard === undefined) {
@@ -25,8 +24,8 @@ export const getUtcTimestamp = (): string => {
   return new Date().toISOString()
 }
 
-export const clog = (...args: any[]): void => {
-  if (isDevelop) {
+export const debug = (...args: any[]): void => {
+  if (isDevelopmentEnv()) {
     console.log('%c' + '  >> ', 'color:' + 'Cyan', ...args)
   }
 }

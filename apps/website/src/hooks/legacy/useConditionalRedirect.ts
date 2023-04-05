@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { clog } from '@app/src/utils/legacyUtils'
+import { debug } from '@app/src/utils/legacyUtils'
 
 export interface RedirectConditions {
   waitIf: boolean
@@ -20,7 +20,7 @@ export const useConditionalRedirect = (
 
   const startRedirect = (_route: string, _timeout: number) => {
     if (_timeout <= 0) {
-      clog('useConditionalRedirect: REDIRECTING - NO TIMEOUT')
+      debug('useConditionalRedirect: REDIRECTING - NO TIMEOUT')
       if (_route === 'back') {
         router.back()
       } else {
@@ -30,7 +30,7 @@ export const useConditionalRedirect = (
     }
     redirectTimeouts.push(
       setTimeout(() => {
-        clog('useConditionalRedirect: REDIRECTING - WITH TIMEOUT')
+        debug('useConditionalRedirect: REDIRECTING - WITH TIMEOUT')
         if (_route === 'back') {
           router.back()
         } else {
@@ -42,23 +42,23 @@ export const useConditionalRedirect = (
 
   const abortRedirect = () => {
     if (redirectTimeouts.length > 0) {
-      clog('useConditionalRedirect: ABORTED')
+      debug('useConditionalRedirect: ABORTED')
       clearTimeout(redirectTimeouts.pop())
     }
   }
 
   useEffect(() => {
     if (conditions.waitIf) {
-      clog('useConditionalRedirect: WAITING')
+      debug('useConditionalRedirect: WAITING')
       return
     }
     if (conditions.redirectIf) {
-      clog('useConditionalRedirect: STARTING')
+      debug('useConditionalRedirect: STARTING')
       startRedirect(route, timeout)
       return
     }
     if (conditions.abortRedirectIf) {
-      clog('useConditionalRedirect: ABORTING')
+      debug('useConditionalRedirect: ABORTING')
       abortRedirect()
       return
     }
