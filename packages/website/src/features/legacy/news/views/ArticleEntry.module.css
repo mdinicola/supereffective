@@ -135,16 +135,16 @@
 -----------------
 */
 .article .content {
-  line-height: 1.6rem;
+  line-height: 1.4rem;
 }
 
 .article .content a {
-  color: var(--color-navy);
+  color: var(--color-teal-2);
   text-decoration: none;
 }
 
 .article .content a:hover {
-  color: var(--color-pink);
+  color: var(--color-teal-1);
 }
 
 .contentWrapper,
@@ -206,6 +206,25 @@
   display: block;
   width: 100%;
   height: auto;
+  color: transparent;
+  max-height: 400px;
+}
+
+:global(.homepage) .article > figure img {
+  object-fit: contain !important;
+  background-color: var(--color-teal-4);
+  background-image: linear-gradient(
+    45deg,
+    var(--color-teal-4) 25%,
+    var(--color-teal-3) 25%,
+    var(--color-teal-3) 50%,
+    var(--color-teal-2) 50%,
+    var(--color-teal-2) 75%,
+    var(--color-teal-3) 75%,
+    var(--color-teal-3) 100%
+  );
+  padding: 2rem;
+  padding-left: 4rem;
 }
 
 .article > figure span span img {

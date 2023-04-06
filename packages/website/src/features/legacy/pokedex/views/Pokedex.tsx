@@ -316,8 +316,7 @@ export const Pokedex = ({
   const headerContent = (
     <div className={'text-center ' + css.docTop}>
       <h2 className="main-title-outlined ">
-        <i className="icon-pkg-pokedex-rotom" /> National Pokédex{' '}
-        <small className={css.betaLabel} />
+        <i className="icon-books" /> National Pokédex <small className={css.betaLabel} />
       </h2>
       <div className={css.intro}>
         <p>

@@ -7,11 +7,14 @@ import MDXContent from './MDXContent'
 
 export type ArticlePageViewProps = {
   entry: Entry | null
-  basePath?: string
   isExcerpt?: boolean
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
-export default function ArticlePageView({ entry, isExcerpt = false }: ArticlePageViewProps) {
+export default function ArticlePageView({
+  entry,
+  isExcerpt = false,
+  ...rest
+}: ArticlePageViewProps) {
   if (!entry) {
     return <LoadingBanner />
   }
@@ -46,6 +49,7 @@ export default function ArticlePageView({ entry, isExcerpt = false }: ArticlePag
       enableComments={entry.enableComments === true}
       enableSharing={entry.enableSharing === true}
       videoUrl={entry.videoUrl}
+      {...rest}
     >
       {content}
     </ArticlePage>

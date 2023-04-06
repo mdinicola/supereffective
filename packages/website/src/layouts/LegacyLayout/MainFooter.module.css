@@ -3,7 +3,7 @@
   color: #fff;
   background: var(--color-purple-dark);
   box-shadow: 0 -10px 10px rgb(0 0 0 / 10%);
-  background: #1f1f1f;
+  background: var(--color-black-0);
   text-align: left;
   line-height: 1.5;
   font-size: 0.8rem;

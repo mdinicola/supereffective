@@ -9,7 +9,7 @@
   "frontMatter.git.enabled": true,
   "frontMatter.git.commitMessage": "Synced by Front Matter {{hour24}}:{{minute}}",
   "frontMatter.content.defaultFileType": "mdx",
-  "frontMatter.content.publicFolder": "/packages/website/public",
+  "frontMatter.content.publicFolder": "[[workspace]]/packages/website/public",
   "frontMatter.content.autoUpdateDate": true,
   "frontMatter.content.fmHighlight": true,
   "frontMatter.content.hideFm": false,

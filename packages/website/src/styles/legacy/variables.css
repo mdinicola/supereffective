@@ -1,7 +1,7 @@
 :root {
   /* Dimensions */
-  --menu-height: 60px;
-  --toolbar-height: 70px;
+  --menu-height: 50px;
+  --toolbar-height: 60px;
 
   /* Color Presets */
   --dropshadow-black: drop-shadow(1px 1px 0px #000) drop-shadow(1px -1px 0px #000)
@@ -109,7 +109,8 @@
 }
 
 .main-site-bg {
-  background: url('/assets/gui/bgs/sv-violet-pattern-sm2.jpg') repeat top left;
+  background: black url('/assets/gui/bgs/sv-violet-pattern-sm2.jpg') repeat top left;
+  /* background: #b762bb linear-gradient(40deg, #6b3271 0%, #c767d2 50%, #9a4d99 100%) repeat center; */
 }
 
 .bg-white {

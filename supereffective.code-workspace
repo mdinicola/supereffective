@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "workspace",
+      "path": "./"
+    },
+    {
+      "name": "- cms",
+      "path": "./cms"
+    },
+    {
+      "name": "- public",
+      "path": "./packages/website/public"
+    },
+    {
+      "name": "- website",
+      "path": "./packages/website/src"
+    }
+  ],
+  "settings": {}
+}

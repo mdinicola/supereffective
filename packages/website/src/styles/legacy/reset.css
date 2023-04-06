@@ -10,10 +10,10 @@
 
 html {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.4;
   tab-size: 4;
   -webkit-text-size-adjust: 100%;
-  background: var(--color-purple-darker);
+  background: var(--color-black-0);
 }
 
 html,

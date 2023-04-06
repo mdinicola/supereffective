@@ -9,9 +9,9 @@
   width: 38px;
   height: 38px;
   font-size: 18px;
-  border: 1px solid #606060;
-  background-color: #fff;
-  color: #000;
+  border: 1px solid var(--color-black-2);
+  background-color: var(--color-white-2);
+  color: var(--color-black-2);
 }
 
 .btn.withLabel {
@@ -63,8 +63,8 @@
 }
 
 .btn.selected {
-  background-color: var(--color-orange-lighter);
-  color: #000;
+  background-color: var(--color-pink-2);
+  color: var(--color-black-2);
 }
 
 .btnGroup {
@@ -98,7 +98,7 @@
 .btnGroup.dropdown .btn {
   display: flex;
   border-radius: 0.4rem;
-  border: 1px solid #606060;
+  border: 1px solid var(--color-black-2);
 }
 
 .dropdown.dropdownOpen::after {
@@ -121,7 +121,7 @@
   right: -0.4rem;
   top: 100%;
   margin-top: 9px;
-  border: 2px solid #606060;
+  border: 2px solid var(--color-black-2);
   display: none;
   width: auto;
   background: #fff;
@@ -176,12 +176,12 @@
 }
 
 .dropdown .dropdownOptions .btn.selected {
-  background: var(--color-orange-lighter);
+  background: var(--color-pink-3);
   color: #000;
 }
 
 .dropdown .dropdownOptions .btn:hover {
-  background: #606060ff;
+  background: var(--color-pink-1);
   color: #fff;
 }
 
@@ -245,13 +245,13 @@
 .btnGroupGroupCollapsed .btn:last-child,
 .btnGroupGroupCollapsed .btnGroup:last-child .dropdownTrigger {
   border-radius: 0 0.4rem 0.4rem 0;
-  border-right: 1px solid #606060;
+  border-right: 1px solid var(--color-black-2);
 }
 
 .btnGroupGroupCollapsed .btn:only-child,
 .btnGroupGroupCollapsed .btnGroup:only-child .dropdownTrigger {
   border-radius: 0.4rem;
-  border: 1px solid #606060;
+  border: 1px solid var(--color-black-2);
 }
 
 .dropdown .dropdownOptions .btn {

@@ -34,46 +34,31 @@ export default function MainHeader() {
             <SiteLink activeClass={styles.active} href="/" tabIndex={1}>
               Home
             </SiteLink>
-            <SiteLink activeClass={styles.active} href="/news" tabIndex={1}>
-              News
-            </SiteLink>
             <SiteLink activeClass={styles.active} tabIndex={1} href="/apps/pokedex">
-              <i className={'icon-pkg-pokedex-rotom margin-r icon--2x'} />
+              <i className={'icon-books margin-r icon--2x'} />
               Pokédex
             </SiteLink>
             <SiteLink activeClass={styles.active} tabIndex={2} href="/apps/livingdex">
-              <i className={'icon-pkg-box-home margin-r icon--2x'} /> Dex Tracker
+              <i className={'icon-pkg-box margin-r icon--2x'} /> Dex Tracker
             </SiteLink>
             <ExternLink href={config.links.twitter} tabIndex={3} title={'Twitter'}>
-              <i
-                style={{ color: '#56c2e3', fontSize: '1.4rem' }}
-                className={'icon-brand-twitter'}
-              />
-              <span className="mobile-only" style={{ fontSize: 'inherit', color: '#fff' }}>
-                Twitter
-              </span>
+              <i style={{ fontSize: '1.3rem' }} className={'icon-brand-twitter'} />
+              <span className="mobile-only">Twitter</span>
             </ExternLink>
             <ExternLink href={config.links.discord} tabIndex={4} title={'Discord'}>
-              <i
-                style={{ color: '#5667E3', fontSize: '1.4rem' }}
-                className={'icon-brand-discord'}
-              />
-              <span className="mobile-only" style={{ fontSize: 'inherit', color: '#fff' }}>
-                Discord
-              </span>
+              <i style={{ fontSize: '1.3rem' }} className={'icon-brand-discord'} />
+              <span className="mobile-only">Discord</span>
             </ExternLink>
-            <SiteLink href="/donate" tabIndex={5} title={'Donate to help this site'}>
-              <i className="icon-pkg-mark-heart" title="Donate" style={{ color: '#f0dd73' }} />
+            <SiteLink
+              className={styles.donateBtn}
+              activeClass={styles.active}
+              href="/donate"
+              tabIndex={5}
+              title={'Donate to help this site'}
+            >
+              <i className="icon-pkg-mark-heart" title="Donate" />
               <span className={'mobile-onlys'}>Support Us</span>
             </SiteLink>
-            {/* <ExternLink
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfcLi7V5YalUsBrd_whLAy4cHMCZX2kDGUP8kJFhnrVGyrOQQ/viewform"
-              tabIndex={5}
-              title={"Send Feedback"}
-            >
-              <i className="icon-add_comment" style={{ color: "#f09f73" }} />
-              <span className={"mobile-only"}>Send Feedback</span>
-            </ExternLink> */}
             <UserMenu
               loginLink={
                 <SiteLink

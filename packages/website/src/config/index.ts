@@ -5,7 +5,7 @@ import themeConfig from './theme'
 const config = {
   baseUrl: getBaseUrl(),
   version: {
-    num: '3.4.1',
+    num: '3.5.0',
   },
   texts: {
     siteName: 'SuperEffective',

@@ -67,7 +67,7 @@ export const Dashboard = () => {
   return (
     <div className={'page-container dex-count-' + dexes.length}>
       <h2 className={'text-center main-title-outlined'}>
-        <i className="icon-pkg-box-home" style={{ textShadow: 'none' }} /> Pokédex Tracker
+        <i className="icon-pkg-box" style={{ textShadow: 'none' }} /> Living Dex Tracker
       </h2>
       <div
         className="text-center"

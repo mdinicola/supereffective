@@ -87,7 +87,7 @@ export function ArticleEntry(props: ArticleEntryProps) {
   const categoryPill = (
     <section className={containerClass(styles.pills)}>
       {props.category && <small className={styles.category}>{props.category}</small>}
-      {!props.category && <br />}
+      {/* {!props.category && <br />} */}
     </section>
   )
 
@@ -203,7 +203,7 @@ export function ArticleEntry(props: ArticleEntryProps) {
   )
 }
 
-export interface ArticlePageProps extends ArticleEntryProps {
+export interface ArticlePageProps extends ArticleEntryProps, React.HTMLAttributes<HTMLDivElement> {
   meta: PageMetaProps
 }
 
@@ -244,7 +244,7 @@ export function ArticlePage(props: ArticlePageProps) {
     </>
   )
   return (
-    <div className={'page-container'}>
+    <div className={'page-container ' + (props.className ? props.className : '')}>
       {props.isExcerpt !== true && pageMeta}
       <ArticleEntry {...articleProps} />
     </div>

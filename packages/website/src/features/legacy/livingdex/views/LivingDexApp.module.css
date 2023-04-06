@@ -1,6 +1,6 @@
 .toolbar {
   position: fixed;
-  top: 60px;
+  top: var(--menu-height);
   left: 0;
   width: 100vw;
   height: var(--toolbar-height);
@@ -16,14 +16,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid rgba(34, 34, 34, 0.78);
-  background-color: rgba(255, 255, 255, 0.32);
-  /*background: linear-gradient(rgba(163,239,249,0.65), rgba(152,204,255,0.65));*/
-  /*background: linear-gradient(rgba(255,205,255,0.65), rgba(208,185,240,0.65));*/
-  /*background:linear-gradient(rgba(204,249,152,0.75), rgba(204,249,234,0.75));*/
-  /*background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3));*/
-  box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: var(--color-teal-3);
+  border-bottom: 2px solid var(--color-teal-2);
   padding: 0 2rem;
   gap: 2rem;
 }
@@ -91,10 +85,8 @@
 }
 
 .dexHeader {
-  background: rgba(243, 243, 243, 0.4);
-  border: none;
+  background: rgba(243, 243, 243, 1);
   color: #111;
-  box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, 0.42);
 }
 
 .dexLogo {
@@ -134,7 +126,7 @@
 
 span.saveBtn {
   color: #000;
-  background: var(--color-orange-lighter);
+  background: var(--color-teal);
   /*border: none !important;*/
   /*box-shadow: none;*/
 }

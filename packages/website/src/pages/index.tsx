@@ -6,5 +6,5 @@ export async function getStaticProps() {
 }
 
 export default function Page({ entry }: ArticlePageViewProps) {
-  return <ArticlePageView entry={entry} />
+  return <ArticlePageView className="homepage" entry={entry} />
 }
