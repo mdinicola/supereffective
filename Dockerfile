@@ -38,6 +38,7 @@ RUN git config --global pull.rebase true
 
 # Prepare package manager(s) and global dependencies
 RUN npm install npm@latest -g && \
+    npm i -g pnpm@${PNPM_VERSION} && \
     npm i -g vercel
 
 # Install latest pnpm:
