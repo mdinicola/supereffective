@@ -1,7 +1,6 @@
 import React from 'react'
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
-
 import config from '#/config'
 
 export interface LinkDefinition {

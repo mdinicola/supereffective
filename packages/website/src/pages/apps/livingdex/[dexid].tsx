@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from 'next'
-
 import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
 import { loadPresets, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
 import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'

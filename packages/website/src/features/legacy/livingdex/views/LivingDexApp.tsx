@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
 import { useRouter } from 'next/router'
-
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
 import { getGameSet, getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'

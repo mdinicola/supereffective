@@ -16,7 +16,7 @@ export default function MainFooter() {
           <p className={titleClass}>Articles</p>
           <ul>
             <li>
-              <SiteLink href="/">News</SiteLink>
+              <SiteLink href="/news">News</SiteLink>
             </li>
             <li>
               <SiteLink href="/about">About This Site</SiteLink>

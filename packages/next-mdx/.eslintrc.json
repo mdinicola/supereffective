@@ -13,7 +13,7 @@
   },
   "overrides": [
     {
-      "files": ["next.config.js", "src/plugins/**/*.js"],
+      "files": ["*.js", "*.cjs"],
       "rules": {
         "import/no-extraneous-dependencies": "off"
       },

@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useReducer } from 'react'
-
 import { withCountedPokemon } from '#/features/legacy/livingdex/state/LivingDexContext'
 import { DexList, User } from '#/services/legacy/datastore/Entities'
 import { debug } from '#/utils/legacyUtils'

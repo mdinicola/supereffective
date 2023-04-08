@@ -1,5 +1,4 @@
 import { ReactElement, useContext } from 'react'
-
 import { useLoginDetection } from '#/features/legacy/users/hooks/useLoginDetection'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { logout as firebaseLogout } from '#/services/legacy/datastore/Firebase'

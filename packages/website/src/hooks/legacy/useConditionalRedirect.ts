@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-
 import { debug } from '#/utils/legacyUtils'
 
 export interface RedirectConditions {

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-
 import { UserContextType } from '#/features/legacy/users/state/UserContext'
 import { onAuthStateChanged } from '#/services/legacy/datastore/Firebase'
 import tracker from '#/services/legacy/metrics/tracker'

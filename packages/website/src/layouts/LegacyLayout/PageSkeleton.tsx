@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { DefaultBackgroundTheme } from '#/hooks/legacy/useBackgroundTheme'
 import MainFooter from './MainFooter'
 import MainHeader from './MainHeader'

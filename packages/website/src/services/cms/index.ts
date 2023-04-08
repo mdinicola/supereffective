@@ -1,9 +1,16 @@
-import { allArticles, allPages, Article, Page } from 'contentlayer/generated'
+import { getAllEntries } from '@pkg/next-mdx/src/mdx'
 import { Redirect } from 'next/types'
+import { ArticleEntry, Entry, EntryType, PageEntry } from '#/services/cms/types'
 
-export type ArticleEntry = Article
-export type PageEntry = Page
-export type Entry = PageEntry | ArticleEntry
+const allPages = getAllEntries(EntryType.Page).map(entry => ({
+  ...entry,
+  url: `/${entry.slug}`,
+}))
+
+const allArticles = getAllEntries(EntryType.Article).map(entry => ({
+  ...entry,
+  url: `/news/${entry.slug}`,
+}))
 
 function getAllPages(): PageEntry[] {
   return allPages
@@ -75,3 +82,4 @@ function _getEntryStaticProps<T extends Entry>(
 }
 
 export { getPageBySlug, getArticleBySlug, getAllArticles, getAllPages }
+export * from './types'

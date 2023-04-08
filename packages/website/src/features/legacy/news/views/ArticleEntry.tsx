@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import { ButtonLink } from '#/primitives/legacy/Button/Button'
 import CommentsSection from '#/primitives/legacy/Comments/CommentsSection'
 import { abs_url } from '#/primitives/legacy/Link/Links'
@@ -23,7 +22,7 @@ export interface ArticleEntryProps {
   relativeUrl: string
   canonicalUrl: string
   bannerImageUrl?: string
-  publishDate?: Date
+  publishDate?: string
   category?: string
   tags?: string[]
   isExcerpt?: boolean
@@ -69,7 +68,7 @@ export function ArticleEntry(props: ArticleEntryProps) {
     </figure>
   ) : null
 
-  const utcDate = props.publishDate ? props.publishDate.toUTCString() : '---'
+  const utcDate = props.publishDate ? new Date(props.publishDate).toUTCString() : '---'
 
   const publishDate = props.publishDate ? (
     <div className={containerClass(styles.publishDate)}>
@@ -209,7 +208,7 @@ export interface ArticlePageProps extends ArticleEntryProps, React.HTMLAttribute
 
 export function ArticlePage(props: ArticlePageProps) {
   const { meta, ...articleProps } = props
-  const isoDate = props.publishDate?.toISOString() || null
+  const isoDate = props.publishDate ? new Date(props.publishDate).toISOString() : null
   const jsonLdArticle = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',

@@ -1,5 +1,4 @@
 import { ReactElement } from 'react'
-
 import legacyConfig from '#/config/legacyConfig'
 import { canGmax, getPokemonEntry } from '#/features/legacy/livingdex/pokemon'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'

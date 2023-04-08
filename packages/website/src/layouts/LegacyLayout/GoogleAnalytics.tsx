@@ -1,5 +1,4 @@
 import config from '#/config'
-import { debug } from '#/utils/legacyUtils'
 
 const GTAG_ID = config.services.analytics.googleAnalyticsId
 
@@ -10,7 +9,6 @@ export const isGaEnabled = () => {
 
 export const GoogleAnalyticsScript = function () {
   if (!GTAG_ID) {
-    debug('Google Analytics ID not found')
     return null
   }
 

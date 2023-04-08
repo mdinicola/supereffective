@@ -1,7 +1,6 @@
 import { UserCredential } from '@firebase/auth'
 import { ReactNode, useContext, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'

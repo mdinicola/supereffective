@@ -1,7 +1,8 @@
+import React from 'react'
 import { getFullUrl } from '#/config/env'
 import { ArticlePage } from '#/features/legacy/news/views/ArticleEntry'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import { Entry } from '#/services/cms'
+import { Entry, EntryType } from '#/services/cms/types'
 import { cleanupSpaces as clean } from '#/utils/strings'
 import MDXContent from './MDXContent'
 
@@ -22,9 +23,9 @@ export default function ArticlePageView({
   const canonicalSlug = entry.slug === 'index' ? '' : entry.url
   const canonicalUrl = getFullUrl(canonicalSlug)
   const content = isExcerpt ? (
-    <div dangerouslySetInnerHTML={{ __html: entry.summary?.html || '' }} />
+    <div dangerouslySetInnerHTML={{ __html: entry.summary || '' }} />
   ) : (
-    <MDXContent content={entry.body.code} />
+    <MDXContent content={entry.body} />
   )
 
   return (
@@ -41,7 +42,7 @@ export default function ArticlePageView({
       title={clean(entry.title)}
       relativeUrl={entry.url}
       canonicalUrl={canonicalUrl}
-      publishDate={entry.type !== 'Page' ? new Date(entry.createdAt) : undefined}
+      publishDate={entry.type !== EntryType.Page ? entry.createdAt : undefined}
       bannerImageUrl={entry.bannerImageUrl}
       category={entry.category}
       tags={entry.tags}

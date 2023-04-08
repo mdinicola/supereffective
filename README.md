@@ -12,7 +12,7 @@ We use the following technologies, services and tools:
 - NextJS 13 + React 18 for the website
 - CSS Modules for styling (no styling libraries)
 - React Context for state management (to be replaced by Redux Toolkit)
-- [ContentLayer](https://www.contentlayer.dev/) + [FrontMater CMS](https://frontmatter.codes/) + MDX files as the local/static CMS
+- MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
 - Firebase for authentication and dex data storage (to be replaced by Auth.js and Prisma + PlanetScale)
 - Vercel (Pro tier) for hosting and deployments
 - GitHub for hosting [static data and spritesheets](https://github.com/itsjavi/supereffective-assets)
@@ -68,18 +68,19 @@ As an alternative, you can also run the project using Docker with the provided c
 ## Maintenance scripts
 
 - `pnpm build`: builds the website.
-- `pnpm update:latest`: update all dependencies to their latest version (a shortcut for `pnpm update -r --latest`).
+- `pnpm update:packages`: update all dependencies to their latest version (a shortcut for `pnpm update -r --latest`).
 - `pnpm update:data`: update the data from `itsjavi/supereffective-assets` repo.
 
 For other scripts, please check the `package.json` files.
 
 ### Running scripts in an isolated Docker environment
 
-Start a shell inside the docker container, you can run `pnpm docker`.
+Start a shell inside the docker container, you can run `pnpm docker:sh`.
 It is a shortcut for `docker-compose run --rm dev /bin/zsh`.
 
 Alternatively you can run any script directly inside the container by using `docker-compose run --rm dev`
 with any arguments, e.g. `docker-compose run --rm dev pnpm build`.
+There is also a shortcut for it: `pnpm docker`.
 
 ## Dependencies
 

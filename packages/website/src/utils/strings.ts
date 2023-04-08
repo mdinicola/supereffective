@@ -1,5 +1,5 @@
 export function cleanupSpaces(str: string) {
-  return str.trim().replace(/(\s+|\n)/g, ' ')
+  return (str || '').trim().replace(/(\s+|\n)/g, ' ')
 }
 
 export function slugify(str: string) {

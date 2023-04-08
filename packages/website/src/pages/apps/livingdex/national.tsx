@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-
 import { getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
 import {
   generateDexFromPreset,

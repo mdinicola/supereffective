@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
-
 import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
 import {
   canCreateMoreDexes,

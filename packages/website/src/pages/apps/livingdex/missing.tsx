@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import Link from 'next/link'
-
 import pokemonEntries from '#/data/builds/pokemon/pokemon-entries-minimal.min.json'
 import { GameListItem, getGame, getGameSet } from '#/features/legacy/livingdex/games'
 import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'

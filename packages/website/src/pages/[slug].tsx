@@ -1,5 +1,4 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
-
 import { ArticleEntry, Entry, getAllPages, getPageStaticProps, toSortedIndex } from '#/services/cms'
 import ArticlePageView from '#/services/cms/ArticlePageView'
 

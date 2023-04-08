@@ -1,17 +1,16 @@
-import { ImgHTMLAttributes } from 'react'
-import { useMDXComponent } from 'next-contentlayer/hooks'
-import NextImage from 'next/image'
+import PluginMDXContent from '@pkg/next-mdx/src/components/MDXContent'
+import Button from '#/primitives/legacy/Button/Button'
 
-function ResponsiveImage(props: ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
-  return (
-    <span className="responsive-img">
-      <NextImage src={props.src as string} alt={props.alt || ''} fill />
-    </span>
-  )
+const mdxComponents = {
+  button: Button,
 }
 
-export default function MDXContent({ content }: { content: string | undefined }): JSX.Element {
-  const MDXContent = useMDXComponent(content ?? '')
+export default function MDXContent({
+  content,
+}: {
+  content: string | undefined
+}): JSX.Element | null {
+  if (!content) return null
 
-  return <MDXContent components={{ img: ResponsiveImage }} />
+  return <PluginMDXContent components={mdxComponents} content={content} />
 }

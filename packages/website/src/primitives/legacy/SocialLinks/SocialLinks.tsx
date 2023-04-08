@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { abs_url } from '#/primitives/legacy/Link/Links'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './SocialLinks.module.css'
