@@ -36,8 +36,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
-        run: |
-          echo "$PWD/node_modules/.bin" >> $GITHUB_PATH
+
+      - name: Configure PATH env var
+        run: echo "$PWD/node_modules/.bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
