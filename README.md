@@ -1,8 +1,6 @@
 # SuperEffective
 
-<p>
-  <a href="https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml"><img src="https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml/badge.svg?branch=main" alt="build status"></a>
-</p>
+[![Check Code Quality](https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml/badge.svg)](https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml)
 
 Source code for supereffective.gg 's website.
 
