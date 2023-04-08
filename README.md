@@ -1,5 +1,9 @@
 # SuperEffective
 
+<p>
+  <a href="https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml"><img src="https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml/badge.svg?branch=main" alt="build status"></a>
+</p>
+
 Source code for supereffective.gg 's website.
 
 ## Software Stack

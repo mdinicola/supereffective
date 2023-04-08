@@ -20,7 +20,8 @@
     "open": "open http://localhost:3001",
     "pretty": "pnpm format",
     "update:data": "pnpm -r data:sync",
-    "update:packages": "pnpm update -r --latest"
+    "update:packages": "pnpm update -r --latest",
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
