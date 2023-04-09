@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useReducer } from 'react'
+
 import {
   dexWithRecalculatedCounters,
   isNotCatchable,
   normalizeDexWithPreset,
   PresetDex,
 } from '#/features/legacy/livingdex/livingdex'
-import { Dex, DexList, NullableDexPokemon } from '#/services/legacy/datastore/Entities'
-import tracker from '#/services/legacy/metrics/tracker'
+import { Dex, DexList, NullableDexPokemon } from '#/services/legacy/datastore/types'
 import { debug } from '#/utils/legacyUtils'
 
 // ===========================
@@ -271,7 +271,7 @@ const LivingDexProvider = ({ children }: { children: ReactNode }) => {
       setDexTitle: (title: string) => dispatch({ type: 'SET_DEX_TITLE', payload: title }),
       setBoxTitle: (boxIndex: number, title: string) => {
         if (state !== null) {
-          tracker.dexBoxTitleChanged(state.gameId)
+          // tracker.dexBoxTitleChanged(state.gameId)
         }
         return dispatch({
           type: 'SET_BOX_TITLE',

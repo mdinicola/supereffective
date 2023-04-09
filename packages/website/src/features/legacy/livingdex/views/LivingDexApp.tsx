@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
+
 import { useRouter } from 'next/router'
+
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
 import { getGameSet, getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
@@ -27,10 +29,10 @@ import {
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
 } from '#/primitives/legacy/Toolbar/ToolbarButton'
-import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/Entities'
-import { removeDex, saveDex } from '#/services/legacy/datastore/Firebase'
-import tracker from '#/services/legacy/metrics/tracker'
+import { removeDex, saveDex } from '#/services/legacy/datastore/firestore'
+import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/types'
 import { classNameIf, debug } from '#/utils/legacyUtils'
+
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
 
@@ -266,7 +268,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       return
     }
     setSelectMode(newAction as SelectMode)
-    tracker.dexSelectModeChanged(dex, newAction)
+    // tracker.dexSelectModeChanged(dex, newAction)
   }
 
   const handleViewModeToolbar = (
@@ -281,7 +283,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       setSelectMode('cell')
     }
     setViewMode(newAction as ViewMode)
-    tracker.dexViewModeChanged(dex, newAction)
+    // tracker.dexViewModeChanged(dex, newAction)
   }
 
   const handleChangePresetToolbar = (
@@ -379,7 +381,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       setMarkTypes([newAction as MarkType])
     }
     setCurrentTool(newAction as ActionTool)
-    tracker.dexMarkingToolSelected(dex, newAction)
+    // tracker.dexMarkingToolSelected(dex, newAction)
   }
 
   const toolbar = (
@@ -392,7 +394,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             href={'/apps/livingdex'}
             label={'Go back to the list of Living Dexes'}
             onClick={() => {
-              tracker.dexesHomeClicked()
+              // tracker.dexesHomeClicked()
             }}
           />
           {/*Todo: fix button group internal state not updating when selectMode changes (initialAction related?)*/}
@@ -527,7 +529,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             label={'How-To'}
             showLabel={false}
             onClick={() => {
-              tracker.dexHelpClicked()
+              // tracker.dexHelpClicked()
             }}
           />
         </ToolbarButtonGroupGroup>

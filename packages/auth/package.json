@@ -1,0 +1,31 @@
+{
+  "name": "@pkg/auth",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Authentication abstraction layer for supereffective.gg",
+  "scripts": {
+    "lint": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\"",
+    "lint:fix": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\" --fix",
+    "test": "vitest --run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "pnpm test:coverage && open coverage/index.html && vitest --ui --open",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@pkg/firebase": "workspace:*",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "eslint": "^8.38.0",
+    "eslint-config-next": "^13.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.29.8",
+    "eslint-plugin-vitest": "^0.1.1",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
+  }
+}

@@ -1,9 +1,11 @@
 import React from 'react'
+
 import { getFullUrl } from '#/config/env'
 import { ArticlePage } from '#/features/legacy/news/views/ArticleEntry'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { Entry, EntryType } from '#/services/cms/types'
 import { cleanupSpaces as clean } from '#/utils/strings'
+
 import MDXContent from './MDXContent'
 
 export type ArticlePageViewProps = {

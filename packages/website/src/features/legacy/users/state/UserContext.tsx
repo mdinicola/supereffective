@@ -1,29 +1,34 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react'
+
+import { AuthProvider, useAuth as useAuthLib } from '@pkg/auth/src/AuthProvider'
+import { OAuthProviderName } from '@pkg/auth/src/types'
+
 import { withCountedPokemon } from '#/features/legacy/livingdex/state/LivingDexContext'
-import { DexList, User } from '#/services/legacy/datastore/Entities'
+import { DexList, User } from '#/services/legacy/datastore/types'
 import { debug } from '#/utils/legacyUtils'
 
 // ===========================
 //          TYPES
 // ===========================
 
-interface UserContextState {
+type UserContextState = {
   user: User | null
   dexes: DexList | null
   loading: boolean
   error?: string | null
 }
 
-interface UserContextAction {
-  type: 'LOGIN' | 'LOGOUT' | 'LOADING' | 'SET_DEXES' | 'UPDATE_DEX'
+type UserContextAction = {
+  type: 'LOGIN' | 'LOGOUT' | 'LOADING' | 'SET_DEXES' | 'UPDATE_DEX' | 'SET_USER'
   payload?: User | string | any | null
 }
 
-export interface UserContextType {
+export type UserContextType = {
   state: UserContextState
-  login: (user: User) => void
-  logout: () => void
-  loading: () => void
+  signIn: (provider: OAuthProviderName) => Promise<User | null>
+  logout: () => Promise<void>
+  enterLoadingMode: () => void
+  isLoading: () => boolean
   setDexes: (dexes: DexList | null) => void
 }
 
@@ -40,9 +45,10 @@ const initialState: UserContextState = {
 
 const initialContext: UserContextType = {
   state: initialState,
-  login: () => null,
-  logout: () => null,
-  loading: () => null,
+  signIn: () => Promise.resolve(null),
+  logout: () => Promise.resolve(),
+  isLoading: () => initialState.loading,
+  enterLoadingMode: () => null,
   setDexes: () => null,
 }
 
@@ -54,7 +60,7 @@ const userActionReducer = (
   action: UserContextAction
 ): UserContextState => {
   switch (action.type) {
-    case 'LOGIN':
+    case 'SET_USER':
       return {
         user: action.payload,
         dexes: state.dexes,
@@ -90,30 +96,36 @@ const userActionReducer = (
 // ===========================
 const UserContext = createContext<UserContextType>(initialContext)
 
-const UserProvider = ({ children }: { children: ReactNode }) => {
+const BaseUserProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(userActionReducer, initialState)
+  const auth = useAuthLib()
+  const currentUser: User | null = auth.currentUser
 
   // Define the actions
-  const login = (user: User) => {
+  const setUser = (user: User | null) => {
     dispatch({
-      type: 'LOGIN',
+      type: 'SET_USER',
       payload: user,
     })
   }
 
-  const logout = () => {
-    dispatch({
-      type: 'LOGOUT',
-      payload: null,
+  const logout = async () => {
+    auth.signOut().then(() => {
+      dispatch({
+        type: 'LOGOUT',
+        payload: null,
+      })
     })
   }
 
-  const loading = () => {
+  const enterLoadingMode = () => {
     dispatch({
       type: 'LOADING',
       payload: null,
     })
   }
+
+  const isLoading = () => state.loading
 
   const setDexes = (dexes: DexList | null) => {
     dispatch({
@@ -122,11 +134,50 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
+  useEffect(() => {
+    if (state.loading && currentUser === null) {
+      setUser(null)
+    } else if (currentUser !== state.user) {
+      setUser(currentUser)
+    }
+  }, [currentUser, state.user, state.loading])
+
   return (
-    <UserContext.Provider value={{ state, login, logout, loading, setDexes }}>
+    <UserContext.Provider
+      value={{
+        state,
+        signIn: auth.signIn,
+        logout,
+        enterLoadingMode,
+        isLoading,
+        setDexes,
+      }}
+    >
       {children}
     </UserContext.Provider>
   )
 }
 
-export { UserContext, UserProvider }
+const UserProvider = ({ children }: { children: ReactNode }) => (
+  <AuthProvider>
+    <BaseUserProvider>{children}</BaseUserProvider>
+  </AuthProvider>
+)
+
+const useUser = (): UserContextState => {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider')
+  }
+  return context.state
+}
+
+const useAuth = (): UserContextType => {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error('useUserContext must be used within a UserProvider')
+  }
+  return context
+}
+
+export { UserContext, UserProvider, useUser, useAuth }

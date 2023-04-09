@@ -1,13 +1,15 @@
 import { useContext } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { canCreateMoreDexes } from '#/features/legacy/livingdex/livingdex'
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
 import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
-import tracker from '#/services/legacy/metrics/tracker'
+
 import styles from './WelcomeContent.module.css'
 
 export const WelcomeContent = () => {
@@ -26,7 +28,7 @@ export const WelcomeContent = () => {
   const ifCanAddMoreDexes = (children: any, fallback: any) =>
     canAddMoreDexes ? children : fallback
   const onCreateBtn = (btnId: string) => {
-    tracker.dexCreateBtnClicked(btnId)
+    // tracker.dexCreateBtnClicked(btnId)
   }
 
   return (

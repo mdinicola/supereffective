@@ -1,22 +1,17 @@
-import { ReactElement, useContext } from 'react'
-import { useLoginDetection } from '#/features/legacy/users/hooks/useLoginDetection'
-import { UserContext } from '#/features/legacy/users/state/UserContext'
-import { logout as firebaseLogout } from '#/services/legacy/datastore/Firebase'
-import tracker from '#/services/legacy/metrics/tracker'
+import { ReactElement } from 'react'
+
+import { useAuth } from '#/features/legacy/users/state/UserContext'
 
 export default function UserMenu({ loginLink }: { loginLink: ReactElement }) {
-  const userCtx = useContext(UserContext)
-  const { state, logout } = userCtx
-  useLoginDetection(userCtx)
+  const auth = useAuth()
 
   const onLogoutClick = async () => {
-    await firebaseLogout()
-    await logout()
-    tracker.loggedOut()
+    await auth.logout()
+    // tracker.loggedOut()
     return false
   }
 
-  if (state.loading) {
+  if (auth.state.loading) {
     return (
       <a href="#" style={{ background: 'none !important' }}>
         Loading...
@@ -24,7 +19,7 @@ export default function UserMenu({ loginLink }: { loginLink: ReactElement }) {
     )
   }
 
-  if (!state.user) {
+  if (!auth.state.user) {
     return loginLink
   }
 

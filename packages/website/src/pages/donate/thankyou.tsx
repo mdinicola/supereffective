@@ -1,4 +1,5 @@
 import Image from 'next/image'
+
 import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
 import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'

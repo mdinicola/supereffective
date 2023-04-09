@@ -1,5 +1,5 @@
 const path = require('node:path')
-const withMDXFastRefresh = require('@pkg/next-mdx/src/next-plugin/withMDXPageRefresh')
+const withMDXFastRefresh = require('@pkg/mdx/src/next-plugin/withMDXPageRefresh')
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {

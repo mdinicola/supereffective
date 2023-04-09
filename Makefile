@@ -1,10 +1,19 @@
 default: build
 
+dev: # shortcut, because make dev is quicker to type than pnpm dev:docker
+	pnpm dev:docker
+
 build:
 	pnpm build
 
-dev: # because make dev is quicker to type than pnpm dev:docker
-	pnpm dev:docker
+install:
+	pnpm install
+
+lint:
+	pnpm lint
+
+pretty:
+	pnpm pretty
 
 postinstall-dev:
 	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;

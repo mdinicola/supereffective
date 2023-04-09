@@ -1,10 +1,13 @@
 import React from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { ButtonLink } from '#/primitives/legacy/Button/Button'
 import CommentsSection from '#/primitives/legacy/Comments/CommentsSection'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
+
 import PageMeta, { PageMetaProps } from '../../../../layouts/LegacyLayout/PageMeta'
 import styles from './ArticleEntry.module.css'
 

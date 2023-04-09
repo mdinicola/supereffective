@@ -1,5 +1,7 @@
-import mdxRefresh from '@pkg/next-mdx/src/next-plugin/withMDXPageRefresh.meta'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+
+import mdxRefresh from '@pkg/mdx/src/next-plugin/withMDXPageRefresh.meta'
+
 import { isDevelopmentEnv } from '#/config/env'
 import DocumentHeadContent from '#/layouts/LegacyLayout/DocumentHeadContent'
 

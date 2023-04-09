@@ -1,4 +1,5 @@
 import config from '#/config'
+
 import { ExternLink, links_to_li, SiteLink, siteLinks } from '../../primitives/legacy/Link/Links'
 import { LogoWhite } from './LogoWhite'
 import styles from './MainFooter.module.css'

@@ -1,7 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
+
 import { globSync } from 'glob'
 import matter from 'gray-matter'
+
 import { MDXFileContent } from './types'
 
 if (typeof window !== 'undefined') {

@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
+
 import { useRouter } from 'next/router'
+
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
 import PageMeta from '#/layouts/LegacyLayout/PageMeta'

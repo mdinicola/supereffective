@@ -1,0 +1,13 @@
+{
+  "firebase": {
+    "publicConfig": {
+      "apiKey": "AIzaSyDtCh5Bs9YaGXqisXcuXJFLop0w9DaunKQ",
+      "authDomain": "supereffective-gg.firebaseapp.com",
+      "projectId": "supereffective-gg",
+      "appId": "1:956042036019:web:d3c55e9466d3b7708b3446",
+      "storageBucket": "supereffective-gg.appspot.com",
+      "messagingSenderId": "956042036019",
+      "measurementId": "G-48QLCEFF33"
+    }
+  }
+}

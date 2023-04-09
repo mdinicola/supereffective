@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { getLocationHash } from '#/utils/legacyUtils'
 
 export const useScrollToLocation = () => {

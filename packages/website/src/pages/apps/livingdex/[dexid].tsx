@@ -1,11 +1,12 @@
 import { GetServerSidePropsContext } from 'next'
+
 import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
 import { loadPresets, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
 import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
 import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { Dex } from '#/services/legacy/datastore/Entities'
-import { getNormalizedDex } from '#/services/legacy/datastore/Firebase'
+import { getNormalizedDex } from '#/services/legacy/datastore/firestore'
+import { Dex } from '#/services/legacy/datastore/types'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 const Page = ({ dex, presets }: { dex: Dex; presets: PresetDexMap }) => {

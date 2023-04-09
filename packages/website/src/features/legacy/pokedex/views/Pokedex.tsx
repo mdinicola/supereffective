@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+
 import { GAME_SETS, GameSetId } from '#/features/legacy/livingdex/games'
 import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import Button from '#/primitives/legacy/Button/Button'
 import { classNameIf, classNames, titleize } from '#/utils/legacyUtils'
+
 import css from './Pokedex.module.css'
 
 export interface PokedexProps {

@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react'
+
 import Link from 'next/link'
+
 import pokemonEntries from '#/data/builds/pokemon/pokemon-entries-minimal.min.json'
 import { GameListItem, getGame, getGameSet } from '#/features/legacy/livingdex/games'
 import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'
@@ -11,8 +13,9 @@ import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { DexPokemon, NullableDexPokemon } from '#/services/legacy/datastore/Entities'
+import { DexPokemon, NullableDexPokemon } from '#/services/legacy/datastore/types'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
+
 import styles from './missing.module.css'
 
 export async function getServerSideProps() {

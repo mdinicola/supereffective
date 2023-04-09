@@ -1,5 +1,7 @@
 import Image from 'next/image'
+
 import { GameId, getGame } from '#/features/legacy/livingdex/games'
+
 import styles from './GameLogo.module.css'
 
 interface GameLogoProps {

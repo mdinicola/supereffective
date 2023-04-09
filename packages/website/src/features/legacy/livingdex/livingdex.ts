@@ -22,7 +22,7 @@ import {
   StorableDex,
   StorableDexBox,
   StorableDexPokemon,
-} from '#/services/legacy/datastore/Entities'
+} from '#/services/legacy/datastore/types'
 import { debug, getUtcTimestamp } from '#/utils/legacyUtils'
 
 const shinyLockedPokemonMap: { [key: string]: true | undefined } = shinyLockedPokemon.reduce(

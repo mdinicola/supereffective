@@ -40,8 +40,11 @@ function _getVercelEnvName(): string {
 }
 
 function _getVercelUrl(): string {
-  if (process.env.VERCEL_URL) {
+  const vercelUrl = process.env.VERCEL_URL
+  if (vercelUrl && !vercelUrl.startsWith('http')) {
     return `${_getHttpProtocol()}${process.env.VERCEL_URL}`
+  } else if (vercelUrl) {
+    return vercelUrl
   }
 
   return ''

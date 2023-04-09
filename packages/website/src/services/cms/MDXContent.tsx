@@ -1,4 +1,5 @@
-import PluginMDXContent from '@pkg/next-mdx/src/components/MDXContent'
+import PluginMDXContent from '@pkg/mdx/src/components/MDXContent'
+
 import Button from '#/primitives/legacy/Button/Button'
 
 const mdxComponents = {

@@ -1,15 +1,11 @@
+import { AuthUser } from '@pkg/auth/src/types'
+
 import { GameId, GameSetId } from '#/features/legacy/livingdex/games'
 
 export type CollectionType = 'users' | 'dexes'
 export const DEX_SCHEMA_VERSION = 3
 
-export interface User {
-  uid: string
-  email: string
-  //username?: string // 4-15 chars, only 'a-zA-z0-9_', starting with a letter or _. uniqueness is case-insensitive.
-  displayName: string // max 50 chars
-  pictureUrl: string
-}
+export interface User extends AuthUser {}
 
 export interface UserOwnedDocument {
   id: string | null

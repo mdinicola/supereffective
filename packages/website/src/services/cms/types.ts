@@ -1,4 +1,4 @@
-import { MDXFileContent } from '@pkg/next-mdx/src/types'
+import { MDXFileContent } from '@pkg/mdx/src/types'
 
 export enum EntryType {
   Page = 'Page',

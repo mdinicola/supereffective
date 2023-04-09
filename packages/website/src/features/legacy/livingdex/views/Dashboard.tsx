@@ -1,5 +1,7 @@
 import { useContext } from 'react'
+
 import Link from 'next/link'
+
 import { getGameSet } from '#/features/legacy/livingdex/games'
 import { canCreateMoreDexes } from '#/features/legacy/livingdex/livingdex'
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
@@ -8,8 +10,9 @@ import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
-import { Dex } from '#/services/legacy/datastore/Entities'
+import { Dex } from '#/services/legacy/datastore/types'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
+
 import styles from './Dashboard.module.css'
 
 const GameCard = ({ dex }: { dex: Dex }) => {

@@ -1,4 +1,5 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
+
 import {
   ArticleEntry,
   Entry,

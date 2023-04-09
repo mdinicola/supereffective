@@ -1,5 +1,7 @@
-import { getAllEntries } from '@pkg/next-mdx/src/mdx'
 import { Redirect } from 'next/types'
+
+import { getAllEntries } from '@pkg/mdx/src/mdx'
+
 import { ArticleEntry, Entry, EntryType, PageEntry } from '#/services/cms/types'
 
 const allPages = getAllEntries(EntryType.Page).map(entry => ({

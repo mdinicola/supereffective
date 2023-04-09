@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+
 import { GameId, getGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
 import { getAvailableGames, PresetDex, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
@@ -8,6 +9,7 @@ import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
+
 import styles from './GamePresetSelector.module.css'
 
 export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {

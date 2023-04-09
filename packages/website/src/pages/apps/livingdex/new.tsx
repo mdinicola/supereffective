@@ -1,6 +1,8 @@
 import { useContext, useEffect, useRef } from 'react'
+
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
+
 import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
 import {
   canCreateMoreDexes,
@@ -17,7 +19,7 @@ import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { Dex } from '#/services/legacy/datastore/Entities'
+import { Dex } from '#/services/legacy/datastore/types'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 interface PageProps {
