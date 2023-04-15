@@ -2,23 +2,27 @@ import { useContext } from 'react'
 
 import Link from 'next/link'
 
-import { getGameSet } from '#/features/legacy/livingdex/games'
-import { canCreateMoreDexes } from '#/features/legacy/livingdex/livingdex'
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+import { LoadedDex } from '@pkg/database/src/dexes/types'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { WelcomeContent } from '#/features/legacy/livingdex/views/WelcomeContent'
 import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
-import { Dex } from '#/services/legacy/datastore/types'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './Dashboard.module.css'
 
-const GameCard = ({ dex }: { dex: Dex }) => {
+const gameSetRepo = getGameSetRepository()
+const livingDexRepo = getLivingDexRepository()
+
+const GameCard = ({ dex }: { dex: LoadedDex }) => {
   const dexLink = `/apps/livingdex/${dex.id}`
   //const socialLinks = dex.id ? <DexSocialLinks shareAsOwner={true} dexId={dex.id}/> : null
-  const gameSetId = getGameSet(dex.gameId).id
+  const gameSetId = gameSetRepo.getByGameId(dex.gameId).id
   return (
     <Link href={dexLink}>
       <div
@@ -94,7 +98,7 @@ export const Dashboard = () => {
         </small>
       </p>
       <div className="text-center" style={{ margin: '0 0 4rem 0', opacity: 1, fontSize: '1.5rem' }}>
-        {canCreateMoreDexes(dexes) && (
+        {livingDexRepo.canCreateMoreDexes(dexes) && (
           <ButtonInternalLink href={'/apps/livingdex/new'} inverted={false}>
             + Add Game
           </ButtonInternalLink>

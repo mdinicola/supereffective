@@ -5,9 +5,9 @@ import { useRouter } from 'next/router'
 import { OAuthProviderName } from '@pkg/auth/src/types'
 
 import { useAuth } from '#/features/legacy/users/state/UserContext'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import Button from '#/primitives/legacy/Button/Button'
 import { abs_url, SiteLink } from '#/primitives/legacy/Link/Links'
 

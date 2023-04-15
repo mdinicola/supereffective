@@ -2,22 +2,22 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import { getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
-import {
-  generateDexFromPreset,
-  loadPresets,
-  PresetDexMap,
-} from '#/features/legacy/livingdex/livingdex'
+import { createDexFromPreset } from '@pkg/database/src/dexes/presets/createDexFromPreset'
+import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
+import { PresetDexMap } from '@pkg/database/src/dexes/presets/types'
+
 import { PkBoxGroup } from '#/features/legacy/livingdex/views/PkBox'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import Button from '#/primitives/legacy/Button/Button'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 import { classNameIf } from '#/utils/legacyUtils'
 
+const presetsRepo = getPresetRepository()
+
 export async function getStaticProps() {
-  const presets = await loadPresets()
+  const presets = presetsRepo.getAll()
 
   return {
     props: {
@@ -28,8 +28,8 @@ export async function getStaticProps() {
 
 const Page = ({ presets }: { presets: PresetDexMap }) => {
   const [selectedPreset, setSelectedPreset] = React.useState<string>('grouped-region')
-  const dex = getPresetForGame('home', selectedPreset, presets)
-  const homePresets = getPresetsForGame('home', presets)
+  const dex = presetsRepo.getPresetForGame('home', selectedPreset)
+  const homePresets = presetsRepo.getAllPresetsForGame('home')
 
   // if (!entry) {
   //   return <LoadingBanner/>
@@ -175,7 +175,7 @@ const Page = ({ presets }: { presets: PresetDexMap }) => {
         </style>
       </div>
       <PkBoxGroup
-        dex={generateDexFromPreset('home', dex, undefined)}
+        dex={createDexFromPreset('home', dex, undefined)}
         showNonShiny={true}
         showShiny={false}
         selectMode={'cell'}

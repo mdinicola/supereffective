@@ -2,11 +2,11 @@ import * as _firebase from '@firebase/app'
 import * as _firebaseAuth from '@firebase/auth'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from '@firebase/auth'
 
-import createMemoizeCallback from '@pkg/utils/src/universal/createMemoizeCallback'
+import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
 
 import getFirebaseApp from './getFirebaseApp'
 
-const getFirebaseAuth = createMemoizeCallback(() => _createAuthApi(getFirebaseApp()))
+const getFirebaseAuth = createMemoizedCallback(() => _createAuthApi(getFirebaseApp()))
 
 export default getFirebaseAuth
 

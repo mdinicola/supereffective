@@ -1,12 +1,9 @@
 import Image from 'next/image'
 
-import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
-  useBackgroundTheme('teal-pattern')
-
   return (
     <div className={'page-container'} style={{ maxWidth: 'none' }}>
       <PageMeta

@@ -1,11 +1,8 @@
-import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { ButtonLink } from '#/primitives/legacy/Button/Button'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
-  useBackgroundTheme('gold-pattern')
-
   return (
     <div className={'page-container'} style={{ maxWidth: 'none' }}>
       <PageMeta

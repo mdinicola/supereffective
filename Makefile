@@ -19,10 +19,10 @@ postinstall-dev:
 	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
 	pnpm husky install
 	pnpm format:packages
-	cd packages/website && pnpm data:sync
+	pnpm update:data
 
 postinstall-prod:
-	cd packages/website && pnpm data:sync
+	pnpm update:data
 
 # These are only relevant if you have access to the Vercel team:
 

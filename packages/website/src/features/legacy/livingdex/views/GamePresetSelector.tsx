@@ -1,7 +1,11 @@
 import React, { useContext } from 'react'
 
-import { GameId, getGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
-import { getAvailableGames, PresetDex, PresetDexMap } from '#/features/legacy/livingdex/livingdex'
+import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
+import { PresetDex, PresetDexMap } from '@pkg/database/src/dexes/presets/types'
+import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { GameId } from '@pkg/database/src/games/types'
+
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
@@ -11,6 +15,10 @@ import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './GamePresetSelector.module.css'
+
+const gameRepo = getGameRepository()
+const gameSetRepo = getGameSetRepository()
+const presetRepo = getPresetRepository()
 
 export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {
   const userCtx = useContext(UserContext)
@@ -32,8 +40,8 @@ export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {
 
   const gameSelectors = (
     <div className={styles.games}>
-      {getAvailableGames(userDexes).map((gameId: GameId, index) => {
-        const game = getGame(gameId)
+      {gameSetRepo.getAvailableGames(userDexes).map((gameId: GameId, index) => {
+        const game = gameRepo.getById(gameId)
         const gameClasses = classNames(
           styles.gameLogo,
           classNameIf(game.id === selectedGame, styles.selected)
@@ -57,7 +65,7 @@ export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {
 
   let selectedGamePresets: PresetDex[] = []
   if (selectedGame) {
-    selectedGamePresets = Object.values(getPresetsForGame(selectedGame, presets))
+    selectedGamePresets = Object.values(presetRepo.getAllPresetsForGame(selectedGame))
   }
 
   return (
@@ -82,7 +90,9 @@ export const GamePresetSelector = ({ presets }: { presets: PresetDexMap }) => {
           {selectedGame && (
             <div id={'presets'} className={styles.presets}>
               <div className={'text-center'}>
-                <div className={styles.gameTitle}>Pokémon {getGame(selectedGame).name}</div>
+                <div className={styles.gameTitle}>
+                  Pokémon {gameRepo.getById(selectedGame).name}
+                </div>
               </div>
               {selectedGamePresets.map((p, index) => (
                 <div key={index} className={styles.preset + ' inner-container bg-beige'}>

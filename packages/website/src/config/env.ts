@@ -1,3 +1,7 @@
+export function hasDevFeaturesEnabled(): boolean {
+  return isDevelopmentEnv() && !isCIEnv()
+}
+
 export function isProductionEnv(): boolean {
   return _getVercelEnvName() === 'production'
 }
@@ -10,8 +14,16 @@ export function isPreviewEnv(): boolean {
   return _getVercelEnvName() === 'preview'
 }
 
+export function isCIEnv(): boolean {
+  return !!process.env['CI']
+}
+
 export function isServerSide(): boolean {
   return typeof window === 'undefined'
+}
+
+export function isClientSide(): boolean {
+  return typeof window !== 'undefined'
 }
 
 export function getBaseUrl(): string {

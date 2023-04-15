@@ -1,11 +1,15 @@
+import { getArticleRepository } from '@pkg/database/src/pages/getArticleRepository'
+import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
+import { toSortedIndex } from '@pkg/database/src/pages/toSortedIndex'
+import { ArticleEntry } from '@pkg/database/src/pages/types'
+
 import { getFullUrl } from '#/config/env'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
-import { ArticleEntry, getAllArticles, getPageBySlug, toSortedIndex } from '#/services/cms'
-import ArticlePageView from '#/services/cms/ArticlePageView'
+import PageMeta from '#/features/pages/components/PageMeta'
+import ArticlePageView from '#/features/pages/views/ArticlePageView'
 
 export async function getStaticProps() {
-  const entries = toSortedIndex(getAllArticles())
-  const indexEntry = getPageBySlug('news')
+  const entries = toSortedIndex(getArticleRepository().getAll())
+  const indexEntry = getPageRepository().getBySlug('news')
   return {
     props: {
       entries,

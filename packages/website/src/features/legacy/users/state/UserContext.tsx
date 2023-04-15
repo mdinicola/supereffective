@@ -2,9 +2,10 @@ import { createContext, ReactNode, useContext, useEffect, useReducer } from 'rea
 
 import { AuthProvider, useAuth as useAuthLib } from '@pkg/auth/src/AuthProvider'
 import { OAuthProviderName } from '@pkg/auth/src/types'
+import { LoadedDexList } from '@pkg/database/src/dexes/types'
 
 import { withCountedPokemon } from '#/features/legacy/livingdex/state/LivingDexContext'
-import { DexList, User } from '#/services/legacy/datastore/types'
+import { User } from '#/features/legacy/users/types'
 import { debug } from '#/utils/legacyUtils'
 
 // ===========================
@@ -13,7 +14,7 @@ import { debug } from '#/utils/legacyUtils'
 
 type UserContextState = {
   user: User | null
-  dexes: DexList | null
+  dexes: LoadedDexList | null
   loading: boolean
   error?: string | null
 }
@@ -29,7 +30,7 @@ export type UserContextType = {
   logout: () => Promise<void>
   enterLoadingMode: () => void
   isLoading: () => boolean
-  setDexes: (dexes: DexList | null) => void
+  setDexes: (dexes: LoadedDexList | null) => void
 }
 
 // ===========================
@@ -127,7 +128,7 @@ const BaseUserProvider = ({ children }: { children: ReactNode }) => {
 
   const isLoading = () => state.loading
 
-  const setDexes = (dexes: DexList | null) => {
+  const setDexes = (dexes: LoadedDexList | null) => {
     dispatch({
       type: 'SET_DEXES',
       payload: dexes ? dexes.map(dex => withCountedPokemon(dex)) : null,

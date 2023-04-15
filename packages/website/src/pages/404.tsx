@@ -1,12 +1,10 @@
 import Image from 'next/image'
 
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const page = () => {
   const randFrom0to4 = Math.floor(Math.random() * 5)
-  // fifth part of current minute
-  const fifth = Math.floor(new Date().getMinutes() / 5)
   return (
     <div className={'page-container'}>
       <PageMeta

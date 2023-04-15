@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+import { LoadedDexList } from '@pkg/database/src/dexes/types'
+
 import { UserContextType } from '#/features/legacy/users/state/UserContext'
-import { findDexesByUser } from '#/services/legacy/datastore/firestore'
-import { DexList } from '#/services/legacy/datastore/types'
 import { debug } from '#/utils/legacyUtils'
 
 export const useUserDexes = (
   userCtx: UserContextType
-): [DexList | null, boolean, (dexes: DexList | null) => void] => {
+): [LoadedDexList | null, boolean, (dexes: LoadedDexList | null) => void] => {
   const userState = userCtx.state
   const setUserDexes = userCtx.setDexes
-  const [dexes, setDexes] = useState<DexList | null>(null)
+  const [dexes, setDexes] = useState<LoadedDexList | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -43,8 +44,8 @@ export const useUserDexes = (
 
       let userDexes = userState.dexes
       if (userDexes === null) {
-        debug('fetching dexes from Firestore')
-        userDexes = await findDexesByUser(userState.user.uid)
+        debug('fetching dexes from DB')
+        userDexes = await getLivingDexRepository().getManyByUser(userState.user.uid, 100)
         setUserDexes(userDexes)
       } else {
         debug('fetching dexes from context')
@@ -60,7 +61,7 @@ export const useUserDexes = (
     }
   }, [dexes, loading, userState, setUserDexes])
 
-  const setDexesEverywhere = (dexes: DexList | null) => {
+  const setDexesEverywhere = (dexes: LoadedDexList | null) => {
     setDexes(dexes)
     setUserDexes(dexes)
   }

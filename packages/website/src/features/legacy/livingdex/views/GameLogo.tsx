@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
-import { GameId, getGame } from '#/features/legacy/livingdex/games'
+import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
+import { GameId } from '@pkg/database/src/games/types'
 
 import styles from './GameLogo.module.css'
 
@@ -20,7 +21,7 @@ export const GameLogo = ({
   ext = '.jpeg',
   ...props
 }: GameLogoProps) => {
-  const gameData = getGame(game)
+  const gameData = getGameRepository().getById(game)
   const path = asSwitchIcon ? `tiles/${gameData.id}` : gameData.id
   return (
     <Image

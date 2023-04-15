@@ -1,11 +1,11 @@
 import * as _firebaseAnalytics from '@firebase/analytics'
 import * as _firebase from '@firebase/app'
 
-import createMemoizeCallback from '@pkg/utils/src/universal/createMemoizeCallback'
+import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
 
 import getFirebaseApp from './getFirebaseApp'
 
-const getFirebaseAnalytics = createMemoizeCallback(() => _createAnalyticsApi(getFirebaseApp()))
+const getFirebaseAnalytics = createMemoizedCallback(() => _createAnalyticsApi(getFirebaseApp()))
 
 export default getFirebaseAnalytics
 

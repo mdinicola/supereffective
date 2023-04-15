@@ -1,9 +1,10 @@
 import { ReactElement } from 'react'
 
+import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/dexes/types'
+import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+
 import legacyConfig from '#/config/legacyConfig'
-import { canGmax, getPokemonEntry } from '#/features/legacy/livingdex/pokemon'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
-import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/types'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './PkBox.module.css'
@@ -15,8 +16,10 @@ export type MarkType = 'catch' | 'shiny' | 'alpha' | 'gmax' | 'ability' | 'gende
 
 // TODO remove tabindex usage (always be = 0) and replace it with a custom data- attribute.
 
+const pokeRepo = getPokemonRepository()
+
 export const gmaxixePid = (pid: string, isGmax: boolean): string => {
-  if (!canGmax(pid)) {
+  if (!pokeRepo.canGmax(pid)) {
     return pid
   }
   return isGmax ? pid.replace(/-f$/g, '') + '-gmax' : pid
@@ -40,7 +43,7 @@ interface PkBoxProps {
 export interface PkBoxCellProps {
   boxIndex: number
   pokemonIndex: number
-  pokemonData: DexPokemon | null
+  pokemonData: NullableDexPokemon
   children?: any
   tabIndex?: number | undefined
   title?: string
@@ -48,13 +51,13 @@ export interface PkBoxCellProps {
   caption?: any
   className?: string
   revealPokemon: boolean
-  onClick?: (boxIndex: number, pokemonIndex: number, pokemonData: DexPokemon | null) => void
+  onClick?: (boxIndex: number, pokemonIndex: number, pokemonData: NullableDexPokemon) => void
   selectMode: SelectMode
   viewMode: ViewMode
 }
 
 interface PkBoxGroupProps {
-  dex: Dex
+  dex: LoadedDex
   selectMode: SelectMode
   showNonShiny: boolean
   showShiny: boolean
@@ -62,7 +65,7 @@ interface PkBoxGroupProps {
   usePixelIcons: boolean
   revealPokemon: boolean
   onBoxClick?: (boxIndex: number, boxData: DexBox) => void
-  onPokemonClick?: (boxIndex: number, pokemonIndex: number, pokemonData: DexPokemon | null) => void
+  onPokemonClick?: (boxIndex: number, pokemonIndex: number, pokemonData: NullableDexPokemon) => void
   editable: boolean
   onBoxTitleEdit?: (boxIndex: number, newTitle: string) => void
   markTypes: MarkType[]
@@ -267,7 +270,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       }
 
       let slug = cellPkm.pid
-      let pkmEntry = getPokemonEntry(slug)
+      let pkmEntry = pokeRepo.getPokemonEntry(slug)
       let title = pkmEntry.name
       let isSpecialAbilityPkm = false
       let isHiddenAbilityPkm = false // TODO support in future
@@ -290,7 +293,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       }
 
       if (cellPkm.shiny && cellPkm.shinyBase) {
-        title += ', same color as ' + getPokemonEntry(cellPkm.shinyBase).name
+        title += ', same color as ' + pokeRepo.getPokemonEntry(cellPkm.shinyBase).name
       }
 
       if (cellPkm.shiny && cellPkm.shinyLocked) {
@@ -370,7 +373,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         viewMode={props.viewMode}
         selectMode={props.selectMode}
         tabIndex={boxTabIndex}
-        title={box.title}
+        title={box.title || `[Box ${boxIndex + 1}]`}
         onClick={props.onBoxClick}
       >
         {boxCells}

@@ -3,14 +3,12 @@ import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { UserContext } from '#/features/legacy/users/state/UserContext'
-import useBackgroundTheme from '#/hooks/legacy/useBackgroundTheme'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 
 const Page = () => {
   const router = useRouter()
   const appAuth = useContext(UserContext)
-  useBackgroundTheme('purple-pattern')
 
   useEffect(() => {
     // console.log('redirecting to login page')

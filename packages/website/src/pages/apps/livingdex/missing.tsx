@@ -2,32 +2,39 @@ import { useContext, useState } from 'react'
 
 import Link from 'next/link'
 
-import pokemonEntries from '#/data/builds/pokemon/pokemon-entries-minimal.min.json'
-import { GameListItem, getGame, getGameSet } from '#/features/legacy/livingdex/games'
-import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'
+import { DexPokemon, NullableDexPokemon } from '@pkg/database/src/dexes/types'
+import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { GameBasicInfo } from '@pkg/database/src/games/types'
+import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'
 import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { DexPokemon, NullableDexPokemon } from '#/services/legacy/datastore/types'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 import styles from './missing.module.css'
 
+const pokeRepo = getPokemonRepository()
+const gameRepo = getGameRepository()
+const gameSetRepo = getGameSetRepository()
+
 export async function getServerSideProps() {
   return {
     props: {
-      allPokemon: pokemonEntries,
+      allPokemon: pokeRepo.getPokemonEntries(),
     },
   }
 }
 
 type MissingPokemon = {
-  game: GameListItem
+  game: GameBasicInfo
   pokemon: PokemonEntryMinimal[]
   countSpecies: number
   countForms: number
@@ -117,7 +124,7 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
 
     if (missingPokemon.length > 0) {
       missingPokemonByGame.push({
-        game: getGame(dex.gameId),
+        game: gameRepo.getById(dex.gameId),
         pokemon: missingPokemon,
         countSpecies,
         countForms,
@@ -152,7 +159,7 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
           if (!missingPokemon.game.setId) {
             throw new Error('Missing game set id for ' + missingPokemon.game.id)
           }
-          const gameSet = getGameSet(missingPokemon.game.id)
+          const gameSet = gameSetRepo.getByGameId(missingPokemon.game.id)
           if (showShiny && !gameSet.hasShinies) {
             return null
           }

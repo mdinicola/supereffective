@@ -3,40 +3,45 @@ import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
-import { GameId, getGameSet } from '#/features/legacy/livingdex/games'
-import {
-  canCreateMoreDexes,
-  generateDexFromPreset,
-  loadPresets,
-  PresetDexMap,
-} from '#/features/legacy/livingdex/livingdex'
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+import { createDexFromPreset } from '@pkg/database/src/dexes/presets/createDexFromPreset'
+import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
+import { LoadedDex } from '@pkg/database/src/dexes/types'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { GameId } from '@pkg/database/src/games/types'
+
 import { LivingDexContext } from '#/features/legacy/livingdex/state/LivingDexContext'
 import { GamePresetSelector } from '#/features/legacy/livingdex/views/GamePresetSelector'
 import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
 import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { useConditionalRedirect } from '#/hooks/legacy/useConditionalRedirect'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { Dex } from '#/services/legacy/datastore/types'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 interface PageProps {
-  presets: PresetDexMap
   selectedGame: string | null
   selectedPreset: string | null
 }
 
-const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
+const Page = ({ selectedGame, selectedPreset }: PageProps) => {
   const userCtx = useContext(UserContext)
   const livingdex = useContext(LivingDexContext)
   const [dexes, loadingDexes] = useUserDexes(userCtx)
   const presetIsSelected = !(!selectedGame || !selectedPreset)
   const router = useRouter()
   const createdDexId = useRef<string | null>(null)
+  const gameSetRepo = getGameSetRepository()
+  const dexRepo = getLivingDexRepository()
+  const presets = getPresetRepository().getAll()
 
-  const onSaveHandler = (dex: Dex): void => {
+  const onSaveHandler = (dex: LoadedDex): void => {
+    if (!dex.id) {
+      console.warn('Dex id is not set')
+      return
+    }
     createdDexId.current = dex.id
     router.push(`/apps/livingdex/${dex.id}`)
   }
@@ -55,8 +60,8 @@ const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
     '/apps/livingdex',
     {
       waitIf: loadingDexes || createdDexId.current !== null,
-      redirectIf: dexes !== null && !canCreateMoreDexes(dexes),
-      abortRedirectIf: dexes !== null && canCreateMoreDexes(dexes),
+      redirectIf: dexes !== null && !dexRepo.canCreateMoreDexes(dexes),
+      abortRedirectIf: dexes !== null && dexRepo.canCreateMoreDexes(dexes),
     },
     2000
   )
@@ -79,7 +84,7 @@ const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
     return <LoadingBanner content={'Creating your dex...'} />
   }
 
-  if (!canCreateMoreDexes(dexes)) {
+  if (!dexRepo.canCreateMoreDexes(dexes)) {
     return (
       <LoadingBanner
         content={
@@ -99,7 +104,7 @@ const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
   let gameSetId = ''
 
   if (selectedGame) {
-    gameSet = getGameSet(selectedGame as GameId)
+    gameSet = gameSetRepo.getByGameId(selectedGame)
     gameSetId = gameSet.id
   }
 
@@ -136,7 +141,7 @@ const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
       {presetIsSelected && foundPreset && (
         <LivingDexApp
           presets={presets}
-          loadedDex={generateDexFromPreset(
+          loadedDex={createDexFromPreset(
             selectedGame as GameId,
             foundPreset,
             userCtx.state.user.uid
@@ -149,14 +154,9 @@ const Page = ({ presets, selectedGame, selectedPreset }: PageProps) => {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  context.res.setHeader('Cache-Control', 'public, s-maxage=20, stale-while-revalidate=59')
-
-  const presets = await loadPresets()
-
   try {
     return {
       props: {
-        presets,
         selectedGame: context.query.game || null,
         selectedPreset: context.query.preset || null,
       },

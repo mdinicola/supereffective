@@ -1,10 +1,13 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
 
-import { ArticleEntry, Entry, getAllPages, getPageStaticProps, toSortedIndex } from '#/services/cms'
-import ArticlePageView from '#/services/cms/ArticlePageView'
+import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
+import { toSortedIndex } from '@pkg/database/src/pages/toSortedIndex'
+import { Entry, PageEntry } from '@pkg/database/src/pages/types'
+
+import ArticlePageView from '#/features/pages/views/ArticlePageView'
 
 export function getStaticPaths(): GetStaticPathsResult {
-  const paths = toSortedIndex(getAllPages()).map((page: Entry) => ({
+  const paths = toSortedIndex(getPageRepository().getAll()).map((page: Entry) => ({
     params: {
       slug: page.slug,
     },
@@ -20,10 +23,10 @@ export function getStaticPaths(): GetStaticPathsResult {
 
 export function getStaticProps(ctx: GetStaticPropsContext): GetStaticPropsResult<any> {
   const slug = ctx.params?.slug as string
-  return getPageStaticProps(slug, 60 * 15)
+  return getPageRepository().getStaticProps(slug, 60 * 15)
 }
 
-const page = ({ entry }: { entry: ArticleEntry | null }) => {
+const page = ({ entry }: { entry: PageEntry | null }) => {
   return <ArticlePageView entry={entry} />
 }
 

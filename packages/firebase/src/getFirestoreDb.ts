@@ -1,11 +1,11 @@
 import * as _firebase from '@firebase/app'
 import * as _firestore from '@firebase/firestore/lite'
 
-import createMemoizeCallback from '@pkg/utils/src/universal/createMemoizeCallback'
+import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
 
 import getFirebaseApp from './getFirebaseApp'
 
-export const getFirestoreDb = createMemoizeCallback(() => _createFirestoreApi(getFirebaseApp()))
+export const getFirestoreDb = createMemoizedCallback(() => _createFirestoreApi(getFirebaseApp()))
 
 export default getFirestoreDb
 
@@ -18,16 +18,18 @@ export type FirestoreDocument = {
   updatedAt?: Date
 } & Record<string, unknown>
 
-const _documentWithoutId = (doc: FirestoreDocument): Omit<FirestoreDocument, 'id'> => {
+const _documentWithoutId = <D extends FirestoreDocument>(doc: D): Omit<D, 'id'> => {
   const { id, ...payload } = doc
   return payload
 }
 
-const _snapshotWithId = (doc: _firestore.DocumentSnapshot): FirestoreDocument => {
+const _snapshotWithId = <D extends FirestoreDocument = FirestoreDocument>(
+  doc: _firestore.DocumentSnapshot
+): D => {
   return {
     ...doc.data(),
     id: doc.id,
-  } as FirestoreDocument
+  } as D
 }
 
 function _createFirestoreApi(app: _firebase.FirebaseApp) {
@@ -37,18 +39,18 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
   const ResourceNotFoundError = new Error('Resource not found')
   const defaultLimit = 25
 
+  const collection = (collectionPath: string) => {
+    return _firestore.collection(db, collectionPath)
+  }
+
   const dbApi = {
     createTimestamp: (): Date => {
       return _firestore.Timestamp.now().toDate()
     },
 
-    collection: (collectionPath: string) => {
-      return _firestore.collection(db, collectionPath)
-    },
-
-    addDocument: async (
+    addDocument: async <D extends FirestoreDocument>(
       collectionPath: string,
-      data: FirestoreDocument,
+      data: D,
       userUid: string | undefined
     ): Promise<string> => {
       if (!userUid) {
@@ -59,30 +61,30 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
       data.userId = userUid
       data.createdAt = data.updatedAt = dbApi.createTimestamp()
 
-      const docRef = await _firestore.addDoc(
-        dbApi.collection(collectionPath),
-        _documentWithoutId(data)
-      )
+      const docRef = await _firestore.addDoc(collection(collectionPath), _documentWithoutId(data))
       data.id = docRef.id
 
       return docRef.id
     },
 
-    getDocument: async (collectionPath: string, id: string): Promise<FirestoreDocument> => {
+    getDocument: async <D extends FirestoreDocument>(
+      collectionPath: string,
+      id: string
+    ): Promise<D> => {
       const docRef = _firestore.doc(db, collectionPath, id)
       const docSnap = await _firestore.getDoc(docRef)
       if (docSnap.exists()) {
-        return _firestore.getDoc(docRef).then(_snapshotWithId)
+        return _firestore.getDoc(docRef).then(_snapshotWithId<D>)
       }
       return new Promise((resolve, reject) => {
         reject(ResourceNotFoundError)
       })
     },
 
-    updateDocument: async (
+    updateDocument: async <D extends FirestoreDocument>(
       collectionPath: string,
       id: string,
-      data: FirestoreDocument,
+      data: D,
       userUid: string | undefined
     ): Promise<void> => {
       if (!userUid || userUid !== data.userId) {
@@ -96,9 +98,9 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
       )
     },
 
-    upsertDocument: async (
+    upsertDocument: async <D extends FirestoreDocument>(
       collectionPath: string,
-      data: FirestoreDocument,
+      data: D,
       userUid: string | undefined
     ): Promise<string> => {
       if (!data.id) {
@@ -112,12 +114,12 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
       return _firestore.deleteDoc(_firestore.doc(db, collectionPath, id))
     },
 
-    findDocuments: async (
+    findDocuments: async <D extends FirestoreDocument>(
       collectionPath: string,
       criteria: { [key: string]: any },
       sortBy: [string, _firestore.OrderByDirection] = ['createdAt', 'asc'],
       maxResults: number = defaultLimit
-    ): Promise<FirestoreDocument[]> => {
+    ): Promise<Array<D>> => {
       const collectionRef = _firestore.collection(db, collectionPath)
 
       const whereClauses = Object.entries(criteria).map(([key, value]) => {
@@ -132,15 +134,15 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
       )
 
       return _firestore.getDocs(query).then(snapshot => {
-        return snapshot.docs.map(_snapshotWithId)
+        return snapshot.docs.map<D>(_snapshotWithId)
       })
     },
 
-    findDocument: async (
+    findDocument: async <D extends FirestoreDocument>(
       collectionPath: string,
       criteria: { [key: string]: any },
       sortBy: [string, _firestore.OrderByDirection] = ['createdAt', 'asc']
-    ): Promise<FirestoreDocument> => {
+    ): Promise<D> => {
       const collectionRef = _firestore.collection(db, collectionPath)
 
       const whereClauses = Object.entries(criteria).map(([key, value]) => {
@@ -154,7 +156,7 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
         _firestore.limit(1)
       )
 
-      return dbApi.findDocuments(collectionPath, criteria, sortBy, 1).then(docs => {
+      return dbApi.findDocuments<D>(collectionPath, criteria, sortBy, 1).then(docs => {
         if (docs.length === 0) {
           throw ResourceNotFoundError
         }
@@ -162,19 +164,19 @@ function _createFirestoreApi(app: _firebase.FirebaseApp) {
       })
     },
 
-    findDocumentsByUser: async (
+    findDocumentsByUser: async <D extends FirestoreDocument>(
       collectionPath: string,
       userUid: string | undefined,
       criteria: { [key: string]: any } = {},
       sortBy: [string, _firestore.OrderByDirection] = ['createdAt', 'desc'],
       maxResults: number = defaultLimit
-    ): Promise<FirestoreDocument[]> => {
+    ): Promise<Array<D>> => {
       if (!userUid) {
         return new Promise((resolve, reject) => {
           reject(NotAuthorizedError)
         })
       }
-      return dbApi.findDocuments(
+      return dbApi.findDocuments<D>(
         collectionPath,
         { ...criteria, userId: userUid },
         sortBy,

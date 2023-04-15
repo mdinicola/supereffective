@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import createMemoizeCallback from '@pkg/utils/src/universal/createMemoizeCallback'
+import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
 
 import getFirebaseAnalytics from './getFirebaseAnalytics'
 import getFirebaseApp from './getFirebaseApp'
@@ -13,7 +13,7 @@ vi.mock('@firebase/analytics', () => ({
   },
 }))
 
-vi.mock('@pkg/utils/src/universal/createMemoizeCallback', () => ({
+vi.mock('@pkg/utils/src/universal/createMemoizedCallback', () => ({
   default: vi.fn(callback => () => callback()),
 }))
 
@@ -29,7 +29,7 @@ describe('getFirebaseAnalytics', () => {
   it('calls _createAnalyticsApi with the correct Firebase app', () => {
     const result = getFirebaseAnalytics()
 
-    expect(createMemoizeCallback).toHaveBeenCalledTimes(1)
+    expect(createMemoizedCallback).toHaveBeenCalledTimes(1)
     expect(getFirebaseApp).toHaveBeenCalledTimes(1)
 
     expect(result).toStrictEqual({

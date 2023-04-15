@@ -1,14 +1,16 @@
-import pokemonEntries from '#/data/builds/pokemon/pokemon-entries-minimal.min.json'
-import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'
+import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
+import { PageEntry } from '@pkg/database/src/pages/types'
+import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'
+import PageMeta from '#/features/pages/components/PageMeta'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import PageMeta from '#/layouts/LegacyLayout/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
-import { getPageStaticProps, PageEntry } from '#/services/cms'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 export async function getStaticProps() {
-  const pageProps = getPageStaticProps('pokedex', 60 * 60 * 24) // 24h
+  const pageProps = getPageRepository().getStaticProps('pokedex', 60 * 60 * 24) // 24h
 
   if (!pageProps.props) {
     return pageProps
@@ -17,7 +19,7 @@ export async function getStaticProps() {
   return {
     props: {
       entry: pageProps.props.entry,
-      pokemon: pokemonEntries,
+      pokemon: getPokemonRepository().getPokemonEntries(),
     },
     revalidate: pageProps.revalidate,
   }

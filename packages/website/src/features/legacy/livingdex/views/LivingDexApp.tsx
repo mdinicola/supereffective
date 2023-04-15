@@ -3,15 +3,17 @@ import ReactModal from 'react-modal'
 
 import { useRouter } from 'next/router'
 
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
+import { normalizeDexWithPreset } from '@pkg/database/src/dexes/presets/normalizeDexWithPreset'
+import { PresetDex, PresetDexMap } from '@pkg/database/src/dexes/presets/types'
+import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/dexes/types'
+import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
-import { getGameSet, getPresetForGame, getPresetsForGame } from '#/features/legacy/livingdex/games'
-import {
-  isNotCatchable,
-  normalizeDexWithPreset,
-  PresetDex,
-  PresetDexMap,
-} from '#/features/legacy/livingdex/livingdex'
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { MarkType, PkBoxGroup, SelectMode, ViewMode } from '#/features/legacy/livingdex/views/PkBox'
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
@@ -29,8 +31,6 @@ import {
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
 } from '#/primitives/legacy/Toolbar/ToolbarButton'
-import { removeDex, saveDex } from '#/services/legacy/datastore/firestore'
-import { Dex, DexBox, DexPokemon } from '#/services/legacy/datastore/types'
 import { classNameIf, debug } from '#/utils/legacyUtils'
 
 import { LivingDexContext } from '../state/LivingDexContext'
@@ -41,9 +41,9 @@ type SavingState = 'ready' | 'saving' | 'saved'
 const defaultTool: ActionTool = 'catch'
 
 export interface LivingDexAppProps {
-  loadedDex: Dex
+  loadedDex: LoadedDex
   presets: PresetDexMap
-  onSave?: (dex: Dex, isNewDex: boolean) => void
+  onSave?: (dex: LoadedDex, isNewDex: boolean) => void
 }
 
 interface ModalContent {
@@ -54,10 +54,16 @@ interface ModalContent {
   onCancel?: () => void
   onConfirm?: () => void
   prevState: {
-    dex: Dex
+    dex: LoadedDex
     preset: PresetDex
   }
 }
+
+const presetRepo = getPresetRepository()
+const dexRepo = getLivingDexRepository()
+const pokeRepo = getPokemonRepository()
+const gameRepo = getGameRepository()
+const gameSetRepo = getGameSetRepository()
 
 export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
   const initialMarkTypes: MarkType[] = ['catch']
@@ -99,16 +105,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     if (livingdex.state === null) {
       return null
     }
-    return getPresetForGame(livingdex.state.gameId, livingdex.state!.presetId, presets)
+    return presetRepo.getPresetForGame(livingdex.state.gameId, livingdex.state!.presetId)
   }, [presets, livingdex.state])
-
-  // useEffect(() => {
-  //   clog('useEffect init 2')
-  //   if (livingdex.stateV2.currentDex === null || (loadedDex.id !== livingdex.stateV2.currentDex.id)) {
-  //     clog('useEffect calling setStateV2')
-  //     livingdex.actions.setStateV2({...livingdex.stateV2, currentDex: loadedDex})
-  //   }
-  // }, [loadedDex.id, livingdex.stateV2])
 
   if (currentUser.state.loading || dex === null) {
     return <LoadingBanner />
@@ -122,7 +120,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     currentUser.state.user !== null &&
     (dex.userId === currentUser.state.user.uid || dex.userId === undefined)
 
-  const gameSet = getGameSet(dex.gameId)
+  const gameSet = gameSetRepo.getByGameId(dex.gameId)
   const gameSymbols = gameSet.storage?.symbols || []
   const hasShinyMode = gameSet.hasShinies
 
@@ -160,14 +158,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const handlePkmClick = (
     boxIndex: number,
     pokemonIndex: number,
-    pokemonData: DexPokemon | null
+    pokemonData: NullableDexPokemon
   ) => {
     if (pokemonData === null || selectMode !== 'cell') {
       return
     }
     switch (currentTool) {
       case 'catch':
-        if (isNotCatchable(pokemonData)) {
+        if (!pokeRepo.isCatchable(pokemonData)) {
           // console.log("shiny locked", pokemonData.pid)
           return
         }
@@ -220,6 +218,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const handleSave = () => {
+    if (!dex.userId) {
+      throw new Error('Cannot save dex without a logged in user')
+    }
     if (savingState !== 'ready') {
       return
     }
@@ -228,17 +229,17 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
 
     const isNewDex = dex.id === null
 
-    saveDex(dex).then(dexId => {
+    dexRepo.save(dex, dex.userId).then(updatedDex => {
       let dexWithId = dex
       if (isNewDex) {
-        dexWithId = { ...dex, id: dexId }
+        dexWithId = { ...dex, id: updatedDex.id }
         app.setDex(dexWithId)
       }
       // currentUser.syncDex(dexWithId)
       setUserDexes(null) // TODO remove userCtx.syncDex, do it inside livingdexCtx.setDex
       handleSavedState()
       if (isNewDex) {
-        router.push(`/apps/livingdex/${dexId}`)
+        router.push(`/apps/livingdex/${updatedDex.id}`)
       }
       if (onSave) {
         onSave(dexWithId, isNewDex)
@@ -247,10 +248,11 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const handleRemoveDex = () => {
-    if (dex.id === null) {
+    if (!dex.id) {
       return
     }
-    removeDex(dex.id)
+    dexRepo
+      .remove(dex.id)
       .then(() => {
         window.location.href = '/apps/livingdex' // TODO do better than this, which reloads the whole state
       })
@@ -294,7 +296,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     if (newAction === dex.presetId || newAction === null) {
       return
     }
-    const newPreset = getPresetForGame(dex.gameId, newAction, presets)
+    const newPreset = presetRepo.getPresetForGame(dex.gameId, newAction)
     if (!newPreset) {
       throw new Error(`Preset ${newAction} not found for game ${dex.gameId}`)
     }
@@ -497,30 +499,13 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             dropdownTitle={'Change Box Preset'}
             dropdownPosition={'middle'}
             dropdownNoActionIcon={'sync_alt'}
-            items={Object.values(getPresetsForGame(dex.gameId, presets)).map(pr => ({
+            items={Object.values(presetRepo.getAllPresetsForGame(dex.gameId)).map(pr => ({
               actionName: pr.id,
               label: pr.name,
               title: pr.description,
               status: pr.id === preset?.id ? 'selected' : null,
             }))}
-          >
-            {/*<div className={"text-left"}>*/}
-            {/*  {*/}
-            {/*    [*/}
-            {/*      <i key={"hint1"}>*/}
-            {/*        Hint 1: Changing presets will reorganize your boxes and may change available Pokémon.*/}
-            {/*      </i>,*/}
-            {/*      <i key={"hint2"}>Hint 2: On "Minimal" presets, All Legendary and Mythical forms are excluded.</i>,*/}
-            {/*      <i key={"hint2"}>Hint 2: On "Minimal" presets, All Legendary and Mythical forms are excluded.</i>,*/}
-            {/*      <i key={"hint3"}>Hint 3: "National" stands for "National Pokédex order".</i>,*/}
-            {/*      <i key={"hint4"}>Hint 3: "National" stands for "National Pokédex order".</i>,*/}
-            {/*    ][(Math.random() * 5) | 0]*/}
-            {/*  }*/}
-            {/*  ️*/}
-            {/*</div>*/}
-            {/*When you migrate to another box preset, all Pokémon in the current boxes will be reorganized to match*/}
-            {/*the new preset. It a Pokémon is not in the new preset, it will be moved to a new box at the bottom.*/}
-          </ToolbarButtonGroup>
+          ></ToolbarButtonGroup>
           <ToolbarButton
             actionName={null}
             icon={'help_outline'}
@@ -561,12 +546,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   status: status,
                   className: styles.saveBtn,
                   showLabel: true,
-                }, // {
-                //   actionName: null,
-                //   icon: 'help',
-                //   href: '/apps/livingdex#howto',
-                //   className: styles.helpBtn,
-                // }
+                },
               ]
             })()}
           />

@@ -3,7 +3,8 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { canCreateMoreDexes } from '#/features/legacy/livingdex/livingdex'
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import { UserContext } from '#/features/legacy/users/state/UserContext'
 import { useScrollToLocation } from '#/hooks/legacy/useScrollToLocation'
@@ -11,6 +12,8 @@ import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
 
 import styles from './WelcomeContent.module.css'
+
+const dexRepo = getLivingDexRepository()
 
 export const WelcomeContent = () => {
   useScrollToLocation()
@@ -24,7 +27,7 @@ export const WelcomeContent = () => {
     margin: '2rem 0',
   }
 
-  const canAddMoreDexes = canCreateMoreDexes(dexes)
+  const canAddMoreDexes = dexRepo.canCreateMoreDexes(dexes)
   const ifCanAddMoreDexes = (children: any, fallback: any) =>
     canAddMoreDexes ? children : fallback
   const onCreateBtn = (btnId: string) => {

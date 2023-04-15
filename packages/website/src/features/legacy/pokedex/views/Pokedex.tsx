@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { GAME_SETS, GameSetId } from '#/features/legacy/livingdex/games'
-import { PokemonEntryMinimal } from '#/features/legacy/livingdex/pokemon'
+import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { GameSetId } from '@pkg/database/src/games/types'
+import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import Button from '#/primitives/legacy/Button/Button'
-import { classNameIf, classNames, titleize } from '#/utils/legacyUtils'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import css from './Pokedex.module.css'
 
@@ -30,6 +32,15 @@ export interface PokemonInfoPanelProps {
   isOpen: boolean
 
   [key: string]: any
+}
+
+const gameSetRepo = getGameSetRepository()
+
+const titleize = (str: string): string => {
+  if (!str) return ''
+  const parts = str.split('.')
+  const last = parts[parts.length - 1]
+  return last.replace(/([A-Z])/g, ' $1').replace(/^./, l => l.toUpperCase())
 }
 
 export const PokemonInfoPanel = ({
@@ -104,7 +115,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={GAME_SETS[gameSetId].name}
+                data-tooltip={gameSetRepo.getById(gameSetId).name}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
@@ -114,7 +125,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={GAME_SETS[gameSetId].name + ' (Event Only)'}
+                data-tooltip={gameSetRepo.getById(gameSetId).name + ' (Event Only)'}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
@@ -131,7 +142,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={GAME_SETS[gameSetId].name}
+                data-tooltip={gameSetRepo.getById(gameSetId).name}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>

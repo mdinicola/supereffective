@@ -1,27 +1,16 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
-import {
-  dexWithRecalculatedCounters,
-  isNotCatchable,
-  normalizeDexWithPreset,
-  PresetDex,
-} from '#/features/legacy/livingdex/livingdex'
-import { Dex, DexList, NullableDexPokemon } from '#/services/legacy/datastore/types'
+import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
+import { normalizeDexWithPreset } from '@pkg/database/src/dexes/presets/normalizeDexWithPreset'
+import { PresetDex } from '@pkg/database/src/dexes/presets/types'
+import { LoadedDex, LoadedDexList, NullableDexPokemon } from '@pkg/database/src/dexes/types'
+import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+
 import { debug } from '#/utils/legacyUtils'
 
 // ===========================
 //          TYPES
 // ===========================
-
-const MAX_STORAGE = {
-  // TODO add this info in games.json of supereffective-assets
-  HOME: { boxes: 200, maxBoxSize: 30 },
-  GO: { boxes: 1, maxBoxSize: 5000 },
-  LGPE: { boxes: 1, maxBoxSize: 1000 },
-  SWSH: { boxes: 32, maxBoxSize: 30 },
-  BDSP: { boxes: 40, maxBoxSize: 30 },
-  PLA: { boxes: 32, maxBoxSize: 30 },
-}
 
 interface LivingDexContextAction {
   type:
@@ -43,22 +32,22 @@ interface LivingDexContextAction {
     | 'GMAXIZE_POKEMON'
     | 'ALPHAIZE_BOX'
     | 'ALPHAIZE_POKEMON'
-  payload?: Dex | string | any | null
+  payload?: LoadedDex | string | any | null
 }
 
 export interface LivingDexState {
   currentDex: number | null
-  userDexes: DexList | null
+  userDexes: LoadedDexList | null
 }
 
 export interface LivingDexContextType {
-  state: Dex | null
+  state: LoadedDex | null
   stateV2: LivingDexState
   actions: {
-    getCurrentDex: () => Dex | null
-    setDexes: (dexes: DexList | null) => void
+    getCurrentDex: () => LoadedDex | null
+    setDexes: (dexes: LoadedDexList | null) => void
     changePreset: (preset: PresetDex) => void
-    setDex: (dex: Dex) => void
+    setDex: (dex: LoadedDex) => void
     resetDex: () => void
     setDexTitle: (title: string) => void
     setBoxTitle: (boxIndex: number, title: string) => void
@@ -75,17 +64,17 @@ export interface LivingDexContextType {
   }
 }
 
-export const withCountedPokemon = (state: Dex | null): Dex | null => {
+export const withCountedPokemon = (state: LoadedDex | null): LoadedDex | null => {
   if (state === null) return null
 
-  return dexWithRecalculatedCounters(state)
+  return getLivingDexRepository().recalculateCounters(state)
 }
 
 // ===========================
 //        Initial Values
 // ===========================
 
-const initialState: Dex | null = null
+const initialState: LoadedDex | null = null
 const initialStateV2: LivingDexState = {
   currentDex: null,
   userDexes: null,
@@ -114,7 +103,7 @@ const initialContext: LivingDexContextType = {
 }
 
 const changePokemonProperty = (
-  state: Dex | null,
+  state: LoadedDex | null,
   boxIndex: number,
   pokemonIndex: number,
   property: string,
@@ -129,7 +118,7 @@ const changePokemonProperty = (
     return state
   }
 
-  if (property === 'caught' && isNotCatchable(pkm)) {
+  if (property === 'caught' && !getPokemonRepository().isCatchable(pkm)) {
     return state
   }
 
@@ -144,7 +133,7 @@ const changePokemonProperty = (
 }
 
 const changeBoxAllPokemonProperty = (
-  state: Dex | null,
+  state: LoadedDex | null,
   boxIndex: number,
   property: string,
   value: any
@@ -156,7 +145,7 @@ const changeBoxAllPokemonProperty = (
   // @ts-ignore
   newState.boxes[boxIndex].pokemon = newState.boxes[boxIndex].pokemon.map(pokemon => {
     if (pokemon) {
-      if (property === 'caught' && isNotCatchable(pokemon)) {
+      if (property === 'caught' && !getPokemonRepository().isCatchable(pokemon)) {
         return pokemon
       }
       if (property === 'shiny') {
@@ -170,7 +159,12 @@ const changeBoxAllPokemonProperty = (
   return newState
 }
 
-const changeBoxProperty = (state: Dex | null, boxIndex: number, property: string, value: any) => {
+const changeBoxProperty = (
+  state: LoadedDex | null,
+  boxIndex: number,
+  property: string,
+  value: any
+) => {
   if (state === null) {
     return null
   }
@@ -184,7 +178,10 @@ const changeBoxProperty = (state: Dex | null, boxIndex: number, property: string
 //      Action Reducer
 // ===========================
 
-const livingDexActionReducer = (state: Dex | null, action: LivingDexContextAction): Dex | null => {
+const livingDexActionReducer = (
+  state: LoadedDex | null,
+  action: LivingDexContextAction
+): LoadedDex | null => {
   const { type, payload } = action
   switch (type) {
     case 'CHANGE_PRESET':
@@ -262,11 +259,11 @@ const LivingDexProvider = ({ children }: { children: ReactNode }) => {
     state,
     stateV2: initialStateV2, // TODO initialStateV2
     actions: {
-      getCurrentDex: (): Dex | null => {
+      getCurrentDex: (): LoadedDex | null => {
         return state
       },
-      setDexes: (dexes: DexList | null) => dispatch({ type: 'SET_DEXES', payload: dexes }),
-      setDex: (dex: Dex) => dispatch({ type: 'SET_DEX', payload: dex }),
+      setDexes: (dexes: LoadedDexList | null) => dispatch({ type: 'SET_DEXES', payload: dexes }),
+      setDex: (dex: LoadedDex) => dispatch({ type: 'SET_DEX', payload: dex }),
       resetDex: () => dispatch({ type: 'RESET_DEX' }),
       setDexTitle: (title: string) => dispatch({ type: 'SET_DEX_TITLE', payload: title }),
       setBoxTitle: (boxIndex: number, title: string) => {
