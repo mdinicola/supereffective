@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import getFirebaseAnalytics from './getFirebaseAnalytics'
 import getFirebaseApp from './getFirebaseApp'
@@ -13,7 +13,7 @@ vi.mock('@firebase/analytics', () => ({
   },
 }))
 
-vi.mock('@pkg/utils/src/universal/createMemoizedCallback', () => ({
+vi.mock('@pkg/utils/src/caching/createMemoizedCallback', () => ({
   default: vi.fn(callback => () => callback()),
 }))
 

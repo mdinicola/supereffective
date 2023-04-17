@@ -1,4 +1,5 @@
 {
+  "root": true,
   "extends": ["next", "next/core-web-vitals", "turbo", "prettier"],
   "rules": {
     // "@next/next/no-html-link-for-pages": "off",
@@ -13,7 +14,7 @@
   },
   "overrides": [
     {
-      "files": ["next.config.js", "src/plugins/**/*.js"],
+      "files": ["*.js", "*.cjs"],
       "rules": {
         "import/no-extraneous-dependencies": "off"
       },

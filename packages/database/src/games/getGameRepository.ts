@@ -1,4 +1,4 @@
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import gameList from '../../data/builds/games.json'
 import { GAME_IDS, GameBasicInfo, GameDict, GameId } from './types'

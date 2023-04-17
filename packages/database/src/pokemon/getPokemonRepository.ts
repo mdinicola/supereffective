@@ -1,10 +1,11 @@
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import pokemonGmaxable from '../../data/builds/pokemon/gigantamaxable-pokemon.min.json'
 import pokemonEntries from '../../data/builds/pokemon/pokemon-entries-minimal.min.json'
 import shinyLockedPokemon from '../../data/builds/pokemon/pokemon-unobtainable-shiny.min.json'
 import { DexPokemon } from '../dexes/types'
-import { PokemonEntryMinimal, PokemonEntryMinimalMap, PokemonRepository } from './types'
+import { LegacyPokemonEntryMinimal, LegacyPokemonEntryMinimalMap } from './legacy_types'
+import { PokemonRepository } from './types'
 
 export const getPokemonRepository = createMemoizedCallback((): PokemonRepository => {
   // todo convert to a real Map
@@ -20,21 +21,21 @@ export const getPokemonRepository = createMemoizedCallback((): PokemonRepository
     return pokemonId in shinyLockedPokemonMap && shinyLockedPokemonMap[pokemonId]
   }
 
-  const pokemonEntriesMap: PokemonEntryMinimalMap = {}
+  const pokemonEntriesMap: LegacyPokemonEntryMinimalMap = {}
 
-  pokemonEntries.forEach((entry: PokemonEntryMinimal) => {
+  pokemonEntries.forEach((entry: LegacyPokemonEntryMinimal) => {
     pokemonEntriesMap[entry.id] = { ...entry, shinyReleased: !isShinyLocked(entry.id) }
   })
 
-  const getPokemonEntriesMap = (): PokemonEntryMinimalMap => {
+  const getPokemonEntriesMap = (): LegacyPokemonEntryMinimalMap => {
     return pokemonEntriesMap
   }
 
-  const getPokemonEntries = (): PokemonEntryMinimal[] => {
+  const getPokemonEntries = (): LegacyPokemonEntryMinimal[] => {
     return pokemonEntries
   }
 
-  const getPokemonEntry = (pokemonId: string): PokemonEntryMinimal => {
+  const getPokemonEntry = (pokemonId: string): LegacyPokemonEntryMinimal => {
     if (pokemonId in pokemonEntriesMap) {
       return pokemonEntriesMap[pokemonId]
     }
@@ -47,6 +48,7 @@ export const getPokemonRepository = createMemoizedCallback((): PokemonRepository
   }
 
   const isCatchable = (pokemon: DexPokemon): boolean => {
+    // TODO: this logic belongs to the Dexes module
     return !(pokemon.shiny && isShinyLocked(pokemon.pid))
   }
 
@@ -54,8 +56,8 @@ export const getPokemonRepository = createMemoizedCallback((): PokemonRepository
     getPokemonEntries,
     getPokemonEntriesMap,
     getPokemonEntry,
-    isShinyLocked,
     isCatchable,
+    isShinyLocked,
     canGmax,
   }
 })

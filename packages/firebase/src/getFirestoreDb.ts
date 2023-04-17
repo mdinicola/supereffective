@@ -1,7 +1,7 @@
 import * as _firebase from '@firebase/app'
 import * as _firestore from '@firebase/firestore/lite'
 
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import getFirebaseApp from './getFirebaseApp'
 

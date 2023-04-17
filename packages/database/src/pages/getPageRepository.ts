@@ -1,5 +1,5 @@
 import { getAllEntries } from '@pkg/mdx/src/mdx'
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import { getEntryStaticProps } from './getEntryStaticProps'
 import { EntryType, PageEntry, StaticProps } from './types'

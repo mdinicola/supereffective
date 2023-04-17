@@ -1,8 +1,9 @@
 import getFirestoreDb from '@pkg/firebase/src/getFirestoreDb'
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import { getGameSetRepository } from '../games/getGameSetRepository'
 import { GameId, GameSetId } from '../games/types'
+import { isShinyLocked } from '../pokemon'
 import { getPokemonRepository } from '../pokemon/getPokemonRepository'
 import { convertLoadedDexToStorableDex } from './converters/convertLoadedDexToStorableDex'
 import { convertPokemonListToStorable } from './converters/convertPokemonListToStorable'
@@ -10,6 +11,7 @@ import { getPresetRepository } from './presets/getPresetRepository'
 import { normalizeDexWithPreset } from './presets/normalizeDexWithPreset'
 import {
   DexBox,
+  DexPokemon,
   LivingDexRepository,
   LoadedDex,
   LoadedDexList,
@@ -54,6 +56,9 @@ export const getLivingDexRepository = createMemoizedCallback((): LivingDexReposi
     },
     remove: async (id: string) => {
       return db.deleteDocument(collectionName, id)
+    },
+    isCatchable: (pokemon: DexPokemon): boolean => {
+      return !(pokemon.shiny && isShinyLocked(pokemon.pid))
     },
     recalculateCounters: (dex: LoadedDex): LoadedDex => {
       const counters = dex.boxes.reduce(

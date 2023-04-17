@@ -109,7 +109,7 @@
 }
 
 .main-site-bg {
-  background: black url('/assets/gui/bgs/sv-violet-pattern-sm2.jpg') repeat top left;
+  background: var(--color-main-bg) url('/assets/gui/bgs/sv-violet-pattern-sm2.jpg') repeat top left;
   /* background: #b762bb linear-gradient(40deg, #6b3271 0%, #c767d2 50%, #9a4d99 100%) repeat center; */
 }
 

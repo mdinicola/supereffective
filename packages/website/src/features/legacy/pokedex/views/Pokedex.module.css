@@ -389,6 +389,7 @@
   z-index: 1000;
 }
 
+.maleIcon,
 .femaleIcon {
   position: absolute;
   bottom: 6px;
@@ -411,6 +412,10 @@
   align-content: center;
   font-family: monospace;
   transform: scale(0.7);
+}
+
+.maleIcon {
+  background: #0079cb;
 }
 
 .betaLabel {

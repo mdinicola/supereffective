@@ -19,7 +19,7 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@types/node": "^18.15.11",
-    "@types/react": "^18.0.35",
+    "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/react-modal": "^3.13.1",
     "eslint": "^8.38.0",

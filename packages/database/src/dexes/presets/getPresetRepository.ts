@@ -1,4 +1,4 @@
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import presetsJson from '../../../data/builds/box-presets-full.min.json'
 import { getGameSetRepository } from '../../games/getGameSetRepository'

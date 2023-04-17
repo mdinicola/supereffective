@@ -1,4 +1,4 @@
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import gameSetList from '../../data/sources/games/game-sets.json'
 import { LoadedDexList } from '../dexes/types'

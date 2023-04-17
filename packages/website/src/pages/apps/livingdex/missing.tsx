@@ -6,8 +6,8 @@ import { DexPokemon, NullableDexPokemon } from '@pkg/database/src/dexes/types'
 import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
 import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
 import { GameBasicInfo } from '@pkg/database/src/games/types'
-import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
-import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/src/pokemon'
+import { PokemonEntry } from '@pkg/database/src/pokemon/types'
 
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'
@@ -21,26 +21,17 @@ import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 import styles from './missing.module.css'
 
-const pokeRepo = getPokemonRepository()
 const gameRepo = getGameRepository()
 const gameSetRepo = getGameSetRepository()
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      allPokemon: pokeRepo.getPokemonEntries(),
-    },
-  }
-}
-
 type MissingPokemon = {
   game: GameBasicInfo
-  pokemon: PokemonEntryMinimal[]
+  pokemon: PokemonEntry[]
   countSpecies: number
   countForms: number
 }
 
-const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
+const Page = () => {
   useScrollToLocation()
   const [dexes, loadingDexes] = useUserDexes(useContext(UserContext))
   const [showShiny, setShowShiny] = useState(false)
@@ -52,6 +43,9 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
   if (dexes === null) {
     return <LoadingBanner content={<p>You need to be logged in to access this page.</p>} />
   }
+
+  const allPokemon = getPokemonEntries()
+  const pokemonSearch = getPokemonSearchIndex()
 
   if (dexes.length === 0) {
     return (
@@ -95,16 +89,16 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
     let countSpecies = 0
     let countForms = 0
 
-    const missingPokemon: PokemonEntryMinimal[] = []
+    const missingPokemon: PokemonEntry[] = []
     const boxesPokemon: DexPokemon[] = dex.boxes
       .reduce((acc, box) => acc.concat(box.pokemon), [] as NullableDexPokemon[])
       .filter(p => p !== null) as DexPokemon[]
 
     for (const pokemon of allPokemon) {
-      if (showShiny && !pokemon.shinyReleased) {
+      if (showShiny && !pokemon.shiny.released) {
         continue
       }
-      if (showShiny && pokemon.shinyBase !== null) {
+      if (showShiny && pokemon.shiny.base !== null) {
         continue
       }
       // if (pokemon.isForm) {
@@ -112,7 +106,7 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
       // }
       if (boxesPokemon.some(p => p.pid === pokemon.id)) {
         if (!boxesPokemon.some(p => p.pid === pokemon.id && p.caught && p.shiny === showShiny)) {
-          if (pokemon.isForm) {
+          if (pokemon.form.isForm) {
             countForms++
           } else {
             countSpecies++
@@ -168,6 +162,7 @@ const Page = ({ allPokemon }: { allPokemon: PokemonEntryMinimal[] }) => {
               <div className={styles.gameBlock} key={missingPokemon.game.id}>
                 <Pokedex
                   pokemon={missingPokemon.pokemon}
+                  pokemonSearch={pokemonSearch}
                   useSearch={missingPokemon.pokemon.length >= 50}
                   showForms={true}
                   showCounts={true}

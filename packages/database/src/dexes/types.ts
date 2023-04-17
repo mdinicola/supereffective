@@ -54,6 +54,7 @@ export type LoadedDexList = Array<LoadedDex>
 export type LivingDexRepository = {
   getById: (id: string) => Promise<LoadedDex>
   getManyByUser: (userUid: string, limit: number) => Promise<LoadedDexList>
+  isCatchable: (pokemon: DexPokemon) => boolean
   recalculateCounters: (dex: LoadedDex) => LoadedDex
   canCreateMoreDexes: (dexes: LoadedDexList | null) => boolean
   save: (dex: LoadedDex, userId: string) => Promise<LoadedDex>

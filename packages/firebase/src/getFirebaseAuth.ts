@@ -2,7 +2,7 @@ import * as _firebase from '@firebase/app'
 import * as _firebaseAuth from '@firebase/auth'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from '@firebase/auth'
 
-import createMemoizedCallback from '@pkg/utils/src/universal/createMemoizedCallback'
+import createMemoizedCallback from '@pkg/utils/src/caching/createMemoizedCallback'
 
 import getFirebaseApp from './getFirebaseApp'
 

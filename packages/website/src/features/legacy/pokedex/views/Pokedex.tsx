@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
 import { GameSetId } from '@pkg/database/src/games/types'
-import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/src/pokemon/types'
 
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import Button from '#/primitives/legacy/Button/Button'
@@ -12,10 +12,10 @@ import css from './Pokedex.module.css'
 
 export interface PokedexProps {
   className?: string
-  pokemon: PokemonEntryMinimal[]
+  pokemon: PokemonEntry[]
+  pokemonSearch: PokemonEntrySearchIndex
   useSearch?: boolean
   showForms?: boolean
-  showShiny?: boolean
   showCounts?: boolean
   children?: React.ReactNode
 
@@ -26,7 +26,7 @@ export interface PokemonInfoPanelProps {
   className?: string
   children?: undefined
   showShiny?: boolean
-  pokemon: PokemonEntryMinimal | null
+  pokemon: PokemonEntry | null
   onCloseBtnClick?: () => void
   onTypeBtnClick?: (type: string) => void
   isOpen: boolean
@@ -111,7 +111,7 @@ export const PokemonInfoPanel = ({
         <section>
           <div className={css.title}>Obtainable In</div>
           <div className={css.gameIcons}>
-            {pokemon.obtainableIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.obtainableIn.map((gameSetId: GameSetId) => (
               <div
                 key={gameSetId}
                 className={css.gameset}
@@ -121,7 +121,7 @@ export const PokemonInfoPanel = ({
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
               </div>
             ))}
-            {pokemon.eventOnlyIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.eventOnlyIn.map((gameSetId: GameSetId) => (
               <div
                 key={gameSetId}
                 className={css.gameset}
@@ -132,13 +132,15 @@ export const PokemonInfoPanel = ({
                 <span className={`icon-pkg-pokeball-outlined`} title="Event Only"></span>
               </div>
             ))}
-            {pokemon.obtainableIn.length + pokemon.eventOnlyIn.length === 0 && <b>---</b>}
+            {pokemon.location.obtainableIn.length + pokemon.location.eventOnlyIn.length === 0 && (
+              <b>---</b>
+            )}
           </div>
         </section>
         <section>
           <div className={css.title}>Storable In</div>
           <div className={css.gameIcons}>
-            {pokemon.storableIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.storableIn.map((gameSetId: GameSetId) => (
               <div
                 key={gameSetId}
                 className={css.gameset}
@@ -148,7 +150,7 @@ export const PokemonInfoPanel = ({
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
               </div>
             ))}
-            {pokemon.storableIn.length === 0 && <b>---</b>}
+            {pokemon.location.storableIn.length === 0 && <b>---</b>}
           </div>
         </section>
         {/*<section>*/}
@@ -174,19 +176,15 @@ interface PokedexState {
   showForms: boolean
 }
 
-type PkmEntry = PokemonEntryMinimal & {
-  isFemaleForm: boolean
-  searchText: string
-}
-
 type PkmEntryMap = {
-  [key: string]: PkmEntry
+  [key: string]: PokemonEntry
 }
 
 export const Pokedex = ({
   className,
   children,
   pokemon,
+  pokemonSearch,
   showShiny,
   showForms = false,
   showCounts = true,
@@ -195,33 +193,20 @@ export const Pokedex = ({
 }: PokedexProps) => {
   let speciesCount = 0
   let formsCount = 0
+  const pokemonList = Array.from(pokemon.values())
 
-  const searchablePokemon: PkmEntry[] = pokemon.map((pkm: PokemonEntryMinimal) => {
-    if (pkm.isForm) {
+  const searchablePokemon: PokemonEntry[] = pokemonList.map((pkm: PokemonEntry) => {
+    if (pkm.form.isForm) {
       formsCount++
     } else {
       speciesCount++
     }
-    if (pkm.dexNum !== null && pkm.dexNum > 5000) {
-      pkm.dexNum = null
-    }
-    const dexNum = (pkm.dexNum === null ? 0 : pkm.dexNum).toString()
-    const searchText = classNames(
-      'num:' + dexNum,
-      dexNum.padStart(4, '0'),
-      dexNum.padStart(3, '0'),
-      'name:' + pkm.id,
-      'name:' + pkm.name,
-      'name:' + pkm.name.replace(/ /g, '').replace(/\s/g, ''),
-      'type:' + (pkm.type1 ? pkm.type1 : ''),
-      'type:' + (pkm.type2 ? pkm.type2 : ''),
-      'id:' + (pkm.id ? pkm.id : ''),
-      'base:' + (pkm.baseSpecies ? pkm.baseSpecies : '')
-    ).toLowerCase()
 
-    const isFemaleForm = /(\(female\)|female)/gi.test(pkm.name)
-    const pkName = pkm.name.replace(/(\(female\)|female)/gi, '♀')
-    return { ...pkm, name: pkName, isFemaleForm, searchText }
+    let pkName = pkm.name.replace(/(\(female\)|female)/gi, '♀')
+    if (pkm.form.isMaleForm) {
+      pkName = pkName + ' ♂'
+    }
+    return { ...pkm, name: pkName }
   })
 
   const pokemonById: PkmEntryMap = searchablePokemon.reduce((prev, pkm) => {
@@ -281,18 +266,18 @@ export const Pokedex = ({
   if (searchValue.length >= 1 && searchValue.length < 3) {
     searchValue = ''
   }
-  const searchCriteria = searchValue.split(/\s+/)
+  const searchResults = pokemonSearch.search(searchValue)
 
   const pokemonCells = searchablePokemon
-    .filter(pk => state.showForms || !pk.isForm)
+    .filter(pk => state.showForms || !pk.form.isForm)
     .filter(pk => {
       if (searchValue.length === 0) {
         return true
       }
-      return searchCriteria.some(criteria => pk.searchText.includes(criteria))
+      return searchResults.has(pk.id)
     })
     .map((pkm, index) => {
-      if (pkm.isForm) {
+      if (pkm.form.isForm) {
         shownFormsCount++
       } else {
         shownSpeciesCount++
@@ -320,7 +305,10 @@ export const Pokedex = ({
             pixelArt={false}
             classNameExtra={css.pkimg}
           />
-          {pkm.isFemaleForm && <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>}
+          {pkm.form.isFemaleForm && (
+            <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>
+          )}
+          {pkm.form.isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
         </div>
       )
     })

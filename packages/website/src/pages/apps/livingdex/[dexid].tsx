@@ -6,7 +6,7 @@ import { PresetDexMap } from '@pkg/database/src/dexes/presets/types'
 import { LoadedDex } from '@pkg/database/src/dexes/types'
 import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
 import { GameId } from '@pkg/database/src/games/types'
-import { deserializeObject, serializeObject } from '@pkg/utils/src/universal/jsonSerializable'
+import { deserializeObject, serializeObject } from '@pkg/utils/src/serialization/jsonSerializable'
 
 import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
 import PageMeta from '#/features/pages/components/PageMeta'

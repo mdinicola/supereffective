@@ -1,7 +1,6 @@
 import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
 import { PageEntry } from '@pkg/database/src/pages/types'
-import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
-import { PokemonEntryMinimal } from '@pkg/database/src/pokemon/types'
+import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/src/pokemon'
 
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'
 import PageMeta from '#/features/pages/components/PageMeta'
@@ -19,20 +18,13 @@ export async function getStaticProps() {
   return {
     props: {
       entry: pageProps.props.entry,
-      pokemon: getPokemonRepository().getPokemonEntries(),
     },
     revalidate: pageProps.revalidate,
   }
 }
 
-const Page = ({
-  entry,
-  pokemon,
-}: {
-  entry: PageEntry | null
-  pokemon: PokemonEntryMinimal[] | null
-}) => {
-  if (!entry || pokemon === null) {
+const Page = ({ entry }: { entry: PageEntry | null }) => {
+  if (!entry) {
     return <LoadingBanner />
   }
 
@@ -47,7 +39,7 @@ const Page = ({
         canonicalUrl={abs_url('/apps/pokedex')}
         lang={'en'}
       />
-      <Pokedex pokemon={pokemon} />
+      <Pokedex pokemon={getPokemonEntries()} pokemonSearch={getPokemonSearchIndex()} />
     </div>
   )
 }

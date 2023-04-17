@@ -1,4 +1,0 @@
-{
-  "extends": ["../utils/.eslintrc.js"],
-  "plugins": ["vitest"]
-}
