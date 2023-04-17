@@ -1,5 +1,6 @@
 const path = require('node:path')
 const withMDXFastRefresh = require('@pkg/mdx/src/next-plugin/withMDXPageRefresh')
+const { withAxiom } = require('next-axiom')
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
@@ -19,6 +20,8 @@ let nextConfig = {
   },
 }
 
-module.exports = withMDXFastRefresh(nextConfig, {
-  dir: path.resolve(path.join(__dirname, '..', '..', 'cms')),
-})
+module.exports = withAxiom(
+  withMDXFastRefresh(nextConfig, {
+    dir: path.resolve(path.join(__dirname, '..', '..', 'cms')),
+  })
+)
