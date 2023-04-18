@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
-import { GameSetId } from '@pkg/database/src/games/types'
+import { getGameSetById } from '@pkg/database/src/game-sets'
+import { GameSetId } from '@pkg/database/src/game-sets/ids'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/src/pokemon/types'
 
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
@@ -33,8 +33,6 @@ export interface PokemonInfoPanelProps {
 
   [key: string]: any
 }
-
-const gameSetRepo = getGameSetRepository()
 
 const titleize = (str: string): string => {
   if (!str) return ''
@@ -115,7 +113,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={gameSetRepo.getById(gameSetId).name}
+                data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
@@ -125,7 +123,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={gameSetRepo.getById(gameSetId).name + ' (Event Only)'}
+                data-tooltip={getGameSetById(gameSetId).name + ' (Event Only)'}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
@@ -144,7 +142,7 @@ export const PokemonInfoPanel = ({
               <div
                 key={gameSetId}
                 className={css.gameset}
-                data-tooltip={gameSetRepo.getById(gameSetId).name}
+                data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
                 <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>

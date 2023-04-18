@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
-import { GameId } from '@pkg/database/src/games/types'
+import { getGameById } from '@pkg/database/src/games'
+import { GameId } from '@pkg/database/src/games/ids'
 
 import styles from './GameLogo.module.css'
 
@@ -21,7 +21,7 @@ export const GameLogo = ({
   ext = '.jpeg',
   ...props
 }: GameLogoProps) => {
-  const gameData = getGameRepository().getById(game)
+  const gameData = getGameById(game)
   const path = asSwitchIcon ? `tiles/${gameData.id}` : gameData.id
   return (
     <Image

@@ -3,14 +3,15 @@ import ReactModal from 'react-modal'
 
 import { useRouter } from 'next/router'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
-import { normalizeDexWithPreset } from '@pkg/database/src/dexes/presets/normalizeDexWithPreset'
-import { PresetDex, PresetDexMap } from '@pkg/database/src/dexes/presets/types'
-import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/dexes/types'
-import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
-import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+import { getGameSetByGameId } from '@pkg/database/src/game-sets'
+import { getLivingDexRepository, isCatchable } from '@pkg/database/src/living-dexes/legacy'
+import {
+  getPresetByIdForGame,
+  getPresetsForGame,
+} from '@pkg/database/src/living-dexes/legacy/presets'
+import { normalizeDexWithPreset } from '@pkg/database/src/living-dexes/legacy/presets/normalizeDexWithPreset'
+import { PresetDex, PresetDexMap } from '@pkg/database/src/living-dexes/legacy/presets/types'
+import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
 
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
@@ -59,11 +60,7 @@ interface ModalContent {
   }
 }
 
-const presetRepo = getPresetRepository()
 const dexRepo = getLivingDexRepository()
-const pokeRepo = getPokemonRepository()
-const gameRepo = getGameRepository()
-const gameSetRepo = getGameSetRepository()
 
 export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
   const initialMarkTypes: MarkType[] = ['catch']
@@ -86,7 +83,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const currentUser = useContext(UserContext)
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   useScrollToLocation()
-  const [userDexes, loadingUserDexes, setUserDexes] = useUserDexes(currentUser)
+  const [, loadingUserDexes, setUserDexes] = useUserDexes(currentUser)
 
   useEffect(() => {
     debug('useEffect init')
@@ -105,7 +102,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     if (livingdex.state === null) {
       return null
     }
-    return presetRepo.getPresetForGame(livingdex.state.gameId, livingdex.state!.presetId)
+    return getPresetByIdForGame(livingdex.state.gameId, livingdex.state!.presetId)
   }, [presets, livingdex.state])
 
   if (currentUser.state.loading || dex === null) {
@@ -120,7 +117,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     currentUser.state.user !== null &&
     (dex.userId === currentUser.state.user.uid || dex.userId === undefined)
 
-  const gameSet = gameSetRepo.getByGameId(dex.gameId)
+  const gameSet = getGameSetByGameId(dex.gameId)
   const gameSymbols = gameSet.storage?.symbols || []
   const hasShinyMode = gameSet.hasShinies
 
@@ -165,7 +162,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     }
     switch (currentTool) {
       case 'catch':
-        if (!pokeRepo.isCatchable(pokemonData)) {
+        if (!isCatchable(pokemonData)) {
           // console.log("shiny locked", pokemonData.pid)
           return
         }
@@ -296,7 +293,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     if (newAction === dex.presetId || newAction === null) {
       return
     }
-    const newPreset = presetRepo.getPresetForGame(dex.gameId, newAction)
+    const newPreset = getPresetByIdForGame(dex.gameId, newAction)
     if (!newPreset) {
       throw new Error(`Preset ${newAction} not found for game ${dex.gameId}`)
     }
@@ -499,7 +496,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             dropdownTitle={'Change Box Preset'}
             dropdownPosition={'middle'}
             dropdownNoActionIcon={'sync_alt'}
-            items={Object.values(presetRepo.getAllPresetsForGame(dex.gameId)).map(pr => ({
+            items={Object.values(getPresetsForGame(dex.gameId)).map(pr => ({
               actionName: pr.id,
               label: pr.name,
               title: pr.description,

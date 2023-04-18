@@ -3,12 +3,13 @@ import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { createDexFromPreset } from '@pkg/database/src/dexes/presets/createDexFromPreset'
-import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
-import { LoadedDex } from '@pkg/database/src/dexes/types'
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
-import { GameId } from '@pkg/database/src/games/types'
+import { getGameSetByGameId } from '@pkg/database/src/game-sets'
+import { GameSetId } from '@pkg/database/src/game-sets/ids'
+import { GameId } from '@pkg/database/src/games/ids'
+import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
+import { getPresets } from '@pkg/database/src/living-dexes/legacy/presets'
+import { createDexFromPreset } from '@pkg/database/src/living-dexes/legacy/presets/createDexFromPreset'
+import { LoadedDex } from '@pkg/database/src/living-dexes/legacy/types'
 
 import { LivingDexContext } from '#/features/legacy/livingdex/state/LivingDexContext'
 import { GamePresetSelector } from '#/features/legacy/livingdex/views/GamePresetSelector'
@@ -22,7 +23,7 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 interface PageProps {
-  selectedGame: string | null
+  selectedGame: GameId | null
   selectedPreset: string | null
 }
 
@@ -33,9 +34,8 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
   const presetIsSelected = !(!selectedGame || !selectedPreset)
   const router = useRouter()
   const createdDexId = useRef<string | null>(null)
-  const gameSetRepo = getGameSetRepository()
   const dexRepo = getLivingDexRepository()
-  const presets = getPresetRepository().getAll()
+  const presets = getPresets()
 
   const onSaveHandler = (dex: LoadedDex): void => {
     if (!dex.id) {
@@ -99,18 +99,17 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
   }
 
   let foundPreset = null
-
   let gameSet = undefined
-  let gameSetId = ''
+  let gameSetId: GameSetId | '' = ''
 
   if (selectedGame) {
-    gameSet = gameSetRepo.getByGameId(selectedGame)
+    gameSet = getGameSetByGameId(selectedGame)
     gameSetId = gameSet.id
   }
 
   if (presetIsSelected) {
     // find preset
-    if (presets[gameSetId] === undefined) {
+    if (gameSetId === '' || presets[gameSetId] === undefined) {
       return <LoadingBanner content={'Game does not exist: ' + selectedGame} />
     }
 

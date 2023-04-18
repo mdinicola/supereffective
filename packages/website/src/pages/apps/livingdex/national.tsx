@@ -2,9 +2,11 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import { createDexFromPreset } from '@pkg/database/src/dexes/presets/createDexFromPreset'
-import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
-import { PresetDexMap } from '@pkg/database/src/dexes/presets/types'
+import {
+  getPresetByIdForGame,
+  getPresetsForGame,
+} from '@pkg/database/src/living-dexes/legacy/presets'
+import { createDexFromPreset } from '@pkg/database/src/living-dexes/legacy/presets/createDexFromPreset'
 
 import { PkBoxGroup } from '#/features/legacy/livingdex/views/PkBox'
 import PageMeta from '#/features/pages/components/PageMeta'
@@ -14,26 +16,10 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 import { classNameIf } from '#/utils/legacyUtils'
 
-const presetsRepo = getPresetRepository()
-
-export async function getStaticProps() {
-  const presets = presetsRepo.getAll()
-
-  return {
-    props: {
-      presets,
-    },
-  }
-}
-
-const Page = ({ presets }: { presets: PresetDexMap }) => {
+const Page = () => {
   const [selectedPreset, setSelectedPreset] = React.useState<string>('grouped-region')
-  const dex = presetsRepo.getPresetForGame('home', selectedPreset)
-  const homePresets = presetsRepo.getAllPresetsForGame('home')
-
-  // if (!entry) {
-  //   return <LoadingBanner/>
-  // }
+  const dex = getPresetByIdForGame('home', selectedPreset)
+  const homePresets = getPresetsForGame('home')
 
   if (!dex) {
     return (

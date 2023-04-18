@@ -17,9 +17,9 @@ pretty:
 
 postinstall-dev:
 	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
-	pnpm husky install
-	pnpm format:packages
 	pnpm update:data
+	pnpm -r generate:code
+	pnpm pretty
 
 postinstall-prod:
 	pnpm update:data

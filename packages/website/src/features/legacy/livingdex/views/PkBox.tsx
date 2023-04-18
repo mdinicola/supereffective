@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
-import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/dexes/types'
-import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
+import { getPokemonEntry } from '@pkg/database/src/pokemon'
 
 import legacyConfig from '#/config/legacyConfig'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
@@ -16,10 +16,8 @@ export type MarkType = 'catch' | 'shiny' | 'alpha' | 'gmax' | 'ability' | 'gende
 
 // TODO remove tabindex usage (always be = 0) and replace it with a custom data- attribute.
 
-const pokeRepo = getPokemonRepository()
-
 export const gmaxixePid = (pid: string, isGmax: boolean): string => {
-  if (!pokeRepo.canGmax(pid)) {
+  if (!getPokemonEntry(pid).form.hasGmax) {
     return pid
   }
   return isGmax ? pid.replace(/-f$/g, '') + '-gmax' : pid
@@ -270,7 +268,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       }
 
       let slug = cellPkm.pid
-      let pkmEntry = pokeRepo.getPokemonEntry(slug)
+      let pkmEntry = getPokemonEntry(slug)
       let title = pkmEntry.name
       let isSpecialAbilityPkm = false
       let isHiddenAbilityPkm = false // TODO support in future
@@ -288,12 +286,12 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       )
 
       let imgSlug = gmaxixePid(slug, cellPkm.gmax)
-      if (cellPkm.gmax) {
+      if (pkmEntry.form.isGmax) {
         title += ' Gigantamax'
       }
 
       if (cellPkm.shiny && cellPkm.shinyBase) {
-        title += ', same color as ' + pokeRepo.getPokemonEntry(cellPkm.shinyBase).name
+        title += ', same color as ' + getPokemonEntry(cellPkm.shinyBase).name
       }
 
       if (cellPkm.shiny && cellPkm.shinyLocked) {

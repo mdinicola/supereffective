@@ -2,10 +2,10 @@ import { useContext, useState } from 'react'
 
 import Link from 'next/link'
 
-import { DexPokemon, NullableDexPokemon } from '@pkg/database/src/dexes/types'
-import { getGameRepository } from '@pkg/database/src/games/getGameRepository'
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
-import { GameBasicInfo } from '@pkg/database/src/games/types'
+import { getGameSetByGameId } from '@pkg/database/src/game-sets'
+import { getGameById } from '@pkg/database/src/games'
+import { LegacyGame } from '@pkg/database/src/games/types'
+import { DexPokemon, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
 import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/src/pokemon'
 import { PokemonEntry } from '@pkg/database/src/pokemon/types'
 
@@ -21,11 +21,8 @@ import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
 import styles from './missing.module.css'
 
-const gameRepo = getGameRepository()
-const gameSetRepo = getGameSetRepository()
-
 type MissingPokemon = {
-  game: GameBasicInfo
+  game: LegacyGame
   pokemon: PokemonEntry[]
   countSpecies: number
   countForms: number
@@ -118,7 +115,7 @@ const Page = () => {
 
     if (missingPokemon.length > 0) {
       missingPokemonByGame.push({
-        game: gameRepo.getById(dex.gameId),
+        game: getGameById(dex.gameId),
         pokemon: missingPokemon,
         countSpecies,
         countForms,
@@ -153,7 +150,7 @@ const Page = () => {
           if (!missingPokemon.game.setId) {
             throw new Error('Missing game set id for ' + missingPokemon.game.id)
           }
-          const gameSet = gameSetRepo.getByGameId(missingPokemon.game.id)
+          const gameSet = getGameSetByGameId(missingPokemon.game.id)
           if (showShiny && !gameSet.hasShinies) {
             return null
           }

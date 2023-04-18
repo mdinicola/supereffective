@@ -2,9 +2,9 @@ import { useContext } from 'react'
 
 import Link from 'next/link'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { LoadedDex } from '@pkg/database/src/dexes/types'
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
+import { getGameSetByGameId } from '@pkg/database/src/game-sets'
+import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
+import { LoadedDex } from '@pkg/database/src/living-dexes/legacy/types'
 
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { WelcomeContent } from '#/features/legacy/livingdex/views/WelcomeContent'
@@ -16,13 +16,12 @@ import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './Dashboard.module.css'
 
-const gameSetRepo = getGameSetRepository()
 const livingDexRepo = getLivingDexRepository()
 
 const GameCard = ({ dex }: { dex: LoadedDex }) => {
   const dexLink = `/apps/livingdex/${dex.id}`
   //const socialLinks = dex.id ? <DexSocialLinks shareAsOwner={true} dexId={dex.id}/> : null
-  const gameSetId = gameSetRepo.getByGameId(dex.gameId).id
+  const gameSetId = getGameSetByGameId(dex.gameId).id
   return (
     <Link href={dexLink}>
       <div

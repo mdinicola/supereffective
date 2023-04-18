@@ -1,10 +1,13 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { normalizeDexWithPreset } from '@pkg/database/src/dexes/presets/normalizeDexWithPreset'
-import { PresetDex } from '@pkg/database/src/dexes/presets/types'
-import { LoadedDex, LoadedDexList, NullableDexPokemon } from '@pkg/database/src/dexes/types'
-import { getPokemonRepository } from '@pkg/database/src/pokemon/getPokemonRepository'
+import { getLivingDexRepository, isCatchable } from '@pkg/database/src/living-dexes/legacy'
+import { normalizeDexWithPreset } from '@pkg/database/src/living-dexes/legacy/presets/normalizeDexWithPreset'
+import { PresetDex } from '@pkg/database/src/living-dexes/legacy/presets/types'
+import {
+  LoadedDex,
+  LoadedDexList,
+  NullableDexPokemon,
+} from '@pkg/database/src/living-dexes/legacy/types'
 
 import { debug } from '#/utils/legacyUtils'
 
@@ -118,7 +121,7 @@ const changePokemonProperty = (
     return state
   }
 
-  if (property === 'caught' && !getPokemonRepository().isCatchable(pkm)) {
+  if (property === 'caught' && !isCatchable(pkm)) {
     return state
   }
 
@@ -145,7 +148,7 @@ const changeBoxAllPokemonProperty = (
   // @ts-ignore
   newState.boxes[boxIndex].pokemon = newState.boxes[boxIndex].pokemon.map(pokemon => {
     if (pokemon) {
-      if (property === 'caught' && !getPokemonRepository().isCatchable(pokemon)) {
+      if (property === 'caught' && !isCatchable(pokemon)) {
         return pokemon
       }
       if (property === 'shiny') {

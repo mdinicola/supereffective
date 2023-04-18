@@ -4,6 +4,7 @@
   "private": true,
   "description": "Database abstraction layer (DBAL) and ORM for supereffective.gg",
   "scripts": {
+    "generate:code": "node src/common/generate-ids.cjs",
     "lint": "eslint \"./**/*.{ts,js,mjs,cjs}\"",
     "lint:fix": "eslint \"./**/*.{ts,js,mjs,cjs}\" --fix",
     "test": "vitest --run",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { LoadedDexList } from '@pkg/database/src/dexes/types'
+import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
+import { LoadedDexList } from '@pkg/database/src/living-dexes/legacy/types'
 
 import { UserContextType } from '#/features/legacy/users/state/UserContext'
 import { debug } from '#/utils/legacyUtils'

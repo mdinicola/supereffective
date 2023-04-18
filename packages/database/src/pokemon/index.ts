@@ -78,6 +78,7 @@ function _transformPokemon(pokemon: RawPokemonEntry): PokemonEntry {
       isMaleForm: pokemon.hasGenderDifferences && !pokemon.isFemaleForm,
       hasGenderForms: pokemon.hasGenderDifferences,
       hasGmax: pokemon.canGmax,
+      isGmax: pokemon.isGmax,
     },
     location: {
       obtainableIn: pokemon.obtainableIn,

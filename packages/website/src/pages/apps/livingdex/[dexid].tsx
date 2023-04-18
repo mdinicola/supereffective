@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext } from 'next'
 
-import { getLivingDexRepository } from '@pkg/database/src/dexes/getLivingDexRepository'
-import { getPresetRepository } from '@pkg/database/src/dexes/presets/getPresetRepository'
-import { PresetDexMap } from '@pkg/database/src/dexes/presets/types'
-import { LoadedDex } from '@pkg/database/src/dexes/types'
-import { getGameSetRepository } from '@pkg/database/src/games/getGameSetRepository'
-import { GameId } from '@pkg/database/src/games/types'
+import { getGameSetByGameId } from '@pkg/database/src/game-sets'
+import { GameId } from '@pkg/database/src/games/ids'
+import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
+import { getPresets } from '@pkg/database/src/living-dexes/legacy/presets'
+import { PresetDexMap } from '@pkg/database/src/living-dexes/legacy/presets/types'
+import { LoadedDex } from '@pkg/database/src/living-dexes/legacy/types'
 import { deserializeObject, serializeObject } from '@pkg/utils/src/serialization/jsonSerializable'
 
 import LivingDexApp from '#/features/legacy/livingdex/views/LivingDexApp'
@@ -13,14 +13,12 @@ import PageMeta from '#/features/pages/components/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 
-const gameSetRepo = getGameSetRepository()
-
 const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => {
   const dex = deserializeObject<LoadedDex>(dexData)
   console.log(dex)
   const metaTitle = `${dex.title} | Supereffective.gg Pokédex Tracker`
   const metaDescription = `${dex.title}, a Pokémon Living Dex created with Supereffective's Living Pokédex Tracker app. Caught ${dex.caughtRegular} / ${dex.totalRegular}.`
-  const gameSet = gameSetRepo.getByGameId(dex.gameId as GameId)
+  const gameSet = getGameSetByGameId(dex.gameId as GameId)
   const gameSetId = gameSet.id
 
   const containerClasses =
@@ -57,7 +55,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const dexid = context.params?.dexid
 
   const dexRepo = getLivingDexRepository()
-  const presetsRepo = getPresetRepository()
 
   if (typeof dexid !== 'string' || !dexid.match(/^[a-zA-Z0-9-_]+$/)) {
     return {
@@ -70,7 +67,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return {
       props: {
         dexData: serializeObject(dex),
-        presets: presetsRepo.getAll(),
+        presets: getPresets(),
       },
     }
   } catch (e) {
