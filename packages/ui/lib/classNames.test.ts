@@ -11,12 +11,12 @@ describe('classNames', () => {
   })
 
   it('should handle conditional class names', () => {
-    expect(classNames([true, 'foo'], [false, 'bar'], [true, 'baz'])).toBe('foo baz')
+    expect(classNames(['foo', true], ['bar', false], ['baz', true])).toBe('foo baz')
   })
 
   it('should handle if-else conditional class names', () => {
-    expect(classNames('foo', [true, 'qux', 'baz'])).toBe('foo qux')
-    expect(classNames('foo', [false, 'qux', 'baz'])).toBe('foo baz')
+    expect(classNames('foo', ['qux', true, 'baz'])).toBe('foo qux')
+    expect(classNames('foo', ['qux', false, 'baz'])).toBe('foo baz')
   })
 
   it('should handle undefined and null class names', () => {
