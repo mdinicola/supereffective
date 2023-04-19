@@ -1,4 +1,4 @@
-import { isDevelopmentEnv } from '#/config/env'
+import { isDevelopmentEnv } from '@pkg/config/default/env'
 
 export const debug = (...args: any[]): void => {
   if (isDevelopmentEnv()) {

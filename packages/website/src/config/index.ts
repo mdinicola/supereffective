@@ -1,34 +1,13 @@
-import { getBaseUrl } from '#/config/env'
+import baseConfig from '@pkg/config/default'
 
-import servicesConfig from './services'
-import themeConfig from './theme'
+const themeColorPurple = ['#352f46', '#6b5e94', '#a692eb', '#c5b6f2', '#e3dbf9']
 
 const config = {
-  baseUrl: getBaseUrl(),
+  ...baseConfig,
   version: {
-    num: '3.5.0',
+    num: '3.5.2',
   },
-  texts: {
-    siteName: 'SuperEffective',
-    standaloneTitle: 'SuperEffective',
-    defaultMetaTitle: 'Supereffective - Latest Pokémon news & Scarlet/Violet rumors',
-    defaultMetaDescription:
-      'Supereffective is a new Pokémon website with news and various tools to assist you ' +
-      'in your journey as a trainer. Follow us to stay up-to-date.',
-  },
-  links: {
-    twitter: 'https://twitter.com/supereffectiv',
-    github: 'https://github.com/itsjavi',
-    github_repos: 'https://github.com/itsjavi/supereffective-assets',
-    github_dataset: 'https://github.com/itsjavi/supereffective-assets',
-    discord: 'https://discord.gg/3fRXQFtrkN',
-    issue_report: 'https://github.com/itsjavi/supereffective.gg/issues',
-    paypal_donate: 'https://www.paypal.me/metaunicorn/10',
-    feedback_gdoc:
-      'https://docs.google.com/forms/d/e/1FAIpQLSfcLi7V5YalUsBrd_whLAy4cHMCZX2kDGUP8kJFhnrVGyrOQQ/viewform',
-  },
-  services: servicesConfig,
-  theme: themeConfig,
+  themeColor: themeColorPurple[2],
 }
 
 export default config

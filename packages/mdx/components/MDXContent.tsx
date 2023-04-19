@@ -15,11 +15,20 @@ const defaultComponents = {
   img: ResponsiveImage,
 }
 
+/**
+ * Renders the given MDX content with the given components.
+ */
 export default function MDXContent({
   content,
   components,
 }: {
+  /**
+   * The MDX content to render.
+   */
   content: string | undefined
+  /**
+   * The components to use for rendering the MDX content.
+   */
   components?: Components
 }): JSX.Element | null {
   if (!content) return null

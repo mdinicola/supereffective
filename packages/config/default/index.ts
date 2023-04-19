@@ -1,10 +1,8 @@
-import colorsConfig from './colors.json'
-import { getBaseUrl } from './env'
+import { getBaseUrl, isDevelopmentEnv } from './env'
 import servicesConfig from './services'
 
-const { primary, accent, ...colors } = colorsConfig
-
 const config = {
+  dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
   version: {
     num: '4.0.0',
@@ -27,13 +25,6 @@ const config = {
     paypal_donate: 'https://www.paypal.me/metaunicorn/10',
   },
   services: servicesConfig,
-  theme: {
-    colors: {
-      primary: (colors as any)[primary],
-      accent: (colors as any)[accent],
-      ...colors,
-    },
-  },
 }
 
 export default config

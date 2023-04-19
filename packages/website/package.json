@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@pkg/auth": "workspace:*",
+    "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",

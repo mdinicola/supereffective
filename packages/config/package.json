@@ -1,0 +1,14 @@
+{
+  "name": "@pkg/config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Config package for supereffective.gg",
+  "scripts": {
+    "lint": "eslint \"./**/*.{ts,js,mjs,cjs}\"",
+    "lint:fix": "eslint \"./**/*.{ts,js,mjs,cjs}\" --fix"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
+}

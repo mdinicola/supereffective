@@ -18,11 +18,11 @@
   @apply flex-shrink-0 flex items-center py-4;
 }
 
-.flexRight {
+.navDesktop {
   @apply hidden sm:flex sm:ml-6 sm:items-stretch;
 }
 
-.flexRightXs {
+.navMobile {
   @apply flex ml-6 items-stretch sm:hidden;
 }
 

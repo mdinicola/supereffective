@@ -1,4 +1,4 @@
-import { isDevelopmentEnv } from '#/config/env'
+import { isDevelopmentEnv } from '@pkg/config/default/env'
 
 const legacyConfig = {
   limits: {

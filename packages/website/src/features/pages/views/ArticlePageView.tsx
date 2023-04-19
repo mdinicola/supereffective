@@ -1,9 +1,9 @@
 import React from 'react'
 
+import { getFullUrl } from '@pkg/config/default/env'
 import { Entry, EntryType } from '@pkg/database/repositories/pages/types'
 import { cleanupSpaces as clean } from '@pkg/utils/lib/primitives/strings'
 
-import { getFullUrl } from '#/config/env'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 
 import MDXContent from '../components/MDXContent'
