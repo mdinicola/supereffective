@@ -1,10 +1,13 @@
 import React, { useContext } from 'react'
 
-import { getGameById } from '@pkg/database/src/games'
-import { GameId } from '@pkg/database/src/games/ids'
-import { getAvailableGames } from '@pkg/database/src/living-dexes/legacy/gameAvailability'
-import { getPresetsForGame } from '@pkg/database/src/living-dexes/legacy/presets'
-import { PresetDex, PresetDexMap } from '@pkg/database/src/living-dexes/legacy/presets/types'
+import { getGameById } from '@pkg/database/repositories/games'
+import { GameId } from '@pkg/database/repositories/games/ids'
+import { getAvailableGames } from '@pkg/database/repositories/living-dexes/legacy/gameAvailability'
+import { getPresetsForGame } from '@pkg/database/repositories/living-dexes/legacy/presets'
+import {
+  PresetDex,
+  PresetDexMap,
+} from '@pkg/database/repositories/living-dexes/legacy/presets/types'
 
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { useUserDexes } from '#/features/legacy/users/hooks/useUserDexes'

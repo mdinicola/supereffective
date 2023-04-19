@@ -1,7 +1,7 @@
-import { getArticleRepository } from '@pkg/database/src/pages/getArticleRepository'
-import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
-import { toSortedIndex } from '@pkg/database/src/pages/toSortedIndex'
-import { ArticleEntry } from '@pkg/database/src/pages/types'
+import { getArticleRepository } from '@pkg/database/repositories/pages/getArticleRepository'
+import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepository'
+import { toSortedIndex } from '@pkg/database/repositories/pages/toSortedIndex'
+import { ArticleEntry } from '@pkg/database/repositories/pages/types'
 
 import { getFullUrl } from '#/config/env'
 import PageMeta from '#/features/pages/components/PageMeta'

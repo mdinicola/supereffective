@@ -2,12 +2,15 @@ import { useContext, useState } from 'react'
 
 import Link from 'next/link'
 
-import { getGameSetByGameId } from '@pkg/database/src/game-sets'
-import { getGameById } from '@pkg/database/src/games'
-import { LegacyGame } from '@pkg/database/src/games/types'
-import { DexPokemon, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
-import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/src/pokemon'
-import { PokemonEntry } from '@pkg/database/src/pokemon/types'
+import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
+import { getGameById } from '@pkg/database/repositories/games'
+import { LegacyGame } from '@pkg/database/repositories/games/types'
+import {
+  DexPokemon,
+  NullableDexPokemon,
+} from '@pkg/database/repositories/living-dexes/legacy/types'
+import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/repositories/pokemon'
+import { PokemonEntry } from '@pkg/database/repositories/pokemon/types'
 
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'

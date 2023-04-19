@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Entry, EntryType } from '@pkg/database/src/pages/types'
-import { cleanupSpaces as clean } from '@pkg/utils/src/primitives/strings'
+import { Entry, EntryType } from '@pkg/database/repositories/pages/types'
+import { cleanupSpaces as clean } from '@pkg/utils/lib/primitives/strings'
 
 import { getFullUrl } from '#/config/env'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'

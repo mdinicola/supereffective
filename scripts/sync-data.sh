@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [[ ! -d "./packages/database/src" ]]; then
+if [[ ! -d "./packages/database/lib" ]]; then
   echo "[scripts/sync-data]  ERROR: This script must be run from the project root directory"
   exit 1
 fi

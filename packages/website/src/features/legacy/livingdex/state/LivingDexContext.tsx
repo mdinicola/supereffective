@@ -1,13 +1,13 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
-import { getLivingDexRepository, isCatchable } from '@pkg/database/src/living-dexes/legacy'
-import { normalizeDexWithPreset } from '@pkg/database/src/living-dexes/legacy/presets/normalizeDexWithPreset'
-import { PresetDex } from '@pkg/database/src/living-dexes/legacy/presets/types'
+import { getLivingDexRepository, isCatchable } from '@pkg/database/repositories/living-dexes/legacy'
+import { normalizeDexWithPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/normalizeDexWithPreset'
+import { PresetDex } from '@pkg/database/repositories/living-dexes/legacy/presets/types'
 import {
   LoadedDex,
   LoadedDexList,
   NullableDexPokemon,
-} from '@pkg/database/src/living-dexes/legacy/types'
+} from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { debug } from '#/utils/legacyUtils'
 

@@ -1,0 +1,9 @@
+.root {
+  @apply relative rounded-md w-full px-6 py-6 lg:pt-12 lg:pb-12 bg-white dark:bg-black dark:bg-opacity-50;
+  @apply shadow-xl shadow-gray-700/10 ring-1 ring-gray-900/5 dark:ring-gray-100/5;
+  @apply md:max-w-3xl md:mx-auto md:my-6 lg:max-w-4xl;
+}
+
+.content {
+  @apply prose prose-teal mx-auto lg:prose-lg dark:prose-invert;
+}

@@ -2,9 +2,9 @@ import { useContext } from 'react'
 
 import Link from 'next/link'
 
-import { getGameSetByGameId } from '@pkg/database/src/game-sets'
-import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
-import { LoadedDex } from '@pkg/database/src/living-dexes/legacy/types'
+import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
+import { getLivingDexRepository } from '@pkg/database/repositories/living-dexes/legacy'
+import { LoadedDex } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { GameLogo } from '#/features/legacy/livingdex/views/GameLogo'
 import { WelcomeContent } from '#/features/legacy/livingdex/views/WelcomeContent'

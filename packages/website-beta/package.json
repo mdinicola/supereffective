@@ -1,0 +1,34 @@
+{
+  "name": "@app/website-beta",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "PORT=3002 next dev",
+    "lint": "next lint --max-warnings=25",
+    "lint:fix": "next lint --fix --max-warnings=25",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@pkg/auth": "workspace:*",
+    "@pkg/database": "workspace:*",
+    "@pkg/mdx": "workspace:*",
+    "@pkg/ui": "workspace:*",
+    "@pkg/utils": "workspace:*",
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-config-next": "^13.3.0",
+    "next": "^13.3.0",
+    "next-axiom": "^0.17.0",
+    "postcss": "^8.4.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.1",
+    "tailwindcss-animate": "^1.0.5",
+    "typescript": "^5.0.4"
+  }
+}

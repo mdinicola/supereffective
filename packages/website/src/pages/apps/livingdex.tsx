@@ -1,5 +1,5 @@
-import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
-import { PageEntry } from '@pkg/database/src/pages/types'
+import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepository'
+import { PageEntry } from '@pkg/database/repositories/pages/types'
 
 import { Dashboard } from '#/features/legacy/livingdex/views/Dashboard'
 import PageMeta from '#/features/pages/components/PageMeta'

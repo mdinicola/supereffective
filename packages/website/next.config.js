@@ -1,5 +1,5 @@
 const path = require('node:path')
-const withMDXFastRefresh = require('@pkg/mdx/src/next-plugin/withMDXPageRefresh')
+const withMDXFastRefresh = require('@pkg/mdx/lib/next-plugin/withMDXPageRefresh')
 const { withAxiom } = require('next-axiom')
 
 /** @type {import('next').NextConfig} */
@@ -7,7 +7,7 @@ let nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@pkg/*'],
   images: {
-    domains: ['images.ctfassets.net', 'itsjavi.com', 'localhost'],
+    domains: ['itsjavi.com', 'localhost'],
     minimumCacheTTL: 60 * 60 * 24 * 7 * 4, // 4 weeks
   },
   async rewrites() {

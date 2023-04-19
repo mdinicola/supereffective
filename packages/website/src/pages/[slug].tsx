@@ -1,8 +1,8 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
 
-import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
-import { toSortedIndex } from '@pkg/database/src/pages/toSortedIndex'
-import { Entry, PageEntry } from '@pkg/database/src/pages/types'
+import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepository'
+import { toSortedIndex } from '@pkg/database/repositories/pages/toSortedIndex'
+import { Entry, PageEntry } from '@pkg/database/repositories/pages/types'
 
 import ArticlePageView from '#/features/pages/views/ArticlePageView'
 

@@ -1,3 +1,3 @@
-import { AuthUser } from '@pkg/auth/src/types'
+import { AuthUser } from '@pkg/auth/lib/types'
 
 export interface User extends AuthUser {}

@@ -1,4 +1,4 @@
-import PluginMDXContent from '@pkg/mdx/src/components/MDXContent'
+import PluginMDXContent from '@pkg/mdx/components/MDXContent'
 
 import Button from '#/primitives/legacy/Button/Button'
 

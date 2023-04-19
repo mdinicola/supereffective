@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import { getGameById } from '@pkg/database/src/games'
-import { GameId } from '@pkg/database/src/games/ids'
+import { getGameById } from '@pkg/database/repositories/games'
+import { GameId } from '@pkg/database/repositories/games/ids'
 
 import styles from './GameLogo.module.css'
 

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Database abstraction layer (DBAL) and ORM for supereffective.gg",
   "scripts": {
-    "generate:code": "node src/common/generate-ids.cjs",
+    "generate:code": "node lib/codegen/generate-ids.cjs",
     "lint": "eslint \"./**/*.{ts,js,mjs,cjs}\"",
     "lint:fix": "eslint \"./**/*.{ts,js,mjs,cjs}\" --fix",
     "test": "vitest --run",
@@ -17,8 +17,6 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@types/node": "^18.15.11",
-    "eslint": "^8.38.0",
-    "eslint-config-next": "^13.3.0",
     "typescript": "^5.0.4",
     "zod": "^3.21.4"
   }

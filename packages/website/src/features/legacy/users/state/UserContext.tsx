@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react'
 
-import { AuthProvider, useAuth as useAuthLib } from '@pkg/auth/src/AuthProvider'
-import { OAuthProviderName } from '@pkg/auth/src/types'
-import { LoadedDexList } from '@pkg/database/src/living-dexes/legacy/types'
+import { AuthProvider, useAuth as useAuthLib } from '@pkg/auth/lib/AuthProvider'
+import { OAuthProviderName } from '@pkg/auth/lib/types'
+import { LoadedDexList } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { withCountedPokemon } from '#/features/legacy/livingdex/state/LivingDexContext'
 import { User } from '#/features/legacy/users/types'

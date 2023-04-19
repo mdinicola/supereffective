@@ -1,4 +1,4 @@
-import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
+import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepository'
 
 import ArticlePageView, { ArticlePageViewProps } from '#/features/pages/views/ArticlePageView'
 

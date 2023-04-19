@@ -1,7 +1,11 @@
 import { ReactElement } from 'react'
 
-import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
-import { getPokemonEntry } from '@pkg/database/src/pokemon'
+import {
+  DexBox,
+  LoadedDex,
+  NullableDexPokemon,
+} from '@pkg/database/repositories/living-dexes/legacy/types'
+import { getPokemonEntry } from '@pkg/database/repositories/pokemon'
 
 import legacyConfig from '#/config/legacyConfig'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'

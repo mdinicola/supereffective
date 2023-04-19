@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { getLivingDexRepository } from '@pkg/database/src/living-dexes/legacy'
+import { getLivingDexRepository } from '@pkg/database/repositories/living-dexes/legacy'
 
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import { UserContext } from '#/features/legacy/users/state/UserContext'

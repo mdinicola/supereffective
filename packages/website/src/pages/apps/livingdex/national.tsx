@@ -5,8 +5,8 @@ import Link from 'next/link'
 import {
   getPresetByIdForGame,
   getPresetsForGame,
-} from '@pkg/database/src/living-dexes/legacy/presets'
-import { createDexFromPreset } from '@pkg/database/src/living-dexes/legacy/presets/createDexFromPreset'
+} from '@pkg/database/repositories/living-dexes/legacy/presets'
+import { createDexFromPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/createDexFromPreset'
 
 import { PkBoxGroup } from '#/features/legacy/livingdex/views/PkBox'
 import PageMeta from '#/features/pages/components/PageMeta'

@@ -15,11 +15,14 @@ lint:
 pretty:
 	pnpm pretty
 
-postinstall-dev:
-	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
+code:
 	pnpm update:data
 	pnpm -r generate:code
 	pnpm pretty
+
+postinstall-dev:
+	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
+	pnpm update:data
 
 postinstall-prod:
 	pnpm update:data

@@ -1,6 +1,6 @@
-import { getPageRepository } from '@pkg/database/src/pages/getPageRepository'
-import { PageEntry } from '@pkg/database/src/pages/types'
-import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/src/pokemon'
+import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepository'
+import { PageEntry } from '@pkg/database/repositories/pages/types'
+import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/repositories/pokemon'
 
 import { Pokedex } from '#/features/legacy/pokedex/views/Pokedex'
 import PageMeta from '#/features/pages/components/PageMeta'

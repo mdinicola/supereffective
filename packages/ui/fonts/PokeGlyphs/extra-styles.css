@@ -1,0 +1,326 @@
+svg.pkg {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+[class^='pkg-'],
+[class*=' pkg-'] {
+  font-display: block;
+  vertical-align: middle;
+}
+
+[class^='pkg-']:before,
+[class*=' pkg-']:before {
+  aspect-ratio: 1;
+  line-height: 1;
+  display: inline-block;
+}
+
+/*-*/
+
+[class^='pkg-'].pkg-0_25x,
+[class*=' pkg-'].pkg-0_25x {
+  font-size: 0.25rem;
+}
+
+[class^='pkg-'].pkg-0_50x,
+[class*=' pkg-'].pkg-0_50x {
+  font-size: 0.5rem;
+}
+
+[class^='pkg-'].pkg-0_65x,
+[class*=' pkg-'].pkg-0_65x {
+  font-size: 0.65rem;
+}
+
+[class^='pkg-'].pkg-0_75x,
+[class*=' pkg-'].pkg-0_75x {
+  font-size: 0.75rem;
+}
+
+[class^='pkg-'].pkg-0_85x,
+[class*=' pkg-'].pkg-0_85x {
+  font-size: 0.85rem;
+}
+
+[class^='pkg-'].pkg-1x,
+[class*=' pkg-'].pkg-1x {
+  font-size: 1rem;
+}
+
+[class^='pkg-'].pkg-1_25x,
+[class*=' pkg-'].pkg-1_25x {
+  font-size: 1.25rem;
+}
+
+[class^='pkg-'].pkg-1_50x,
+[class*=' pkg-'].pkg-1_50x {
+  font-size: 1.5rem;
+}
+
+[class^='pkg-'].pkg-1_65x,
+[class*=' pkg-'].pkg-1_65x {
+  font-size: 1.65rem;
+}
+
+[class^='pkg-'].pkg-1_75x,
+[class*=' pkg-'].pkg-1_75x {
+  font-size: 1.75rem;
+}
+
+[class^='pkg-'].pkg-1_85x,
+[class*=' pkg-'].pkg-1_85x {
+  font-size: 1.85rem;
+}
+
+[class^='pkg-'].pkg-2x,
+[class*=' pkg-'].pkg-2x {
+  font-size: 2rem;
+}
+
+/*-*/
+
+.pkg--bg .pkg--fg,
+.pkg--bg [class^='pkg-'],
+.pkg--bg [class*='pkg-'] {
+  font-size: 0.6em;
+  background: none;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  line-height: 1;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.pkg--bg .pkg--fg::before,
+.pkg--bg [class^='pkg-']::before,
+.pkg--bg [class*='pkg-']::before {
+  font-size: 0.8em;
+  background: none;
+  padding: 0;
+  color: #fff;
+}
+
+/*-*/
+
+.pkg-bg-bug {
+  background-color: #a0a027;
+}
+.pkg-bg-dark {
+  background-color: #4f4747;
+}
+.pkg-bg-dragon {
+  background-color: #576fbd;
+}
+.pkg-bg-electric {
+  background-color: #e0bd28;
+}
+.pkg-bg-fairy {
+  background-color: #e28de2;
+}
+.pkg-bg-fighting {
+  background-color: #e59121;
+}
+.pkg-bg-fire {
+  background-color: #e5613e;
+}
+.pkg-bg-flying {
+  background-color: #74abd1;
+}
+.pkg-bg-ghost {
+  background-color: #6f4570;
+}
+.pkg-bg-grass {
+  background-color: #439937;
+}
+.pkg-bg-ground {
+  background-color: #a5733c;
+}
+.pkg-bg-ice {
+  background-color: #47c9c9;
+}
+.pkg-bg-normal {
+  background-color: #828282;
+}
+.pkg-bg-poison {
+  background-color: #9454cc;
+}
+.pkg-bg-psychic {
+  background-color: #ea6c8d;
+}
+.pkg-bg-rock {
+  background-color: #aaa581;
+}
+.pkg-bg-steel {
+  background-color: #6badc9;
+}
+.pkg-bg-water {
+  background-color: #309ae2;
+}
+
+/*-*/
+
+.pkg-color-bug {
+  color: #a0a027;
+}
+.pkg-color-dark {
+  color: #4f4747;
+}
+.pkg-color-dragon {
+  color: #576fbd;
+}
+.pkg-color-electric {
+  color: #e0bd28;
+}
+.pkg-color-fairy {
+  color: #e28de2;
+}
+.pkg-color-fighting {
+  color: #e59121;
+}
+.pkg-color-fire {
+  color: #e5613e;
+}
+.pkg-color-flying {
+  color: #74abd1;
+}
+.pkg-color-ghost {
+  color: #6f4570;
+}
+.pkg-color-grass {
+  color: #439937;
+}
+.pkg-color-ground {
+  color: #a5733c;
+}
+.pkg-color-ice {
+  color: #47c9c9;
+}
+.pkg-color-normal {
+  color: #828282;
+}
+.pkg-color-poison {
+  color: #9454cc;
+}
+.pkg-color-psychic {
+  color: #ea6c8d;
+}
+.pkg-color-rock {
+  color: #aaa581;
+}
+.pkg-color-steel {
+  color: #6badc9;
+}
+.pkg-color-water {
+  color: #309ae2;
+}
+
+/*-*/
+[class^='pkg-circled-'],
+[class*=' pkg-circled-'],
+[class^='pkg-squared-'],
+[class*=' pkg-squared-'] {
+  padding: 3px 0;
+}
+
+[class^='pkg-circled-']:before,
+[class*=' pkg-circled-']:before,
+[class^='pkg-squared-']:before,
+[class*=' pkg-squared-']:before {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 3px;
+}
+
+[class^='pkg-circled-']:before,
+[class*=' pkg-circled-']:before {
+  border-radius: 100px;
+  border-radius: 100%;
+}
+
+[class^='pkg-squared-']:before,
+[class*=' pkg-squared-']:before {
+  border-radius: 3px;
+}
+
+.pkg-circled-bug:before,
+.pkg-squared-bug:before {
+  background-color: #a0a027;
+}
+.pkg-circled-dark:before,
+.pkg-squared-dark:before {
+  background-color: #4f4747;
+}
+.pkg-circled-dragon:before,
+.pkg-squared-dragon:before {
+  background-color: #576fbd;
+}
+.pkg-circled-electric:before,
+.pkg-squared-electric:before {
+  background-color: #e0bd28;
+}
+.pkg-circled-fairy:before,
+.pkg-squared-fairy:before {
+  background-color: #e28de2;
+}
+.pkg-circled-fighting:before,
+.pkg-squared-fighting:before {
+  background-color: #e59121;
+}
+.pkg-circled-fire:before,
+.pkg-squared-fire:before {
+  background-color: #e5613e;
+}
+.pkg-circled-flying:before,
+.pkg-squared-flying:before {
+  background-color: #74abd1;
+}
+.pkg-circled-ghost:before,
+.pkg-squared-ghost:before {
+  background-color: #6f4570;
+}
+.pkg-circled-grass:before,
+.pkg-squared-grass:before {
+  background-color: #439937;
+}
+.pkg-circled-ground:before,
+.pkg-squared-ground:before {
+  background-color: #a5733c;
+}
+.pkg-circled-ice:before,
+.pkg-squared-ice:before {
+  background-color: #47c9c9;
+}
+.pkg-circled-normal:before,
+.pkg-squared-normal:before {
+  background-color: #828282;
+}
+.pkg-circled-poison:before,
+.pkg-squared-poison:before {
+  background-color: #9454cc;
+}
+.pkg-circled-psychic:before,
+.pkg-squared-psychic:before {
+  background-color: #ea6c8d;
+}
+.pkg-circled-rock:before,
+.pkg-squared-rock:before {
+  background-color: #aaa581;
+}
+.pkg-circled-steel:before,
+.pkg-squared-steel:before {
+  background-color: #6badc9;
+}
+.pkg-circled-water:before,
+.pkg-squared-water:before {
+  background-color: #309ae2;
+}
+
+/*-*/

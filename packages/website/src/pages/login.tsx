@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { OAuthProviderName } from '@pkg/auth/src/types'
+import { OAuthProviderName } from '@pkg/auth/lib/types'
 
 import { useAuth } from '#/features/legacy/users/state/UserContext'
 import PageMeta from '#/features/pages/components/PageMeta'

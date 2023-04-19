@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import { getGameSetById } from '@pkg/database/src/game-sets'
-import { GameSetId } from '@pkg/database/src/game-sets/ids'
-import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/src/pokemon/types'
+import { getGameSetById } from '@pkg/database/repositories/game-sets'
+import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
+import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/repositories/pokemon/types'
 
 import PkImage from '#/features/legacy/livingdex/views/PkImage'
 import Button from '#/primitives/legacy/Button/Button'

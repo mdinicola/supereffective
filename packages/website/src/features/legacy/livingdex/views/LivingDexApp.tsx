@@ -3,15 +3,22 @@ import ReactModal from 'react-modal'
 
 import { useRouter } from 'next/router'
 
-import { getGameSetByGameId } from '@pkg/database/src/game-sets'
-import { getLivingDexRepository, isCatchable } from '@pkg/database/src/living-dexes/legacy'
+import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
+import { getLivingDexRepository, isCatchable } from '@pkg/database/repositories/living-dexes/legacy'
 import {
   getPresetByIdForGame,
   getPresetsForGame,
-} from '@pkg/database/src/living-dexes/legacy/presets'
-import { normalizeDexWithPreset } from '@pkg/database/src/living-dexes/legacy/presets/normalizeDexWithPreset'
-import { PresetDex, PresetDexMap } from '@pkg/database/src/living-dexes/legacy/presets/types'
-import { DexBox, LoadedDex, NullableDexPokemon } from '@pkg/database/src/living-dexes/legacy/types'
+} from '@pkg/database/repositories/living-dexes/legacy/presets'
+import { normalizeDexWithPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/normalizeDexWithPreset'
+import {
+  PresetDex,
+  PresetDexMap,
+} from '@pkg/database/repositories/living-dexes/legacy/presets/types'
+import {
+  DexBox,
+  LoadedDex,
+  NullableDexPokemon,
+} from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
