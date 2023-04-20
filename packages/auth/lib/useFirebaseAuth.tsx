@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import getFirebaseAnalytics from '@pkg/firebase/lib/getFirebaseAnalytics'
 import getFirebaseAuth, { User, UserCredential } from '@pkg/firebase/lib/getFirebaseAuth'
 
 import { AuthApi, AuthProviderName, AuthUser, OAuthProviderName } from './types'
 
 const firebaseAuth = getFirebaseAuth()
-const firebaseAnalytics = getFirebaseAnalytics()
 
 const oauthProviders: Record<OAuthProviderName, () => Promise<UserCredential>> = {
   twitter: firebaseAuth.signIn.withTwitter,
@@ -51,8 +49,12 @@ export function useFirebaseAuth(onError?: (err: Error) => void): AuthApi<AuthUse
     const unsubscribe = firebaseAuth.onAuthStateChanged(
       user => {
         if (user) {
-          firebaseAnalytics.setUserId(user.uid)
-          setUser(user)
+          const modifiedUser = { ...user }
+          if (user.providerData.length > 0) {
+            modifiedUser.providerId = user.providerData[0].providerId
+          }
+          // firebaseAnalytics.setUserId(user.uid)
+          setUser(modifiedUser)
         } else {
           // User is signed out.
           setUser(null)

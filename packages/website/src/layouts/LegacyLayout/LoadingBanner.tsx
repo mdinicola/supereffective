@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 export const LoadingBanner = ({ content }: { content?: any }) => {
   const hasContent = !!content
@@ -18,13 +18,8 @@ export const LoadingBanner = ({ content }: { content?: any }) => {
     <>
       {content && (
         <div className="page-container">
-          <div
-            className="inner-container bg-white-semi"
-            style={{ background: 'rgba(243,243,243,0.15)' }}
-          >
-            <p className={'font-title3 text-center'} style={{ color: 'rgba(255,255,255,0.65)' }}>
-              {content}
-            </p>
+          <div className="inner-container bg-white-semi" style={{ background: 'rgba(0,0,0,0.15)' }}>
+            <p className={'font-title3 text-center'}>{content}</p>
           </div>
         </div>
       )}

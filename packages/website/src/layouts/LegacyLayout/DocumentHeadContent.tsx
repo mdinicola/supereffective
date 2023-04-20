@@ -1,5 +1,4 @@
 import config from '#/config'
-import { GoogleAnalyticsScript } from '#/layouts/LegacyLayout/GoogleAnalytics'
 
 export default function DocumentHeadContent(): JSX.Element {
   const bgColor = config.themeColor
@@ -40,8 +39,6 @@ export default function DocumentHeadContent(): JSX.Element {
       <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml?v=20230331" />
       <meta name="theme-color" content={bgColor} />
       {/* --------------------------------------------------------------END */}
-
-      <GoogleAnalyticsScript />
     </>
   )
 }

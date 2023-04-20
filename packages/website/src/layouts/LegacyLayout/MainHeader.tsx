@@ -5,14 +5,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import config from '#/config'
-import UserMenu from '#/layouts/LegacyLayout/UserMenu'
+import { UserTrayView } from '#/features/users/views/UserTrayView'
 import { ExternLink, SiteLink } from '#/primitives/legacy/Link/Links'
 
 import styles from './MainHeader.module.css'
 
 export default function MainHeader() {
   const router = useRouter()
-  const pageSrc = router.query.s
+  const pageSrc = Array.isArray(router.query.s) ? router.query.s[0] : router.query.s
 
   const [navbarOpen, setNavbarOpen] = useState(false)
 
@@ -61,17 +61,7 @@ export default function MainHeader() {
               <i className="icon-pkg-mark-heart" title="Donate" />
               <span className={'mobile-onlys'}>Support Us</span>
             </SiteLink>
-            <UserMenu
-              loginLink={
-                <SiteLink
-                  activeClass={styles.active}
-                  href={'/login' + (pageSrc ? '?s=' + pageSrc : '')}
-                  tabIndex={6}
-                >
-                  Sign In
-                </SiteLink>
-              }
-            />
+            <UserTrayView activeClass={styles.active} returnUrl={pageSrc} />
           </nav>
 
           <span
