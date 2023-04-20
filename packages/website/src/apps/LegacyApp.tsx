@@ -1,3 +1,5 @@
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+
 import type { AppProps } from 'next/app'
 
 import { LivingDexProvider } from '#/features/legacy/livingdex/state/LivingDexContext'
@@ -6,13 +8,16 @@ import PageSkeleton from '#/layouts/LegacyLayout/PageSkeleton'
 
 function LegacyApp({ Component, pageProps }: AppProps | any) {
   return (
-    <UserProvider>
-      <LivingDexProvider>
-        <PageSkeleton>
-          <Component {...pageProps} />
-        </PageSkeleton>
-      </LivingDexProvider>
-    </UserProvider>
+    <>
+      <UserProvider>
+        <LivingDexProvider>
+          <PageSkeleton>
+            <Component {...pageProps} />
+          </PageSkeleton>
+        </LivingDexProvider>
+      </UserProvider>
+      <VercelAnalytics />
+    </>
   )
 }
 

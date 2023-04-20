@@ -9,9 +9,49 @@ services:
     command: ['pnpm', 'dev']
     environment:
       - PNPM_VERSION=latest
+      - DATABASE_URL=mysql://myuser:mysecret@db:3306/supereffectivedb
+      - EMAIL_SMTP_USER=
+      - EMAIL_SMTP_PASSWORD=
+      - EMAIL_SMTP_HOST=maildev
+      - EMAIL_SMTP_PORT=1025
+      - EMAIL_SMTP_ADDRESS=noreply@localhost
+      - EMAIL_DEV_SMTP_CATCHALL_ADDRESS=test@localhost
     ports:
       - '3001:3001'
       - '3002:3002'
+    depends_on:
+      - db
     volumes:
       - './:/usr/src/app'
       - node_modules:/usr/src/app/node_modules/ # do not share dependencies with host, as they might be different platforms
+
+  maildev: # https://github.com/maildev/maildev
+    image: maildev/maildev
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+
+  db:
+    image: mariadb:10
+    environment:
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mysecret
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=supereffectivedb
+    ports:
+      - '3306:3306'
+    volumes:
+      - './.local/cache/mysql:/var/lib/mysql'
+#  prisma:
+#    build:
+#      context: .
+#      target: base
+#    working_dir: /usr/src/app
+#    environment:
+#      - DATABASE_URL=mysql://myuser:mysecret@db:3306/supereffectivedb
+#    command: [ "prisma", "studio", "--port", "5555", "--browser", "none" ]
+#    ports:
+#      - "5555:5555"
+#    volumes:
+#      - "./:/usr/src/app"
+#      - "./.local/cache/yarn:/root/.cache/yarn"

@@ -1,5 +1,7 @@
 import './globals.css'
 
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+
 import React from 'react'
 
 import { MDXRefreshMeta } from '@pkg/mdx/components/MDXRefreshMeta'
@@ -16,7 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {config.baseUrl && <MDXRefreshMeta />}
         <DarkModeScript defaultEnabled={true} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <VercelAnalytics />
+      </body>
     </html>
   )
 }

@@ -2,7 +2,7 @@ const { generateIdsTsFile } = require('./codegen.cjs')
 const path = require('node:path')
 
 const dataDir = path.resolve(path.join(__dirname, '..', '..', 'data'))
-const srcDir = path.resolve(path.join(__dirname, '..'))
+const srcDir = path.resolve(path.join(__dirname, '..', 'repositories'))
 
 generateIdsTsFile(
   path.resolve(path.join(dataDir, 'sources', 'abilities.json')),

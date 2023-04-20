@@ -22,6 +22,7 @@ code:
 
 postinstall-dev:
 	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
+	if [[ ! -f "packages/website-beta/.env.local" ]]; then cp .env.dist packages/website-beta/.env.local; fi;
 	pnpm update:data
 
 postinstall-prod:
