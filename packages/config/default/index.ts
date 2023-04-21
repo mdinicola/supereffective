@@ -18,10 +18,10 @@ const config = {
   links: {
     twitter: 'https://twitter.com/supereffectiv',
     github: 'https://github.com/itsjavi',
-    github_repos: 'https://github.com/itsjavi?tab=repositories&q=supereffective',
     github_dataset: 'https://github.com/itsjavi/supereffective-assets',
-    discord: 'https://discord.gg/3fRXQFtrkN',
     issue_report: 'https://github.com/itsjavi/supereffective-issues/issues',
+    roadmap: 'https://github.com/users/itsjavi/projects/9',
+    discord: 'https://discord.gg/3fRXQFtrkN',
     paypal_donate: 'https://www.paypal.me/metaunicorn/10',
   },
   services: servicesConfig,

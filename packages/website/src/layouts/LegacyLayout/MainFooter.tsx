@@ -23,7 +23,7 @@ export default function MainFooter() {
               <SiteLink href="/about">About This Site</SiteLink>
             </li>
             <li>
-              <ExternLink href={config.links.github}>Github Projects</ExternLink>
+              <ExternLink href={config.links.roadmap}>Roadmap</ExternLink>
             </li>
           </ul>
         </nav>
@@ -52,7 +52,7 @@ export default function MainFooter() {
             </li>
             <li>
               <ExternLink href={config.links.issue_report} title={''}>
-                <i className="icon-bug" title="Discord" />
+                <i className="icon-bug" title="Issue Report" />
                 <span>Report an issue</span>
               </ExternLink>
             </li>
