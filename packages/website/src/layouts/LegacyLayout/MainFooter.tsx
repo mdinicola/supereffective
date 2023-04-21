@@ -45,9 +45,9 @@ export default function MainFooter() {
               </SiteLink>
             </li>
             <li>
-              <ExternLink href={config.links.github_repos} title={''}>
+              <ExternLink href={config.links.github_dataset} title={''}>
                 <i className="icon-embed2" title="Discord" />
-                <span>Data Repository</span>
+                <span>Assets Repository</span>
               </ExternLink>
             </li>
             <li>
