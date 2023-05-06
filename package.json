@@ -6,7 +6,7 @@
   "license": "proprietary",
   "author": "Javi Aguilar https://itsjavi.com",
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && pnpm format:code",
     "build:vercel": "pnpm pkg:database migrate && turbo run build",
     "dev": "pnpm install --ignore-scripts && turbo run dev --no-deps --no-cache --parallel --concurrency 20",
     "dev:docker": "docker-compose up -d",

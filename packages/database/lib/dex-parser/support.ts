@@ -24,9 +24,6 @@ import {
 } from './types'
 
 export function convertDexFromLegacyToV4(dex: LoadedDex): DeserializedLivingDexDoc {
-  if (!dex.id) {
-    throw new Error(`LoadedDex has no id`)
-  }
   if (!dex.userId) {
     throw new Error(`LoadedDex has no userId`)
   }

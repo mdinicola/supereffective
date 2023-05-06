@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 import { createCsrfToken } from '@pkg/auth/lib/serverside/createCsrfToken'
-import { isClientSide } from '@pkg/utils/lib/env'
 
 import { Routes } from '#/config/routes'
 import PageMeta from '#/features/pages/components/PageMeta'
@@ -19,10 +18,13 @@ export default function Page({ csrfToken }: { csrfToken: string | null }) {
   const logout = useSignOut()
   const router = useRouter()
 
-  if (!auth.isAuthenticated() && isClientSide()) {
-    router.push(Routes.Login)
+  if (!auth.isAuthenticated()) {
     return <UnauthenticatedBanner />
   }
+  // if (!auth.isAuthenticated() && isClientSide()) {
+  //   router.push(Routes.Login)
+  //   return <UnauthenticatedBanner />
+  // }
 
   if (auth.isAuthenticated() && auth.isVerified() && auth.isOperable()) {
     router.push(Routes.Profile)

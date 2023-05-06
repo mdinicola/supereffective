@@ -32,7 +32,7 @@ export interface DeserializedLivingDexDoc extends LivingDexDocMeta {
 }
 
 export interface LivingDexDocMeta {
-  $id: string
+  $id?: string
   format: LivingDexDocSpecVersion
   title: string
   gameId: GameId
