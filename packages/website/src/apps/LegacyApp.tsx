@@ -1,22 +1,25 @@
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
-
 import type { AppProps } from 'next/app'
 
-import { LivingDexProvider } from '#/features/legacy/livingdex/state/LivingDexContext'
-import { UserProvider } from '#/features/legacy/users/state/UserContext'
+import { CompositeAuthProvider } from '@pkg/auth/lib/state/AuthProvider'
+
+import { LivingDexProvider } from '#/features/livingdex/state/LivingDexContext'
+import { LivingDexListProvider } from '#/features/livingdex/state/LivingDexListContext'
 import PageSkeleton from '#/layouts/LegacyLayout/PageSkeleton'
+import { SimpleAnalytics } from '#/layouts/SimpleAnalytics'
 
 function LegacyApp({ Component, pageProps }: AppProps | any) {
   return (
     <>
-      <UserProvider>
-        <LivingDexProvider>
-          <PageSkeleton>
-            <Component {...pageProps} />
-          </PageSkeleton>
-        </LivingDexProvider>
-      </UserProvider>
-      <VercelAnalytics />
+      <CompositeAuthProvider>
+        <LivingDexListProvider>
+          <LivingDexProvider>
+            <PageSkeleton>
+              <Component {...pageProps} />
+            </PageSkeleton>
+          </LivingDexProvider>
+        </LivingDexListProvider>
+      </CompositeAuthProvider>
+      <SimpleAnalytics />
     </>
   )
 }

@@ -21,3 +21,7 @@ public/
 *.sqlite
 *.db
 *.tar.gz
+
+.pnpm-store
+.local
+v8-compile-*

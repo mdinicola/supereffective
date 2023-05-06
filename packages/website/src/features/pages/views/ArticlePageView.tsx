@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { getFullUrl } from '@pkg/config/default/env'
 import { Entry, EntryType } from '@pkg/database/repositories/pages/types'
+import { getFullUrl } from '@pkg/utils/lib/nextjs/urls'
 import { cleanupSpaces as clean } from '@pkg/utils/lib/primitives/strings'
 
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'

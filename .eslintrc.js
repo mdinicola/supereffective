@@ -6,6 +6,13 @@ module.exports = {
     },
   },
   extends: ['next', 'next/core-web-vitals', 'turbo', 'prettier'],
+  ignorePatterns: [
+    '**/node_modules/**',
+    '**/.next/**',
+    '**/out/**',
+    '**/dist/**',
+    '**/generated/**',
+  ],
   rules: {
     // "@next/next/no-html-link-for-pages": "off",
     // images

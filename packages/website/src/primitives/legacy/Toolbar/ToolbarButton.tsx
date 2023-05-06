@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import Link from 'next/link'
 
-import { classNameIf, classNames, debug } from '#/utils/legacyUtils'
+import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './ToolbarButton.module.css'
 
@@ -133,17 +133,14 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
   let selectedActionIcon: string | null = null
 
   const handleFocus = (e: FocusEvent | any) => {
-    debug('dd focused')
     setDropdownOpen(true)
     e.stopPropagation()
   }
   const handleBlur = (e: FocusEvent | any) => {
-    debug('dd blurred')
     setDropdownOpen(false)
     e.stopPropagation()
   }
   const handleDropdownClick = (e: MouseEvent | any) => {
-    debug('dd clicked')
     if (!dropdownOpen) {
       setDropdownOpen(true)
     }

@@ -50,8 +50,8 @@ function _createAuthApi(app: _firebase.FirebaseApp) {
     ) => {
       return _firebaseAuth.onAuthStateChanged(auth, onSuccess, onError)
     },
-    getIdToken: (user: User) => {
-      return _firebaseAuth.getIdToken(user)
+    getIdToken: async () => {
+      return await auth.currentUser?.getIdToken()
     },
   }
 }

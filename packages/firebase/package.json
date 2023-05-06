@@ -2,7 +2,7 @@
   "name": "@pkg/firebase",
   "version": "0.0.0",
   "private": true,
-  "description": "Firebase abstraction layer for supereffective.gg",
+  "description": "Firebase abstraction layer for supereffective.gg. Firebase needs the following extra packages: encoding, request",
   "scripts": {
     "lint": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\"",
     "lint:fix": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\" --fix",
@@ -12,16 +12,19 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@firebase/analytics": "^0.9.5",
-    "@firebase/app": "^0.9.8",
-    "@firebase/auth": "^0.23.0",
-    "@firebase/firestore": "^3.10.1",
+    "@firebase/app": "^0.9.9",
+    "@firebase/auth": "^0.23.1",
+    "@firebase/firestore": "^3.11.0",
+    "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@types/node": "^18.15.13",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "encoding": "^0.1.13",
+    "firebase-admin": "^11.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "request": "^2.88.2",
     "typescript": "^5.0.4"
   }
 }

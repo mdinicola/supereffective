@@ -1,63 +1,31 @@
-export function hasDevFeaturesEnabled(): boolean {
-  return isDevelopmentEnv() && !isCIEnv()
-}
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
 
-export function isProductionEnv(): boolean {
-  return _getVercelEnvName() === 'production'
-}
-
-export function isDevelopmentEnv(): boolean {
-  return _getVercelEnvName() === 'development'
-}
-
-export function isPreviewEnv(): boolean {
-  return _getVercelEnvName() === 'preview'
-}
-
-export function isCIEnv(): boolean {
-  return !!process.env['CI']
-}
-
-export function isServerSide(): boolean {
-  return typeof window === 'undefined'
-}
-
-export function isClientSide(): boolean {
-  return typeof window !== 'undefined'
-}
-
-export function getBaseUrl(): string {
-  // get absolute url in client/browser
-  if (!isServerSide()) {
-    return location.origin
-  }
-  // get absolute url in server.
-  return _getVercelUrl()
-}
-
-export function getFullUrl(path?: string): string {
-  if (!path) return getBaseUrl()
-
-  const sanitizedPath = path.replace(/^\/|\/$/g, '')
-  return `${getBaseUrl()}${sanitizedPath ? '/' + sanitizedPath : '/'}`
-}
-
-function _getHttpProtocol() {
-  if (isDevelopmentEnv()) return 'http://'
-  return 'https://'
-}
-
-function _getVercelEnvName(): string {
-  return (process.env.VERCEL_ENV as string) || 'development'
-}
-
-function _getVercelUrl(): string {
-  const vercelUrl = process.env.VERCEL_URL
-  if (vercelUrl && !vercelUrl.startsWith('http')) {
-    return `${_getHttpProtocol()}${process.env.VERCEL_URL}`
-  } else if (vercelUrl) {
-    return vercelUrl
-  }
-
-  return ''
-}
+export const envVars = createEnv({
+  server: {
+    // vercel
+    VERCEL_ENV: z.string(),
+    VERCEL_URL: z.string(), // does not have http[s]:// prefix, so cannot validate as .url()
+    // next auth
+    NEXTAUTH_SECRET: z.string(),
+    NEXTAUTH_URL: z.string().url().optional(),
+    NEXTAUTH_URL_INTERNAL: z.string().url().optional(),
+    // email
+    EMAIL_SMTP_USER: z.string(),
+    EMAIL_SMTP_PASSWORD: z.string(),
+    EMAIL_SMTP_HOST: z.string(),
+    EMAIL_SMTP_PORT: z.string(),
+    EMAIL_SMTP_ADDRESS: z.string().email(),
+    EMAIL_SMTP_ADDRESS_TEST: z.string().email(),
+    // databases
+    DATABASE_URL: z.string().url(),
+    DIRECT_DATABASE_URL: z.string().url(),
+    SHADOW_DATABASE_URL: z.string().url(),
+    // firebase
+    FIREBASE_ADMINSDK_JSON: z.string(),
+    FIREBASE_DATABASE_URL: z.string().url(),
+  },
+  // client-side only
+  client: {},
+  runtimeEnv: process.env as any, // or `import.meta.env`, or similar
+})

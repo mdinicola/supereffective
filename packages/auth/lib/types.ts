@@ -1,3 +1,5 @@
+import { SignInResponse, SignOutResponse, useSession } from 'next-auth/react'
+
 /**
  * Basic user data, compatible with Firebase's auth User
  */
@@ -9,11 +11,23 @@ export type AuthUser<T = {}> = {
   /**
    * The provider used to authenticate the user.
    */
-  providerId: string
+  providerId: OAuthProviderName | 'email' | null
   /**
    * The email of the user.
    */
   email: string | null
+  /**
+   * Whether the user's email has been verified.
+   */
+  emailVerified: boolean
+  /**
+   * Whether the user is disabled.
+   */
+  isDisabled: boolean
+  /**
+   * The user's handle.
+   */
+  userName: string | null
   /**
    * The display name of the user.
    */
@@ -21,14 +35,21 @@ export type AuthUser<T = {}> = {
   /**
    * The profile photo URL of the user.
    */
-  photoURL: string | null
+  photoUrl: string | null
+
+  createdAt?: Date
+
+  updatedAt?: Date
+
+  lastSignInAt?: Date
+
+  lastActivityAt?: Date
 } & T
 
-export type ReadonlyAuthUser<T = {}> = Readonly<AuthUser<T>>
-
-export enum AuthProviderName {
-  Firebase = 'firebase',
-  NextAuth = 'next-auth',
+export enum AuthStatus {
+  Loading = 'loading',
+  Authenticated = 'authenticated',
+  Unauthenticated = 'unauthenticated',
 }
 
 export enum OAuthProviderName {
@@ -37,11 +58,35 @@ export enum OAuthProviderName {
   Github = 'github',
 }
 
-export type AuthApi<ProviderUser extends AuthUser = AuthUser> = {
-  authProvider: AuthProviderName
-  currentUser: ProviderUser | null
-  isSignedIn: () => boolean
-  signIn: (provider: OAuthProviderName) => Promise<ProviderUser | null>
+export type NextSession = ReturnType<typeof useSession>
+
+export type AuthUserState = {
+  status: AuthStatus
+  currentUser: AuthUser | null
+  isAuthenticated: () => boolean
+  isUnauthenticated: () => boolean
+  isLoading: () => boolean
+  isVerified: () => boolean
+  isOperable: () => boolean
+}
+
+export type BaseAuthApi = AuthUserState
+
+export type NextAuthApi = BaseAuthApi & {
+  signIn: (
+    email: string,
+    redirect?: boolean,
+    callbackUrl?: string
+  ) => Promise<SignInResponse | undefined>
+  signOut: (redirect?: boolean, callbackUrl?: string) => Promise<SignOutResponse | undefined>
+}
+
+export type FirebaseAuthApi = BaseAuthApi & {
+  signIn: (provider: OAuthProviderName) => Promise<AuthUser | null>
   signOut: () => Promise<void>
-  createUser: (email: string, password: string) => Promise<ProviderUser | null>
+  getSessionToken: () => Promise<string | null>
+}
+
+export type AuthApi = NextAuthApi & {
+  legacy: FirebaseAuthApi
 }

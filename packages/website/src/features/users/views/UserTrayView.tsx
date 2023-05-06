@@ -1,4 +1,6 @@
-import { useAuth } from '#/features/legacy/users/state/UserContext'
+import { useSession } from '@pkg/auth/lib/hooks/useSession'
+
+import { Routes } from '#/config/routes'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
 
 type UserTrayViewProps = {
@@ -7,22 +9,22 @@ type UserTrayViewProps = {
 } & React.HTMLAttributes<HTMLAnchorElement>
 
 export function UserTrayView({ activeClass, returnUrl, ...rest }: UserTrayViewProps): JSX.Element {
-  const auth = useAuth()
+  const auth = useSession()
 
-  if (auth.state.loading) {
+  if (auth.isLoading()) {
     return (
       <a href="#" style={{ background: 'none !important' }}>
-        Loading...
+        Sign In
       </a>
     )
   }
 
-  if (!auth.state.user) {
+  if (auth.isUnauthenticated()) {
     return (
       <SiteLink
         {...rest}
         activeClass={activeClass}
-        href={'/login' + (returnUrl ? '?s=' + returnUrl : '')}
+        href={Routes.Login + (returnUrl ? '?s=' + returnUrl : '')}
         tabIndex={0}
       >
         Sign In
@@ -30,8 +32,21 @@ export function UserTrayView({ activeClass, returnUrl, ...rest }: UserTrayViewPr
     )
   }
 
+  if (!auth.isVerified()) {
+    return (
+      <SiteLink
+        {...rest}
+        activeClass={activeClass}
+        href={Routes.VerifyEmail + ('?email=' + encodeURIComponent(auth.currentUser?.email || ''))}
+        tabIndex={0}
+      >
+        <i className="icon-email" style={{ marginRight: '0.5rem' }} /> Verify Email
+      </SiteLink>
+    )
+  }
+
   return (
-    <SiteLink {...rest} href="/profile" activeClass={activeClass} tabIndex={0}>
+    <SiteLink {...rest} href={Routes.Profile} activeClass={activeClass} tabIndex={0}>
       <i className="icon-user" style={{ marginRight: '0.5rem' }} /> Profile
     </SiteLink>
   )

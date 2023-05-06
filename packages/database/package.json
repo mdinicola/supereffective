@@ -4,17 +4,15 @@
   "private": true,
   "description": "Database abstraction layer (DBAL) and ORM for supereffective.gg",
   "scripts": {
-    "db:format": "prisma format",
-    "db:generate": "prisma generate",
-    "db:migrate": "echo \"[db:migrate] skipped. Use db:push instead. The recommended workflow with using Prisma alongside PlanetScale, is to use  'prisma db push' instead of 'prisma migrate'.\"",
-    "db:push": "prisma db push",
-    "db:ui": "prisma studio --port 5555",
-    "db:validate": "prisma validate",
-    "generate:code": "node lib/codegen/generate-ids.cjs",
+    "build": "pnpm build:data && pnpm build:code",
+    "build:code": "prisma generate && node lib/codegen/generate-ids.cjs",
+    "build:data": "scripts/sync-data.sh",
+    "dev": "pnpm build:code && pnpm format:code && DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
+    "format:code": "cd ../../ && pnpm format:code && cd -",
     "lint": "eslint \"./**/*.{ts,js,mjs,cjs}\"",
     "lint:fix": "eslint \"./**/*.{ts,js,mjs,cjs}\" --fix",
-    "pscale:dev": "pscale connect supereffectivedb initial-setup --port 3309",
-    "pscale:shell": "pscale shell supereffectivedb initial-setup",
+    "migrate": "prisma generate && prisma migrate deploy",
+    "prisma": "prisma",
     "test": "vitest --run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "pnpm test:coverage && open coverage/index.html && vitest --ui --open",
@@ -25,12 +23,10 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/client": "^4.13.0",
-    "@types/node": "^18.15.13",
+    "@types/node": "^18.16.5",
+    "prisma": "^4.13.0",
     "typescript": "^5.0.4",
     "zod": "^3.21.4"
-  },
-  "devDependencies": {
-    "prisma": "^4.13.0"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"

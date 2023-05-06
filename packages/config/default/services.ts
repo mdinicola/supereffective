@@ -1,7 +1,3 @@
-const servicesConfig = {
-  analytics: {
-    googleAnalyticsId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
-  },
-}
+const servicesConfig = {}
 
 export default servicesConfig

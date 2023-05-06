@@ -8,7 +8,7 @@ supereffective.gg is a monorepo using turbo and pnpm workspaces. We use Node v18
 and link dependencies must be [pnpm v8](https://pnpm.io/). It can be installed as:
 
 ```sh
-npm install -g pnpm@7
+npm install -g pnpm@8
 ```
 
 Install the dependencies after forking and cloning the repository

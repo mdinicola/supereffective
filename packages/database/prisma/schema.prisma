@@ -1,46 +1,18 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-//
-// PlanetScale guide: 
-//    https://planetscale.com/docs/prisma/prisma-quickstart
-//    https://planetscale.com/docs/prisma/prisma-best-practices
-//
-//    The recommended workflow with using Prisma alongside PlanetScale,
-//    is to use  "prisma db push" instead of "prisma migrate".
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  // needed to run migrations on Neon PGSQL databases:
+  directUrl         = env("DIRECT_DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
-}
-
-datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
-}
-
-model User {
-  // Auth.JS-required--------------------------
-  id               String            @id @default(cuid())
-  email            String?           @unique @db.VarChar(255)
-  emailVerified    DateTime?
-  image            String?           @db.Text()
-  accounts         Account[]
-  sessions         Session[]
-  // -----------------------------------------
-  userName         String?
-  displayName      String?
-  roles            Json?
-  adminRoles       Json?
-  firebaseAccounts FirebaseAccount[]
-  livingDexes      LivingDex[]
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique @db.VarChar(255)
-  expires    DateTime
-
-  @@unique([identifier, token])
+  // output   = "./generated/client"
+  // binaryTargets = ["native", "darwin", "darwin-arm64", "linux-arm64-openssl-1.1.x"]
 }
 
 model Account {
@@ -55,31 +27,10 @@ model Account {
   token_type        String?
   scope             String?
   id_token          String? @db.Text
-  session_state     String? @db.Text
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@index([userId])
-}
-
-model FirebaseAccount {
-  uid             String      @id
-  userId          String?
-  email           String?     @db.VarChar(255)
-  emailVerified   Boolean?
-  displayName     String?     @db.Text()
-  photoUrl        String?     @db.Text()
-  providerId      String?
-  creationTime    DateTime?
-  lastSignInTime  DateTime?
-  lastRefreshTime DateTime?
-  livingDexes     LivingDex[]
-
-  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([email])
-  @@index([userId])
 }
 
 model Session {
@@ -87,26 +38,66 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
+model User {
+  // Auth.JS-required--------------------------
+  id               String            @id @default(cuid())
+  name             String?
+  email            String?           @unique
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  // -----------------------------------------
+  displayName      String?           @db.VarChar(50)
+  userName         String?           @unique @db.VarChar(20)
+  isDisabled       Boolean           @default(false)
+  roles            Json?
+  firebaseAccounts FirebaseAccount[]
+  livingDexes      LivingDex[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model FirebaseAccount {
+  id              String      @id
+  userId          String
+  email           String?
+  emailVerified   Boolean?
+  displayName     String?
+  photoUrl        String?
+  providerId      String?
+  creationTime    DateTime?
+  lastSignInTime  DateTime?
+  lastRefreshTime DateTime?
+  livingDexes     LivingDex[]
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([email])
+}
+
 model LivingDex {
-  uid            String    @id @default(cuid())
-  userId         String?
-  fbAccountId    String?
-  schemaVer      Int?
-  title          String?   @db.VarChar(255)
-  gameId         String?   @db.VarChar(50)
-  data           Json
-  creationTime   DateTime
-  lastUpdateTime DateTime?
+  id                String           @id @default(cuid())
+  userId            String
+  specVer           String           @default("v4") @db.VarChar(10)
+  title             String?          @db.VarChar(255)
+  gameId            String           @db.VarChar(50)
+  data              String           @db.Text()
+  creationTime      DateTime
+  lastUpdateTime    DateTime
+  firebaseAccountId String?
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firebaseAccount   FirebaseAccount? @relation(fields: [firebaseAccountId], references: [id], onDelete: Cascade)
 
-  user      User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  fbAccount FirebaseAccount? @relation(fields: [fbAccountId], references: [uid], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([fbAccountId])
+  // @@index([lastUpdateTime])
 }

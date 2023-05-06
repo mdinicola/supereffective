@@ -45,11 +45,12 @@ jobs:
 
       - name: Read default env vars from .env.dist
         id: dotenv
-        uses: falti/dotenv-action@v1.0.2
+        uses: falti/dotenv-action@v1.0.4
         with:
           path: ${{ github.workspace }}/.env.dist
           log-variables: true
           mask-variables: true
+          keys-case: upper
 
       - name: Use node_modules cache
         id: node_modules-cache
@@ -62,6 +63,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Run code generators
+        run: pnpm -r build:code
 
       - name: Prettify
         run: pnpm pretty

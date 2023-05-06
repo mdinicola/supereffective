@@ -13,7 +13,7 @@ const customMatchers = {
     const err = catchError(received)
     const passes = err instanceof Error && err.cause === cause
     const actualCause = String(err ? `got: ${err.cause}` : 'no error was thrown')
-    console.log('Error Cause', actualCause)
+    console.log('Cause', actualCause)
 
     if (err && err.cause === undefined) {
       console.error('Error was thrown, but cause was undefined. Error:', err)

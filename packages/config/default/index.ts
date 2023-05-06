@@ -1,4 +1,6 @@
-import { getBaseUrl, isDevelopmentEnv } from './env'
+import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
+
 import servicesConfig from './services'
 
 const config = {

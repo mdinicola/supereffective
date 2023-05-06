@@ -2,6 +2,22 @@ import { useEffect } from 'react'
 
 export const LoadingBanner = ({ content }: { content?: any }) => {
   const hasContent = !!content
+
+  const loaderSvg = (
+    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width={50} height={50}>
+      <circle
+        className="spinner"
+        cx="20"
+        cy="20"
+        r="16"
+        stroke="#00000055"
+        strokeWidth={6}
+        strokeDasharray="70 10 10"
+        strokeDashoffset="-20"
+        fill="none"
+      />
+    </svg>
+  )
   useEffect(() => {
     if (hasContent) {
       return
@@ -16,13 +32,16 @@ export const LoadingBanner = ({ content }: { content?: any }) => {
   }, [hasContent])
   return (
     <>
-      {content && (
+      {
         <div className="page-container">
-          <div className="inner-container bg-white-semi" style={{ background: 'rgba(0,0,0,0.15)' }}>
-            <p className={'font-title3 text-center'}>{content}</p>
+          <div
+            className="inner-container bg-white-semi fader"
+            style={{ background: 'rgba(0,0,0,0.15)' }}
+          >
+            <p className={'font-title3 text-center'}>{content ? content : loaderSvg}</p>
           </div>
         </div>
-      )}
+      }
     </>
   )
 }

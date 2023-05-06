@@ -1,11 +1,12 @@
 import { BaseUserDocument } from '../../../lib/types'
 import { GameSetId } from '../../game-sets/ids'
 import { GameId } from '../../games/ids'
+import { PokemonId } from '../../pokemon/ids'
 
 export const DEX_SCHEMA_VERSION = 3
 
 export type DexPokemon = {
-  pid: string
+  pid: PokemonId
   caught: boolean
   gmax: boolean
   alpha: boolean
@@ -53,11 +54,9 @@ export type StorableDexList = Array<StorableDex>
 export type LoadedDexList = Array<LoadedDex>
 
 export type LivingDexRepository = {
-  getById: (id: string) => Promise<LoadedDex>
-  getManyByUser: (userUid: string, limit: number) => Promise<LoadedDexList>
-  isCatchable: (pokemon: DexPokemon) => boolean
-  recalculateCounters: (dex: LoadedDex) => LoadedDex
-  canCreateMoreDexes: (dexes: LoadedDexList | null) => boolean
+  getById: (id: string) => Promise<LoadedDex | null>
+  getManyByUserFromFirebase: (userUid: string) => Promise<LoadedDexList>
+  getManyByUser: (userUid: string) => Promise<LoadedDexList>
   save: (dex: LoadedDex, userId: string) => Promise<LoadedDex>
   remove: (id: string) => Promise<void>
 }

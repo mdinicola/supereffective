@@ -13,13 +13,14 @@ We use the following technologies, services and tools:
 - pnpm v8 for package management
 - Turborepo (turbo) to accelerate running scripts
 - NextJS 13 + React 18 for the website
-- CSS Modules for styling (no styling libraries)
-- React Context for state management (to be replaced by Redux Toolkit)
+- CSS Modules for styling without styling libraries (to be integrated with TailwindCSS in v4)
+- React Context for state management (to be replaced by Redux Toolkit in v4)
 - MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
-- Firebase for authentication and dex data storage (to be replaced by Auth.js and Prisma + PlanetScale)
+- Firebase for authentication and dex data storage (to be replaced by Auth.js, Prisma and Neon.tech PostgreSQL)
 - Vercel (Pro tier) for hosting and deployments
 - GitHub for hosting [static data and spritesheets](https://github.com/itsjavi/supereffective-assets)
-- CloudFlare for CDN and DNS
+- CloudFlare for caching and DNS
+- Maildev as a local
 - Other tools: ESLint, Prettier, Husky, etc.
 
 This repository is a Turbo monorepo, meaning it contains multiple packages and apps.
@@ -56,23 +57,47 @@ Website is a NextJS application with the following structure:
 > All code that it's subject to be rewritten and refactored is under `src/*/legacy/` subfolders or has
 > "legacy" as part of the filename.
 
+## Monorepo packages
+
+- auth: Authentication abstraction layer
+- config: Project confing and env vars wrapper
+- database: Database abstraction layer. It also abstracts the Pokemon JSON data from supereffective-assets.
+- firebase: Firebase abstraction layer (only needed for website v3).
+- mdx: MDX abstraction layer (loader and react components).
+- noxt: NextJS abstraction layer (WIP)
+- ui: Stateless UI components, assets, fonts, SVGs, and tools. Uses TailwindCSS and Lucide Icons.
+- utils: Generic utilities for various environments (universal, commonjs, react, nextjs)
+- website: v3 site, using Next pages dir
+- website-beta: v4 site (WIP), using Next app dir
+
 ## Prerequisites
 
-You will need Node v18 LTS and pnpm v8.
-As an alternative, you can also run the project using Docker with the provided configuration files.
+You will need Docker, Node v18 LTS and pnpm v8.
 
 ## Quick Start
 
 1. Clone the repository
 2. Install dependencies: `pnpm install`
-3. Run the website in development mode: `pnpm dev` (natively) or `pnpm dev:docker` (with Docker)
-4. Open http://localhost:3001 or run `pnpm open` to open the website in your browser
+3. Configure your DB connection strings.
+   You can uncomment the `db` service in `docker-compose.yml` to spawn a local DB, or use a provider like Neon.tech,
+   then configure the database env vars in:
+
+- packages/database/.env
+- packages/website/.env.local
+- packages/website-beta/.env.local
+
+1. Run the website in development mode: run any of: `pnpm dev:docker` / `docker compose up -d` / `make`.
+2. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
+   - Beta website: http://localhost:3002
+   - Dev Mail server: http://localhost:1080
+   - Prisma Studio: http://localhost:5555
 
 ## Maintenance scripts
 
 - `pnpm build`: builds the website.
 - `pnpm update:packages`: update all dependencies to their latest version (a shortcut for `pnpm update -r --latest`).
 - `pnpm update:data`: update the data from `itsjavi/supereffective-assets` repo.
+- `make code`: updates the generated code (e.g. enums from JSON data, prettify code or prisma client files)
 
 For other scripts, please check the `package.json` files.
 

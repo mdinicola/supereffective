@@ -1,5 +1,4 @@
 /** @type {import('next-sitemap').IConfig} */
-
 module.exports = {
   siteUrl: 'https://supereffective.gg',
   generateRobotsTxt: true, // (optional)
@@ -14,6 +13,8 @@ module.exports = {
     '/apps/livingdex/new',
     '/apps/livingdex/missing',
     '/donate/thankyou',
+    '/profile',
+    '/auth/*',
   ],
   // ...other options
 }

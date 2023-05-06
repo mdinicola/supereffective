@@ -65,4 +65,11 @@ export function deserializeJson(value: string): any {
   return deserialize(JSON.parse(value))
 }
 
+export const jsonEncode = serializeJson
+export const jsonDecode = deserializeJson
+
 export { serialize as serializeObject, deserialize as deserializeObject }
+
+export type SerializableDate = { _type: 'Date'; _value: string }
+export type SerializableMap = { _type: 'Map'; _value: [any, any][] }
+export type SerializableSet = { _type: 'Set'; _value: any[] }

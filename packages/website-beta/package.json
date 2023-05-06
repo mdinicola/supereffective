@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build:beta": "next build",
     "dev": "PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
@@ -16,20 +16,24 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/ui": "workspace:*",
     "@pkg/utils": "workspace:*",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^4.13.0",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "^18.15.13",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
-    "@vercel/analytics": "^1.0.0",
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@vercel/analytics": "^1.0.1",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.39.0",
-    "eslint-config-next": "^13.3.1",
-    "next": "^13.3.1",
+    "eslint": "^8.40.0",
+    "eslint-config-next": "^13.4.1",
+    "next": "^13.4.1",
     "next-axiom": "^0.17.0",
     "postcss": "^8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.1",
+    "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
+  },
+  "prisma": {
+    "schema": "../database/lib/schema.prisma"
   }
 }

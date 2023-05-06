@@ -1,6 +1,7 @@
 const withMDXFastRefresh = require('@pkg/mdx/lib/next-plugin/withMDXPageRefresh')
 const { withAxiom } = require('next-axiom')
 const path = require('node:path')
+const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -12,6 +13,13 @@ const nextConfig = {
   },
   experimental: {
     appDir: true,
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()]
+    }
+
+    return config
   },
 }
 

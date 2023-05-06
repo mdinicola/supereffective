@@ -1,8 +1,9 @@
+import { PokemonId } from '../../../pokemon/ids'
 import { isCatchable } from '../index'
 import { DexPokemonList } from '../types'
 
 // TODO: add cap-pikachus (to include -cap at the end)
-const _pokemonIdRenamesVerLessThan3: { [key: string]: string } = {
+const _pokemonIdRenamesVerLessThan3: { [key: string]: PokemonId } = {
   'greninja-battle-bond': 'greninja--battle-bond',
   'zygarde-power-construct': 'zygarde--power-construct',
   'zygarde-10-power-construct': 'zygarde-10--power-construct',
@@ -24,7 +25,7 @@ export const convertPokemonListToStorable = (
       if (_pokemonIdRenamesVerLessThan3[pkm.pid] !== undefined) {
         pkm.pid = _pokemonIdRenamesVerLessThan3[pkm.pid]
       } else if (rawPkm.abilityType === 'special' && rawPkm.ability) {
-        pkm.pid = `${pkm.pid}--${rawPkm.ability}`
+        pkm.pid = `${pkm.pid}--${rawPkm.ability}` as PokemonId
       }
     }
 

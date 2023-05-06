@@ -7,7 +7,7 @@ import stylesCtrl from './Control.module.css'
 
 export default function Button({ className, inverted, ...props }: any) {
   return (
-    <span
+    <button
       className={classNames(
         styles.btn,
         stylesCtrl.ctrl,
@@ -17,7 +17,7 @@ export default function Button({ className, inverted, ...props }: any) {
       {...props}
     >
       {props.children}
-    </span>
+    </button>
   )
 }
 

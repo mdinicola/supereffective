@@ -1,6 +1,7 @@
 import { GameSetId } from '../../../game-sets/ids'
 import { getPokemonEntry, isShinyLocked } from '../../../pokemon'
-import { getLivingDexRepository, isCatchable } from '../index'
+import { PokemonId } from '../../../pokemon/ids'
+import { isCatchable, recalculateCounters } from '../index'
 import { DexBox, DexPokemon, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'
 import { createDexFromPreset } from './createDexFromPreset'
@@ -11,8 +12,6 @@ import { PresetDex, PresetDexBox } from './types'
 const _LEFTOVER_BOX_NAME = 'TERU-SAMA'
 
 export const normalizeDexWithPreset = (oldDex: LoadedDex, preset: PresetDex): LoadedDex => {
-  const dexRepo = getLivingDexRepository()
-
   // Create the new dex
   const newDex = createDexFromPreset(oldDex.gameId, preset, oldDex.userId)
   newDex.id = oldDex.id // Important!  otherwise we will create duplicated dexes
@@ -26,7 +25,7 @@ export const normalizeDexWithPreset = (oldDex: LoadedDex, preset: PresetDex): Lo
   newDex.boxes = nonShinyBoxes.concat(shinyBoxes)
   newDex.lostPokemon = nonShinyLost.pokemon.concat(shinyLost.pokemon)
 
-  return dexRepo.recalculateCounters(newDex)
+  return recalculateCounters(newDex)
 }
 
 function _matchBoxes(
@@ -68,7 +67,7 @@ function _matchBoxes(
         gmax = pokemon.gmax === true
         alpha = pokemon.alpha === true
       } else {
-        pid = pokemon
+        pid = pokemon as PokemonId
         caught = false
         shiny = false
         shinyLocked = false

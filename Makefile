@@ -1,7 +1,9 @@
-default: build
+default: dev
 
-dev: # shortcut, because make dev is quicker to type than pnpm dev:docker
+dev: # shortcut, because "make" or "make dev" is quicker to type than "pnpm dev:docker"
 	pnpm dev:docker
+	sleep 5
+	pnpm open
 
 build:
 	pnpm build
@@ -15,23 +17,27 @@ lint:
 pretty:
 	pnpm pretty
 
+data:
+	pnpm update:data
+
 code:
-	pnpm update:data
-	pnpm -r generate:code
-	pnpm pretty
+	pnpm docker pnpm -r build:code
+	pnpm format:packages
 
-postinstall-dev:
-	if [[ ! -f "packages/website/.env.local" ]]; then cp .env.dist packages/website/.env.local; fi;
-	if [[ ! -f "packages/website-beta/.env.local" ]]; then cp .env.dist packages/website-beta/.env.local; fi;
-	pnpm update:data
-
-postinstall-prod:
-	pnpm update:data
+postinstall:
+	echo "Running postinstall..."
+	if [[ ! -f ".env" ]]; then cp .env.dist .env; fi;
+	pnpm pkg:database build:data
+	pnpm pkg:database build:code
+	pnpm format:code
+	if [ "$$CI" = "1" ]; then exit 0; fi;
+	pnpm husky install
+	pnpm format:packages
 
 # These are only relevant if you have access to the Vercel team:
 
 vercel-login:
-	pnpm i -g vercel
+	# npm i -g vercel
 	vercel login # login
 	vercel link # link local repo to vercel project
 	vercel pull # pull project settings

@@ -19,19 +19,23 @@
     "@pkg/database": "workspace:*",
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@types/node": "^18.15.13",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^4.13.0",
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
     "@types/react-modal": "^3.16.0",
-    "@vercel/analytics": "^1.0.0",
-    "eslint": "^8.39.0",
-    "eslint-config-next": "^13.3.1",
-    "next": "^13.3.1",
+    "@vercel/analytics": "^1.0.1",
+    "eslint": "^8.40.0",
+    "eslint-config-next": "^13.4.1",
+    "next": "^13.4.1",
     "next-axiom": "^0.17.0",
-    "next-sitemap": "^4.0.7",
+    "next-sitemap": "^4.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "typescript": "^5.0.4"
+  },
+  "prisma": {
+    "schema": "../database/lib/schema.prisma"
   }
 }
