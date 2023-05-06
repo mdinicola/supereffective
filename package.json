@@ -7,7 +7,7 @@
   "author": "Javi Aguilar https://itsjavi.com",
   "scripts": {
     "build": "turbo run build && pnpm format:code",
-    "build:vercel": "pnpm pkg:database migrate && turbo run build",
+    "build:vercel": "pnpm pkg:database migrate && pnpm build",
     "dev": "pnpm install --ignore-scripts && turbo run dev --no-deps --no-cache --parallel --concurrency 20",
     "dev:docker": "docker-compose up -d",
     "docker": "docker-compose run --rm dev",
