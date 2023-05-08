@@ -35,7 +35,7 @@ const authOptions: AuthOptions = {
     EmailProvider({
       server: {
         host: envVars.EMAIL_SMTP_HOST,
-        port: parseInt(envVars.EMAIL_SMTP_PORT),
+        port: parseInt(envVars.EMAIL_SMTP_PORT || '25'),
         auth: {
           user: envVars.EMAIL_SMTP_USER,
           pass: envVars.EMAIL_SMTP_PASSWORD,

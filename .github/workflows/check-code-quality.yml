@@ -49,8 +49,14 @@ jobs:
         with:
           path: ${{ github.workspace }}/.env.dist
           log-variables: true
-          mask-variables: true
+          mask-variables: false
           keys-case: upper
+
+      - name: Copy env vars to packages
+        run: |
+          for package in packages/*; do
+            cp .env.dist $package/.env
+          done
 
       - name: Use node_modules cache
         id: node_modules-cache

@@ -1,6 +1,7 @@
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
+import { envVars } from './env'
 import servicesConfig from './services'
 
 const config = {
@@ -25,6 +26,11 @@ const config = {
     roadmap: 'https://github.com/users/itsjavi/projects/9',
     discord: 'https://discord.gg/3fRXQFtrkN',
     paypal_donate: 'https://www.paypal.me/metaunicorn/10',
+  },
+  patreon: {
+    clientId: envVars.NEXT_PUBLIC_PATREON_CLIENT_ID as string,
+    oauthRedirectUrl: `${getBaseUrl()}/api/callbacks/patreon`,
+    webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
   services: servicesConfig,
 }

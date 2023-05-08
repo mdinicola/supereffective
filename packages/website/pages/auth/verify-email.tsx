@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
-import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
+import { useLegacySignOut, useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 import { createCsrfToken } from '@pkg/auth/lib/serverside/createCsrfToken'
 
 import { Routes } from '#/config/routes'
@@ -16,18 +16,21 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 export default function Page({ csrfToken }: { csrfToken: string | null }) {
   const auth = useSession()
   const logout = useSignOut()
+  const firebaseLogout = useLegacySignOut()
   const router = useRouter()
 
   if (!auth.isAuthenticated()) {
     return <UnauthenticatedBanner />
   }
-  // if (!auth.isAuthenticated() && isClientSide()) {
-  //   router.push(Routes.Login)
-  //   return <UnauthenticatedBanner />
-  // }
+
+  if (auth.isLoading()) {
+    return <LoadingBanner />
+  }
 
   if (auth.isAuthenticated() && auth.isVerified() && auth.isOperable()) {
-    router.push(Routes.Profile)
+    firebaseLogout().then(() => {
+      router.push(Routes.Profile)
+    })
     return <LoadingBanner />
   }
 

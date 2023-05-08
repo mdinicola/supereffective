@@ -2,7 +2,9 @@ import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 
 import { UserRestrictedArea } from '#/layouts/UserRestrictedArea'
-import Button from '#/primitives/legacy/Button/Button'
+import Button, { PatreonButton } from '#/primitives/legacy/Button/Button'
+
+import { hasPatreonFeaturesEnabled } from '../../../../../config/default/featureFlags'
 
 export function ProfileView(): JSX.Element | null {
   const auth = useSession()
@@ -36,6 +38,14 @@ export function ProfileView(): JSX.Element | null {
           <b>Support ID: </b>
           <code style={{ color: 'var(--color-pink-2)' }}>{auth.currentUser?.uid}</code>
         </p>
+        {hasPatreonFeaturesEnabled() && (
+          <>
+            <hr />
+            <div>
+              <PatreonButton />
+            </div>
+          </>
+        )}
         <hr />
         <div className="text-right">
           <Button onClick={onLogoutClick}>Logout</Button>

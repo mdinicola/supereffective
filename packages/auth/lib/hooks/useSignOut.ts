@@ -8,3 +8,11 @@ export function useSignOut(): (redirect?: boolean, callbackUrl?: string) => Prom
     await auth.legacy.signOut()
   }
 }
+
+export function useLegacySignOut(): () => Promise<void> {
+  const auth = useAuthContext()
+
+  return async () => {
+    await auth.legacy.signOut()
+  }
+}

@@ -1,5 +1,8 @@
 import Link from 'next/link'
 
+import { ConnectPatreonBtn } from '@pkg/auth/lib/patreon/ConnectPatreonBtn'
+
+import config from '#/config'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './Button.module.css'
@@ -51,5 +54,16 @@ export function ButtonLink({ className, inverted, ...props }: any) {
     >
       {props.children}
     </a>
+  )
+}
+
+export function PatreonButton({ className }: any) {
+  return (
+    <ConnectPatreonBtn
+      className={classNames(styles.btn, stylesCtrl.ctrl, className)}
+      style={{ backgroundColor: '#ff424d', color: '#111', borderColor: '#141661' }}
+      clientId={config.patreon.clientId}
+      redirectUri={config.patreon.oauthRedirectUrl}
+    />
   )
 }

@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@pkg/utils": "workspace:*",
-    "@t3-oss/env-nextjs": "^0.2.2",
     "@types/node": "^18.16.5",
     "typescript": "^5.0.4",
     "zod": "^3.21.4"
