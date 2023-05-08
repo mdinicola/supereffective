@@ -45,3 +45,8 @@ vercel-login:
 # build project locally, using vercel's build system (useful to detect deployment errors before pushing)
 vercel-build:
 	vercel build
+
+# DATABASE_URL=$$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$$STUDIO_DATABASE_URL 
+prisma-studio-start:
+	pnpm install
+	cd packages/database && pnpm prisma generate && pnpm prisma studio --browser none --port $${PORT:-5555}

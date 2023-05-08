@@ -11,6 +11,8 @@ export function SimpleAnalytics(): JSX.Element | null {
   const clientInfoTracked = useRef(false)
   const clientData = useRef<any>({})
 
+  const orientation = window?.screen?.orientation?.type || 'unknown'
+
   useEffect(() => {
     if (!analyticsInjected.current) {
       clientData.current = {
@@ -19,7 +21,11 @@ export function SimpleAnalytics(): JSX.Element | null {
         viewportHeight: document?.documentElement?.clientHeight || 'unknown',
         pixelRatio: window?.devicePixelRatio || 'unknown',
         colorDepth: window?.screen?.colorDepth || 'unknown',
-        orientation: window?.screen?.orientation?.type || 'unknown',
+        orientation: orientation.includes('portrait')
+          ? 'portrait'
+          : orientation.includes('landscape')
+          ? 'landscape'
+          : orientation,
         timezone: Intl.DateTimeFormat()?.resolvedOptions()?.timeZone || 'unknown',
         language: window?.navigator?.language || 'unknown',
         referrerUrl: document?.referrer || undefined,
