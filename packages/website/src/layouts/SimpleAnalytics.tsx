@@ -11,10 +11,11 @@ export function SimpleAnalytics(): JSX.Element | null {
   const clientInfoTracked = useRef(false)
   const clientData = useRef<any>({})
 
-  const orientation = window?.screen?.orientation?.type || 'unknown'
-
   useEffect(() => {
     if (!analyticsInjected.current) {
+      const orientation = window?.screen?.orientation?.type ?? 'unknown'
+      const referrerWithoutQuery = document?.referrer?.split('?')[0] ?? undefined
+
       clientData.current = {
         screenResolution: `${window?.screen?.width}x${window?.screen?.height}`,
         viewportWidth: document?.documentElement?.clientWidth || 'unknown',
@@ -28,7 +29,7 @@ export function SimpleAnalytics(): JSX.Element | null {
           : orientation,
         timezone: Intl.DateTimeFormat()?.resolvedOptions()?.timeZone || 'unknown',
         language: window?.navigator?.language || 'unknown',
-        referrerUrl: document?.referrer || undefined,
+        referrerUrl: referrerWithoutQuery,
       }
 
       va.inject()
