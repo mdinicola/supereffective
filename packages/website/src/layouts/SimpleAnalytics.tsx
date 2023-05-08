@@ -14,25 +14,18 @@ export function SimpleAnalytics(): JSX.Element | null {
   useEffect(() => {
     if (!analyticsInjected.current) {
       clientData.current = {
-        screenResolution: `${window.screen.width}x${window.screen.height}`,
-        viewportWidth: document.documentElement.clientWidth,
-        viewportHeight: document.documentElement.clientHeight,
-        pixelRatio: window.devicePixelRatio,
-        colorDepth: window.screen.colorDepth,
-        orientation: window.screen.orientation.type,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        language: window.navigator.language,
-        referrerUrl: document.referrer || undefined,
+        screenResolution: `${window?.screen?.width}x${window?.screen?.height}`,
+        viewportWidth: document?.documentElement?.clientWidth || 'unknown',
+        viewportHeight: document?.documentElement?.clientHeight || 'unknown',
+        pixelRatio: window?.devicePixelRatio || 'unknown',
+        colorDepth: window?.screen?.colorDepth || 'unknown',
+        orientation: window?.screen?.orientation?.type || 'unknown',
+        timezone: Intl.DateTimeFormat()?.resolvedOptions()?.timeZone || 'unknown',
+        language: window?.navigator?.language || 'unknown',
+        referrerUrl: document?.referrer || undefined,
       }
 
-      va.inject({
-        // beforeSend: event => {
-        //   if (event.type !== 'pageview') {
-        //     return event
-        //   }
-        //   return { ...clientData.current, ...event }
-        // },
-      })
+      va.inject()
 
       analyticsInjected.current = true
     }

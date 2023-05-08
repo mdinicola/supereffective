@@ -15,6 +15,14 @@ class RootDocument extends Document {
             // Forces a page refresh when a new MDX file is changed
             <meta name="x-mdx-refresh-timestamp" content={mdxRefresh.timestamp} />
           )}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            // fix brave browser bug
+            window.ethereum.selectedAddress = {}
+          `,
+            }}
+          />
         </Head>
         <body>
           <Main />
