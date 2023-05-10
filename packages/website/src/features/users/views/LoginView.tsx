@@ -1,6 +1,5 @@
-import { useRouter } from 'next/router'
-
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
+import { isSignInEnabled } from '@pkg/config/default/featureFlags'
 
 import { Routes } from '#/config/routes'
 import EmailSigninView from '#/features/users/views/EmailSigninView'
@@ -10,7 +9,6 @@ import { RedirectArea } from '#/layouts/RedirectArea'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
 
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
-  const router = useRouter()
   const auth = useSession()
 
   if (auth.isLoading()) {
@@ -30,6 +28,23 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
 
   if (auth.isAuthenticated() && auth.isOperable() && auth.isVerified()) {
     return <RedirectArea routeUri={Routes.Profile} />
+  }
+
+  if (!isSignInEnabled()) {
+    return (
+      <div className="text-center">
+        <h2>
+          <i className={'icon-user'} /> Sign In
+        </h2>
+        <p
+          className={'inner-container bg-gr-white-pattern text-center'}
+          style={{ fontSize: '1.3rem' }}
+        >
+          We are currently experiencing issues with our Sign In system. <br />
+          Please check back later.
+        </p>
+      </div>
+    )
   }
 
   return (
