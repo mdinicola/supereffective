@@ -69,7 +69,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
   return {
     getById: async (id: string) => {
       return prismaDb
-        .findUnique({ where: { id } })
+        .findFirst({ where: { id } })
         .catch(error => {
           console.error('Error getting dex', error)
           throw error
