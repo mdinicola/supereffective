@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@pkg/utils": "workspace:*",
-    "@types/node": "^18.16.5",
+    "@types/node": "^18.16.7",
     "@vercel/edge-config": "^0.1.10",
     "typescript": "^5.0.4",
     "zod": "^3.21.4"
