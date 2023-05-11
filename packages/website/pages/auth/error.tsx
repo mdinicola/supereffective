@@ -10,10 +10,14 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 export default function Page() {
   const router = useRouter()
   const { error } = router.query
-  let errorMessage: React.ReactNode = 'Unexpected sign up error'
+  let errorMessage: React.ReactNode = 'Unexpected sign in error'
   switch (String(error).toLowerCase()) {
     case 'verification':
       errorMessage = 'Sign In link is expired or has been already used'
+      break
+    case 'emailsignin':
+      errorMessage =
+        'Cannot send the Sign In link at this time due to an internal error. Please try again later.'
       break
     default:
       errorMessage = <>Unexpected sign up error{error ? <i>{`: ${error}`}</i> : ''}</>
@@ -22,7 +26,7 @@ export default function Page() {
     <>
       <div className={'page-container'}>
         <PageMeta
-          metaTitle={'Verification sent - Supereffective.gg'}
+          metaTitle={'Sign In error - Supereffective.gg'}
           metaDescription={''}
           robots={'noindex, nofollow'}
           canonicalUrl={abs_url('/auth/error')}
@@ -30,7 +34,7 @@ export default function Page() {
         />
         <article className={'page-authored-content'}>
           <div className={'page-container text-center bordered-container bg-white'}>
-            <h2>Sign up Error</h2>
+            <h2>Sign In Error</h2>
             <p>❌ {errorMessage}</p>
             <ButtonInternalLink href={Routes.Login}>Login</ButtonInternalLink>
           </div>

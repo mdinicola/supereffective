@@ -2,7 +2,6 @@ import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
 import { envVars } from './env'
-import servicesConfig from './services'
 
 const config = {
   dev: isDevelopmentEnv(),
@@ -32,7 +31,6 @@ const config = {
     oauthRedirectUrl: `${getBaseUrl()}/api/callbacks/patreon`,
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
-  services: servicesConfig,
 }
 
 export default config

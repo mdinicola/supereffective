@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { isSignInEnabled } from '@pkg/config/default/featureFlags'
 
@@ -9,9 +11,15 @@ import { RedirectArea } from '#/layouts/RedirectArea'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
 
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
+  const router = useRouter()
   const auth = useSession()
 
   if (auth.isLoading()) {
+    return <LoadingBanner />
+  }
+
+  if (router.query.error) {
+    router.push(Routes.AuthError + '?error=' + router.query.error)
     return <LoadingBanner />
   }
 

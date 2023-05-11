@@ -72,6 +72,7 @@ export const envVars = parseEnvVars(
     PATREON_CREATOR_REFRESH_TOKEN: process.env.PATREON_CREATOR_REFRESH_TOKEN,
     PATREON_WEBHOOK_SECRET: process.env.PATREON_WEBHOOK_SECRET,
     NEXT_PUBLIC_PATREON_CLIENT_ID: process.env.NEXT_PUBLIC_PATREON_CLIENT_ID,
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
   {
     server: {
@@ -102,6 +103,9 @@ export const envVars = parseEnvVars(
       PATREON_CREATOR_ACCESS_TOKEN: z.string(),
       PATREON_CREATOR_REFRESH_TOKEN: z.string(),
       PATREON_WEBHOOK_SECRET: z.string(),
+
+      // sendgrid
+      SENDGRID_API_KEY: z.string(),
     },
     client: {
       NEXT_PUBLIC_PATREON_CLIENT_ID: z.string(),

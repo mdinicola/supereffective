@@ -1,5 +1,3 @@
-// import { getAll as getEdgeConfig } from '@vercel/edge-config'
-
 export type FeatureName =
   | 'signIn'
   | 'createLivingDex'
@@ -29,7 +27,7 @@ export const edgeConfig: EdgeConfig = {
       enabled: true,
     },
     mailing: {
-      enabled: false,
+      enabled: true,
     },
     database: {
       enabled: true,
@@ -37,7 +35,7 @@ export const edgeConfig: EdgeConfig = {
   },
   features: {
     signIn: {
-      enabled: false,
+      enabled: true,
     },
     createLivingDex: {
       enabled: true,

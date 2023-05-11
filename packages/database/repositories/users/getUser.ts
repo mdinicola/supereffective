@@ -50,3 +50,23 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 
   return user || null
 }
+
+export async function hasTooManyValidVerificationTokens(email: string): Promise<boolean> {
+  const client = getPrismaClient()
+
+  const tokensCount = await client.verificationToken.count({
+    where: {
+      identifier: email,
+      expires: {
+        gt: new Date(),
+      },
+    },
+  })
+
+  if (tokensCount > 5) {
+    console.warn(`User ${email} has too many valid verification tokens: ${tokensCount}`)
+    return true
+  }
+
+  return false
+}
