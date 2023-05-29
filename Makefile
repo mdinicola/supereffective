@@ -25,7 +25,7 @@ code:
 
 postinstall:
 	echo "Running postinstall..."
-	if [[ ! -f ".env" ]]; then cp .env.dist .env; fi;
+	if [ ! -f ".env" ]; then cp .env.dist .env; fi;
 	pnpm pkg:database build:data
 	pnpm pkg:database build:code
 	pnpm format:code
