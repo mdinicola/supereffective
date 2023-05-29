@@ -1,8 +1,7 @@
 import './globals.css'
 
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
-
 import React from 'react'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 
 import { MDXRefreshMeta } from '@pkg/mdx/components/MDXRefreshMeta'
 import { DarkModeScript } from '@pkg/ui/components/theme/DarkModeScript'

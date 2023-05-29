@@ -31,7 +31,7 @@
     "update:packages": "pnpm update -r"
   },
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.0.0",
     "eslint": "^8.41.0",
     "eslint-config-next": "13.4.2",
     "eslint-config-prettier": "^8.8.0",

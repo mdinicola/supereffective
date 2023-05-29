@@ -1,8 +1,7 @@
 // import sgMail from '@sendgrid/mail'
 
-import { createTransport } from 'nodemailer'
-
 import { SendVerificationRequestParams } from 'next-auth/providers'
+import { createTransport } from 'nodemailer'
 
 import config from '@pkg/config/default'
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'

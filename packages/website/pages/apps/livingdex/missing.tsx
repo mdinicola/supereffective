@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import Link from 'next/link'
 
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'

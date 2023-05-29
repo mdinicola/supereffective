@@ -1,6 +1,5 @@
 import { ImgHTMLAttributes } from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
-
 import NextImage from 'next/image'
 
 function ResponsiveImage(props: ImgHTMLAttributes<HTMLImageElement>): JSX.Element {

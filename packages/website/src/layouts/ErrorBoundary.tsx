@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { log as axiomLogger } from 'next-axiom'
 
 import PageSkeleton from '#/layouts/LegacyLayout/PageSkeleton'

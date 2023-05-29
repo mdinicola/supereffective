@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
-
 import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'

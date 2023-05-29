@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from 'react'
-
 import {
   SessionProvider as NextAuthSessionProvider,
   SessionProviderProps,
