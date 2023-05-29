@@ -1,9 +1,8 @@
 default: dev
 
-dev: # shortcut, because "make" or "make dev" is quicker to type than "pnpm dev:docker"
-	pnpm dev:docker
-	sleep 5
+dev:
 	pnpm open
+	pnpm dev
 
 build:
 	pnpm build
@@ -21,7 +20,7 @@ data:
 	pnpm update:data
 
 code:
-	pnpm docker pnpm -r build:code
+	pnpm -r build:code
 	pnpm format:packages
 
 postinstall:

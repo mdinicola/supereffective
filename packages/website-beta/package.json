@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:beta": "next build",
-    "dev": "PORT=3002 next dev",
+    "dev:beta": "PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
     "start": "next start"
@@ -24,8 +24,8 @@
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.41.0",
-    "eslint-config-next": "^13.4.4",
-    "next": "^13.4.4",
+    "eslint-config-next": "13.4.2",
+    "next": "13.4.2",
     "next-axiom": "^0.17.0",
     "postcss": "^8.4.24",
     "react": "^18.2.0",

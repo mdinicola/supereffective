@@ -1,4 +1,4 @@
-import LegacyApp from '#/apps/LegacyApp'
+import LegacyApp from '#/containers/LegacyApp'
 
 import '#/styles/legacy/styles.css'
 

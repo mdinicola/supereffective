@@ -5,23 +5,6 @@ volumes:
   v8_compile_cache:
   postgresql_data:
 services:
-  dev:
-    build:
-      context: .
-      target: dev
-    command: ['pnpm', 'dev']
-    env_file:
-      - .env
-    ports:
-      - '3001:3001'
-      - '3002:3002'
-      - '5555:5555'
-    volumes:
-      - './:/usr/src/app'
-      - v8_compile_cache:/usr/src/app/v8-compile-cache-0/
-      - pnpm_store:/usr/src/app/.pnpm-store/
-      - node_modules:/usr/src/app/node_modules/ # do not share dependencies with host, as they might be different platforms
-
   db:
     image: postgres:15
     restart: always

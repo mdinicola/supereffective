@@ -72,21 +72,21 @@ Website is a NextJS application with the following structure:
 
 ## Prerequisites
 
-You will need Docker, Node v18 LTS and pnpm v8.
+You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v8.
 
 ## Quick Start
 
 1. Clone the repository
 2. Install dependencies: `pnpm install`
 3. Configure your DB connection strings.
-   You can uncomment the `db` service in `docker-compose.yml` to spawn a local DB, or use a provider like Neon.tech,
+   You can use the `db` service in `docker-compose.yml` to spawn a local DB, or use a provider like Neon.tech,
    then configure the database env vars in:
 
 - packages/database/.env
 - packages/website/.env.local
 - packages/website-beta/.env.local
 
-1. Run the website in development mode: run any of: `pnpm dev:docker` / `docker compose up -d` / `make`.
+1. Run the website in development mode: run any of: `pnpm dev` / `make`.
 2. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
    - Beta website: http://localhost:3002
    - Dev Mail server: http://localhost:1080
@@ -100,15 +100,6 @@ You will need Docker, Node v18 LTS and pnpm v8.
 - `make code`: updates the generated code (e.g. enums from JSON data, prettify code or prisma client files)
 
 For other scripts, please check the `package.json` files.
-
-### Running scripts in an isolated Docker environment
-
-Start a shell inside the docker container, you can run `pnpm docker:sh`.
-It is a shortcut for `docker-compose run --rm dev /bin/zsh`.
-
-Alternatively you can run any script directly inside the container by using `docker-compose run --rm dev`
-with any arguments, e.g. `docker-compose run --rm dev pnpm build`.
-There is also a shortcut for it: `pnpm docker`.
 
 ## Dependencies
 
