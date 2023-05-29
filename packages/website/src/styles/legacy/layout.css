@@ -197,6 +197,7 @@ blockquote {
   z-index: 1;
   display: inline-block;
   padding: 1rem;
+  font-size: 0.9rem;
 }
 
 .lined-text::before,

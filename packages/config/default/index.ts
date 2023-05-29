@@ -25,6 +25,7 @@ const config = {
     roadmap: 'https://github.com/users/itsjavi/projects/9',
     discord: 'https://discord.gg/3fRXQFtrkN',
     paypal_donate: 'https://www.paypal.me/metaunicorn/10',
+    legacy_account_recovery_form: 'https://forms.gle/HxnV3qCs1UWJn7Tc6',
   },
   patreon: {
     clientId: envVars.NEXT_PUBLIC_PATREON_CLIENT_ID as string,

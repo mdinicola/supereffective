@@ -74,9 +74,6 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
           <b>Terms and Conditions</b>
         </SiteLink>
       </p>
-      <div className="lined-text">
-        <p>Or login using an old existing account, via:</p>
-      </div>
       <OAuthButtonsView />
     </div>
   )
