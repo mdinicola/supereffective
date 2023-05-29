@@ -249,10 +249,19 @@ const renderHtml = (options: MagicLinkOptions): string => {
                           <table cellpadding='0' cellspacing='0' width='100%' role='presentation'
                                  style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                             <tr>
-                              <td align='center' style='padding:0;Margin:0'><span class='es-button-border'
+                              <td align='center' style='padding:0;Margin:0'>
+                              <span class='es-button-border'
                                                                                   style='border-style:solid;border-color:#2CB543;background:#a692eb;border-width:0px;display:inline-block;border-radius:8px;width:auto;mso-border-alt:10px'><a
                                 href='${url}' class='es-button es-button-1' target='_blank'
                                 style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:10px 40px;display:inline-block;background:#a692eb;border-radius:8px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;border-color:#a692eb">Sign In</a></span>
+
+                                <br />
+                                <br />
+                                If you cannot click the link, please copy and paste the following URL into your browser:
+                                <br />
+                                <span style='word-break:break-all; max-width: 500px; font-size:0.8em; display:block; margin-top:1rem;'>
+                                  ${url}
+                                </span>
                               </td>
                             </tr>
                           </table>

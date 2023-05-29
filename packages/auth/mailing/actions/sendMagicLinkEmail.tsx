@@ -4,6 +4,7 @@ import { createTransport } from 'nodemailer'
 
 import { SendVerificationRequestParams } from 'next-auth/providers'
 
+import config from '@pkg/config/default'
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 
 import { hasTooManyValidVerificationTokens } from '../../../database/repositories/users/getUser'
@@ -11,6 +12,10 @@ import { renderHtml, renderText } from '../templates/magic-link.tpl'
 
 if (isDevelopmentEnv()) {
   process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
+}
+
+function wrapUrl(url: string): string {
+  return config.baseUrl + '/auth/verify-request?callbackUrl=' + encodeURIComponent(url)
 }
 
 const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
@@ -30,7 +35,7 @@ const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
     text: renderText(url),
     // TODO: check MJML https://mjml.io to create a better template
     html: renderHtml({
-      url,
+      url: wrapUrl(url),
     }),
   })
   const failed = result.rejected.concat(result.pending).filter(Boolean)
