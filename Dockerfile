@@ -8,7 +8,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 ENV HOME "/root"
 ENV PATH="/usr/src/app/node_modules/.bin:$PATH"
-ENV PNPM_VERSION="8.4.0"
+ENV PNPM_VERSION="8.6.0"
 
 # Configure Locale and Timezone
 ENV LC_ALL=en_US.UTF-8 \
