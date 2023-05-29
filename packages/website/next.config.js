@@ -7,6 +7,9 @@ const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
 let baseConfig = {
   reactStrictMode: true,
   transpilePackages: ['@pkg/*'],
+  experimental: {
+    turbo: true,
+  },
   images: {
     domains: ['itsjavi.com', 'localhost'],
     minimumCacheTTL: 60 * 60 * 24 * 7 * 4, // 4 weeks
