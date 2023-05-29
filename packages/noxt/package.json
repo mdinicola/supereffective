@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@pkg/utils": "workspace:*",
-    "@types/node": "^18.16.7",
-    "@types/react": "^18.2.6",
+    "@types/node": "^18.16.16",
+    "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
-    "next": "^13.4.1",
+    "next": "^13.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.0.4"
