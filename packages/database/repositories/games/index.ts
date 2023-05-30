@@ -1,6 +1,6 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
-import gameList from '../../data/builds/games.json'
+import gameList from '../../data/legacy/games.json'
 import { GameId, getGameIds } from './ids'
 import { LegacyGame, LegacyGameDict } from './types'
 

@@ -1,8 +1,7 @@
 const fs = require('node:fs')
 const { parseJsonFile } = require('@pkg/utils/lib/commonjs/index.cjs')
 
-function generateIdsTsFile(srcDataFile, outCodeFile, singularName) {
-  const data = parseJsonFile(srcDataFile)
+function generateIdsTsFileFromData(data, outCodeFile, singularName) {
   const constantValues = Array.from(data.map(item => item.id))
   const capitalizedName = singularName.charAt(0).toUpperCase() + singularName.slice(1)
 
@@ -19,5 +18,15 @@ export function get${capitalizedName}Ids(): readonly ${capitalizedName}Id[] {
 }
 
 module.exports = {
+  generateIdsTsFile,
+}
+
+function generateIdsTsFile(srcDataFile, outCodeFile, singularName) {
+  const data = parseJsonFile(srcDataFile)
+  generateIdsTsFileFromData(data, outCodeFile, singularName)
+}
+
+module.exports = {
+  generateIdsTsFileFromData,
   generateIdsTsFile,
 }

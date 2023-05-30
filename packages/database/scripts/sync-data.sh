@@ -9,7 +9,7 @@ fi
 echo "  >>>  Importing supereffective-assets..."
 
 ASSETS_REPO_DIR=".cache/supereffective-assets"
-ASSETS_DATA_FOLDER_DIR=".cache/supereffective-assets/data"
+ASSETS_DATA_FOLDER_DIR=".cache/supereffective-assets/assets/data"
 
 if [[ -d "${ASSETS_REPO_DIR}" ]]; then
   echo "[scripts/sync-data] Updating supereffective-assets repository..."

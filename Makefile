@@ -17,7 +17,7 @@ pretty:
 	pnpm pretty
 
 data:
-	pnpm update:data
+	pnpm pkg:database build:data
 
 code:
 	pnpm -r build:code

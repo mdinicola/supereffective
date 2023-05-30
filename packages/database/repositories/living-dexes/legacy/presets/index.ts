@@ -1,6 +1,6 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
-import presetsJson from '../../../../data/builds/box-presets-full.min.json'
+import presetsJson from '../../../../data/legacy/box-presets.json'
 import { getGameSetByGameId } from '../../../game-sets'
 import { GameSetId } from '../../../game-sets/ids'
 import { GameId } from '../../../games/ids'

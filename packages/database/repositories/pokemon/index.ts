@@ -1,7 +1,7 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 import { SimpleSearchIndex } from '@pkg/utils/lib/searching/algos/SimpleSearchIndex'
 
-import pokemonEntries from '../../data/builds/pokemon/pokemon-entries.min.json'
+import pokemonEntries from '../../data/legacy/pokemon.json'
 import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry } from './types'
 
 export const getPokemonEntries = createMemoizedCallback((): PokemonEntry[] => {
