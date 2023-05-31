@@ -1,10 +1,15 @@
-import { isDevelopmentEnv, isServerSide } from '../env'
+import { isDevelopmentEnv, isProductionEnv, isServerSide } from '../env'
 
 export function getBaseUrl(): string {
+  if (isProductionEnv()) {
+    return 'https://supereffective.gg'
+  }
+
   // get absolute url in client/browser
   if (!isServerSide()) {
     return location.origin
   }
+
   // get absolute url in server.
   return _getVercelUrl()
 }
