@@ -3,7 +3,6 @@
 import { SendVerificationRequestParams } from 'next-auth/providers'
 import { createTransport } from 'nodemailer'
 
-import config from '@pkg/config/default'
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 
 import { hasTooManyValidVerificationTokens } from '../../../database/repositories/users/getUser'
@@ -14,7 +13,8 @@ if (isDevelopmentEnv()) {
 }
 
 function wrapUrl(url: string): string {
-  return config.baseUrl + '/auth/verify-request?callbackUrl=' + encodeURIComponent(url)
+  return url
+  // return config.baseUrl + '/auth/verify-request?callbackUrl=' + encodeURIComponent(url)
 }
 
 const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
