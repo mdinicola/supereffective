@@ -32,7 +32,7 @@ export default function Page() {
         />
         <article className={'page-authored-content'}>
           <div className={'page-container text-center bordered-container bg-white'}>
-            <ButtonLink href={decodedCallbackUrl}>
+            <ButtonLink href={decodedNextUrl}>
               Continue with Sign In <i className="icon-arrow-right" />
             </ButtonLink>
             <br />
