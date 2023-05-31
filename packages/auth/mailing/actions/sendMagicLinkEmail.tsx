@@ -14,7 +14,7 @@ if (isDevelopmentEnv()) {
 
 function wrapUrl(url: string): string {
   return url
-  // return config.baseUrl + '/auth/verify-request?callbackUrl=' + encodeURIComponent(url)
+  // return config.baseUrl + '/auth/verify-request?nextUrl=' + encodeURIComponent(url)
 }
 
 const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {

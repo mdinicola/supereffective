@@ -12,15 +12,15 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 export default function Page() {
   const auth = useSession()
   const router = useRouter()
-  const callbackUrl = router.query.callbackUrl as string | undefined
+  const nextUrl = router.query.nextUrl as string | undefined
 
   if (auth.isLoading()) {
     return <LoadingBanner />
   }
 
-  const decodedCallbackUrl = decodeURIComponent(callbackUrl || '')
+  const decodedNextUrl = decodeURIComponent(nextUrl || '')
 
-  if (decodedCallbackUrl.startsWith('http')) {
+  if (decodedNextUrl.startsWith('http')) {
     return (
       <div className={'page-container'}>
         <PageMeta

@@ -1,8 +1,6 @@
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 
-import config from '#/config'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import { ButtonLink } from '#/primitives/legacy/Button/Button'
 
 export function OAuthButtonsView(): JSX.Element {
   const auth = useSession()
@@ -25,12 +23,12 @@ export function OAuthButtonsView(): JSX.Element {
           </h6>
           <div style={{ fontStyle: 'italic', fontSize: '0.9rem', padding: '1rem 2rem' }}>
             As of May 29th, 2023 OAuth Sign In via external providers is no longer possible. <br />
-            To login or create a new account, just use the new Sign In via Email. <br /> In case you
-            need to recover the data from your old account, please contact us using the following
-            button:
+            To login or create a new account, just use the new Sign In via Email. <br /> <br />
+            We are working on a migration tool to recover data from older accounts that didn't login
+            for a while. Thank you for your patience!
             <br />
           </div>
-          <div className="formButtons">
+          {/* <div className="formButtons">
             <ButtonLink
               href={config.links.legacy_account_recovery_form}
               target="_blank"
@@ -39,7 +37,7 @@ export function OAuthButtonsView(): JSX.Element {
             >
               <i className="icon-email"></i> Recover old account dex data
             </ButtonLink>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
