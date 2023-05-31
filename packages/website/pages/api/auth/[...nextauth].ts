@@ -16,19 +16,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     authOptions.callbacks = {
       ...authOptions.callbacks,
-      redirect: async () => {
-        return '/api/users/migrate-user?firebaseUserId=' + firebaseUserId
-        // + '&redirectUrl=' + encodeURIComponent('/profile')
+      redirect: async ({ url, baseUrl }) => {
+        return baseUrl + '/api/users/migrate-user?firebaseUserId=' + firebaseUserId
       },
     }
-  } else {
-    authOptions.callbacks = {
-      ...authOptions.callbacks,
-      redirect: async ({ url }) => {
-        return url || '/profile?ref=api'
-      },
-    }
-    devLog('nextauth_request -> NO_MIGRATION_INFO', req.url)
   }
 
   return await createAuthRouter(req, res, authOptions)
