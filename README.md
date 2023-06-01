@@ -113,7 +113,4 @@ Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUT
 
 ## License
 
-At the moment, this project uses a [private software license](./LICENSE.md).
-
-All contributors that have access to this project and/or has contributed to it,
-will automatically agree to the terms of this license.
+This project is licensed under the [MIT License](./LICENSE).
