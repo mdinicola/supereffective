@@ -38,7 +38,6 @@ export function SimpleAnalytics(): JSX.Element | null {
 
   useEffect(() => {
     if (analyticsInjected.current && !clientInfoTracked.current) {
-      va.track('client_info', clientData.current)
       axiomLogger.info('client_info', clientData.current)
       clientInfoTracked.current = true
     }
