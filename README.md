@@ -3,7 +3,7 @@
 [![Check Code Quality](https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml/badge.svg)](https://github.com/itsjavi/supereffective/actions/workflows/check-code-quality.yml)
 [![wakatime](https://wakatime.com/badge/github/itsjavi/supereffective.svg?)](https://wakatime.com/badge/github/itsjavi/supereffective)
 
-Source code for supereffective.gg 's website.
+Source code for supereffective.gg 's website. Data and assets can be found in [supereffective-assets](https://github.com/itsjavi/supereffective-assets).
 
 ## Software Stack
 
