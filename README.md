@@ -110,6 +110,12 @@ For other scripts, please check the `package.json` files.
 
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
 
+- [Dataset and Assets repository](https://github.com/itsjavi/supereffective-assets)
+- [Issue Reports and Tracking](https://github.com/itsjavi/supereffective/issues)
+- [Project Roadmap and Task Board](https://github.com/users/itsjavi/projects/9)
+
+For other feedback that is not related to issues, please use our [Discord server](https://discord.gg/3fRXQFtrkN)
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
