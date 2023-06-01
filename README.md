@@ -16,11 +16,11 @@ We use the following technologies, services and tools:
 - CSS Modules for styling without styling libraries (to be integrated with TailwindCSS in v4)
 - React Context for state management (to be replaced by Redux Toolkit in v4)
 - MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
-- Firebase for authentication and dex data storage (to be replaced by Auth.js, Prisma and Neon.tech PostgreSQL)
+- Next Auth, Prisma and Neon.tech PostgreSQL for authentication and dex data storage (after migrating from Firebase)
 - Vercel (Pro tier) for hosting and deployments
 - GitHub for hosting [static data and spritesheets](https://github.com/itsjavi/supereffective-assets)
 - CloudFlare for caching and DNS
-- Maildev as a local
+- Docker and Maildev as a local mail server for development
 - Other tools: ESLint, Prettier, Husky, etc.
 
 This repository is a Turbo monorepo, meaning it contains multiple packages and apps.
@@ -64,7 +64,6 @@ Website is a NextJS application with the following structure:
 - database: Database abstraction layer. It also abstracts the Pokemon JSON data from supereffective-assets.
 - firebase: Firebase abstraction layer (only needed for website v3).
 - mdx: MDX abstraction layer (loader and react components).
-- noxt: NextJS abstraction layer (WIP)
 - ui: Stateless UI components, assets, fonts, SVGs, and tools. Uses TailwindCSS and Lucide Icons.
 - utils: Generic utilities for various environments (universal, commonjs, react, nextjs)
 - website: v3 site, using Next pages dir
