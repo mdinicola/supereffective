@@ -9,7 +9,6 @@
   position: relative;
   min-height: 70vh; /*this keeps the footer at the bottom*/
   min-height: calc(100vh - var(--footer-height));
-  padding-top: var(--menu-height);
 }
 
 .page h1 {

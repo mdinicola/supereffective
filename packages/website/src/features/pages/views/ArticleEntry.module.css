@@ -135,12 +135,12 @@
 }
 
 .article .content a {
-  color: var(--color-teal-2);
-  text-decoration: none;
+  color: var(--color-link);
+  text-decoration: underline;
 }
 
 .article .content a:hover {
-  color: var(--color-teal-1);
+  color: var(--color-teal-2);
 }
 
 .contentWrapper,

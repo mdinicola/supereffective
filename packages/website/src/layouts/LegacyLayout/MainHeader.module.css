@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: var(--menu-height);
-  z-index: 100;
+  z-index: 110;
   white-space: nowrap;
 }
 

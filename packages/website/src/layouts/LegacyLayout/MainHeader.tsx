@@ -50,6 +50,10 @@ export default function MainHeader() {
               <i style={{ fontSize: '1.3rem' }} className={'icon-brand-discord'} />
               <span className="mobile-only">Discord</span>
             </ExternLink>
+            <ExternLink href={config.links.github_site} tabIndex={4} title={'Github'}>
+              <i style={{ fontSize: '1.3rem' }} className={'icon-brand-github'} />
+              <span className="mobile-only">Github</span>
+            </ExternLink>
             <SiteLink
               className={styles.donateBtn}
               activeClass={styles.active}

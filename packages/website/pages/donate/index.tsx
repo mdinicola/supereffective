@@ -19,11 +19,7 @@ const Page = () => {
             You can help support the development and hosting costs of this website by making a
             donation.
             <br /> <br />
-            Your donation will not only help me to continue developing this website, it will also
-            help me understand that people care about what I do and it will help me to stay
-            motivated and continue to improve this website and deliver new great features.
-            <br /> <br />
-            Thank you, at least for considering it ❤️.
+            Thank you for your contribution, or at least for considering it ❤️.
             <br /> <br />
             <cite>— F. Javier Aguilar - Webmaster and Developer.</cite>
           </p>

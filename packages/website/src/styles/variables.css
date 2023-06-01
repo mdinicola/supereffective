@@ -41,6 +41,7 @@
   --color-gold-4: #fdebbf;
   --color-teal-0: #1c3734;
   --color-teal-1: #2b6f6a;
+  --color-teal-1_5: #267e77;
   --color-teal-2: #37aea5;
   --color-teal-3: #86cac3;
   --color-teal-4: #c6e5e1;
@@ -60,6 +61,7 @@
   --color-violet-3: #8975d3;
   --color-violet-4: #c7baea;
   --color-main-bg: #a857ae;
+  --color-link: var(--color-teal-1_5);
   --gradient-0: linear-gradient(206deg, #ffc7cb 11%, #c34e97 73%);
   --gradient-1: repeating-linear-gradient(213deg, #1d163a 74%, #c6e5e1 74%);
   --gradient-2: linear-gradient(280deg, #37aea5 18%, #cddcbc 99%);
