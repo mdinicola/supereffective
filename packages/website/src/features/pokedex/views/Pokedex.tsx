@@ -325,10 +325,10 @@ export const Pokedex = ({
         </p>
         <p style={{ fontSize: '0.9rem' }}>
           <i className="icon-help_outline icon--2x" /> Type anything or narrow-down your search by
-          including prefixes like <code>num:</code>, <code>name:</code> and <code>type:</code>. If
-          you type for example, just "ice" it will match everything, including "Jellicent". You can
-          also enter different criteria, separated by space (in that case it will search using an OR
-          condition).
+          including prefixes like <code>num:</code>, <code>name:</code>, <code>color:</code> and{' '}
+          <code>type:</code>. If you type for example, just "ice" it will match everything,
+          including "Jellicent". You can also enter different criteria, separated by space (in that
+          case it will search using an OR condition).
         </p>
       </div>
     </div>
