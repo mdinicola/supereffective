@@ -18,13 +18,13 @@
     "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@types/node": "^18.16.16",
-    "@types/react": "^18.2.7",
+    "@types/react": "^18.2.8",
     "@types/react-dom": "^18.2.4",
     "encoding": "^0.1.13",
-    "firebase-admin": "^11.8.0",
+    "firebase-admin": "^11.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "request": "^2.88.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
