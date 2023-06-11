@@ -26,6 +26,7 @@ code:
 postinstall:
 	echo "Running postinstall..."
 	if [ ! -f ".env" ]; then cp .env.dist .env; fi;
+	if [ ! -f "packages/database/.env" ]; then cp .env packages/database/.env; fi;
 	pnpm pkg:database build:data
 	pnpm pkg:database build:code
 	pnpm format:code
@@ -43,7 +44,7 @@ vercel-login:
 
 # build project locally, using vercel's build system (useful to detect deployment errors before pushing)
 vercel-build:
-	vercel build
+	vercel build -d
 	pnpm pretty
 
 # DATABASE_URL=$$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$$STUDIO_DATABASE_URL 
