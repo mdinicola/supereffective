@@ -1,5 +1,3 @@
-'use server'
-
 import { Prisma, PrismaClient } from '@prisma/client'
 
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
