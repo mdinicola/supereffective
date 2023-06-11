@@ -9,6 +9,7 @@ export const _pokedexIds = [
   'johto-hgss',
   'unova',
   'unova-b2w2',
+  'kalos',
   'kalos-central',
   'kalos-coastal',
   'kalos-mountain',
@@ -25,6 +26,7 @@ export const _pokedexIds = [
   'alola-poni-usum',
   'kanto-lgpe',
   'galar',
+  'galar-initial',
   'galar-isle-armor',
   'galar-crown-tundra',
   'hisui',
@@ -34,6 +36,7 @@ export const _pokedexIds = [
   'hisui-coronet',
   'hisui-alabaster',
   'paldea',
+  'paldea-initial',
 ] as const
 
 export type PokedexId = (typeof _pokedexIds)[number]
