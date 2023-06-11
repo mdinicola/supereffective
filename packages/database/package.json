@@ -22,7 +22,7 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/client": "^4.15.0",
-    "@types/node": "^18.16.17",
+    "@types/node": "^20.3.0",
     "prisma": "^4.15.0",
     "typescript": "^5.1.3",
     "zod": "^3.21.4"
