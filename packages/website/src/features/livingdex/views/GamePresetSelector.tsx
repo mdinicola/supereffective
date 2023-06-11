@@ -90,22 +90,24 @@ export const GamePresetSelector = () => {
               <div className={'text-center'}>
                 <div className={styles.gameTitle}>Pokémon {getGameById(selectedGame).name}</div>
               </div>
-              {selectedGamePresets.map((p, index) => (
-                <div key={index} className={styles.preset + ' inner-container bg-beige'}>
-                  <div className={styles.presetName}>
-                    <i className={'icon-sync_alt'} /> {p.name}
+              {selectedGamePresets
+                .filter(p => !p.isHidden)
+                .map((p, index) => (
+                  <div key={index} className={styles.preset + ' inner-container bg-beige'}>
+                    <div className={styles.presetName}>
+                      <i className={'icon-sync_alt'} /> {p.name}
+                    </div>
+                    <div className={styles.presetDescription}>{p.description}</div>
+                    <div className={'text-right'}>
+                      <ButtonInternalLink
+                        href={`?game=${selectedGame}&preset=${p.id}`}
+                        className={styles.selectBtn}
+                      >
+                        Select this preset
+                      </ButtonInternalLink>
+                    </div>
                   </div>
-                  <div className={styles.presetDescription}>{p.description}</div>
-                  <div className={'text-right'}>
-                    <ButtonInternalLink
-                      href={`?game=${selectedGame}&preset=${p.id}`}
-                      className={styles.selectBtn}
-                    >
-                      Select this preset
-                    </ButtonInternalLink>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           )}
         </div>

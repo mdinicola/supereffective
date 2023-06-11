@@ -528,12 +528,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             dropdownTitle={'Change Box Preset'}
             dropdownPosition={'middle'}
             dropdownNoActionIcon={'sync_alt'}
-            items={Object.values(getPresetsForGame(dex.gameId)).map(pr => ({
-              actionName: pr.id,
-              label: pr.name,
-              title: pr.description,
-              status: pr.id === preset?.id ? 'selected' : null,
-            }))}
+            items={Object.values(getPresetsForGame(dex.gameId))
+              .filter(p => !p.isHidden)
+              .map(pr => ({
+                actionName: pr.id,
+                label: pr.name,
+                title: pr.description,
+                status: pr.id === preset?.id ? 'selected' : null,
+              }))}
           ></ToolbarButtonGroup>
           {/* <ToolbarButton
             actionName={null}

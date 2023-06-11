@@ -27,6 +27,7 @@ export type PresetDex = {
   game?: GameId | undefined
   gameSet: GameSetId
   description: string
+  isHidden?: boolean
   boxes: PresetDexBox[]
 }
 
