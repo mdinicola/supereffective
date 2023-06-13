@@ -6,7 +6,6 @@ import {
 } from 'next-auth/react'
 
 import { convertNextSessionToAuthApi } from '../converters/convertNextSessionToAuthApi'
-import { useFirebaseAuth } from '../hooks/firebase/useFirebaseAuth'
 import { AuthApi } from '../types'
 
 export function CompositeAuthProvider({
@@ -23,9 +22,8 @@ export function CompositeAuthProvider({
 const authContext = createContext<AuthApi | null>(null)
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const firebaseAuth = useFirebaseAuth()
   const nextSession = useSession()
-  const auth = convertNextSessionToAuthApi(nextSession, firebaseAuth)
+  const auth = convertNextSessionToAuthApi(nextSession)
 
   return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }

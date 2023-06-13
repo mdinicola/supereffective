@@ -2,13 +2,10 @@ import { signIn, signOut } from 'next-auth/react'
 
 import { User } from '@pkg/database/lib/types'
 
-import { AuthApi, AuthStatus, AuthUser, FirebaseAuthApi, NextSession } from '../types'
+import { AuthApi, AuthStatus, AuthUser, NextSession } from '../types'
 import { convertPrismaUserToAuthUser } from './convertPrismaUserToAuthUser'
 
-export function convertNextSessionToAuthApi(
-  nextSession: NextSession,
-  firebaseAuth: FirebaseAuthApi
-): AuthApi {
+export function convertNextSessionToAuthApi(nextSession: NextSession): AuthApi {
   const nextUser = _transformNextAuthUserObject(nextSession)
   const emailVerified = nextUser?.emailVerified || false
 
@@ -29,7 +26,6 @@ export function convertNextSessionToAuthApi(
     isOperable: () => {
       return nextUser !== null && !nextUser.isDisabled && nextUser.email !== null && emailVerified
     },
-    legacy: firebaseAuth,
   }
 }
 

@@ -87,6 +87,4 @@ export type FirebaseAuthApi = BaseAuthApi & {
   getSessionToken: () => Promise<string | null>
 }
 
-export type AuthApi = NextAuthApi & {
-  legacy: FirebaseAuthApi
-}
+export type AuthApi = NextAuthApi & {}

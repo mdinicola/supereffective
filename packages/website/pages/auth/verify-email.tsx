@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
-import { useLegacySignOut, useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
+import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 import { createCsrfToken } from '@pkg/auth/lib/serverside/createCsrfToken'
 
 import { Routes } from '#/config/routes'
@@ -16,7 +16,6 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 export default function Page({ csrfToken }: { csrfToken: string | null }) {
   const auth = useSession()
   const logout = useSignOut()
-  const firebaseLogout = useLegacySignOut()
   const router = useRouter()
 
   if (!auth.isAuthenticated()) {
@@ -28,9 +27,7 @@ export default function Page({ csrfToken }: { csrfToken: string | null }) {
   }
 
   if (auth.isAuthenticated() && auth.isVerified() && auth.isOperable()) {
-    firebaseLogout().then(() => {
-      router.push(Routes.Profile)
-    })
+    router.push(Routes.Profile)
     return <LoadingBanner />
   }
 
@@ -58,7 +55,6 @@ export default function Page({ csrfToken }: { csrfToken: string | null }) {
             </p>
             <EmailSigninView
               csrfToken={csrfToken}
-              firebaseUserId={auth.currentUser?.uid}
               email={auth.currentUser?.email || undefined}
               buttonText={'Send Sign In Link'}
             />

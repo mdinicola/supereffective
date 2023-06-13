@@ -1,5 +1,3 @@
-import getFirestoreDb from '@pkg/firebase/lib/getFirestoreDb'
-
 import { getGameById } from '../../../games'
 import { GameId } from '../../../games/ids'
 import { DEX_SCHEMA_VERSION, DexBox, LoadedDex } from '../types'
@@ -14,7 +12,7 @@ export const createDexFromPreset = (
   userId: string | undefined
 ): LoadedDex => {
   const game = getGameById(gameId)
-  const timestamp = getFirestoreDb().createTimestamp()
+  const timestamp = new Date()
   let totalRegular = 0
   let totalShiny = 0
 
