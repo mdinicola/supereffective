@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { log as axiomLogger } from 'next-axiom'
-import va from '@vercel/analytics'
 
 export function SimpleAnalytics(): JSX.Element | null {
   const analyticsInjected = useRef(false)
@@ -29,8 +28,6 @@ export function SimpleAnalytics(): JSX.Element | null {
         language: window?.navigator?.language || 'unknown',
         referrerUrl: referrerWithoutQuery,
       }
-
-      va.inject()
 
       analyticsInjected.current = true
     }
