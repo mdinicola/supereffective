@@ -1,46 +1,39 @@
-// import sgMail from '@sendgrid/mail'
-
 import { SendVerificationRequestParams } from 'next-auth/providers'
-import { createTransport } from 'nodemailer'
 
-import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+import { hasTooManyValidVerificationTokens } from '@pkg/database/repositories/users/getUser'
+import { sendMail } from '@pkg/mailer/lib/sendMail'
+import { EmailMessage } from '@pkg/mailer/lib/types'
 
-import { hasTooManyValidVerificationTokens } from '../../../database/repositories/users/getUser'
 import { renderHtml, renderText } from '../templates/magic-link.tpl'
 
-if (isDevelopmentEnv()) {
-  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-}
-
-function wrapUrl(url: string): string {
-  return url
-  // return config.baseUrl + '/auth/verify-request?nextUrl=' + encodeURIComponent(url)
-}
+const maxTokens = 5
 
 const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
-  const emailAlreadySent = await hasTooManyValidVerificationTokens(params.identifier)
+  const emailAlreadySent = await hasTooManyValidVerificationTokens(params.identifier, maxTokens)
   if (emailAlreadySent) {
-    console.warn('[NEXT_AUTH] Email already sent', params.identifier)
+    console.error(
+      `[NEXT_AUTH] User has already more than ${maxTokens} sign in tokens`,
+      params.identifier
+    )
     return
   }
-  const { identifier, url, provider, token } = params
-  // NOTE: You are not required to use `nodemailer`, use whatever you want.
-  const transport = createTransport(provider.server)
-  const result = await transport.sendMail({
+  const { identifier, url, token } = params
+  const message: EmailMessage = {
     to: identifier,
-    // bcc: isDevelopmentEnv() ? envVars.EMAIL_SMTP_ADDRESS_TEST : undefined,
-    from: 'noreply@supereffective.gg', //provider.from,
+    // from: 'noreply@supereffective.gg',
     subject: `Sign in to SuperEffective.gg`,
-    text: renderText(url, token),
-    // TODO: check MJML https://mjml.io to create a better template
-    html: renderHtml({
-      url: wrapUrl(url),
-      token: token,
-    }),
-  })
-  const failed = result.rejected.concat(result.pending).filter(Boolean)
-  if (failed.length) {
-    throw new Error(`[NEXT_AUTH] Email(s) (${failed.join(', ')}) could not be sent`)
+    body: {
+      text: renderText(url, token),
+      html: renderHtml({
+        url: url,
+        token: token,
+      }),
+    },
+  }
+
+  const deliveryResult = await sendMail(message)
+  if (!deliveryResult.success) {
+    throw new Error(`[NEXT_AUTH] Email could not be sent: ${deliveryResult.errorMessage}`)
   }
 }
 

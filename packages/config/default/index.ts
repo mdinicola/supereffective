@@ -9,6 +9,7 @@ const config = {
   version: {
     num: '4.0.0',
   },
+  emailProvider: 'nodemailer',
   texts: {
     siteName: 'SuperEffective',
     standaloneTitle: 'SuperEffective',

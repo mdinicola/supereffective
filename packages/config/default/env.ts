@@ -65,7 +65,6 @@ export const envVars = parseEnvVars(
     // firebase
     FIREBASE_ADMINSDK_JSON: process.env.FIREBASE_ADMINSDK_JSON,
     FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
-
     // patreon
     PATREON_CLIENT_ID: process.env.PATREON_CLIENT_ID,
     PATREON_CREATOR_ACCESS_TOKEN: process.env.PATREON_CREATOR_ACCESS_TOKEN,
@@ -97,13 +96,11 @@ export const envVars = parseEnvVars(
       // firebase
       FIREBASE_ADMINSDK_JSON: z.string(),
       FIREBASE_DATABASE_URL: z.string().url(),
-
       // patreon
       PATREON_CLIENT_ID: z.string(),
       PATREON_CREATOR_ACCESS_TOKEN: z.string(),
       PATREON_CREATOR_REFRESH_TOKEN: z.string(),
       PATREON_WEBHOOK_SECRET: z.string(),
-
       // sendgrid
       SENDGRID_API_KEY: z.string(),
     },
