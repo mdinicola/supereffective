@@ -1,3 +1,6 @@
+// created with https://my.stripo.email/cabinet/#/template-editor/?projectId=888398&templateId=2037101&type=MY_TEMPLATE
+
+const html = /* html */ `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
@@ -931,3 +934,5 @@
     </div>
   </body>
 </html>
+`
+export default html

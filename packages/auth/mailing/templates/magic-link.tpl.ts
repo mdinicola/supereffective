@@ -1,18 +1,13 @@
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import { renderTemplate } from '../templateEngine'
+import templateCode from './magic-link.html'
 
 interface MagicLinkOptions {
   url: string
   token: string
 }
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
 const renderHtml = (options: MagicLinkOptions): string => {
-  // created with https://my.stripo.email/cabinet/#/template-editor/?projectId=888398&templateId=2037101&type=MY_TEMPLATE
-  return renderTemplate('magic-link.html', options)
+  return renderTemplate(templateCode, options)
 }
 
 const renderText = (url: string, token: string): string => {
