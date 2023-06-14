@@ -13,7 +13,7 @@ export default function Page() {
   let errorMessage: React.ReactNode = 'Unexpected sign in error'
   switch (String(error).toLowerCase()) {
     case 'verification':
-      errorMessage = 'Sign In link is expired or has been already used'
+      errorMessage = 'Sign In token is invalid, expired or has been already used'
       break
     case 'emailsignin':
       errorMessage =
@@ -36,6 +36,7 @@ export default function Page() {
           <div className={'page-container text-center bordered-container bg-white'}>
             <h2>Sign In Error</h2>
             <p>❌ {errorMessage}</p>
+            <p>Try logging in again.</p>
             <ButtonInternalLink href={Routes.Login}>Login</ButtonInternalLink>
           </div>
         </article>

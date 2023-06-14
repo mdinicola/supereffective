@@ -1,6 +1,7 @@
 export const Routes = {
   API: {
     SignIn: '/api/auth/signin/email',
+    SignInCallback: '/api/auth/callback/email',
     LivingDexes: '/api/livingdexes',
   },
   Home: '/',

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
@@ -6,6 +7,7 @@ import { isSignInEnabled } from '@pkg/config/default/featureFlags'
 import { Routes } from '#/config/routes'
 import EmailSigninView from '#/features/users/views/EmailSigninView'
 import { OAuthButtonsView } from '#/features/users/views/OAuthButtonsView'
+import TokenSignInView from '#/features/users/views/TokenSignInView'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { RedirectArea } from '#/layouts/RedirectArea'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
@@ -13,6 +15,7 @@ import { SiteLink } from '#/primitives/legacy/Link/Links'
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
   const router = useRouter()
   const auth = useSession()
+  const [tokenMode, setTokenMode] = useState(false)
 
   if (auth.isLoading()) {
     return <LoadingBanner />
@@ -67,7 +70,25 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
         </b>{' '}
         progress and use all other upcoming features of the website.
       </p>
-      <EmailSigninView csrfToken={csrfToken} email={auth.currentUser?.email || undefined} />
+      {!tokenMode && (
+        <>
+          <EmailSigninView csrfToken={csrfToken} />
+          <p>
+            Do you want to use the token you got via email?{' '}
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                setTokenMode(true)
+              }}
+              style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+            >
+              Sign In with Token
+            </a>
+          </p>
+        </>
+      )}
+      {tokenMode && <TokenSignInView csrfToken={csrfToken} />}
       <p style={{ fontStyle: 'italic', fontSize: '0.9rem' }}>
         By signing in, you agree to our{' '}
         <SiteLink href={'/terms-and-conditions'}>

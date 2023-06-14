@@ -81,10 +81,4 @@ export type NextAuthApi = BaseAuthApi & {
   signOut: (redirect?: boolean, callbackUrl?: string) => Promise<SignOutResponse | undefined>
 }
 
-export type FirebaseAuthApi = BaseAuthApi & {
-  signIn: (provider: OAuthProviderName) => Promise<AuthUser | null>
-  signOut: () => Promise<void>
-  getSessionToken: () => Promise<string | null>
-}
-
 export type AuthApi = NextAuthApi & {}

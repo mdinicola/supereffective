@@ -6,6 +6,7 @@ import { envVars } from '@pkg/config/default/env'
 import { getPrismaClient } from '@pkg/database/prisma/getPrismaClient'
 
 import sendMagicLinkEmail from '../../mailing/actions/sendMagicLinkEmail'
+import { generateRandomToken } from './generateRandomToken'
 
 const authOptions: AuthOptions = {
   session: {
@@ -50,6 +51,9 @@ const authOptions: AuthOptions = {
       },
       from: envVars.EMAIL_SMTP_ADDRESS,
       sendVerificationRequest: sendMagicLinkEmail,
+      generateVerificationToken() {
+        return generateRandomToken()
+      },
     }),
   ],
 }
