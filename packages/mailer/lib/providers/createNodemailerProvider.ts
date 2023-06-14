@@ -41,7 +41,7 @@ const sendMailFactory: EmailSenderFactory = (config: EmailProviderConfig) => {
 }
 
 const createNodemailerProvider = (config: EmailProviderConfig): EmailProvider => ({
-  id: 'nodemailer',
+  id: 'smtp',
   config,
   sendMail: sendMailFactory(config),
 })

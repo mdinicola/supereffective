@@ -56,8 +56,9 @@ export const envVars = parseEnvVars(
     EMAIL_SMTP_PASSWORD: process.env.EMAIL_SMTP_PASSWORD,
     EMAIL_SMTP_HOST: process.env.EMAIL_SMTP_HOST,
     EMAIL_SMTP_PORT: process.env.EMAIL_SMTP_PORT,
-    EMAIL_SMTP_ADDRESS: process.env.EMAIL_SMTP_ADDRESS,
-    EMAIL_SMTP_ADDRESS_TEST: process.env.EMAIL_SMTP_ADDRESS_TEST,
+    EMAIL_DEFAULT_FROM: process.env.EMAIL_DEFAULT_FROM,
+    EMAIL_PROVIDER: process.env.EMAIL_PROVIDER,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
     // databases
     DATABASE_URL: process.env.DATABASE_URL,
     DIRECT_DATABASE_URL: process.env.DIRECT_DATABASE_URL,
@@ -71,7 +72,6 @@ export const envVars = parseEnvVars(
     PATREON_CREATOR_REFRESH_TOKEN: process.env.PATREON_CREATOR_REFRESH_TOKEN,
     PATREON_WEBHOOK_SECRET: process.env.PATREON_WEBHOOK_SECRET,
     NEXT_PUBLIC_PATREON_CLIENT_ID: process.env.NEXT_PUBLIC_PATREON_CLIENT_ID,
-    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
   {
     server: {
@@ -87,8 +87,9 @@ export const envVars = parseEnvVars(
       EMAIL_SMTP_PASSWORD: z.string(),
       EMAIL_SMTP_HOST: z.string(),
       EMAIL_SMTP_PORT: z.string(),
-      EMAIL_SMTP_ADDRESS: z.string().email(),
-      EMAIL_SMTP_ADDRESS_TEST: z.string().email(),
+      EMAIL_PROVIDER: z.enum(['resend', 'smtp']),
+      EMAIL_DEFAULT_FROM: z.string().email(),
+      RESEND_API_KEY: z.string(),
       // databases
       DATABASE_URL: z.string().url(),
       DIRECT_DATABASE_URL: z.string().url(),
@@ -101,8 +102,6 @@ export const envVars = parseEnvVars(
       PATREON_CREATOR_ACCESS_TOKEN: z.string(),
       PATREON_CREATOR_REFRESH_TOKEN: z.string(),
       PATREON_WEBHOOK_SECRET: z.string(),
-      // sendgrid
-      SENDGRID_API_KEY: z.string(),
     },
     client: {
       NEXT_PUBLIC_PATREON_CLIENT_ID: z.string(),

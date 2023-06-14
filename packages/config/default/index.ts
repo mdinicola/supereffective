@@ -7,9 +7,8 @@ const config = {
   dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
   version: {
-    num: '4.0.0',
+    num: '4.0.3',
   },
-  emailProvider: 'nodemailer',
   texts: {
     siteName: 'SuperEffective',
     standaloneTitle: 'SuperEffective',

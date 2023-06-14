@@ -1,27 +1,36 @@
-import config from '@pkg/config/default'
 import { envVars } from '@pkg/config/default/env'
 
 import createNodemailerProvider from './providers/createNodemailerProvider'
+import createResendProvider from './providers/createResendProvider'
 import { EmailProvider, EmailSmtpConfig } from './types'
 
 export function getDefaultEmailProvider(): EmailProvider {
-  const providerId = config.emailProvider as EmailProvider['id']
-  const smtpConfig: EmailSmtpConfig = {
-    host: envVars.EMAIL_SMTP_HOST!,
-    port: parseInt(envVars.EMAIL_SMTP_PORT || '25'),
-    auth: {
-      user: envVars.EMAIL_SMTP_USER!,
-      pass: envVars.EMAIL_SMTP_PASSWORD!,
-    },
-  }
+  const emailProviderId = envVars.EMAIL_PROVIDER as EmailProvider['id']
+  const defaultFrom: string = envVars.EMAIL_DEFAULT_FROM!
 
-  switch (providerId) {
-    case 'nodemailer':
+  switch (emailProviderId) {
+    case 'smtp':
+      const smtpConfig: EmailSmtpConfig = {
+        host: envVars.EMAIL_SMTP_HOST!,
+        port: parseInt(envVars.EMAIL_SMTP_PORT || '25'),
+        auth: {
+          user: envVars.EMAIL_SMTP_USER!,
+          pass: envVars.EMAIL_SMTP_PASSWORD!,
+        },
+      }
       return createNodemailerProvider({
         server: smtpConfig,
-        defaultFrom: envVars.EMAIL_SMTP_ADDRESS!,
+        defaultFrom,
+      })
+    case 'resend':
+      return createResendProvider({
+        apiKey: envVars.RESEND_API_KEY!,
+        defaultFrom,
       })
     default:
-      throw new Error(`Unknown email provider: ${providerId}`)
+      if (!emailProviderId) {
+        throw new Error('EMAIL_PROVIDER env var is missing')
+      }
+      throw new Error(`Unknown email provider: ${emailProviderId}`)
   }
 }

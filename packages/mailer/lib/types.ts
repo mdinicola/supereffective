@@ -9,10 +9,11 @@ export type EmailSmtpConfig = {
 
 export type EmailProviderConfig = {
   server?: EmailSmtpConfig
+  apiKey?: string
   defaultFrom: string
 }
 export type EmailProvider = {
-  id: 'nodemailer' | 'resend'
+  id: 'smtp' | 'resend'
   config: EmailProviderConfig
   sendMail: EmailSender
 }
