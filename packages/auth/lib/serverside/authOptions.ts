@@ -49,7 +49,7 @@ const authOptions: AuthOptions = {
           pass: envVars.EMAIL_SMTP_PASSWORD,
         },
       },
-      from: envVars.EMAIL_SMTP_ADDRESS,
+      from: envVars.EMAIL_DEFAULT_FROM,
       sendVerificationRequest: sendMagicLinkEmail,
       generateVerificationToken() {
         return generateRandomToken()
