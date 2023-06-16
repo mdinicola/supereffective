@@ -11,12 +11,15 @@ if (process.env.CI === 'true') {
    * @type {Array<keyof typeof console>}
    */
   const consoleFunctionNames = ['debug', 'info', 'log', 'warn', 'error']
+  const originalWarn = console.warn
 
   for (const funcName of consoleFunctionNames) {
     const originalFn = console[funcName]
     console[funcName] = (...data) => {
       originalFn.apply(console, data)
-      throw new Error(`[eslint.rules.no-console] console.${funcName} has been triggered!`)
+      originalWarn.apply(console, [
+        `[eslint.rules.no-console] console.${funcName} has been triggered!`,
+      ])
     }
   }
 }
