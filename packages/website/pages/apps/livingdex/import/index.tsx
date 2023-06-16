@@ -32,10 +32,14 @@ const Page = ({ entry }: { entry: PageEntry | null }) => {
     return <LoadingBanner />
   }
 
+  if (swr.error) {
+    return <LoadingBanner content={'❌ An internal server error ocurred.'} />
+  }
+
   const dexes = swr.data ?? []
   const email = auth.currentUser?.email
 
-  if (dexes.length === -1 || !email) {
+  if (dexes.length === 0 || !email) {
     const content = (
       <>
         <p>No old dexes found</p>
