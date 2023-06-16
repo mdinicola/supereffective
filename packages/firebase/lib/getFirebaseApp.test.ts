@@ -1,16 +1,17 @@
 import * as _firebase from '@firebase/app'
-import { afterEach, describe, expect, it, Mock, vi } from 'vitest'
 
 import config from '../config.json'
 import getFirebaseApp from './getFirebaseApp'
 
-vi.mock('@firebase/app', () => ({
-  getApps: vi.fn(),
-  initializeApp: vi.fn(),
-  getApp: vi.fn(),
+jest.mock('@firebase/app', () => ({
+  __esModule: true,
+  getApps: jest.fn(),
+  initializeApp: jest.fn(),
+  getApp: jest.fn(),
 }))
 
-vi.mock('../config.json', () => ({
+jest.mock('../config.json', () => ({
+  __esModule: true,
   default: {
     firebase: {
       publicConfig: {
@@ -22,12 +23,12 @@ vi.mock('../config.json', () => ({
   },
 }))
 
-const getAppMock = _firebase.getApp as Mock
-const getAppsMock = _firebase.getApps as Mock
+const getAppMock = _firebase.getApp as jest.Mock
+const getAppsMock = _firebase.getApps as jest.Mock
 
 describe('firebaseApp', () => {
   afterEach(() => {
-    vi.resetAllMocks()
+    jest.resetAllMocks()
   })
 
   it('initializes the app only when no apps have been initialized', () => {

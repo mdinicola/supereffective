@@ -1,10 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
-
 import createMemoizedCallback from './createMemoizedCallback'
 
 describe('createMemoizeCallback', () => {
   it('should memoize the result of the callback function', () => {
-    const callback = vi.fn(() => ({ a: 1, b: 2 }))
+    const callback = jest.fn(() => ({ a: 1, b: 2 }))
     const memoized = createMemoizedCallback(callback)
 
     // Call memoized function the first time
@@ -19,7 +17,7 @@ describe('createMemoizeCallback', () => {
   })
 
   it('should clear the cache when clear method is called', () => {
-    const callback = vi.fn(() => ({ a: 1, b: 2 }))
+    const callback = jest.fn(() => ({ a: 1, b: 2 }))
     const memoized = createMemoizedCallback(callback)
 
     // Call memoized function the first time

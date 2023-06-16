@@ -25,10 +25,7 @@ module.exports = {
     'react/jsx-key': 'error',
     'react/no-unescaped-entities': 'off',
   },
-  plugins:
-    process.env['NODE_ENV'] === 'development'
-      ? ['import', 'react', 'jsx-a11y', 'vitest']
-      : ['import', 'react', 'jsx-a11y'],
+  plugins: ['import', 'react', 'jsx-a11y'],
   overrides: [
     {
       files: ['*.js', '*.cjs'],

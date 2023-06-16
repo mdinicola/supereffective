@@ -1,6 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": [
+    "CI",
+    "LOCALE_LANGUAGE",
+    "DEBUG_MODE",
     "VERCEL_ENV",
     "VERCEL_URL",
     "NEXTAUTH_SECRET",
@@ -26,26 +29,32 @@
     "PATREON_CREATOR_REFRESH_TOKEN",
     "PATREON_WEBHOOK_SECRET"
   ],
+  "globalDependencies": [".env", "tsconfig.json"],
   "pipeline": {
     "build": {
+      "description": "A package's `build` script depends on that package's dependencies and devDependencies `build` tasks being completed first. The `^` symbol signifies `upstream script`.",
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
     },
-    "lint": {
+    "//#pretty:all": {
+      "description": "Run the pretty:all script from the root package ('`//#` signifies `root package`)",
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "//#lint:all": {
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "//#lint:all:fix": {
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "//#format:all": {
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "//#test:all": {
       "outputs": []
-    },
-    "lint:fix": {
-      "cache": false
-    },
-    "test": {
-      "outputs": []
-    },
-    "test:coverage": {
-      "outputs": ["coverage/**"]
-    },
-    "test:watch": {
-      "cache": false,
-      "persistent": true
     },
     "dev": {
       "cache": false,

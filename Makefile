@@ -21,7 +21,7 @@ data:
 
 code:
 	pnpm -r build:code
-	pnpm format:packages
+	pnpm pretty:pkgjsons
 
 postinstall:
 	echo "Running postinstall..."
@@ -29,10 +29,10 @@ postinstall:
 	if [ ! -f "packages/database/.env" ]; then cp .env packages/database/.env; fi;
 	pnpm pkg:database build:data
 	pnpm pkg:database build:code
-	pnpm format:code
+	pnpm pretty:code
 	if [ "$$CI" = "1" ]; then exit 0; fi;
 	pnpm husky install
-	pnpm format:packages
+	pnpm pretty:pkgjsons
 
 # These are only relevant if you have access to the Vercel team:
 

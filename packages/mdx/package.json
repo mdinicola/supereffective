@@ -4,13 +4,7 @@
   "private": true,
   "description": "Better MDX support for NextJS, with FrontMatter YAML parsing, full reload, and more.",
   "scripts": {
-    "postinstall": "node lib/next-plugin/init.js",
-    "lint": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\"",
-    "lint:fix": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\" --fix",
-    "test": "vitest --run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "pnpm test:coverage && open coverage/index.html && vitest --ui --open",
-    "test:watch": "vitest"
+    "postinstall": "node lib/next-plugin/init.js"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",

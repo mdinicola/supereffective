@@ -2,6 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Package for Next.js app",
   "extends": "../config/tsconfig.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../../vitest.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

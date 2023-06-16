@@ -4,13 +4,7 @@
   "private": true,
   "description": "Authentication abstraction layer for supereffective.gg",
   "scripts": {
-    "gen:token": "tsx generate-token.ts",
-    "lint": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\"",
-    "lint:fix": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\" --fix",
-    "test": "vitest --run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "pnpm test:coverage && open coverage/index.html && vitest --ui --open",
-    "test:watch": "vitest"
+    "gen:token": "tsx generate-token.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "1.0.7",

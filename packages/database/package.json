@@ -9,13 +9,7 @@
     "build:data": "scripts/sync-data.sh",
     "dev": "pnpm build:code && pnpm format:code && DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
     "format:code": "cd ../../ && pnpm format:code && cd -",
-    "lint": "eslint \"./**/*.{ts,js,mjs,cjs}\"",
-    "lint:fix": "eslint \"./**/*.{ts,js,mjs,cjs}\" --fix",
-    "prisma": "prisma",
-    "test": "vitest --run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "pnpm test:coverage && open coverage/index.html && vitest --ui --open",
-    "test:watch": "vitest"
+    "prisma": "prisma"
   },
   "dependencies": {
     "@pkg/firebase": "workspace:*",

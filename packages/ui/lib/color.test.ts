@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { Color, color, RgbaColor } from './color'
 
 describe('Color class', () => {

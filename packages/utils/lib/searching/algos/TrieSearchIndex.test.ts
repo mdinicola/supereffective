@@ -1,5 +1,3 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-
 import { TrieSearchIndex } from './TrieSearchIndex'
 
 const pokemon = [
