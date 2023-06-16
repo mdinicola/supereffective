@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { classNameIf, classNames } from '#/utils/legacyUtils'
+
 export const LoadingBanner = ({ content }: { content?: any }) => {
   const hasContent = !!content
 
@@ -35,8 +37,11 @@ export const LoadingBanner = ({ content }: { content?: any }) => {
       {
         <div className="page-container">
           <div
-            className="inner-container bg-white-semi fader"
-            style={{ background: 'rgba(0,0,0,0.15)' }}
+            className={classNames(
+              'inner-container',
+              classNameIf(hasContent, 'bg-beige'),
+              classNameIf(!hasContent, 'bg-black-semi fader')
+            )}
           >
             <p className={'font-title3 text-center'}>{content ? content : loaderSvg}</p>
           </div>

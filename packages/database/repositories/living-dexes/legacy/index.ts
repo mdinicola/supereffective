@@ -6,7 +6,7 @@ import {
   dexToLoadedDex,
   loadedDexToDex,
 } from '../../../lib/dex-parser/support'
-import { getPrismaClient } from '../../../prisma/getPrismaClient'
+import { getPrismaClient, PrismaTypes } from '../../../prisma/getPrismaClient'
 import { isShinyLocked } from '../../pokemon'
 import { getAvailableGames } from './gameAvailability'
 import { DexPokemon, LivingDexRepository, LoadedDex, LoadedDexList, StorableDex } from './types'
@@ -66,25 +66,27 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
   const collectionName = 'dexes'
   const prismaDb = getPrismaClient().livingDex
 
-  return {
-    getById: async (id: string) => {
-      return prismaDb
-        .findFirst({ where: { id } })
-        .catch(error => {
-          console.error('Error getting dex', error)
-          throw error
-        })
-        .then(dex => {
-          if (!dex) {
-            return null
-          }
-          if (typeof dex.data !== 'string') {
-            throw new Error(`Invalid dex data for dex ${id}`)
-          }
+  const getById = async (id: string) => {
+    return prismaDb
+      .findFirst({ where: { id } })
+      .catch(error => {
+        console.error('Error getting dex', error)
+        throw error
+      })
+      .then(dex => {
+        if (!dex) {
+          return null
+        }
+        if (typeof dex.data !== 'string') {
+          throw new Error(`Invalid dex data for dex ${id}`)
+        }
 
-          return dexToLoadedDex(dex)
-        })
-    },
+        return dexToLoadedDex(dex)
+      })
+  }
+
+  return {
+    getById,
     getManyByUser: async (userUid: string) => {
       return prismaDb
         .findMany({
@@ -114,6 +116,41 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
           throw error
         })
         .then(docs => docs.map(doc => convertFirebaseStorableDexToLoadedDex(doc.id || '??', doc)))
+    },
+    import: async (dexes: LoadedDex[], userId) => {
+      const createManyArgs: {
+        data: Array<PrismaTypes.LivingDexCreateManyInput>
+      } = {
+        data: [],
+      }
+      for (const dex of dexes) {
+        dex.userId = userId
+
+        if (!dex.id) {
+          throw new Error('Cannot import a dex that has no ID')
+        }
+
+        const existingDex = await getById(dex.id)
+
+        if (existingDex) {
+          throw new Error(`Dex ${dex.id} already exists`)
+        }
+
+        const dexToSave = loadedDexToDex(userId, dex)
+
+        createManyArgs.data.push({
+          id: dex.id,
+          specVer: dexToSave.specVer,
+          userId,
+          data: dexToSave.data,
+          gameId: dexToSave.gameId,
+          title: dexToSave.title,
+          creationTime: dexToSave.creationTime,
+          lastUpdateTime: dexToSave.lastUpdateTime || new Date(),
+        })
+      }
+
+      return prismaDb.createMany(createManyArgs).then(result => result.count)
     },
     save: async (dex: LoadedDex, userId) => {
       dex.updatedAt = new Date()

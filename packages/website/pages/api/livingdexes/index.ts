@@ -37,6 +37,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (httpMethod) {
     case 'GET': {
       const result = await listHandler(guard.user)
+      Object.entries(result.headers || {}).forEach(([key, value]) => {
+        res.setHeader(key, value)
+      })
       res.status(result.statusCode).json(result.data)
       break
     }

@@ -7,13 +7,14 @@ import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallbac
 export { UserRecord } from 'firebase-admin/auth'
 
 export type FirebaseAdminSdk = typeof admin
-
 export const getFirebaseAdmin = createMemoizedCallback((): FirebaseAdminSdk => {
-  const serviceAccount = JSON.parse(envVars.FIREBASE_ADMINSDK_JSON || '{}')
-
   if (!admin.apps.length) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
+      credential: admin.credential.cert({
+        projectId: envVars.FIREBASE_ADMIN_PROJECT_ID,
+        clientEmail: envVars.FIREBASE_ADMIN_CLIENT_EMAIL,
+        privateKey: envVars.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\n/g, '\n'),
+      }),
       databaseURL: envVars.FIREBASE_DATABASE_URL,
     })
   }
@@ -37,9 +38,12 @@ export async function getUserByUid(uid: string) {
     .catch(() => null)
 }
 
-export async function getUserByEmail(email: string) {
+export async function getUsersByEmail(email: string) {
   return await getFirebaseAdmin()
     .auth()
-    .getUserByEmail(email)
-    .catch(() => null)
+    .getUsers([{ email }])
+    .catch(e => {
+      console.log('getUserByEmail error', e)
+      return null
+    })
 }

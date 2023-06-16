@@ -57,6 +57,7 @@ export type LivingDexRepository = {
   getById: (id: string) => Promise<LoadedDex | null>
   getManyByUserFromFirebase: (userUid: string) => Promise<LoadedDexList>
   getManyByUser: (userUid: string) => Promise<LoadedDexList>
+  import: (dexes: LoadedDex[], userId: string) => Promise<number>
   save: (dex: LoadedDex, userId: string) => Promise<LoadedDex>
   remove: (id: string) => Promise<void>
 }

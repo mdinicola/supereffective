@@ -24,8 +24,7 @@ export function OAuthButtonsView(): JSX.Element {
           <div style={{ fontStyle: 'italic', fontSize: '0.9rem', padding: '1rem 2rem' }}>
             As of May 29th, 2023 OAuth Sign In via external providers is no longer possible. <br />
             To login or create a new account, just use the new Sign In via Email. <br /> <br />
-            We are working on a migration tool to recover data from older accounts that didn't login
-            for a while. Thank you for your patience!
+            You can find an import tool in the Living Dex section to import your old dex data.{' '}
             <br />
           </div>
           {/* <div className="formButtons">

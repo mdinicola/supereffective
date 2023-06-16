@@ -123,6 +123,11 @@
   color: var(--text-color);
 }
 
+.bg-black-semi {
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--text-color);
+}
+
 .bg-beige {
   background: var(--color-beige);
   color: var(--text-color);

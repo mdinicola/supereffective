@@ -33,3 +33,5 @@ export const getPrismaClient = createMemoizedCallback((): PrismaClient => {
 
   return prisma
 })
+
+export { Prisma as PrismaTypes }
