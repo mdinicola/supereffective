@@ -88,7 +88,7 @@ const ImportLegacyDexesContainer = (): JSX.Element => {
           those accounts? <br />
           <br />
           If you are logged in with the same email linked to the social account you used in the
-          past, you can restore your previous dexes here:
+          past, you can restore your previous dexes and link them to your current user.
         </p>
         {/* <div>
         <label>
