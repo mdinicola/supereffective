@@ -14,10 +14,9 @@ module.exports = {
     '**/generated/**',
   ],
   rules: {
-    // "@next/next/no-html-link-for-pages": "off",
-    // images
+    // nextjs
     '@next/next/no-img-element': 'warn',
-    '@next/next/no-html-link-for-pages': 'off',
+    '@next/next/no-html-link-for-pages': 'warn',
     'jsx-a11y/alt-text': 'error',
     // components
     'react-hooks/exhaustive-deps': 'off',
