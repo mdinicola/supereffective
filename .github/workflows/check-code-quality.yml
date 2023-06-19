@@ -40,6 +40,15 @@ jobs:
       - name: Configure PATH env var
         run: echo "$PWD/node_modules/.bin" >> $GITHUB_PATH
 
+      - name: Use node_modules cache
+        id: node_modules-cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -57,15 +66,6 @@ jobs:
           for package in packages/*; do
             cp .env.dist $package/.env
           done
-
-      - name: Use node_modules cache
-        id: node_modules-cache
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
 
       - name: Install dependencies
         run: pnpm install
