@@ -34,6 +34,7 @@ export const getPokemonSearchIndex = createMemoizedCallback((): PokemonEntrySear
     ['base', (pk: PokemonEntry) => [pk.form.baseSpecies || pk.id]],
     ['color', (pk: PokemonEntry) => [pk.color || '']],
     ['id', (pk: PokemonEntry) => [pk.id || '']],
+    ['obtainable', (pk: PokemonEntry) => pk.location.obtainableIn],
   ])
 
   return index
