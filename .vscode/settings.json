@@ -20,5 +20,6 @@
       "other": "on"
     },
     "editor.minimap.enabled": false
-  }
+  },
+  "jest.jestCommandLine": "pnpm jest"
 }

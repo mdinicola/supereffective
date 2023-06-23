@@ -5,7 +5,7 @@ module.exports = {
       rootDir: ['packages/*/'],
     },
   },
-  extends: ['next', 'next/core-web-vitals', 'turbo', 'prettier'],
+  extends: ['next', 'next/core-web-vitals', 'prettier'],
   ignorePatterns: [
     '**/node_modules/**',
     '**/.next/**',

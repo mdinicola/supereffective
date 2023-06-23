@@ -4,9 +4,9 @@
   "private": true,
   "description": "Firebase abstraction layer for supereffective.gg. Firebase needs the following extra packages: encoding, request",
   "dependencies": {
-    "@firebase/app": "^0.9.12",
+    "@firebase/app": "^0.9.13",
     "@firebase/auth": "^0.23.2",
-    "@firebase/firestore": "^3.12.2",
+    "@firebase/firestore": "^3.13.0",
     "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@types/node": "^20.3.1",
