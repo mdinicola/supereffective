@@ -9,7 +9,7 @@
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
     "@types/node": "^20.3.1",
-    "@types/react": "^18.2.13",
+    "@types/react": "^18.2.14",
     "chokidar": "^3.5.3",
     "glob": "^10.3.0",
     "gray-matter": "^4.0.3",

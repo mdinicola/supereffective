@@ -7,7 +7,7 @@
     "@pkg/utils": "workspace:*",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^20.3.1",
-    "@types/react": "^18.2.13",
+    "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "lucide-react": "^0.252.0",
     "react": "^18.2.0",

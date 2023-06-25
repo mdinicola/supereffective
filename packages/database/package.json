@@ -7,8 +7,8 @@
     "build": "pnpm build:data && pnpm build:code",
     "build:code": "prisma generate && node lib/codegen/generate-ids.cjs",
     "build:data": "scripts/sync-data.sh",
-    "dev": "pnpm build:code && pnpm format:code && DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
-    "format:code": "cd ../../ && pnpm format:code && cd -",
+    "dev": "pnpm build:code && pnpm pretty:code && DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
+    "pretty:code": "cd ../../ && pnpm pretty:code && cd -",
     "prisma": "prisma"
   },
   "dependencies": {
