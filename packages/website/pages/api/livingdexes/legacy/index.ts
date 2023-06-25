@@ -51,6 +51,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         })
         res.redirect(301, Routes.LivingDex + '?imported=success')
       } catch (error) {
+        console.error(`Failed to import legacy dexes for ${guard.user.email}: ${error}`)
+
         if (!isProductionEnv()) {
           res.redirect(
             301,
