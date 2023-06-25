@@ -7,7 +7,7 @@ const config = {
   dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
   version: {
-    num: '4.0.3',
+    num: '4.0.5',
   },
   texts: {
     siteName: 'SuperEffective',
