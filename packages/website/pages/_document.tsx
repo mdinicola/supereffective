@@ -19,7 +19,10 @@ class RootDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
             // fix brave browser bug
-            window.ethereum.selectedAddress = {}
+            window.ethereum = {
+              selectedAddress: undefined,
+              ...(window.ethereum || {})
+            }
           `,
             }}
           />
