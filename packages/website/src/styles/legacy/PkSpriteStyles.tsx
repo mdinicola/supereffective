@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const baseurl =
   'https://itsjavi.com/supereffective-assets/assets/images/spritesheets/pokemon/home3d-icon'
-const version = '20230625-0'
+const version = '20230626-1'
 
 const PkSpriteStyles = () => {
   return (
