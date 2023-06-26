@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 import errors from './errors'
 import { getLivingDexFormat } from './formats'
+import { applyDefaultMiddlewares } from './middlewares'
 import {
   DeserializedLivingDexDoc,
   LivingDexDocBox,
@@ -42,10 +43,12 @@ export function parseLivingDex(markdown: string): DeserializedLivingDexDoc {
   const format = getLivingDexFormat(meta.format)
   const boxes = parseBoxes(mdBoxLines, format)
 
-  return {
+  const dex = {
     ...meta,
     boxes,
   }
+
+  return applyDefaultMiddlewares({ dex, format })
 }
 
 export function validateLivingDex(metadata: object, boxes: object[]): void {
@@ -60,7 +63,7 @@ export function serializeLivingDexMeta(meta: LivingDexDocMeta | Partial<LivingDe
 }
 
 export function serializeLivingDex(
-  dex: DeserializedLivingDexDoc,
+  deserializedDex: DeserializedLivingDexDoc,
   format: LivingDexDocSpecConfig,
   verboseInfo = true
 ): string {
@@ -73,6 +76,8 @@ export function serializeLivingDex(
     arrayDelimiters,
     arraySeparator,
   } = format
+
+  const dex = applyDefaultMiddlewares({ dex: deserializedDex, format })
 
   const meta: LivingDexDocMeta = {
     $id: dex.$id,

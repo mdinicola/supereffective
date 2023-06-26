@@ -157,7 +157,7 @@ export function convertFirebaseStorableDexToLoadedDex(id: string, doc: StorableD
     return normalizeDexWithPreset(dex, preset)
   }
 
-  // TODO workaround on this
+  // TODO find workaround for this case:
   console.error(`Preset ${dex.presetId} not found for game ${dex.gameId}`)
   return normalizeDexWithPreset(dex, presets['home']['fully-sorted'])
 }
