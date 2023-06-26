@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { ConnectPatreonBtn } from '@pkg/auth/lib/patreon/ConnectPatreonBtn'
+import ConnectPatreonBtn from '@pkg/patreon/lib/components/ConnectPatreonBtn'
 
 import config from '#/config'
 import { classNameIf, classNames } from '#/utils/legacyUtils'

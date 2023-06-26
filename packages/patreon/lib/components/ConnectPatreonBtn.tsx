@@ -1,23 +1,27 @@
 import { HTMLProps } from 'react'
 
+import { PATREON_API_URLS } from '../constants'
+
 type ConnectPatreonBtnProps = HTMLProps<HTMLAnchorElement> & {
   redirectUri: string
   clientId: string
+  state?: string // e.g. a next-auth SessionId
 }
-export function ConnectPatreonBtn({
+export default function ConnectPatreonBtn({
   clientId,
   redirectUri,
+  state,
   ...rest
 }: ConnectPatreonBtnProps): JSX.Element {
-  // https://docs.patreon.com/?javascript#step-2-making-the-log-in-button
   const urlParams = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirectUri,
     response_type: 'code',
-    // scope: 'users pledges-to-me my-campaign',
-    // state: 'e.g. a nextAuthSessionId',
+    scope: 'identity campaigns identity.memberships',
+
+    state: state || '',
   })
-  const url = `https://www.patreon.com/oauth2/authorize?${urlParams.toString()}`
+  const url = `${PATREON_API_URLS.oauth2.authorize}?${urlParams.toString()}`
 
   return (
     <a {...rest} href={url} target="_blank" rel="noopener noreferrer">

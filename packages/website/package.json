@@ -18,6 +18,7 @@
     "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
     "@pkg/mdx": "workspace:*",
+    "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.1",
     "@types/node": "^20.3.1",
