@@ -112,8 +112,11 @@ export function convertDexFromV4ToLegacy(dex: DeserializedLivingDexDoc): Storabl
             return null
           }
 
+          const pkmEntry = getPokemonEntry(pokemon.id)
+
           return {
             pid: pokemon.id,
+            nid: pkmEntry.nid,
             caught: pokemon.captured,
             shiny: pokemon.shiny,
             alpha: pokemon.emblemMarks.includes('alpha'),
@@ -263,6 +266,7 @@ function _normalizePokemonList(
 
       return {
         pid: pkm.pid,
+        nid: pkmEntry.nid,
         caught: pkm.caught,
         shiny: pkm.shiny,
         shinyLocked: isShinyLocked(pkm.pid),
