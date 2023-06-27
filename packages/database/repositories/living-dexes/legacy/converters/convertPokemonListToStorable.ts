@@ -31,6 +31,7 @@ export const convertPokemonListToStorable = (
 
     return {
       pid: pkm.pid,
+      nid: pkm.nid,
       caught: pkm.caught && isCatchable(pkm),
       shiny: pkm.shiny,
       gmax: pkm.gmax,
