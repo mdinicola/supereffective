@@ -19,8 +19,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
-  grid-gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
 }
 
 .cell {
@@ -54,8 +54,8 @@
   width: 100%;
   height: auto;
   /**backdrop image shadow*/
-  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.2)) drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.51))
-    drop-shadow(-1px -1px 1px rgba(0, 0, 0, 0.56));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.2)) drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3))
+    drop-shadow(-1px -1px 1px rgba(0, 0, 0, 0.3));
 }
 
 .label {
@@ -95,17 +95,12 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
-  /*background: rgba(0, 0, 0, 0.8);*/
   background: var(--dexLightColor);
   color: var(--dexDarkColor);
   z-index: 99;
-  /*border: 12px solid var(--dexDarkColorD);*/
-  /*border: 6px solid var(--dexDarkColorD);*/
   border: 6px solid #111;
-  /*border-radius: 12px;*/
   border-radius: 8px;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
-  /*transition: all 2.5s ease-in-out;*/
   transform: translateX(150%);
 }
 
@@ -124,10 +119,6 @@
   width: 100%;
   top: 0;
   left: 0;
-}
-
-.infoPanel .inner:hover {
-  /*overflow: visible;*/
 }
 
 .infoPanel .pkimg,
@@ -212,7 +203,6 @@
 }
 
 .pkTitle {
-  /*background: linear-gradient(to bottom, var(--dexDarkColor), transparent);*/
   background: var(--dexDarkColorL);
   background: #111;
   color: #fff;
@@ -221,11 +211,8 @@
   font-size: 1em;
   font-weight: bold;
   justify-content: center;
-  /*border-top: 2px solid var(--dexDarkColorD);*/
-  /*border-bottom: 2px solid var(--dexDarkColorD);*/
   text-align: center;
   display: flex;
-  /*flex-direction: column;*/
   align-items: center;
   justify-items: center;
   align-content: center;
@@ -235,8 +222,6 @@
 }
 
 .dexNo {
-  /*border: 1px solid rgba(255, 255, 255, 0.8);*/
-  /*padding: 0.3rem 0.9rem;*/
   margin-right: 0.5rem;
   font-size: 0.8em;
   font-weight: normal;
@@ -344,9 +329,6 @@
   margin: 1rem 0;
   flex-wrap: wrap;
   font-size: 0.8rem;
-  /*background: rgba(255, 255, 255, 0.3);;*/
-  /*padding: 1rem;*/
-  /*border-radius: 1rem;*/
 }
 
 .buttons .btn {

@@ -33,6 +33,11 @@ const config = {
     oauthRedirectUrl: `${getBaseUrl()}/api/callbacks/patreon`,
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
+  assets: {
+    dataUrl: 'https://itsjavi.com/supereffective-assets/assets/data',
+    fontsUrl: 'https://itsjavi.com/supereffective-assets/assets/fonts',
+    imagesUrl: 'https://itsjavi.com/supereffective-assets/assets/images',
+  },
 }
 
 export default config

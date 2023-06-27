@@ -7,6 +7,7 @@ export const DEX_SCHEMA_VERSION = 3
 
 export type DexPokemon = {
   pid: PokemonId
+  nid: string
   caught: boolean
   gmax: boolean
   alpha: boolean

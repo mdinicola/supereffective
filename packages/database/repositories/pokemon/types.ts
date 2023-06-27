@@ -73,6 +73,7 @@ export enum PokemonColor {
 
 export type PokemonEntry = {
   id: PokemonId
+  nid: string
   dexNum: number | null
   name: string
   type1: PokemonTypeId

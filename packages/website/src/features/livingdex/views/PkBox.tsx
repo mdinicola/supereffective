@@ -8,11 +8,11 @@ import {
 import { getPokemonEntry } from '@pkg/database/repositories/pokemon'
 
 import legacyConfig from '#/config/legacyConfig'
+import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './PkBox.module.css'
-import PkImage from './PkImage'
 
 export type SelectMode = 'all' | 'box' | 'cell'
 export type ViewMode = 'boxed' | 'listed'
@@ -221,13 +221,7 @@ export function PkBoxCell(props: PkBoxCellProps) {
 export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean }) {
   return (
     <PkBoxCell {...{ ...props, className: styles.pkBoxEmptyCell }}>
-      <PkImage
-        slug="placeholder"
-        title=""
-        shiny={false}
-        pixelArt={props.usePixelIcons}
-        classNameExtra=""
-      />
+      <PkImgFile nid="placeholder" variant="3d" />
     </PkBoxCell>
   )
 }
@@ -315,12 +309,11 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           onClick={props.onPokemonClick}
           className={classes}
         >
-          <PkImage
-            slug={imgSlug}
+          <PkImgFile
+            nid={cellPkm.nid}
             title={title}
             shiny={cellPkm.shiny}
-            pixelArt={usePixelIcons}
-            classNameExtra=""
+            variant={usePixelIcons ? 'pixelart' : '3d'}
           />
           <span className={styles.pkBoxCellLabel}>{title}</span>
           {props.markTypes.includes('catch') && (

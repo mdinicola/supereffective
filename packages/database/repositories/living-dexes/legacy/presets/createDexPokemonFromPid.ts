@@ -12,6 +12,7 @@ export function createDexPokemonFromPid(
     const pkmEntry = getPokemonEntry(pid)
     return {
       pid: pid as PokemonId,
+      nid: pkmEntry.nid,
       caught: false,
       shiny: shiny,
       shinyLocked: isShinyLocked(pid),
@@ -24,6 +25,7 @@ export function createDexPokemonFromPid(
   const pkmEntry = getPokemonEntry(pid.pid)
   return {
     pid: pid.pid,
+    nid: pkmEntry.nid,
     caught: pid.caught === true,
     shiny: shiny || pid.shiny === true,
     shinyLocked: isShinyLocked(pid.pid) || pid.shinyLocked === true,

@@ -86,8 +86,11 @@ function _matchBoxes(
         throw new Error('Unexpected error: old pokemon was null or undefined in migration hashmap')
       }
 
+      const _pkmEntry = getPokemonEntry(pid)
+
       return {
         pid: pid,
+        nid: _pkmEntry.nid,
         caught: (oldPokemon.caught && isCatchable({ ...oldPokemon, shiny: asShiny })) || caught,
         shiny: asShiny || shiny,
         shinyLocked: isShinyLocked(pid) || shinyLocked,
@@ -120,6 +123,7 @@ function _matchBoxes(
       const pkmEntry = getPokemonEntry(pokemon.pid)
       dupesBox.pokemon.push({
         pid: pokemon.pid,
+        nid: pkmEntry.nid,
         caught: true, // at this point, this is always true
         shiny: asShiny,
         shinyLocked: isShinyLocked(pokemon.pid),

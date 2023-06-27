@@ -14,6 +14,7 @@ export const convertPokemonListToNormalized = (
 
       return {
         pid: pkm.pid,
+        nid: pkmEntry.nid,
         caught: pkm.caught,
         shiny: pkm.shiny,
         shinyLocked: isShinyLocked(pkm.pid),

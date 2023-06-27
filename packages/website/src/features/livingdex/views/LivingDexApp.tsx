@@ -26,7 +26,7 @@ import legacyConfig from '#/config/legacyConfig'
 import { useDexesContext } from '#/features/livingdex/state/LivingDexListContext'
 import { GameLogo } from '#/features/livingdex/views/GameLogo'
 import { MarkType, PkBoxGroup, SelectMode, ViewMode } from '#/features/livingdex/views/PkBox'
-import PkImage from '#/features/livingdex/views/PkImage'
+import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import { useScrollToLocation } from '#/hooks/useScrollToLocation'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import Button from '#/primitives/legacy/Button/Button'
@@ -336,14 +336,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       }
       return (
         <div key={pkm.pid} title={pkm.pid} className={styles.lostPkm}>
-          <PkImage
-            key={pkm.pid}
-            slug={pkm.pid}
-            title={pkm.pid}
-            shiny={pkm.shiny}
-            pixelArt={false}
-            classNameExtra=""
-          />
+          <PkImgFile key={pkm.pid} nid={pkm.nid} title={pkm.pid} shiny={pkm.shiny} variant="3d" />
         </div>
       )
     })

@@ -64,6 +64,7 @@ function _transformPokemon(pokemon: RawPokemonEntry): PokemonEntry {
 
   return {
     id: pokemon.id,
+    nid: pokemon.nid,
     dexNum: pokemon.dexNum,
     name: pokemon.name,
     type1: pokemon.type1,

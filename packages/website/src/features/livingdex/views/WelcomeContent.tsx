@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { canCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
 import { LoadedDexList } from '@pkg/database/repositories/living-dexes/legacy/types'
 
-import PkImage from '#/features/livingdex/views/PkImage'
+import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import { useScrollToLocation } from '#/hooks/useScrollToLocation'
 import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
@@ -337,13 +337,7 @@ export const WelcomeContent = () => {
         <article className={'bg-gr-white-pattern inner-container'} id={'creation'}>
           <div className={'text-center'}>
             <div style={{ width: '150px', height: '150px', display: 'inline-block' }}>
-              <PkImage
-                slug={'arceus'}
-                title={''}
-                shiny={false}
-                pixelArt={false}
-                classNameExtra={''}
-              />
+              <PkImgFile nid={'0493'} title={''} shiny={false} variant={'3d'} />
             </div>
           </div>
           <p>

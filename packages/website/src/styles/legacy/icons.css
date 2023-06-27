@@ -17,7 +17,7 @@
   background-image: none;
 }
 
-.pkm-wrapper .pkm {
+.pkm-wrapper img {
   image-rendering: optimizespeed;
 }
 
@@ -27,4 +27,8 @@
 
 .icon--2x {
   font-size: 1.4em;
+}
+
+.pkm-wrapper.pkimg-variant-pixelart img {
+  image-rendering: pixelated;
 }

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-interface PkImageProps {
+interface PkImgSpriteProps {
   slug: string
   title: string
   shiny: boolean
@@ -8,7 +8,10 @@ interface PkImageProps {
   classNameExtra: string
 }
 
-export default function PkImage(props: PkImageProps) {
+/**
+ * @deprecated Use PkImgFile instead
+ */
+export default function PkImgSprite(props: PkImgSpriteProps) {
   let prefix = 'pkm'
   let imgW = 64
   let imgH = 64

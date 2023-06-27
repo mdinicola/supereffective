@@ -4,7 +4,7 @@ import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/repositories/pokemon/types'
 
-import PkImage from '#/features/livingdex/views/PkImage'
+import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import Button from '#/primitives/legacy/Button/Button'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
@@ -76,12 +76,12 @@ export const PokemonInfoPanel = ({
           <span className={css.pkName}>{pokemon.name}</span>
         </div>
         <div className={css.picFrame}>
-          <PkImage
-            slug={pokemon.id}
+          <PkImgFile
+            nid={pokemon.nid}
             title={pokemon.name}
             shiny={showShiny === true}
-            pixelArt={false}
-            classNameExtra={css.pkimg}
+            className={css.pkimg}
+            variant="3d"
           />
         </div>
         <div className={css.types}>
@@ -151,17 +151,6 @@ export const PokemonInfoPanel = ({
             {pokemon.location.storableIn.length === 0 && <b>---</b>}
           </div>
         </section>
-        {/*<section>*/}
-        {/*  <div className={css.title}>More Info</div>*/}
-        {/*  <div className={css.gameIcons}>*/}
-        {/*    <a>*/}
-        {/*      <PkImage slug="celebi" title="Serebii.net" shiny={false} pixelArt={true} classNameExtra="" />*/}
-        {/*    </a>*/}
-        {/*    <a>*/}
-        {/*      <PkImage slug="bulbasaur" title="Bulbapedia" shiny={false} pixelArt={true} classNameExtra="" />*/}
-        {/*    </a>*/}
-        {/*  </div>*/}
-        {/*</section>*/}
       </div>
     </div>
   )
@@ -296,12 +285,12 @@ export const Pokedex = ({
             e.stopPropagation()
           }}
         >
-          <PkImage
-            slug={pkm.id}
+          <PkImgFile
+            nid={pkm.nid}
             title={pkm.name}
             shiny={showShiny === true}
-            pixelArt={false}
-            classNameExtra={css.pkimg}
+            className={css.pkimg}
+            variant="3d"
           />
           {pkm.form.isFemaleForm && (
             <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>
