@@ -379,18 +379,17 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
   const totalBoxCount = props.showShiny ? shinyBoxElements.length : boxElements.length
   const pagedBoxElements = (props.showShiny ? shinyBoxElements : boxElements).slice(0, perPage)
   const hasMoreBoxes = perPage < totalBoxCount
-  console.log('perPage', perPage, totalBoxCount)
 
   const handleLoadMore = (): void => {
     setPerPage(Math.min(perPage + initialPerPage, totalBoxCount))
   }
 
-  const handleLoadAll = (): void => {
-    setPerPage(totalBoxCount)
-  }
+  // const handleLoadAll = (): void => {
+  //   setPerPage(totalBoxCount)
+  // }
 
   const loadMoreBtn = hasMoreBoxes ? (
-    <div key="load-more-btn" className={styles.loadMoreCell}>
+    <div key="load-more-btn" className={styles.loadMoreBtnCell}>
       <div className="text-center">
         <Button onClick={handleLoadMore}>Load More</Button>
         {/* <Button onClick={handleLoadAll}>Load All</Button> */}

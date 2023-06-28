@@ -548,7 +548,7 @@
   filter: grayscale(100%);
 }
 
-.loadMoreCell {
+.loadMoreBtnCell {
   display: flex;
   justify-content: center;
   align-items: center;

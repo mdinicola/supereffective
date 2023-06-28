@@ -386,9 +386,10 @@ export const Pokedex = ({
   )
 
   const loadMoreBtn = hasMorePokemon ? (
-    <div className="text-center">
-      <br />
-      <Button onClick={handleLoadMore}>Load More</Button>
+    <div className={css.loadMoreBtnCell}>
+      <div className="text-center">
+        <Button onClick={handleLoadMore}>Load More</Button>
+      </div>
     </div>
   ) : null
 
@@ -398,8 +399,10 @@ export const Pokedex = ({
       {useSearch && searchContainer}
 
       <div className={classes} {...rest}>
-        <div className={css.grid}>{pokemonCells}</div>
-        {loadMoreBtn}
+        <div className={css.grid}>
+          {pokemonCells}
+          {loadMoreBtn}
+        </div>
         <PokemonInfoPanel
           isOpen={state.infoPanelOpen}
           showShiny={showShiny}
