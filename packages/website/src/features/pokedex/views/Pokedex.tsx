@@ -161,6 +161,8 @@ interface PokedexState {
   selectedPkmId: string | null | undefined
   search?: string | null
   showForms: boolean
+  currentPage: number
+  perPage: number
 }
 
 type PkmEntryMap = {
@@ -176,12 +178,23 @@ export const Pokedex = ({
   showForms = false,
   showCounts = true,
   useSearch = true,
+  perPage = 48,
   ...rest
 }: PokedexProps) => {
-  let speciesCount = 0
-  let formsCount = 0
+  const initialPerpage = perPage
+
+  const [state, setState] = useState<PokedexState>({
+    infoPanelOpen: false,
+    selectedPkmId: null,
+    search: null,
+    showForms: showForms === true,
+    currentPage: 0,
+    perPage: initialPerpage,
+  })
   const pokemonList = Array.from(pokemon.values())
 
+  let speciesCount = 0
+  let formsCount = 0
   const searchablePokemon: PokemonEntry[] = pokemonList.map((pkm: PokemonEntry) => {
     if (pkm.form.isForm) {
       formsCount++
@@ -189,7 +202,12 @@ export const Pokedex = ({
       speciesCount++
     }
 
-    let pkName = pkm.name.replace(/(\(female\)|female)/gi, '♀')
+    let pkName = pkm.name
+
+    if (pkm.form.isFemaleForm) {
+      pkName = pkName.replace(/(\(female\)|female)/gi, '♀')
+    }
+
     if (pkm.form.isMaleForm) {
       pkName = pkName + ' ♂'
     }
@@ -200,13 +218,6 @@ export const Pokedex = ({
     prev[pkm.id] = pkm
     return prev
   }, {} as PkmEntryMap)
-
-  const [state, setState] = useState<PokedexState>({
-    infoPanelOpen: false,
-    selectedPkmId: null,
-    search: null,
-    showForms: showForms === true,
-  })
 
   const selectedPkm = state.selectedPkmId ? pokemonById[state.selectedPkmId] : null
 
@@ -235,6 +246,8 @@ export const Pokedex = ({
     setState({
       ...state,
       search: e.target.value,
+      currentPage: 0,
+      perPage: initialPerpage,
     })
   }
 
@@ -243,6 +256,15 @@ export const Pokedex = ({
       ...state,
       infoPanelOpen: false,
       search: 'type:' + type,
+      currentPage: 0,
+      perPage: initialPerpage,
+    })
+  }
+
+  const handleLoadMore = (): void => {
+    setState({
+      ...state,
+      perPage: state.perPage + initialPerpage,
     })
   }
 
@@ -255,7 +277,7 @@ export const Pokedex = ({
   }
   const searchResults = pokemonSearch.search(searchValue)
 
-  const pokemonCells = searchablePokemon
+  const filteredPokemon = searchablePokemon
     .filter(pk => state.showForms || !pk.form.isForm)
     .filter(pk => {
       if (searchValue.length === 0) {
@@ -263,42 +285,45 @@ export const Pokedex = ({
       }
       return searchResults.has(pk.id)
     })
-    .map((pkm, index) => {
-      if (pkm.form.isForm) {
-        shownFormsCount++
-      } else {
-        shownSpeciesCount++
-      }
-      return (
-        <div
-          key={index}
-          tabIndex={0}
-          className={css.cell}
-          data-tooltip={pkm.name}
-          data-flow="bottom"
-          onClick={e => {
-            selectPokemon(pkm.id)
-            e.stopPropagation()
-          }}
-          onFocus={e => {
-            selectPokemon(pkm.id)
-            e.stopPropagation()
-          }}
-        >
-          <PkImgFile
-            nid={pkm.nid}
-            title={pkm.name}
-            shiny={showShiny === true}
-            className={css.pkimg}
-            variant="3d"
-          />
-          {pkm.form.isFemaleForm && (
-            <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>
-          )}
-          {pkm.form.isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
-        </div>
-      )
-    })
+
+  const startIndex = state.currentPage * state.perPage
+  const hasMorePokemon = state.perPage < filteredPokemon.length
+  const renderablePokemon = filteredPokemon.slice(startIndex, startIndex + state.perPage)
+
+  const pokemonCells = renderablePokemon.map((pkm, index) => {
+    if (pkm.form.isForm) {
+      shownFormsCount++
+    } else {
+      shownSpeciesCount++
+    }
+    return (
+      <div
+        key={pkm.id + '_' + index}
+        tabIndex={0}
+        className={css.cell}
+        data-tooltip={pkm.name}
+        data-flow="bottom"
+        onClick={e => {
+          selectPokemon(pkm.id)
+          e.stopPropagation()
+        }}
+        onFocus={e => {
+          selectPokemon(pkm.id)
+          e.stopPropagation()
+        }}
+      >
+        <PkImgFile
+          nid={pkm.nid}
+          title={pkm.name}
+          shiny={showShiny === true}
+          className={css.pkimg}
+          variant="3d"
+        />
+        {pkm.form.isFemaleForm && <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>}
+        {pkm.form.isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
+      </div>
+    )
+  })
 
   const headerContent = (
     <div className={'text-center ' + css.docTop}>
@@ -360,6 +385,13 @@ export const Pokedex = ({
     </div>
   )
 
+  const loadMoreBtn = hasMorePokemon ? (
+    <div className="text-center">
+      <br />
+      <Button onClick={handleLoadMore}>Load More</Button>
+    </div>
+  ) : null
+
   return (
     <div className={classNames(css.dexApp, className)}>
       {children ? children : headerContent}
@@ -367,6 +399,7 @@ export const Pokedex = ({
 
       <div className={classes} {...rest}>
         <div className={css.grid}>{pokemonCells}</div>
+        {loadMoreBtn}
         <PokemonInfoPanel
           isOpen={state.infoPanelOpen}
           showShiny={showShiny}

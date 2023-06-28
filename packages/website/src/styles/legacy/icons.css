@@ -32,3 +32,15 @@
 .pkm-wrapper.pkimg-variant-pixelart img {
   image-rendering: pixelated;
 }
+
+.pkimg-img-loading {
+  min-width: 32px;
+  min-height: 32px;
+  background-image: url(/assets/placeholders/home3d-icon/unknown-white.png);
+  aspect-ratio: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: none !important;
+  opacity: 0.8;
+}

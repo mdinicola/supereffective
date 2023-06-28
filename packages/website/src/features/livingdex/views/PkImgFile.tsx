@@ -12,8 +12,6 @@ const variantFolder = {
   pixelart: 'gen8-icon',
 }
 
-const base64Placeholder =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkkAQAAB8AG7jymN8AAAAASUVORK5CYII='
 type PkImgFileProps = {
   nid: string
   title?: string
@@ -55,15 +53,16 @@ export default function PkImgFile({
   return (
     <span className={classes} {...rest}>
       <Image
-        placeholder="blur"
-        blurDataURL={base64Placeholder}
         loading="lazy"
         quality={100}
         width={imgW}
         height={imgH}
-        className={className}
+        className={'pkimg-img-loading'}
         src={imageSrc}
         alt={title || nid}
+        onLoadingComplete={imgElem => {
+          imgElem.classList.remove('pkimg-img-loading')
+        }}
       />
     </span>
   )

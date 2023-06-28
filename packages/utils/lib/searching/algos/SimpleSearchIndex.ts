@@ -101,7 +101,7 @@ export class SimpleSearchIndex<C extends Collection = Collection> implements Sea
   }
 
   search(text: string): Set<string> {
-    if (!text) {
+    if (!text || text === '' || text === '*') {
       return new Set(this.index.keys())
     }
     const hits: Set<string> = new Set()
