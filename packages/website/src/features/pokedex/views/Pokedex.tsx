@@ -264,7 +264,7 @@ export const Pokedex = ({
   const handleLoadMore = (): void => {
     setState({
       ...state,
-      perPage: state.perPage + initialPerpage,
+      perPage: Math.min(state.perPage + initialPerpage, searchablePokemon.length),
     })
   }
 

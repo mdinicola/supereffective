@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 
 import {
   DexBox,
@@ -9,6 +9,7 @@ import { getPokemonEntry } from '@pkg/database/repositories/pokemon'
 
 import legacyConfig from '#/config/legacyConfig'
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
+import Button from '#/primitives/legacy/Button/Button'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
@@ -71,6 +72,7 @@ interface PkBoxGroupProps {
   editable: boolean
   onBoxTitleEdit?: (boxIndex: number, newTitle: string) => void
   markTypes: MarkType[]
+  perPage: number
 }
 
 const keyDownHandler = (
@@ -82,11 +84,6 @@ const keyDownHandler = (
 ) => {
   const elemsWithTabindex = document.querySelectorAll(`.${classSelector}[tabindex]`)
   // sort by tabindex
-  const elems = Array.from(document.querySelectorAll(`[tabindex]`)).sort((a, b) => {
-    const aTabIndex = parseInt(a.getAttribute('tabindex') || '0')
-    const bTabIndex = parseInt(b.getAttribute('tabindex') || '0')
-    return aTabIndex - bTabIndex
-  })
   const spaceKey = 32
   const enterKey = 13
   const upKey = 38
@@ -227,6 +224,9 @@ export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean 
 }
 
 export function PkBoxGroup(props: PkBoxGroupProps) {
+  const initialPerPage = props.perPage || 1
+  const [perPage, setPerPage] = useState(initialPerPage)
+
   const { dex, usePixelIcons } = props
   let boxElements: ReactElement[] = []
   let shinyBoxElements: ReactElement[] = []
@@ -359,7 +359,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
     ;(box.shiny ? shinyBoxElements : boxElements).push(
       <PkBox
         boxIndex={boxIndex}
-        key={boxIndex}
+        key={boxIndex + `${box.shiny ? '-shiny' : '-regular'}`}
         boxData={box}
         // editable={props.editable}
         editable={false} // disabled for now
@@ -375,6 +375,28 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       </PkBox>
     )
   })
+
+  const totalBoxCount = props.showShiny ? shinyBoxElements.length : boxElements.length
+  const pagedBoxElements = (props.showShiny ? shinyBoxElements : boxElements).slice(0, perPage)
+  const hasMoreBoxes = perPage < totalBoxCount
+  console.log('perPage', perPage, totalBoxCount)
+
+  const handleLoadMore = (): void => {
+    setPerPage(Math.min(perPage + initialPerPage, totalBoxCount))
+  }
+
+  const handleLoadAll = (): void => {
+    setPerPage(totalBoxCount)
+  }
+
+  const loadMoreBtn = hasMoreBoxes ? (
+    <div key="load-more-btn" className={styles.loadMoreCell}>
+      <div className="text-center">
+        <Button onClick={handleLoadMore}>Load More</Button>
+        {/* <Button onClick={handleLoadAll}>Load All</Button> */}
+      </div>
+    </div>
+  ) : null
 
   const classes = classNames(
     styles.pkBoxGroup,
@@ -399,14 +421,17 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           }
           <div className={classes}>
             <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}
+              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + pagedBoxElements.length].join(
+                ' '
+              )}
             >
-              {boxElements}
+              {pagedBoxElements}
+              {loadMoreBtn}
             </div>
           </div>
         </div>
       )}
-      {props.showShiny && shinyBoxElements.length > 0 && (
+      {props.showShiny && pagedBoxElements.length > 0 && (
         <div className={'pkBoxGroupWr pkBoxGroupWr-shiny'}>
           {
             <div className={'text-center pkBoxGroupWr-separator'}>
@@ -417,11 +442,12 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           }
           <div className={classes}>
             <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + shinyBoxElements.length].join(
+              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + pagedBoxElements.length].join(
                 ' '
               )}
             >
-              {shinyBoxElements}
+              {pagedBoxElements}
+              {loadMoreBtn}
             </div>
           </div>
         </div>

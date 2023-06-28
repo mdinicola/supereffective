@@ -805,6 +805,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
 
         <PkBoxGroup
           dex={dex}
+          perPage={6}
           showNonShiny={!showShiny}
           showShiny={showShiny}
           selectMode={selectMode}
