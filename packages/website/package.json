@@ -34,7 +34,7 @@
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-server-dom-webpack": "^0.0.1",
-    "typescript": "^5.1.5"
+    "typescript": "^5.1.6"
   },
   "prisma": {
     "schema": "../database/lib/schema.prisma"
