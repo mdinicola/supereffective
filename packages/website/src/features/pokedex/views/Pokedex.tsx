@@ -297,25 +297,29 @@ export const Pokedex = ({
   }
   const searchResults = pokemonSearch.search(searchValue)
 
-  const filteredPokemon = searchablePokemon
-    .filter(pk => state.showForms || !pk.form.isForm)
-    .filter(pk => {
-      if (searchValue.length === 0) {
-        return true
-      }
-      return searchResults.has(pk.id)
-    })
+  const filteredPokemon = searchablePokemon.filter(pk => {
+    if (searchValue.length === 0) {
+      return true
+    }
+    return searchResults.has(pk.id)
+  })
+
+  const filteredPokemonFormAware = filteredPokemon.filter(pk => state.showForms || !pk.form.isForm)
 
   const startIndex = state.currentPage * state.perPage
-  const hasMorePokemon = state.perPage < filteredPokemon.length
-  const renderablePokemon = filteredPokemon.slice(startIndex, startIndex + state.perPage)
+  const hasMorePokemon = state.perPage < filteredPokemonFormAware.length
+  const renderablePokemon = filteredPokemonFormAware.slice(startIndex, startIndex + state.perPage)
 
-  const pokemonCells = renderablePokemon.map((pkm, index) => {
+  filteredPokemon.forEach(pkm => {
+    // update counters
     if (pkm.form.isForm) {
       shownFormsCount++
     } else {
       shownSpeciesCount++
     }
+  })
+
+  const pokemonCells = renderablePokemon.map((pkm, index) => {
     return (
       <div
         key={pkm.id + '_' + index}
@@ -381,7 +385,8 @@ export const Pokedex = ({
           <div className={css.buttons}>
             {showCounts && (
               <span>
-                Showing {shownSpeciesCount} species, {shownFormsCount} forms
+                Showing {shownSpeciesCount} species
+                {state.showForms ? `, and ${shownFormsCount} forms` : ', excluding forms'}
               </span>
             )}
             <Button
@@ -390,7 +395,7 @@ export const Pokedex = ({
             >
               {!state.showForms && (
                 <span>
-                  <i className="icon-eye" /> Show Forms
+                  <i className="icon-eye" /> Show {shownFormsCount} Forms
                 </span>
               )}
               {state.showForms && (
