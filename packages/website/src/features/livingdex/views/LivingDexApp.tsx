@@ -173,7 +173,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     const autoSaveTimeout = setTimeout(() => {
       handleSave()
       console.log('Dex saved')
-    }, 1000)
+    }, 5000)
     return () => {
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout)
