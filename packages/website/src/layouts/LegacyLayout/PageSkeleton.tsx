@@ -21,7 +21,7 @@ export default function PageSkeleton({ children }: { children: React.ReactNode }
 function _renderAnnouncementBanners() {
   return (
     <>
-      <AnnouncementBanner startDate="2023-06-01" endDate="2023-07-01" dismissable>
+      <AnnouncementBanner startDate="2023-06-01" endDate="2023-06-29" dismissable>
         The SuperEffective project is now Open Source 🚀🎉!{' '}
         <ExternLink href="https://twitter.com/supereffectiv/status/1664207379292905472">
           Read the announcement →

@@ -37,7 +37,6 @@ import {
   ToolbarButton,
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
-  ToolbarButtonStatus,
 } from '#/primitives/legacy/Toolbar/ToolbarButton'
 import { classNameIf } from '#/utils/legacyUtils'
 
@@ -45,6 +44,7 @@ import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
+type SyncState = 'changed' | 'synced'
 type SavingState = 'ready' | 'saving' | 'saved' | 'error'
 const defaultTool: ActionTool = 'catch'
 
@@ -73,6 +73,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const viewOnlyModeMarkTypes: MarkType[] = ['shiny', 'gmax', 'alpha', 'ability']
   const router = useRouter()
   const [savingState, setSavingState] = useState<SavingState>('ready')
+  const [syncState, setSyncState] = useState<SyncState>('synced')
   const [selectMode, setSelectMode] = useState<SelectMode>('cell')
   const [currentTool, setCurrentTool] = useState<ActionTool>(defaultTool)
   const [showRemoveModal, setShowRemoveModal] = useState(false)
@@ -84,10 +85,74 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
 
   const dex = livingdex.state
 
-  const app = livingdex.actions
+  const app = new Proxy(livingdex.actions, {
+    get(target, prop) {
+      if (['setDex', 'getCurrentDex', 'setDexes', 'resetDex'].includes(prop as string)) {
+        return target[prop as keyof typeof livingdex.actions]
+      }
+      return (...args: any[]) => {
+        setSyncState('changed')
+        return (target[prop as keyof typeof livingdex.actions] as any)(...args)
+      }
+    },
+  })
+
   const auth = useSession()
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
+
+  const handleSavedState = () => {
+    setSyncState('synced')
+    setSavingState('saved')
+    setTimeout(() => {
+      setSavingState('ready')
+    }, 1000)
+  }
+
+  const handleSave = () => {
+    if (!dex) {
+      return
+    }
+
+    if (!dex.userId) {
+      throw new Error('Cannot save dex without a logged in user')
+    }
+    if (savingState !== 'ready') {
+      return
+    }
+
+    setSavingState('saving')
+
+    const isNewDex = dex.id === null || dex.id === undefined
+
+    saveDex(dex)
+      .then(updatedDex => {
+        if (updatedDex instanceof Error) {
+          console.error('Failed to save', updatedDex)
+          setSavingState('error')
+          return
+        }
+
+        let dexWithId = dex
+        if (isNewDex) {
+          dexWithId = { ...dex, id: updatedDex.id }
+          app.setDex(dexWithId)
+        }
+        // currentUser.syncDex(dexWithId)
+        // setUserDexes(null) // TODO remove userCtx.syncDex, do it inside livingdexCtx.setDex
+        handleSavedState()
+        if (isNewDex) {
+          router.push(`/apps/livingdex/${updatedDex.id}`)
+        }
+        if (onSave) {
+          onSave(dexWithId, isNewDex)
+        }
+      })
+      .catch(e => {
+        console.error('Failed to save', e)
+        setSavingState('error')
+      })
+  }
 
   useScrollToLocation()
 
@@ -99,8 +164,22 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       // || (loadedDex.preset !== livingdex.state.preset)
     ) {
       livingdex.actions.setDex(loadedDex)
+      return
     }
-  }, [loadedDex, livingdex.state])
+
+    if (!auth.isAuthenticated || savingState !== 'ready' || syncState !== 'changed') {
+      return
+    }
+    const autoSaveTimeout = setTimeout(() => {
+      handleSave()
+      console.log('Dex saved')
+    }, 1000)
+    return () => {
+      if (autoSaveTimeout) {
+        clearTimeout(autoSaveTimeout)
+      }
+    }
+  }, [livingdex.state, loadedDex])
 
   const preset = useMemo(() => {
     if (livingdex.state === null) {
@@ -209,13 +288,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     app.setBoxTitle(boxIndex, newTitle)
   }
 
-  const handleSavedState = () => {
-    setSavingState('saved')
-    setTimeout(() => {
-      setSavingState('ready')
-    }, legacyConfig.limits.saveBtnDelay)
-  }
-
   const handleExport = () => {
     const docSpec = convertDexFromLegacyToV4(dex)
     // const mdContent = serializeLivingDex(docSpec, getLivingDexFormat('v4'), true)
@@ -234,47 +306,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     document.body.appendChild(element)
     element.click()
     document.body.removeChild(element)
-  }
-
-  const handleSave = () => {
-    if (!dex.userId) {
-      throw new Error('Cannot save dex without a logged in user')
-    }
-    if (savingState !== 'ready') {
-      return
-    }
-
-    setSavingState('saving')
-
-    const isNewDex = dex.id === null || dex.id === undefined
-
-    saveDex(dex)
-      .then(updatedDex => {
-        if (updatedDex instanceof Error) {
-          console.error('Failed to save', updatedDex)
-          setSavingState('error')
-          return
-        }
-
-        let dexWithId = dex
-        if (isNewDex) {
-          dexWithId = { ...dex, id: updatedDex.id }
-          app.setDex(dexWithId)
-        }
-        // currentUser.syncDex(dexWithId)
-        // setUserDexes(null) // TODO remove userCtx.syncDex, do it inside livingdexCtx.setDex
-        handleSavedState()
-        if (isNewDex) {
-          router.push(`/apps/livingdex/${updatedDex.id}`)
-        }
-        if (onSave) {
-          onSave(dexWithId, isNewDex)
-        }
-      })
-      .catch(e => {
-        console.error('Failed to save', e)
-        setSavingState('error')
-      })
   }
 
   const handleRemoveDex = () => {
@@ -529,24 +560,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 title: pr.description,
                 status: pr.id === preset?.id ? 'selected' : null,
               }))}
-          ></ToolbarButtonGroup>
-          {/* <ToolbarButton
-            actionName={null}
-            icon={'help_outline'}
-            href={'/apps/livingdex#howto'}
-            className={styles.helpBtn}
-            label={'How-To'}
-            showLabel={false}
-            onClick={() => {
-              // tracker.dexHelpClicked()
-            }}
-          /> */}
-        </ToolbarButtonGroupGroup>
+          />
 
-        <ToolbarButtonGroupGroup position={'right'} collapsed={false}>
           <ToolbarButtonGroup
             initialAction={null}
+            isDropdown
             onButtonClick={handleExport}
+            dropdownNoActionIcon={'cog'}
+            isDeselectable={false}
             items={(() => {
               return [
                 {
@@ -560,46 +581,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               ]
             })()}
           />
-          <ToolbarButtonGroup
-            initialAction={null}
-            onButtonClick={handleSave}
-            items={(() => {
-              //let icon = undefined
-              let icon = 'floppy-disk'
-              let text: string | undefined = ''
-              let status: ToolbarButtonStatus = null
-              if (savingState === 'saving') {
-                // icon = undefined
-                icon = 'cloud'
-                status = 'loading'
-                text = 'Saving...'
-              } else if (savingState === 'saved') {
-                icon = 'checkmark' // 'cloud-check'
-                status = 'success'
-                text = undefined //'Saved!'
-              } else if (savingState === 'error') {
-                icon = 'cross' // 'cloud-check'
-                status = 'error'
-                text = 'Error' //'Saved!'
-              }
-              return [
-                {
-                  actionName: 'upload',
-                  icon: icon,
-                  label: text,
-                  status: status,
-                  className: styles.saveBtn,
-                  showLabel: true,
-                },
-              ]
-            })()}
-          />
+        </ToolbarButtonGroupGroup>
+        <ToolbarButtonGroupGroup position="right">
+          {savingState === 'saving' && <>⏳ Saving...</>}
+          {savingState === 'error' && <>Sync error❌</>}
         </ToolbarButtonGroupGroup>
       </div>
     </div>
   )
-
-  // ReactModal.defaultStyles = {}
 
   ReactModal.setAppElement('#__next')
 
