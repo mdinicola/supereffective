@@ -218,7 +218,7 @@ export const Pokedex = ({
     )
     observer.observe(loadMoreRef.current)
     return () => observer.disconnect()
-  }, [state.perPage])
+  }, [state.perPage, state.search, showForms])
 
   let speciesCount = 0
   let formsCount = 0

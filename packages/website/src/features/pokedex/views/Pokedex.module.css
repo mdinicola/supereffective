@@ -430,10 +430,6 @@
   padding: 1em; */
 }
 
-.loadMoreBtnCell button {
-  padding: 0.5rem 0.75rem;
-  width: auto;
-  max-width: 100%;
-  min-width: auto;
-  font-size: 1rem;
+.loadMoreBtnCell img {
+  visibility: hidden;
 }
