@@ -214,7 +214,7 @@ export const Pokedex = ({
           handleLoadMore()
         }
       },
-      { rootMargin: '-10px' }
+      { rootMargin: '200px' }
     )
     observer.observe(loadMoreRef.current)
     return () => observer.disconnect()
