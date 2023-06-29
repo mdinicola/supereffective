@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
@@ -178,11 +179,12 @@ export const Pokedex = ({
   showForms = false,
   showCounts = true,
   useSearch = true,
-  perPage = 48,
+  perPage = 24,
   ...rest
 }: PokedexProps) => {
   const initialPerpage = perPage
 
+  const loadMoreRef = useRef(null)
   const [state, setState] = useState<PokedexState>({
     infoPanelOpen: false,
     selectedPkmId: null,
@@ -192,6 +194,31 @@ export const Pokedex = ({
     perPage: initialPerpage,
   })
   const pokemonList = Array.from(pokemon.values())
+
+  const handleLoadMore = (): void => {
+    setState({
+      ...state,
+      perPage: Math.min(state.perPage + initialPerpage, searchablePokemon.length),
+    })
+  }
+
+  useEffect(() => {
+    if (!loadMoreRef.current || !IntersectionObserver) {
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        //setIsIntersecting(entry.isIntersecting)
+        if (entry.isIntersecting) {
+          handleLoadMore()
+        }
+      },
+      { rootMargin: '-10px' }
+    )
+    observer.observe(loadMoreRef.current)
+    return () => observer.disconnect()
+  }, [state.perPage])
 
   let speciesCount = 0
   let formsCount = 0
@@ -258,13 +285,6 @@ export const Pokedex = ({
       search: 'type:' + type,
       currentPage: 0,
       perPage: initialPerpage,
-    })
-  }
-
-  const handleLoadMore = (): void => {
-    setState({
-      ...state,
-      perPage: Math.min(state.perPage + initialPerpage, searchablePokemon.length),
     })
   }
 
@@ -386,9 +406,15 @@ export const Pokedex = ({
   )
 
   const loadMoreBtn = hasMorePokemon ? (
-    <div className={css.loadMoreBtnCell}>
+    <div className={css.loadMoreBtnCell} ref={loadMoreRef}>
       <div className="text-center">
-        <Button onClick={handleLoadMore}>Load More</Button>
+        <Image
+          src="/assets/placeholders/home3d-icon/unknown-white.png"
+          width={96}
+          height={96}
+          className={css.pkimg}
+          alt=""
+        />
       </div>
     </div>
   ) : null

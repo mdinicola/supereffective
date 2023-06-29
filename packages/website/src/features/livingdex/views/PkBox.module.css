@@ -563,4 +563,5 @@
   max-width: 100%;
   min-width: auto;
   font-size: 1rem;
+  visibility: hidden;
 }

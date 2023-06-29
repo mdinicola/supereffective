@@ -161,7 +161,7 @@ const Page = () => {
       </div>
       <PkBoxGroup
         dex={createDexFromPreset('home', dex, undefined)}
-        perPage={6}
+        perPage={2}
         showNonShiny={true}
         showShiny={false}
         selectMode={'cell'}

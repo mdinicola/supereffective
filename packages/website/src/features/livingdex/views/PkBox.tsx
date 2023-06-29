@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 
 import {
   DexBox,
@@ -225,12 +225,36 @@ export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean 
 
 export function PkBoxGroup(props: PkBoxGroupProps) {
   let initialPerPage = props.perPage || 1
+  const loadMoreRef = useRef(null)
 
   if (props.viewMode === 'listed' || props.dex.boxes.length <= 2) {
-    initialPerPage = Math.max(initialPerPage * initialPerPage, 100)
+    initialPerPage = 10
   }
 
   const [perPage, setPerPage] = useState(initialPerPage)
+
+  const handleLoadMore = (): void => {
+    setPerPage(Math.min(perPage + initialPerPage, totalBoxCount))
+    // setIsIntersecting(false)
+  }
+
+  useEffect(() => {
+    if (!loadMoreRef.current || !IntersectionObserver) {
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        //setIsIntersecting(entry.isIntersecting)
+        if (entry.isIntersecting) {
+          handleLoadMore()
+        }
+      },
+      { rootMargin: '-10px' }
+    )
+    observer.observe(loadMoreRef.current)
+    return () => observer.disconnect()
+  }, [perPage])
 
   const { dex, usePixelIcons } = props
   let boxElements: ReactElement[] = []
@@ -384,16 +408,12 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
   const pagedBoxElements = (props.showShiny ? shinyBoxElements : boxElements).slice(0, perPage)
   const hasMoreBoxes = perPage < totalBoxCount
 
-  const handleLoadMore = (): void => {
-    setPerPage(Math.min(perPage + initialPerPage, totalBoxCount))
-  }
-
   // const handleLoadAll = (): void => {
   //   setPerPage(totalBoxCount)
   // }
 
   const loadMoreBtn = hasMoreBoxes ? (
-    <div key="load-more-btn" className={styles.loadMoreBtnCell}>
+    <div key="load-more-btn" className={styles.loadMoreBtnCell} ref={loadMoreRef}>
       <div className="text-center">
         <Button onClick={handleLoadMore}>Load More</Button>
         {/* <Button onClick={handleLoadAll}>Load All</Button> */}
@@ -450,9 +470,9 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
               )}
             >
               {pagedBoxElements}
-              {loadMoreBtn}
             </div>
           </div>
+          {loadMoreBtn}
         </div>
       )}
     </div>
