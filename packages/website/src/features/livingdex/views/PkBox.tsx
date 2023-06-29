@@ -224,7 +224,12 @@ export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean 
 }
 
 export function PkBoxGroup(props: PkBoxGroupProps) {
-  const initialPerPage = props.perPage || 1
+  let initialPerPage = props.perPage || 1
+
+  if (props.viewMode === 'listed' || props.dex.boxes.length <= 2) {
+    initialPerPage = Math.max(initialPerPage * initialPerPage, 100)
+  }
+
   const [perPage, setPerPage] = useState(initialPerPage)
 
   const { dex, usePixelIcons } = props
@@ -283,7 +288,6 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         cellPkm.shinyBase !== null ? styles.hasShinyBase : ''
       )
 
-      let imgSlug = gmaxixePid(slug, cellPkm.gmax)
       if (pkmEntry.form.isGmax) {
         title += ' Gigantamax'
       }
