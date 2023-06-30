@@ -34,27 +34,24 @@ Website is a NextJS application with the following structure:
 
 **`./packages/website`:**
 
-- `data`: data imported from `itsjavi/supereffective-assets`. This should never be edited manually.
+- `pages`: next routes/pages and APIs
 - `public`: static assets (for the UI and also for the CMS pages)
-- `scripts`: build and maintenance scripts
 - `src`:
-  - `apps`: root-level app components (this is not a NextJS 13 `app` dir structure)
   - `config`: general app config (e.g. from env vars, json files or ts code)
+  - `containers`: root-level app components (this is not a NextJS 13 `app` dir structure)
   - `features`: business logic in bounded contexts, following some DDD principles
     - `/**/`: name of the domain / feature
+      - `components`: components specific to this domain
       - `hooks`: hooks specific to this domain
       - `state`: domain state: contexts, objects and types
-      - `views`: domain views: components and page components
+      - `views`: domain views: views composed with many other components
   - `hooks`: reusable hooks
   - `layouts`: reusable page skeletons / themes
-  - `pages`: next routes/pages and APIs
   - `primitives`: reusable components without business logic or global state
-  - `services`: infrastructure interfaces/types and their implementations
-  - `state`: global state context, object and types
   - `styles`: global css styles
   - `utils`: reusable generic functions that do not belong to services or to a specific domain
 
-> All code that it's subject to be rewritten and refactored is under `src/*/legacy/` subfolders or has
+> All code that it's subject to be rewritten and refactored is under `src/**/legacy/` subfolders or has
 > "legacy" as part of the filename.
 
 ## Monorepo packages
@@ -63,7 +60,9 @@ Website is a NextJS application with the following structure:
 - config: Project confing and env vars wrapper
 - database: Database abstraction layer. It also abstracts the Pokemon JSON data from supereffective-assets.
 - firebase: Firebase abstraction layer (only needed for website v3).
+- mailer: Transactional mailing service abstraction layer
 - mdx: MDX abstraction layer (loader and react components).
+- patreon: All necessary code to connect to Patreon API and get infos
 - ui: Stateless UI components, assets, fonts, SVGs, and tools. Uses TailwindCSS and Lucide Icons.
 - utils: Generic utilities for various environments (universal, commonjs, react, nextjs)
 - website: v3 site, using Next pages dir
@@ -95,8 +94,8 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 
 - `pnpm build`: builds the website.
 - `pnpm update:packages`: update all dependencies to their latest version (a shortcut for `pnpm update -r --latest`).
-- `pnpm update:data`: update the data from `itsjavi/supereffective-assets` repo.
-- `make code`: updates the generated code (e.g. enums from JSON data, prettify code or prisma client files)
+- `pnpm update:data`: update the data from `itsjavi/supereffective-assets` repo, and regenerates data-dependent code,
+  like the consts with IDs for Pokemon, moves, etc.
 
 For other scripts, please check the `package.json` files.
 

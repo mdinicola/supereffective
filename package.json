@@ -8,7 +8,8 @@
   "scripts": {
     "build": "env-cmd turbo run build && pnpm format",
     "build:vercel": "pnpm migrate:deploy && pnpm build",
-    "dev": "pnpm dev:with-docker && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
+    "data:update": "pnpm update:data",
+    "dev": "pnpm dev:with-docker && pnpm migrate && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
     "dev:with-docker": "docker-compose up -d",
     "format": "pnpm pretty && pnpm lint:fix",
     "postinstall": "make postinstall",
@@ -22,7 +23,6 @@
     "open": "open http://localhost:3001 && open http://localhost:3002 && open http://localhost:1080",
     "pkg:auth": "pnpm --filter '@pkg/auth'",
     "pkg:database": "pnpm --filter '@pkg/database'",
-    "data:update": "pnpm pkg:database build:data && pnpm pkg:database build:code",
     "pkg:ui": "pnpm --filter '@pkg/ui'",
     "pkg:website": "pnpm --filter '@app/website'",
     "pretty": "turbo run pretty:all",
@@ -32,6 +32,7 @@
     "test": "turbo run test:all",
     "test:all": "env-cmd jest",
     "test:coverage": "pnpm test -- -- --coverage",
+    "update:data": "pnpm pkg:database build:data && pnpm pkg:database build:code",
     "update:packages": "pnpm update -r"
   },
   "dependencies": {

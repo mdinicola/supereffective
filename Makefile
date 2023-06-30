@@ -17,7 +17,7 @@ pretty:
 	pnpm pretty
 
 data:
-	pnpm data:update
+	pnpm update:data
 	pnpm pretty:code
 
 code:
