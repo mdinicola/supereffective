@@ -18,7 +18,6 @@ pretty:
 
 data:
 	pnpm update:data
-	pnpm pretty:code
 
 code:
 	pnpm -r build:code

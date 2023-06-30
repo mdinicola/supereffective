@@ -32,7 +32,7 @@
     "test": "turbo run test:all",
     "test:all": "env-cmd jest",
     "test:coverage": "pnpm test -- -- --coverage",
-    "update:data": "pnpm pkg:database build:data && pnpm pkg:database build:code",
+    "update:data": "pnpm pkg:database build:data && pnpm pkg:database build:code && pnpm pretty:code",
     "update:packages": "pnpm update -r"
   },
   "dependencies": {
