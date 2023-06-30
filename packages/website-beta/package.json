@@ -16,7 +16,7 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/ui": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.1",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^20.3.2",
     "@types/react": "^18.2.14",
