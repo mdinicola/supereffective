@@ -88,5 +88,6 @@ function _transformPokemon(pokemon: RawPokemonEntry): PokemonEntry {
       eventOnlyIn: pokemon.eventOnlyIn,
       storableIn: pokemon.storableIn,
     },
+    refs: pokemon.refs,
   }
 }

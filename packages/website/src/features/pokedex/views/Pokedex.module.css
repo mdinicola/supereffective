@@ -433,3 +433,18 @@
 .loadMoreBtnCell img {
   visibility: hidden;
 }
+
+.externalLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.externalLinks img {
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+}

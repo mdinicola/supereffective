@@ -12,6 +12,7 @@ export interface RawPokemonEntry {
   dexNum: number
   formId: string | null
   name: string
+  psName: string
   formName: string | null
   region: RegionId
   generation: number
@@ -41,6 +42,12 @@ export interface RawPokemonEntry {
   shinyBase: null | PokemonId
   baseSpecies: null | PokemonId
   forms: PokemonId[] | null
+  refs: {
+    bulbapedia: string
+    serebii: string
+    smogon: string
+    showdown: string
+  }
 }
 
 export interface PokemonBaseStats {
@@ -98,6 +105,12 @@ export type PokemonEntry = {
     // versionExclusiveIn: GameId[]
     eventOnlyIn: GameSetId[]
     storableIn: GameSetId[]
+  }
+  refs: {
+    bulbapedia: string
+    serebii: string
+    smogon: string
+    showdown: string
   }
 }
 
