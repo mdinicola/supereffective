@@ -12,7 +12,6 @@ export interface RawPokemonEntry {
   dexNum: number
   formId: string | null
   name: string
-  psName: string
   formName: string | null
   region: RegionId
   generation: number
