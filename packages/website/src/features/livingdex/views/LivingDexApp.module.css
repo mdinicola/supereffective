@@ -97,7 +97,6 @@
   user-select: none;
   max-width: 180px;
   line-height: 1px;
-  /*box-shadow: -2px -2px 0 2px rgba(0, 0, 0, 0.5);*/
 }
 
 .dexInfo {
@@ -127,25 +126,11 @@
 span.saveBtn {
   color: #000;
   background: var(--color-teal);
-  /*border: none !important;*/
-  /*box-shadow: none;*/
 }
 
 a.helpBtn {
   color: rgba(0, 0, 0, 0.5);
-  /*border: none !important;*/
-  /*background: none;*/
 }
-
-/*a.helpBtn:hover {*/
-/*  color: #fff;*/
-/*  background: none;*/
-/*}*/
-
-/*a.helpBtn:active,*/
-/*a.helpBtn:focus {*/
-/*  color: var(--color-purple-lighter);*/
-/*}*/
 
 span.saveBtn:hover {
   background: var(--color-orange-light);
@@ -183,9 +168,6 @@ span.saveBtn:hover {
   color: rgba(0, 0, 0, 1);
   margin: 0 auto 0 auto;
   font-size: 12px;
-}
-
-.socialLinksBanner a {
 }
 
 .topRightCallout {
@@ -226,16 +208,9 @@ span.saveBtn:hover {
 .lostPkmBox {
   position: relative;
   border-radius: 0 0 24px 24px;
-  /*border: var(--borderwidth) solid var(--bordercolor);*/
-  /*box-shadow: 4px 4px 0 2px black;*/
   z-index: 1;
   padding: 0.85rem 1rem 1rem 1rem;
   margin: 0;
-
-  /* CSS grid*/
-  /*display: grid;*/
-  /*grid-template-columns: repeat(auto-fill, minmax(96px, 14fr));*/
-  /*grid-gap: 0.5rem;*/
 }
 
 .lostPkm {
@@ -276,9 +251,6 @@ span.saveBtn:hover {
     gap: 0.6rem;
   }
 
-  /*span.saveBtn > span {*/
-  /*  display: none;*/
-  /*}*/
   .dexHeader {
     flex-direction: column;
   }
@@ -286,4 +258,15 @@ span.saveBtn:hover {
   .counters {
     flex-direction: column;
   }
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin: 0.5rem 0 0 0;
+}
+
+.saveBtnGroup {
+  display: flex;
+  flex-direction: row;
 }

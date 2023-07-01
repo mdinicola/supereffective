@@ -17,7 +17,7 @@
     "lint:all": "eslint ./packages",
     "lint:all:fix": "eslint ./packages --fix",
     "lint:fix": "turbo run lint:all:fix",
-    "migrate": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate",
+    "migrate": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate deploy",
     "migrate:deploy": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate deploy",
     "migrate:dev": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate dev",
     "open": "open http://localhost:3001 && open http://localhost:3002 && open http://localhost:1080",

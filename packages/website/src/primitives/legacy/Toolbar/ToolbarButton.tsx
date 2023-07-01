@@ -280,17 +280,20 @@ export const ToolbarButtonGroupGroup = ({
   children,
   collapsed,
   position,
+  className,
 }: {
   children: React.ReactNode
   collapsed?: boolean
   position?: 'left' | 'right'
+  className?: string
 }) => {
   return (
     <div
       className={classNames(
         styles.btnGroupGroup,
         classNameIf(collapsed, styles.btnGroupGroupCollapsed),
-        classNameIf(position === 'right', styles.btnGroupGroupRight)
+        classNameIf(position === 'right', styles.btnGroupGroupRight),
+        className
       )}
     >
       {children}

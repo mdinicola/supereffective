@@ -37,6 +37,7 @@ import {
   ToolbarButton,
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
+  ToolbarButtonStatus,
 } from '#/primitives/legacy/Toolbar/ToolbarButton'
 import { classNameIf } from '#/utils/legacyUtils'
 
@@ -67,6 +68,8 @@ interface ModalContent {
   }
 }
 
+const saveTimeout = 2000
+
 export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
   const initialMarkTypes: MarkType[] = ['catch']
   const allMarkTypes: MarkType[] = ['catch', 'shiny', 'gmax', 'alpha', 'ability', 'gender']
@@ -81,6 +84,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const [viewMode, setViewMode] = useState<ViewMode>(numBoxes > 2 ? 'boxed' : 'listed')
   const [modalContent, setModalContent] = useState<ModalContent | null>(null)
   const [showShiny, setShowShiny] = useState(false)
+  const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
   const livingdex = useContext(LivingDexContext)
 
   const dex = livingdex.state
@@ -100,13 +104,17 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const auth = useSession()
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
+  const lastSavedAtString = lastSavedAt
+    ? `${lastSavedAt.toLocaleDateString()} ${lastSavedAt.toLocaleTimeString()}`
+    : ''
 
   const handleSavedState = () => {
     setSyncState('synced')
     setSavingState('saved')
+    setLastSavedAt(new Date())
     setTimeout(() => {
       setSavingState('ready')
-    }, 1000)
+    }, saveTimeout)
   }
 
   const handleSave = () => {
@@ -130,6 +138,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         if (updatedDex instanceof Error) {
           console.error('Failed to save', updatedDex)
           setSavingState('error')
+          setTimeout(() => {
+            setSavingState('ready')
+          }, saveTimeout)
           return
         }
 
@@ -138,11 +149,13 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           dexWithId = { ...dex, id: updatedDex.id }
           app.setDex(dexWithId)
         }
-        // currentUser.syncDex(dexWithId)
-        // setUserDexes(null) // TODO remove userCtx.syncDex, do it inside livingdexCtx.setDex
+
         handleSavedState()
         if (isNewDex) {
-          router.push(`/apps/livingdex/${updatedDex.id}`)
+          app.setDex(dexWithId)
+          setTimeout(() => {
+            window.location.href = `/apps/livingdex/${updatedDex.id}`
+          }, 1000)
         }
         if (onSave) {
           onSave(dexWithId, isNewDex)
@@ -173,7 +186,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     const autoSaveTimeout = setTimeout(() => {
       handleSave()
       console.log('Dex saved')
-    }, 5000)
+    }, saveTimeout)
     return () => {
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout)
@@ -582,9 +595,41 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             })()}
           />
         </ToolbarButtonGroupGroup>
-        <ToolbarButtonGroupGroup position="right">
-          {savingState === 'saving' && <>⏳ Saving...</>}
-          {savingState === 'error' && <>Sync error❌</>}
+        <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
+          <ToolbarButtonGroup
+            initialAction={null}
+            onButtonClick={handleSave}
+            items={(() => {
+              //let icon = undefined
+              let icon = 'cloud-upload'
+              let text: string | undefined = ''
+              let status: ToolbarButtonStatus = null
+              if (savingState === 'saving') {
+                // icon = undefined
+                icon = 'spinner'
+                status = 'loading'
+                text = 'Saving...'
+              } else if (savingState === 'saved') {
+                icon = 'checkmark' // 'cloud-check'
+                status = 'success'
+                text = undefined //'Saved!'
+              } else if (savingState === 'error') {
+                icon = 'cross' // 'cloud-check'
+                status = 'error'
+                text = 'Error' //'Saved!'
+              }
+              return [
+                {
+                  actionName: 'upload',
+                  icon: icon,
+                  label: text,
+                  status: status,
+                  className: styles.saveBtn,
+                  showLabel: true,
+                },
+              ]
+            })()}
+          />
         </ToolbarButtonGroupGroup>
       </div>
     </div>
@@ -751,6 +796,11 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   <i className="icon-pkg-shiny" /> {dex.caughtShiny} / {dex.totalShiny}
                   {dex.caughtShiny === dex.totalShiny && <i className={'icon-pkg-ribbon'} />}
                 </span>
+              )}
+            </div>
+            <div>
+              {lastSavedAtString && (
+                <time className={styles.timestamp}>Last saved at: {lastSavedAtString}</time>
               )}
             </div>
           </div>
