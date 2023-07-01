@@ -586,7 +586,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 {
                   actionName: 'export',
                   icon: 'download',
-                  label: 'Export',
+                  label: 'Export as JSON',
                   status: '',
                   className: styles.saveBtn,
                   showLabel: true,
