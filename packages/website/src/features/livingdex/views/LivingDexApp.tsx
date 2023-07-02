@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
-import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { convertDexFromLegacyToV4 } from '@pkg/database/lib/dex-parser/support'
@@ -74,7 +73,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const initialMarkTypes: MarkType[] = ['catch']
   const allMarkTypes: MarkType[] = ['catch', 'shiny', 'gmax', 'alpha', 'ability', 'gender']
   const viewOnlyModeMarkTypes: MarkType[] = ['shiny', 'gmax', 'alpha', 'ability']
-  const router = useRouter()
   const [savingState, setSavingState] = useState<SavingState>('ready')
   const [syncState, setSyncState] = useState<SyncState>('synced')
   const [selectMode, setSelectMode] = useState<SelectMode>('cell')
@@ -86,6 +84,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const [showShiny, setShowShiny] = useState(false)
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
   const livingdex = useContext(LivingDexContext)
+  const [saveError, setSaveError] = useState<Error | null>(null)
 
   const dex = livingdex.state
 
@@ -138,6 +137,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         if (updatedDex instanceof Error) {
           console.error('Failed to save', updatedDex)
           setSavingState('error')
+          setSaveError(updatedDex)
           setTimeout(() => {
             setSavingState('ready')
           }, saveTimeout)
@@ -160,10 +160,17 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         if (onSave) {
           onSave(dexWithId, isNewDex)
         }
+        if (saveError) {
+          setSaveError(null)
+        }
       })
       .catch(e => {
         console.error('Failed to save', e)
         setSavingState('error')
+        setSaveError(e)
+        setTimeout(() => {
+          setSavingState('ready')
+        }, saveTimeout)
       })
   }
 
@@ -801,6 +808,13 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             <div>
               {lastSavedAtString && (
                 <time className={styles.timestamp}>Last saved at: {lastSavedAtString}</time>
+              )}
+            </div>
+            <div>
+              {saveError && (
+                <span className={styles.errorbox}>
+                  ❌ There was an issue when saving: <br />"{String(saveError)}"
+                </span>
               )}
             </div>
           </div>

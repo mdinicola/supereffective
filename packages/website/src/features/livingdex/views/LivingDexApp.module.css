@@ -270,3 +270,13 @@ span.saveBtn:hover {
   display: flex;
   flex-direction: row;
 }
+
+.errorbox {
+  display: block;
+  padding: 1rem;
+  background: rgb(255, 199, 199);
+  color: rgba(240, 21, 21, 1);
+  border: 1px solid rgba(240, 21, 21, 1);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
