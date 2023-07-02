@@ -2,7 +2,8 @@ import { AxiosResponse } from 'axios'
 
 import axiosInstance from './axiosInstance'
 import { PATREON_API_URLS } from './constants'
-import { PatreonProfileData, PatreonTokenData } from './types'
+import { campaignMemberFields, identityFields } from './requestFields'
+import { PatreonProfileData, PatreonTokenData } from './types/api'
 
 function _handleResponse<T>(res: Promise<AxiosResponse<any, any>>): Promise<T | undefined> {
   return res
@@ -46,10 +47,7 @@ async function createAccessToken(
 
 async function getCurrentUser(accessToken: string): Promise<PatreonProfileData | undefined> {
   const query = {
-    include: 'campaign,memberships',
-    'fields[user]':
-      'about,created,email,first_name,full_name,image_url,last_name,social_connections,thumb_url,url,vanity',
-    'fields[campaign]': 'is_monthly,summary',
+    ...identityFields,
   }
 
   return await _handleResponse(
@@ -68,11 +66,7 @@ async function getCampaignMembers(
   campaignId: string
 ): Promise<any | undefined> {
   const query = {
-    include: 'currently_entitled_tiers,user',
-    'fields[member]':
-      'full_name,is_follower,last_charge_date,last_charge_status,lifetime_support_cents,currently_entitled_amount_cents,patron_status',
-    'fields[tier]':
-      'amount_cents,created_at,description,discord_role_ids,edited_at,patron_count,published,published_at,requires_shipping,title,url',
+    ...campaignMemberFields,
   }
 
   return await _handleResponse(
@@ -91,11 +85,7 @@ async function getCampaignMemberById(
   memberId: string
 ): Promise<any | undefined> {
   const query = {
-    include: 'currently_entitled_tiers,user,campaign',
-    'fields[member]':
-      'full_name,is_follower,last_charge_date,last_charge_status,lifetime_support_cents,currently_entitled_amount_cents,patron_status',
-    'fields[tier]':
-      'amount_cents,created_at,description,discord_role_ids,edited_at,patron_count,published,published_at,requires_shipping,title,url',
+    ...campaignMemberFields,
   }
 
   return await _handleResponse(
