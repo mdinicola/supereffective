@@ -40,7 +40,7 @@ vercel-login:
 	vercel link # link local repo to vercel project
 	vercel pull # pull project settings
 
-# build project locally, using vercel's build system (useful to detect deployment errors before pushing)
+# Build project locally, using vercel's build system (useful to detect deployment errors before pushing)
 vercel-build:
 	vercel build -d
 	pnpm pretty

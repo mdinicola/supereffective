@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import PageMeta from '#/features/pages/components/PageMeta'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 
+//
+
 export default function Page() {
   const router = useRouter()
   const { error } = router.query
