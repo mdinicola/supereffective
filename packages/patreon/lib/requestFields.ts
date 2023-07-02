@@ -1,5 +1,4 @@
 import {
-  CampaignFields,
   CampaignMembersInclude,
   CampaignMembersQueryFields,
   IdentityInclude,
@@ -10,7 +9,7 @@ import {
 } from './types/api'
 
 export const identityFields = {
-  include: [IdentityInclude.Campaign, IdentityInclude.Memberships].join(','),
+  include: [IdentityInclude.Memberships].join(','),
   [IdentityQueryFields.FieldsUser]: [
     UserFields.About,
     UserFields.Created,
@@ -18,23 +17,19 @@ export const identityFields = {
     UserFields.FirstName,
     UserFields.FullName,
     UserFields.LastName,
-    // UserFields.SocialConnections,
     UserFields.ThumbUrl,
     UserFields.ImageUrl,
     UserFields.Url,
     UserFields.Vanity,
   ].join(','),
-
-  [IdentityQueryFields.FieldsCampaign]: [
-    CampaignFields.Url,
-    CampaignFields.Vanity,
-    CampaignFields.IsMonthly,
-    CampaignFields.Summary,
-  ].join(','),
 }
 
 export const campaignMemberFields = {
-  include: [CampaignMembersInclude.CurrentlyEntitledTiers, CampaignMembersInclude.User].join(','),
+  include: [
+    CampaignMembersInclude.Campaign,
+    CampaignMembersInclude.CurrentlyEntitledTiers,
+    CampaignMembersInclude.User,
+  ].join(','),
   [CampaignMembersQueryFields.FieldsMember]: [
     MemberFields.FullName,
     MemberFields.IsFollower,

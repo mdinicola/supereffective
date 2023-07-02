@@ -1,9 +1,9 @@
+// https://www.patreon.com/portal
 // https://docs.patreon.com/?javascript#step-2-making-the-log-in-button
 // https://docs.patreon.com/#oauth
 // https://docs.patreon.com/#requesting-specific-data
 
-export const PATREON_CREATOR_HANDLE = 'supereffective'
-export const PATREON_CAMPAIGN_ID = '9272063'
+import { PATREON_CAMPAIGN_ID } from './types/campaign'
 
 const patreonOauth2Url = 'https://www.patreon.com/oauth2'
 const patreonApiOauth2Url = 'https://www.patreon.com/api/oauth2'

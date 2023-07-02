@@ -136,6 +136,9 @@ importers:
       '@pkg/mdx':
         specifier: workspace:*
         version: link:../mdx
+      '@pkg/patreon':
+        specifier: workspace:*
+        version: link:../patreon
       '@pkg/utils':
         specifier: workspace:*
         version: link:../utils

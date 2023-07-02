@@ -3,11 +3,61 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { apiGuard } from '@pkg/auth/lib/serverside/apiGuard'
 import { getSession } from '@pkg/auth/lib/serverside/getSession'
 import { envVars } from '@pkg/config/default/env'
-import patreonClient from '@pkg/patreon/lib/patreonClient'
+import { PatreonMembership } from '@pkg/database/lib/types'
+import patreon from '@pkg/patreon/lib/patreonClient'
+import { PATREON_TIERS } from '@pkg/patreon/lib/types/campaign'
 import { apiErrors } from '@pkg/utils/lib/types'
 
 import config from '#/config'
 import { Routes } from '#/config/routes'
+
+import { addPatreonMembership } from '../../../../database/repositories/users/patrons'
+
+const linkPatreonAccount = async (
+  res: NextApiResponse,
+  userId: string,
+  accessToken: string
+): Promise<PatreonMembership | undefined> => {
+  const patron = await patreon.getIdentity(accessToken)
+
+  if (!patron) {
+    // something went wrong when using Patreon OAuth API
+    res.status(apiErrors.internalServerError.statusCode).json(apiErrors.internalServerError.data)
+    return
+  }
+
+  // await patreon.findMembership(envVars.PATREON_CREATOR_ACCESS_TOKEN, patron)
+
+  console.log('----------------------------------')
+  console.log('PATRON identity data\n', JSON.stringify(patron, null, 2))
+  console.log('----------------------------------')
+
+  console.log('----------------------------------')
+  console.log('PATRON memberships\n')
+  const memberData = await patreon.findMembership(envVars.PATREON_CREATOR_ACCESS_TOKEN, patron)
+
+  if (!memberData) {
+    return
+  }
+
+  const tier = Object.values(PATREON_TIERS).find(
+    tier => tier.name === memberData.tier.attributes.title
+  )
+  if (!tier) {
+    console.error(`PATREON_TIERS: tier not found for title "${memberData.tier.attributes.title}"`)
+    return
+  }
+
+  const record = await addPatreonMembership(userId, {
+    currentTier: tier.id,
+    patreonMemberId: memberData.membership.id,
+    patreonUserId: memberData.user.id,
+    patronStatus: memberData.membership.attributes.patron_status,
+    totalContributed: memberData.membership.attributes.lifetime_support_cents,
+  })
+
+  return record || undefined
+}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const httpMethod = req.method || 'GET'
@@ -33,7 +83,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const oauthTokenData = await patreonClient.createAccessToken(
+  const oauthTokenData = await patreon.createAccessToken(
     code,
     envVars.PATREON_CLIENT_ID,
     envVars.PATREON_CLIENT_SECRET,
@@ -46,59 +96,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  // console.log('oauthTokenData', oauthTokenData)
+  const membership = await linkPatreonAccount(res, guard.user.uid, oauthTokenData.access_token)
 
-  const patron = await patreonClient.getCurrentUser(oauthTokenData.access_token)
+  console.log(`membership linked: ${JSON.stringify(membership, null, 2)}`)
 
-  if (!patron) {
-    // something went wrong when using Patreon OAuth API
-    res.status(apiErrors.internalServerError.statusCode).json(apiErrors.internalServerError.data)
-    return
-  }
-
-  console.log('PATRON data', patron)
-
-  /*
-  example: 
-  {
-   data: {
-     attributes: {
-       about: null,
-       created: '2023-06-26T17:27:56.000+00:00',
-       first_name: 'Super',
-       full_name: 'Super Test',
-       image_url: 'https://c8.patreon.com/2/200/95758725',
-       last_name: 'Test',
-       social_connections: [Object],
-       thumb_url: 'https://c8.patreon.com/2/200/95758725',
-       url: 'https://www.patreon.com/user?u=95758725',
-       vanity: null
-     },
-     id: '95758725',
-     relationships: { campaign: [Object], memberships: [Object] },
-     type: 'user'
-   },
-   included: [
-     {
-       attributes: {},
-       id: 'abcfc5e4-b4cc-4b17-b2b3-1c8e3ca01173',
-       type: 'member'
-     }
-   ],
-   links: { self: 'https://www.patreon.com/api/oauth2/v2/user/95758725' }
- }
-  
-  */
-
-  // await patreonClient.findMembership(envVars.PATREON_CREATOR_ACCESS_TOKEN, [], PATREON_CAMPAIGN_ID)
+  console.log('----------------------------------')
 
   switch (httpMethod) {
     case 'GET': {
-      console.log('req.method', httpMethod)
-      console.log('req.headers', req.headers)
-      console.log('req.query', req.query)
-      console.log('req.body', req.body)
-      res.redirect(Routes.Profile + '?patreon=' + (code || 'no_code'))
+      if (membership) {
+        res.redirect(Routes.Profile + '?patreon=ok')
+        return
+      }
+      res.redirect(Routes.Profile + '?patreon=none')
       return
       break
     }

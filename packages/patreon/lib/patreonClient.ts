@@ -3,20 +3,31 @@ import { AxiosResponse } from 'axios'
 import axiosInstance from './axiosInstance'
 import { PATREON_API_URLS } from './constants'
 import { campaignMemberFields, identityFields } from './requestFields'
-import { PatreonProfileData, PatreonTokenData } from './types/api'
+import { PatreonTokenData } from './types/api'
+import { PATREON_CAMPAIGN_ID, PATREON_TIER_IDS } from './types/campaign'
+import {
+  IdentityResponse,
+  MembershipResponse,
+  TierResource,
+  UserMembershipResourceAggregate,
+} from './types/resources'
 
 function _handleResponse<T>(res: Promise<AxiosResponse<any, any>>): Promise<T | undefined> {
   return res
     .then(async res => {
       if (res.status !== 200) {
-        console.error('Patreon API call failed', res.config.url, res.data)
+        console.error(
+          'Patreon API call failed with status code HTTP ' + res.status,
+          res.config.url,
+          res.data
+        )
         return undefined
       }
-      console.log(res.config.url, res.data)
+      console.log('Patreon Request Suceeded: ', res.config.url, res.status)
       return res.data
     })
     .catch(err => {
-      console.error('Error fetching Patreon access token', err)
+      console.error('Patreon API call failed:', err)
       return undefined
     })
 }
@@ -45,7 +56,7 @@ async function createAccessToken(
   )
 }
 
-async function getCurrentUser(accessToken: string): Promise<PatreonProfileData | undefined> {
+async function getIdentity(accessToken: string): Promise<IdentityResponse | undefined> {
   const query = {
     ...identityFields,
   }
@@ -62,7 +73,7 @@ async function getCurrentUser(accessToken: string): Promise<PatreonProfileData |
 }
 
 async function getCampaignMembers(
-  creatorAccessToken: string,
+  accessTokenOfCreator: string,
   campaignId: string
 ): Promise<any | undefined> {
   const query = {
@@ -73,7 +84,7 @@ async function getCampaignMembers(
     axiosInstance.get(`${PATREON_API_URLS.oauth2.campaigns}/${campaignId}/members`, {
       params: new URLSearchParams(query),
       headers: {
-        authorization: `Bearer ${creatorAccessToken}`,
+        authorization: `Bearer ${accessTokenOfCreator}`,
         'Content-Type': 'application/json',
       },
     })
@@ -81,9 +92,9 @@ async function getCampaignMembers(
 }
 
 async function getCampaignMemberById(
-  creatorAccessToken: string,
+  accessTokenOfCreator: string,
   memberId: string
-): Promise<any | undefined> {
+): Promise<MembershipResponse | undefined> {
   const query = {
     ...campaignMemberFields,
   }
@@ -92,7 +103,7 @@ async function getCampaignMemberById(
     axiosInstance.get(`${PATREON_API_URLS.oauth2.members}/${memberId}`, {
       params: new URLSearchParams(query),
       headers: {
-        authorization: `Bearer ${creatorAccessToken}`,
+        authorization: `Bearer ${accessTokenOfCreator}`,
         'Content-Type': 'application/json',
       },
     })
@@ -100,22 +111,71 @@ async function getCampaignMemberById(
 }
 
 async function findMembership(
-  creatorAccessToken: string,
-  memberIds: string[],
-  campaignId: string
-): Promise<any | undefined> {
-  const memberships = await Promise.all(
-    memberIds.map(async memberId => {
-      return await getCampaignMemberById(creatorAccessToken, memberId)
-    })
-  )
+  accessTokenOfCreator: string,
+  user: IdentityResponse
+): Promise<UserMembershipResourceAggregate | undefined> {
+  if (!user.data.relationships?.memberships) {
+    return
+  }
 
-  console.log('PATREON memberships', memberships)
+  const memberships: MembershipResponse[] = (
+    await Promise.all(
+      user.data.relationships.memberships?.data.map(async membership => {
+        return await getCampaignMemberById(accessTokenOfCreator, membership.id)
+      })
+    )
+  ).filter((membership): membership is MembershipResponse => membership !== undefined)
+
+  if (memberships.length === 0) {
+    console.log('No memberships found')
+    return
+  }
+
+  const membership = memberships.find(membership => {
+    if (!membership.included.length) {
+      console.log('Membership has no included resources')
+      return false
+    }
+
+    return (
+      membership.included.some(
+        resource => resource.type === 'campaign' && resource.id === PATREON_CAMPAIGN_ID
+      ) &&
+      membership.included.some(
+        resource => resource.type === 'tier' && PATREON_TIER_IDS.includes(resource.id)
+      )
+    )
+  })
+
+  if (!membership) {
+    console.log('Memberships do not include a known campaign or tier')
+    return
+  }
+
+  const tier = membership.included.find(resource => resource.type === 'tier')
+  if (!tier) {
+    throw new Error('Membership does not have a tier')
+  }
+  const campaign = membership.included.find(resource => resource.type === 'campaign')
+  if (!campaign) {
+    throw new Error('Membership does not have a campaign')
+  }
+
+  const aggregate: UserMembershipResourceAggregate = {
+    user: user.data,
+    membership: membership.data,
+    campaign,
+    tier: tier as TierResource,
+  }
+
+  console.log(JSON.stringify(aggregate, null, 2))
+
+  return aggregate
 }
 
 const patreonClient = {
   createAccessToken,
-  getCurrentUser,
+  getIdentity,
   getCampaignMembers,
   getCampaignMemberById,
   findMembership,

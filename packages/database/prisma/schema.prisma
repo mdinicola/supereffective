@@ -45,20 +45,40 @@ model Session {
 
 model User {
   // Auth.JS-required--------------------------
-  id               String            @id @default(cuid())
+  id               String              @id @default(cuid())
   name             String?
-  email            String?           @unique
+  email            String?             @unique
   emailVerified    DateTime?
   image            String?
   accounts         Account[]
   sessions         Session[]
   // -----------------------------------------
-  displayName      String?           @db.VarChar(50)
-  userName         String?           @unique @db.VarChar(20)
-  isDisabled       Boolean           @default(false)
+  displayName      String?             @db.VarChar(50)
+  userName         String?             @unique @db.VarChar(20)
+  isDisabled       Boolean             @default(false)
   roles            Json?
   firebaseAccounts FirebaseAccount[]
   livingDexes      LivingDex[]
+  memberships      PatreonMembership[]
+}
+
+model PatreonMembership {
+  id                     String   @id @default(cuid())
+  patreonCampaignId      String
+  patreonUserId          String
+  patreonMemberId        String
+  currentTier            String
+  highestTier            String
+  patronStatus           String
+  totalContributed       Int // in cents
+  createdAt              DateTime
+  updatedAt              DateTime
+  userId                 String
+  user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rewardMaxDexes         Int      @default(50)
+  rewardFeaturedStreamer Boolean  @default(false)
+
+  @@unique([userId, patreonCampaignId])
 }
 
 model VerificationToken {

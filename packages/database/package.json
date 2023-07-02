@@ -14,6 +14,7 @@
   "dependencies": {
     "@pkg/firebase": "workspace:*",
     "@pkg/mdx": "workspace:*",
+    "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/client": "^4.16.2",
     "@types/node": "^20.3.3",
