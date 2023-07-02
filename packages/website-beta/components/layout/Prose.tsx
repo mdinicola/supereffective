@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import classes from './Prose.module.css'
 
 /* eslint-disable react/no-unescaped-entities */
@@ -99,7 +101,7 @@ export default function Prose({ children, ...rest }: any) {
         </blockquote>
         <p>It's probably important that images look okay here by default as well:</p>
         <figure>
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
             alt=""
           />
