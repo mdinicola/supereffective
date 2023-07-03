@@ -7,7 +7,7 @@
   "author": "Javi Aguilar https://itsjavi.com",
   "scripts": {
     "build": "env-cmd turbo run build && pnpm format",
-    "build:vercel": "pnpm migrate:deploy && pnpm build",
+    "build:vercel": "pnpm migrate:deploy && turbo run build && pnpm format",
     "data:update": "pnpm update:data",
     "dev": "pnpm dev:with-docker && pnpm migrate && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
     "dev:with-docker": "docker-compose up -d",
