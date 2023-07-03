@@ -29,7 +29,6 @@ const config = {
     legacy_account_recovery_form: 'https://forms.gle/HxnV3qCs1UWJn7Tc6',
   },
   patreon: {
-    clientId: envVars.NEXT_PUBLIC_PATREON_CLIENT_ID as string,
     oauthRedirectUrl: `${getBaseUrl()}/api/callbacks/patreon`,
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },

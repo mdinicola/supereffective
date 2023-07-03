@@ -35,9 +35,7 @@ const serverVars = z.object({
   PATREON_WEBHOOK_SECRET: z.string(),
 })
 
-const clientVars = z.object({
-  NEXT_PUBLIC_PATREON_CLIENT_ID: z.string(),
-})
+const clientVars = z.object({})
 
 type ProjectEnvVars = z.infer<typeof serverVars> & z.infer<typeof clientVars>
 type InitialProjectEnvVars = {
@@ -75,7 +73,6 @@ const initialEnvVars: InitialProjectEnvVars = {
   PATREON_CREATOR_ACCESS_TOKEN: process.env.PATREON_CREATOR_ACCESS_TOKEN,
   PATREON_CREATOR_REFRESH_TOKEN: process.env.PATREON_CREATOR_REFRESH_TOKEN,
   PATREON_WEBHOOK_SECRET: process.env.PATREON_WEBHOOK_SECRET,
-  NEXT_PUBLIC_PATREON_CLIENT_ID: process.env.NEXT_PUBLIC_PATREON_CLIENT_ID,
 }
 
 export const envVars = parseEnvVars<ProjectEnvVars>(initialEnvVars, {

@@ -63,7 +63,7 @@ export function PatreonButton({ className }: any) {
     <ConnectPatreonBtn
       className={classNames(styles.btn, stylesCtrl.ctrl, className)}
       style={{ backgroundColor: '#ff424d', color: '#111', borderColor: '#141661' }}
-      clientId={config.patreon.clientId}
+      clientId={String(process.env.NEXT_PUBLIC_PATREON_CLIENT_ID)}
       redirectUri={config.patreon.oauthRedirectUrl}
     />
   )
