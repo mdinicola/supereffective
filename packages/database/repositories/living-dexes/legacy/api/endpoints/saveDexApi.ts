@@ -2,7 +2,6 @@ import { jsonDecode } from '@pkg/utils/lib/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@pkg/utils/lib/types'
 
 import { isValidID } from '../../../../../validators'
-import { hasUsedGame, hasUsedGameSet } from '../../gameAvailability'
 import { getLegacyLivingDexRepository } from '../../index'
 import { LoadedDex } from '../../types'
 import { LoadedDexSchema } from '../../validators'
@@ -11,11 +10,9 @@ function _validDex(dex: LoadedDex): boolean {
   return LoadedDexSchema.safeParse(dex).success
 }
 
-function _canCreateMoreDexes(dexes: LoadedDex[], dex: LoadedDex): boolean {
-  if (hasUsedGame(dexes, dex.gameId) || hasUsedGameSet(dexes, dex.gameSetId)) {
-    return false
-  }
-  return true
+async function _canCreateMoreDexes(dexes: LoadedDex[], currentUserId: string): Promise<boolean> {
+  const limits = await getLegacyLivingDexRepository().getLimitsForUser(currentUserId)
+  return dexes.length < limits.maxDexes
 }
 
 export const saveDexApi = async (
@@ -31,7 +28,7 @@ export const saveDexApi = async (
   const userDexes = await getLegacyLivingDexRepository().getManyByUser(currentUserId)
   const isNew = dex.id === undefined || dex.id === null
 
-  if (isNew && !_canCreateMoreDexes(userDexes, dex)) {
+  if (isNew && !_canCreateMoreDexes(userDexes, currentUserId)) {
     return {
       statusCode: 400,
       data: {

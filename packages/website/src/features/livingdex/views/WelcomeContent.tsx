@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { canCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
+import { legacyCanCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
 import { LoadedDexList } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
@@ -14,7 +14,6 @@ import styles from './WelcomeContent.module.css'
 export const WelcomeContent = () => {
   useScrollToLocation()
 
-  const dexes: LoadedDexList | null = null // const { dexes } = useContext(UserContext).state
   // Style guide: https://pokemongolive.com/en/post/alola-to-alola/
   const imgStyle = {
     width: '100%',
@@ -23,7 +22,7 @@ export const WelcomeContent = () => {
     margin: '2rem 0',
   }
 
-  const canAddMoreDexes = canCreateMoreDexes(dexes)
+  const canAddMoreDexes = legacyCanCreateMoreDexes()
   const ifCanAddMoreDexes = (children: any, fallback: any) =>
     canAddMoreDexes ? children : fallback
   const onCreateBtn = (btnId: string) => {

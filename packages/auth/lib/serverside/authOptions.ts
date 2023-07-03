@@ -1,6 +1,7 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { AuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
+import PatreonProvider from 'next-auth/providers/patreon'
 
 import { envVars } from '@pkg/config/default/env'
 import { getPrismaClient } from '@pkg/database/prisma/getPrismaClient'
@@ -54,6 +55,10 @@ const authOptions: AuthOptions = {
       generateVerificationToken() {
         return generateRandomToken()
       },
+    }),
+    PatreonProvider({
+      clientId: envVars.PATREON_CLIENT_ID,
+      clientSecret: envVars.PATREON_CLIENT_SECRET,
     }),
   ],
 }

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
-import { canCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
+import { legacyCanCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
 import { LoadedDex } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { Routes } from '#/config/routes'
@@ -139,7 +139,7 @@ const AuthenticatedDashboardContainer = (): JSX.Element => {
         </small>
       </p>
       <div className="text-center" style={{ margin: '0 0 4rem 0', opacity: 1, fontSize: '1.5rem' }}>
-        {canCreateMoreDexes(dexes) && (
+        {legacyCanCreateMoreDexes() && (
           <ButtonInternalLink href={'/apps/livingdex/new'} inverted={false}>
             + Add Game
           </ButtonInternalLink>

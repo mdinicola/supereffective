@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { apiGuard } from '@pkg/auth/lib/serverside/apiGuard'
 import { getSession } from '@pkg/auth/lib/serverside/getSession'
 import { envVars } from '@pkg/config/default/env'
-import { PatreonMembership } from '@pkg/database/lib/types'
+import { Membership } from '@pkg/database/lib/types'
 import patreon from '@pkg/patreon/lib/patreonClient'
 import { PATREON_TIERS } from '@pkg/patreon/lib/types/campaign'
 import { apiErrors } from '@pkg/utils/lib/types'
@@ -17,7 +17,7 @@ const linkPatreonAccount = async (
   res: NextApiResponse,
   userId: string,
   accessToken: string
-): Promise<PatreonMembership | undefined> => {
+): Promise<Membership | undefined> => {
   const patron = await patreon.getIdentity(accessToken)
 
   if (!patron) {
@@ -105,10 +105,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (httpMethod) {
     case 'GET': {
       if (membership) {
-        res.redirect(Routes.Profile + '?patreon=ok')
+        res.redirect(Routes.Profile + '?status=ok&provider=patreon&action=link')
         return
       }
-      res.redirect(Routes.Profile + '?patreon=none')
+      res.redirect(Routes.Profile + '?status=error&provider=patreon&action=link')
       return
       break
     }

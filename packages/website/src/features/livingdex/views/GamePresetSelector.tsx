@@ -6,6 +6,7 @@ import { GameId } from '@pkg/database/repositories/games/ids'
 import { getAvailableGames } from '@pkg/database/repositories/living-dexes/legacy/gameAvailability'
 import { getPresetsForGame } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { PresetDex } from '@pkg/database/repositories/living-dexes/legacy/presets/types'
+import { LivingDexResolvedUserLimits } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { useDexesContext } from '#/features/livingdex/state/LivingDexListContext'
 import { GameLogo } from '#/features/livingdex/views/GameLogo'
@@ -17,7 +18,11 @@ import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './GamePresetSelector.module.css'
 
-export const GamePresetSelector = () => {
+export const GamePresetSelector = ({
+  resolvedLimits,
+}: {
+  resolvedLimits: LivingDexResolvedUserLimits
+}) => {
   const auth = useSession()
   const [selectedGame, setSelectedGame] = React.useState<GameId | null>(null)
   const { dexes, dexesLoading } = useDexesContext()
@@ -38,7 +43,7 @@ export const GamePresetSelector = () => {
 
   const gameSelectors = (
     <div className={styles.games}>
-      {getAvailableGames(dexes).map((gameId: GameId, index) => {
+      {getAvailableGames().map((gameId: GameId, index) => {
         const game = getGameById(gameId)
         const gameClasses = classNames(
           styles.gameLogo,
@@ -79,9 +84,9 @@ export const GamePresetSelector = () => {
           until you hit the "Save" button.
           <br />
           <br />
-          You can only create one Living Pokédex per game set. This means that you can only have one
-          for each set: one for HOME, one for Sword or Shield, one for Brilliant Diamong or Shining
-          Pearl, and so on.
+          <p>
+            You can currently create <b>{resolvedLimits.remainingDexes}</b> more Living Pokédexes.
+          </p>
         </div>
         <div className={styles.selector + ' inner-container bg-purple'}>
           {gameSelectors}

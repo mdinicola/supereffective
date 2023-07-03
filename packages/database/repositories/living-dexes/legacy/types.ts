@@ -54,8 +54,21 @@ export type LoadedDex = {
 export type StorableDexList = Array<StorableDex>
 export type LoadedDexList = Array<LoadedDex>
 
+export type LivingDexUserLimits = {
+  maxDexes: number
+}
+
+export type LivingDexResolvedUserLimits = LivingDexUserLimits & {
+  remainingDexes: number
+}
+
 export type LivingDexRepository = {
   getById: (id: string) => Promise<LoadedDex | null>
+  getLimitsForUser: (userUid: string) => Promise<LivingDexUserLimits>
+  getResolvedLimitsForUser: (
+    dexes: LoadedDex[],
+    limits: LivingDexUserLimits
+  ) => LivingDexResolvedUserLimits
   getManyByUserFromFirebase: (userUid: string) => Promise<LoadedDexList>
   getManyByUser: (userUid: string) => Promise<LoadedDexList>
   import: (dexes: LoadedDex[], userId: string) => Promise<number>

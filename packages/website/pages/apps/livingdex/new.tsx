@@ -3,13 +3,17 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
+import { getSession } from '@pkg/auth/lib/serverside/getSession'
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
 import { GameId } from '@pkg/database/repositories/games/ids'
-import { canCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
+import { getLegacyLivingDexRepository } from '@pkg/database/repositories/living-dexes/legacy'
 import { getPresets } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { createDexFromPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/createDexFromPreset'
-import { LoadedDex } from '@pkg/database/repositories/living-dexes/legacy/types'
+import {
+  LivingDexResolvedUserLimits,
+  LoadedDex,
+} from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import { Routes } from '#/config/routes'
 import { LivingDexContext } from '#/features/livingdex/state/LivingDexContext'
@@ -19,6 +23,7 @@ import LivingDexApp from '#/features/livingdex/views/LivingDexApp'
 import PageMeta from '#/features/pages/components/PageMeta'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import { UnauthenticatedBanner } from '#/layouts/LegacyLayout/UnauthenticatedBanner'
+import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { abs_url } from '#/primitives/legacy/Link/Links'
 import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 import { devLog } from '#/utils/logger'
@@ -26,9 +31,10 @@ import { devLog } from '#/utils/logger'
 interface PageProps {
   selectedGame: GameId | null
   selectedPreset: string | null
+  limits: LivingDexResolvedUserLimits | null
 }
 
-const Page = ({ selectedGame, selectedPreset }: PageProps) => {
+const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
   const auth = useSession()
   const livingdex = useContext(LivingDexContext)
   const { dexes, dexesLoading } = useDexesContext()
@@ -46,8 +52,6 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
     router.push(`/apps/livingdex/${dex.id}`)
   }
 
-  const _canCreateMoreDexes = canCreateMoreDexes(dexes)
-
   useEffect(() => {
     if (livingdex.state && livingdex.state.id) {
       devLog('resetDex called')
@@ -59,7 +63,7 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
     return <LoadingBanner />
   }
 
-  if (!auth.isAuthenticated() || !auth.isOperable()) {
+  if (!auth.isAuthenticated() || !auth.isOperable() || !limits) {
     return <UnauthenticatedBanner />
   }
 
@@ -67,16 +71,24 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
     return <LoadingBanner content={'Creating your dex...'} />
   }
 
-  if (!_canCreateMoreDexes && dexes != null) {
-    router.push(Routes.LivingDex)
+  console.log(limits)
+  const _canCreateMoreDexes = limits.remainingDexes > 0
 
+  if (!_canCreateMoreDexes && dexes != null) {
     return (
       <LoadingBanner
         content={
           <>
+            Dex limit exceeded: {limits.maxDexes} <br />
+            <br />
             You cannot create more dexes at this point.
             <br />
-            Try deleting some of your existing dexes.
+            Try deleting some of your existing dexes or consider becomign a Patron to...
+            <br />
+            <br />
+            <ButtonInternalLink href={Routes.Donate}>
+              Support us and unlock more features
+            </ButtonInternalLink>
           </>
         }
       />
@@ -121,7 +133,7 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
         canonicalUrl={abs_url('/apps/livingdex/new')}
         lang={'en'}
       />
-      {!presetIsSelected && <GamePresetSelector />}
+      {!presetIsSelected && <GamePresetSelector resolvedLimits={limits} />}
       {presetIsSelected && foundPreset && (
         <LivingDexApp
           presets={presets}
@@ -137,15 +149,33 @@ const Page = ({ selectedGame, selectedPreset }: PageProps) => {
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  try {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getSession(ctx.req, ctx.res)
+  if (!session?.currentUser?.uid) {
     return {
       props: {
-        selectedGame: context.query.game || null,
-        selectedPreset: context.query.preset || null,
+        selectedGame: ctx.query.game || null,
+        selectedPreset: ctx.query.preset || null,
+        limits: null,
+      },
+    }
+  }
+
+  try {
+    const repo = getLegacyLivingDexRepository()
+    const dexes = await repo.getManyByUser(session.currentUser.uid)
+    const limits = await repo.getLimitsForUser(session.currentUser.uid)
+    const resolvedLimits = repo.getResolvedLimitsForUser(dexes, limits)
+
+    return {
+      props: {
+        selectedGame: ctx.query.game || null,
+        selectedPreset: ctx.query.preset || null,
+        limits: resolvedLimits,
       },
     }
   } catch (e) {
+    console.error(e)
     return {
       notFound: true,
     }

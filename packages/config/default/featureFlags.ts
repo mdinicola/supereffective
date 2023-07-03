@@ -1,13 +1,19 @@
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 
-import { edgeConfig } from './edge'
+const featureFlags = {
+  core: {
+    website: true,
+    database: true,
+  },
+  services: {
+    patreon: true,
+    mailing: true,
+  },
+  signIn: true,
+}
 
 export function isBasicServicesEnabled(): boolean {
-  return (
-    edgeConfig.services.mailing.enabled &&
-    edgeConfig.services.database.enabled &&
-    edgeConfig.services.website.enabled
-  )
+  return featureFlags.services.mailing && featureFlags.core.database && featureFlags.core.website
 }
 
 export function hasDevFeaturesEnabled(): boolean {
@@ -15,13 +21,13 @@ export function hasDevFeaturesEnabled(): boolean {
 }
 
 export function hasPatreonFeaturesEnabled(): boolean {
-  return hasDevFeaturesEnabled()
+  return featureFlags.services.patreon
 }
 
 export function isSignInEnabled(): boolean {
-  return isBasicServicesEnabled() && edgeConfig.features.signIn.enabled
+  return isBasicServicesEnabled() && featureFlags.signIn
 }
 
 export function isWebsiteInMaintenanceMode(): boolean {
-  return edgeConfig.services.website.enabled === false
+  return featureFlags.core.website === false
 }

@@ -1,14 +1,12 @@
-import { PATREON_CAMPAIGN_ID } from '@pkg/patreon/lib/types/campaign'
+import { PATREON_CAMPAIGN_ID, PATREON_TIERS_BY_ID } from '@pkg/patreon/lib/types/campaign'
 
-import { PatreonMembership } from '../../lib/types'
+import { Membership } from '../../lib/types'
 import { getPrismaClient } from '../../prisma/getPrismaClient'
 
-export async function getPatreonMembershipByUserId(
-  userId: string
-): Promise<PatreonMembership | null> {
+export async function getPatreonMembershipByUserId(userId: string): Promise<Membership | null> {
   const client = getPrismaClient()
 
-  const record = await client.patreonMembership.findFirst({
+  const record = await client.membership.findFirst({
     where: {
       userId,
     },
@@ -19,10 +17,10 @@ export async function getPatreonMembershipByUserId(
 
 export async function getPatreonMembershipByMemberId(
   patreonMemberId: string
-): Promise<PatreonMembership | null> {
+): Promise<Membership | null> {
   const client = getPrismaClient()
 
-  const record = await client.patreonMembership.findFirst({
+  const record = await client.membership.findFirst({
     where: {
       patreonMemberId,
     },
@@ -40,16 +38,22 @@ export async function addPatreonMembership(
     patronStatus: string
     totalContributed: number
   }
-): Promise<PatreonMembership | null> {
+): Promise<Membership | null> {
   const client = getPrismaClient()
+  const tier = PATREON_TIERS_BY_ID[data.currentTier]
+  if (!tier) {
+    throw new Error(`Invalid tier ${data.currentTier}`)
+  }
 
-  const record = await client.patreonMembership.create({
+  const record = await client.membership.create({
     data: {
       ...data,
       createdAt: new Date(),
       updatedAt: new Date(),
-      currentTier: data.currentTier,
-      highestTier: data.currentTier,
+      currentTier: tier.id,
+      highestTier: tier.id,
+      rewardMaxDexes: tier.rewards.maxDexes,
+      rewardFeaturedStreamer: tier.rewards.featuredStreamer,
       patreonCampaignId: PATREON_CAMPAIGN_ID,
       userId,
     },
@@ -68,8 +72,12 @@ export async function updatePatreonMembership(
   }
 ): Promise<number> {
   const client = getPrismaClient()
+  const tier = PATREON_TIERS_BY_ID[data.currentTier]
+  if (!tier) {
+    throw new Error(`Invalid tier ${data.currentTier}`)
+  }
 
-  const record = await client.patreonMembership.updateMany({
+  const record = await client.membership.updateMany({
     where: {
       userId,
       patreonMemberId,
@@ -77,7 +85,9 @@ export async function updatePatreonMembership(
     data: {
       ...data,
       updatedAt: new Date(),
-      currentTier: data.currentTier,
+      currentTier: tier.id,
+      rewardMaxDexes: tier.rewards.maxDexes,
+      rewardFeaturedStreamer: tier.rewards.featuredStreamer,
     },
   })
 
@@ -86,11 +96,11 @@ export async function updatePatreonMembership(
 
 export async function removePatreonMembership(
   userId: string,
-  patreonMemberId: string
+  patreonMemberId: string | null
 ): Promise<number> {
   const client = getPrismaClient()
 
-  const result = await client.patreonMembership.deleteMany({
+  const result = await client.membership.deleteMany({
     where: {
       userId,
       patreonMemberId,

@@ -1,6 +1,7 @@
 import getFirestoreDb from '@pkg/firebase/lib/getFirestoreDb'
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
+import { PATREON_NO_TIER } from '../../../../patreon/lib/types/campaign'
 import {
   convertFirebaseStorableDexToLoadedDex,
   dexToLoadedDex,
@@ -8,8 +9,15 @@ import {
 } from '../../../lib/dex-parser/support'
 import { getPrismaClient, PrismaTypes } from '../../../prisma/getPrismaClient'
 import { isShinyLocked } from '../../pokemon'
-import { getAvailableGames } from './gameAvailability'
-import { DexPokemon, LivingDexRepository, LoadedDex, LoadedDexList, StorableDex } from './types'
+import { getPatreonMembershipByUserId } from '../../users/patrons'
+import {
+  DexPokemon,
+  LivingDexRepository,
+  LivingDexUserLimits,
+  LoadedDex,
+  LoadedDexList,
+  StorableDex,
+} from './types'
 
 const DEFAULT_DEX_LIST_LIMIT = 50
 
@@ -17,11 +25,8 @@ export const isCatchable = (pokemon: DexPokemon): boolean => {
   return !(pokemon.shiny && isShinyLocked(pokemon.pid))
 }
 
-export function canCreateMoreDexes(dexes: LoadedDexList | null): boolean {
-  if (dexes === null || dexes.length === 0) {
-    return true
-  }
-  return getAvailableGames(dexes).length > 0
+export function legacyCanCreateMoreDexes(): boolean {
+  return true
 }
 
 export function recalculateCounters(dex: LoadedDex): LoadedDex {
@@ -87,6 +92,23 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
 
   return {
     getById,
+    getLimitsForUser: async (userUid: string): Promise<LivingDexUserLimits> => {
+      const membership = await getPatreonMembershipByUserId(userUid)
+      if (!membership) {
+        return {
+          maxDexes: PATREON_NO_TIER.rewards.maxDexes,
+        }
+      }
+      return {
+        maxDexes: membership.rewardMaxDexes,
+      }
+    },
+    getResolvedLimitsForUser: (dexes: LoadedDexList, limits: LivingDexUserLimits) => {
+      return {
+        ...limits,
+        remainingDexes: limits.maxDexes - dexes.length,
+      }
+    },
     getManyByUser: async (userUid: string) => {
       return prismaDb
         .findMany({

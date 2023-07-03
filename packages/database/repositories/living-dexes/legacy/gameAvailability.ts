@@ -1,4 +1,3 @@
-import { getGameSetByGameId, getSupportedGameSetIds } from '../../game-sets'
 import { GameSetId } from '../../game-sets/ids'
 import { getSupportedGameIds } from '../../games'
 import { GameId } from '../../games/ids'
@@ -36,17 +35,13 @@ export function countGameDexes(userDexes: LoadedDexList, gameId: GameId): number
   return counter.count
 }
 
-export function getAvailableGameSets(userDexes: LoadedDexList): GameSetId[] {
-  const usedGameSets = new Set(getUsedGameSets(userDexes))
-  return getSupportedGameSetIds().filter(gameSetId => !usedGameSets.has(gameSetId))
-}
+// export function getAvailableGameSets(userDexes: LoadedDexList): GameSetId[] {
+//   const usedGameSets = new Set(getUsedGameSets(userDexes))
+//   return getSupportedGameSetIds().filter(gameSetId => !usedGameSets.has(gameSetId))
+// }
 
-export function getAvailableGames(dexes: LoadedDexList): GameId[] {
-  const usableGameSets = getAvailableGameSets(dexes)
-  return getSupportedGameIds().filter(gameId => {
-    const gameSet = getGameSetByGameId(gameId)
-    return usableGameSets.includes(gameSet?.id)
-  })
+export function getAvailableGames(): GameId[] {
+  return getSupportedGameIds().map(gameId => gameId)
 }
 
 export function hasUsedGameSet(userDexes: LoadedDexList, gameSetId: GameSetId): boolean {
