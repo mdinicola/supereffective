@@ -40,10 +40,23 @@ export const getPokemonSearchIndex = createMemoizedCallback((): PokemonEntrySear
   return index
 })
 
+function _sanitizePokemonIdLookup(pokemonId: string): string {
+  const migrationMap: Record<string, string> = {
+    'maushold-four': 'maushold',
+  }
+
+  if (migrationMap[pokemonId]) {
+    return migrationMap[pokemonId]
+  }
+
+  return pokemonId
+}
+
 export function getPokemonEntry(pokemonId: string): PokemonEntry {
+  const safeId = _sanitizePokemonIdLookup(pokemonId)
   const map = getPokemonEntryMap()
-  if (map.has(pokemonId)) {
-    return map.get(pokemonId)!
+  if (map.has(safeId)) {
+    return map.get(safeId)!
   }
 
   throw new Error(`Pokemon with ID '${pokemonId}' does not exist.`)
