@@ -13,7 +13,6 @@ export const identityFields = {
   [IdentityQueryFields.FieldsUser]: [
     UserFields.About,
     UserFields.Created,
-    UserFields.Email,
     UserFields.FirstName,
     UserFields.FullName,
     UserFields.LastName,

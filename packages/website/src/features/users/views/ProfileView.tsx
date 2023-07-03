@@ -29,6 +29,7 @@ export function ProfileView({
       return null
     }
 
+    const hasMembership = !!membership?.patreonMemberId
     const _membership: Membership = membership ?? createMembershipPlaceholder(auth.currentUser.uid)
 
     return (
@@ -47,7 +48,7 @@ export function ProfileView({
           </code>
         </p>
 
-        {!membership && (
+        {!hasMembership && (
           <>
             <div>
               <PatreonButton />
@@ -85,7 +86,7 @@ export function ProfileView({
           </>
         )}
 
-        {membership && (
+        {hasMembership && (
           <>
             <div>
               <PatreonUnlinkButton memberId={membership.patreonMemberId} />
