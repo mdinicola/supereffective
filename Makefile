@@ -26,7 +26,6 @@ code:
 postinstall:
 	echo "Running postinstall..."
 	if [ ! -f ".env" ]; then cp .env.dist .env; fi;
-	if [ ! -f "packages/database/.env" ]; then cp .env packages/database/.env; fi;
 	make data
 	if [ "$$CI" = "1" ]; then exit 0; fi;
 	pnpm husky install
