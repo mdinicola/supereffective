@@ -13,6 +13,7 @@ import { getPatreonMembershipByUserId } from '../../users/patrons'
 import {
   DexPokemon,
   LivingDexRepository,
+  LivingDexResolvedUserLimits,
   LivingDexUserLimits,
   LoadedDex,
   LoadedDexList,
@@ -90,7 +91,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
       })
   }
 
-  return {
+  const repoApi: LivingDexRepository = {
     getById,
     getLimitsForUser: async (userUid: string): Promise<LivingDexUserLimits> => {
       const membership = await getPatreonMembershipByUserId(userUid)
@@ -103,7 +104,12 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
         maxDexes: membership.rewardMaxDexes,
       }
     },
-    getResolvedLimitsForUser: (dexes: LoadedDexList, limits: LivingDexUserLimits) => {
+    getResolvedLimitsForUser: async (userUid: string): Promise<LivingDexResolvedUserLimits> => {
+      const dexes = await repoApi.getManyByUser(userUid)
+      const limits = await repoApi.getLimitsForUser(userUid)
+      return repoApi.calculateResolvedLimits(dexes, limits)
+    },
+    calculateResolvedLimits: (dexes: LoadedDexList, limits: LivingDexUserLimits) => {
       return {
         ...limits,
         remainingDexes: limits.maxDexes - dexes.length,
@@ -113,9 +119,9 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
       return prismaDb
         .findMany({
           where: { userId: userUid },
-          // orderBy: {
-          //   lastUpdateTime: 'desc',
-          // },
+          orderBy: {
+            lastUpdateTime: 'desc',
+          },
           take: DEFAULT_DEX_LIST_LIMIT,
         })
         .catch(error => {
@@ -139,7 +145,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
         })
         .then(docs => docs.map(doc => convertFirebaseStorableDexToLoadedDex(doc.id || '??', doc)))
     },
-    import: async (dexes: LoadedDex[], userId) => {
+    import: async (dexes: LoadedDex[], userId: string) => {
       const createManyArgs: {
         data: Array<PrismaTypes.LivingDexCreateManyInput>
       } = {
@@ -174,7 +180,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
 
       return prismaDb.createMany(createManyArgs).then(result => result.count)
     },
-    save: async (dex: LoadedDex, userId) => {
+    save: async (dex: LoadedDex, userId: string) => {
       dex.updatedAt = new Date()
       dex.userId = userId
 
@@ -223,4 +229,6 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
         .then(/* void */)
     },
   }
+
+  return repoApi
 })

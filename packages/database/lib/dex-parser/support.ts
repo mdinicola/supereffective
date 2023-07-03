@@ -9,6 +9,7 @@ import { convertPokemonListToStorable } from '../../repositories/living-dexes/le
 import { getPresetByIdForGameSet, getPresets } from '../../repositories/living-dexes/legacy/presets'
 import { normalizeDexWithPreset } from '../../repositories/living-dexes/legacy/presets/normalizeDexWithPreset'
 import {
+  DEX_SCHEMA_VERSION,
   DexBox,
   LoadedDex,
   NullableDexPokemon,
@@ -84,17 +85,22 @@ export function convertDexFromLegacyToV4(dex: LoadedDex): DeserializedLivingDexD
   }
 }
 
-export function convertDexFromV4ToLegacy(dex: DeserializedLivingDexDoc): StorableDex {
+export function convertDexFromV4ToLegacy(
+  dexRecord: LivingDex,
+  dex: DeserializedLivingDexDoc
+): StorableDex {
   if (!dex.legacyPresetId || !dex.legacyPresetVersion) {
     throw new Error(`Dex has no legacy preset ID or version`)
   }
+  dexRecord
+
   return {
-    id: dex.$id,
-    createdAt: new Date(dex.creationTime),
-    updatedAt: new Date(dex.lastUpdateTime),
-    userId: dex.ownerId,
-    title: dex.title,
-    sver: 3,
+    id: dexRecord.id,
+    createdAt: dexRecord.creationTime,
+    updatedAt: dexRecord.lastUpdateTime,
+    userId: dexRecord.userId,
+    title: dexRecord.title || 'Untitled',
+    sver: DEX_SCHEMA_VERSION,
     preset: [
       getGameSetByGameId(dex.gameId).id,
       dex.gameId,
@@ -129,8 +135,17 @@ export function convertDexFromV4ToLegacy(dex: DeserializedLivingDexDoc): Storabl
 }
 
 export function dexToLoadedDex(dex: LivingDex): LoadedDex {
-  const dataMd = convertDexFromV4ToLegacy(parseLivingDex(dex.data))
-  return convertFirebaseStorableDexToLoadedDex(dex.id, dataMd)
+  const dataMd = convertDexFromV4ToLegacy(dex, parseLivingDex(dex.data))
+  const loadedDex = convertFirebaseStorableDexToLoadedDex(dex.id, dataMd)
+
+  // TODO: fix something wrong going on with dates in
+  //  parseLivingDex,  convertDexFromV4ToLegacy or convertFirebaseStorableDexToLoadedDex
+  loadedDex.createdAt = dex.creationTime
+  loadedDex.updatedAt = dex.lastUpdateTime
+  loadedDex.id = dex.id
+  loadedDex.title = dex.title || 'Untitled'
+
+  return loadedDex
 }
 
 export function loadedDexToDex(userId: string, loadedDex: LoadedDex): Omit<LivingDex, 'id'> {
@@ -210,8 +225,8 @@ function _documentToDex(doc: StorableDex): LoadedDex {
   return {
     id: doc.id,
     userId: doc.userId,
-    createdAt: _sanitizeDate(doc.createdAt),
-    updatedAt: _sanitizeDate(doc.updatedAt),
+    createdAt: doc.createdAt,
+    updatedAt: doc.updatedAt,
 
     title: doc.title,
     schemaVersion: schemaVersion,
@@ -249,7 +264,7 @@ function _sanitizeDate(date: Date | SerializableDate | string | undefined): Date
     return new Date(date._value)
   }
 
-  return new Date()
+  return new Date('2023-07-01T10:00:00.000Z')
 }
 
 function _normalizePokemonList(

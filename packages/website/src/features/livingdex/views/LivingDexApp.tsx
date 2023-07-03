@@ -103,9 +103,10 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const auth = useSession()
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
-  const lastSavedAtString = lastSavedAt
-    ? `${lastSavedAt.toLocaleDateString()} ${lastSavedAt.toLocaleTimeString()}`
-    : ''
+  const lastSavedAtString =
+    lastSavedAt && lastSavedAt.toLocaleDateString
+      ? `${lastSavedAt.toLocaleDateString()} ${lastSavedAt.toLocaleTimeString()}`
+      : ''
 
   const handleSavedState = () => {
     setSyncState('synced')

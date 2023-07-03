@@ -5,7 +5,7 @@ import { getPageRepository } from '@pkg/database/repositories/pages/getPageRepos
 import { PageEntry } from '@pkg/database/repositories/pages/types'
 
 import { Routes } from '#/config/routes'
-import { GameCardList } from '#/features/livingdex/views/Dashboard'
+import { GameCardList } from '#/features/livingdex/views/gameCard/GameCard'
 import PageMeta from '#/features/pages/components/PageMeta'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import Button, { ButtonInternalLink } from '#/primitives/legacy/Button/Button'

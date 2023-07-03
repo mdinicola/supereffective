@@ -162,10 +162,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
-    const repo = getLegacyLivingDexRepository()
-    const dexes = await repo.getManyByUser(session.currentUser.uid)
-    const limits = await repo.getLimitsForUser(session.currentUser.uid)
-    const resolvedLimits = repo.getResolvedLimitsForUser(dexes, limits)
+    const resolvedLimits = await getLegacyLivingDexRepository().getResolvedLimitsForUser(
+      session.currentUser.uid
+    )
 
     return {
       props: {

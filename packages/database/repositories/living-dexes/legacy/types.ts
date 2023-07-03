@@ -65,7 +65,8 @@ export type LivingDexResolvedUserLimits = LivingDexUserLimits & {
 export type LivingDexRepository = {
   getById: (id: string) => Promise<LoadedDex | null>
   getLimitsForUser: (userUid: string) => Promise<LivingDexUserLimits>
-  getResolvedLimitsForUser: (
+  getResolvedLimitsForUser: (userUid: string) => Promise<LivingDexResolvedUserLimits>
+  calculateResolvedLimits: (
     dexes: LoadedDex[],
     limits: LivingDexUserLimits
   ) => LivingDexResolvedUserLimits
