@@ -1,4 +1,5 @@
 export enum PatreonTier {
+  None = 'None',
   Basic = 'Basic',
   Advanced = 'Advanced',
   Pro = 'Pro',
@@ -6,7 +7,7 @@ export enum PatreonTier {
 
 export type PatreonTierData = {
   id: string
-  name: 'Basic' | 'Advanced' | 'Pro'
+  name: `${PatreonTier}`
   level: number
   rewards: {
     maxDexes: number
@@ -17,19 +18,18 @@ export type PatreonTierData = {
 export const PATREON_CREATOR_HANDLE = 'supereffective'
 export const PATREON_CAMPAIGN_ID = '9272063'
 
-export const PATREON_NO_TIER: PatreonTierData = {
-  id: '0',
-  name: 'Basic',
-  level: 0,
-  rewards: {
-    maxDexes: 5,
-    featuredStreamer: false,
-  },
-}
-
 export const PATREON_TIERS: {
   [key in PatreonTier]: PatreonTierData
 } = {
+  [PatreonTier.None]: {
+    id: '0',
+    name: 'None',
+    level: 0,
+    rewards: {
+      maxDexes: 5,
+      featuredStreamer: false,
+    },
+  },
   [PatreonTier.Basic]: {
     id: '9094266',
     name: 'Basic',
@@ -59,7 +59,9 @@ export const PATREON_TIERS: {
   },
 }
 
+export const PATREON_NO_TIER: PatreonTierData = PATREON_TIERS[PatreonTier.None]
 export const PATREON_TIERS_BY_ID = {
+  [PATREON_TIERS[PatreonTier.None].id]: PATREON_TIERS[PatreonTier.None],
   [PATREON_TIERS[PatreonTier.Basic].id]: PATREON_TIERS[PatreonTier.Basic],
   [PATREON_TIERS[PatreonTier.Advanced].id]: PATREON_TIERS[PatreonTier.Advanced],
   [PATREON_TIERS[PatreonTier.Pro].id]: PATREON_TIERS[PatreonTier.Pro],

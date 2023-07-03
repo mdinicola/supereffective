@@ -62,7 +62,7 @@ export default function MainHeader() {
               title={'Donate to help this site'}
             >
               <i className="icon-pkg-mark-heart" title="Donate" />
-              <span className={'mobile-onlys'}>Support Us</span>
+              <span className={'mobile-only'}>Support Us</span>
             </SiteLink>
             <UserTrayView activeClass={styles.active} returnUrl={pageSrc} />
           </nav>

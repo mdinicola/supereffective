@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 import { hasPatreonFeaturesEnabled } from '@pkg/config/default/featureFlags'
@@ -6,6 +8,7 @@ import { Membership } from '@pkg/database/lib/types'
 import { UserRestrictedArea } from '#/layouts/UserRestrictedArea'
 import Button, { PatreonButton, PatreonUnlinkButton } from '#/primitives/legacy/Button/Button'
 
+import { createMembershipPlaceholder } from '../../../../../database/repositories/users/patrons'
 import { PATREON_TIERS_BY_ID } from '../../../../../patreon/lib/types/campaign'
 
 export function ProfileView({
@@ -13,6 +16,7 @@ export function ProfileView({
 }: {
   membership?: Membership | undefined
 }): JSX.Element | null {
+  const { status, error, provider, action } = useRouter().query
   const auth = useSession()
   const signOut = useSignOut()
 
@@ -21,45 +25,53 @@ export function ProfileView({
   }
 
   const _renderPatreonMembership = () => {
-    if (!hasPatreonFeaturesEnabled()) {
+    if (!hasPatreonFeaturesEnabled() || !auth.currentUser) {
       return null
     }
+
+    const _membership: Membership = membership ?? createMembershipPlaceholder(auth.currentUser.uid)
+
     return (
       <>
+        <p>
+          <b>Patreon Membership: </b>
+          <code style={{ color: 'var(--color-pink-2)' }}>
+            {PATREON_TIERS_BY_ID[_membership.currentTier].name}
+          </code>
+        </p>
+        <p>
+          <b>Entitled Rewards: </b>
+          <code style={{ color: 'var(--color-pink-2)' }}>
+            {_membership.rewardMaxDexes} dexes
+            {_membership.rewardFeaturedStreamer ? ', featured streamer' : ''}
+          </code>
+        </p>
+
         {!membership && (
           <>
-            <p>
-              <b>Patreon Membership: </b>
-              <code style={{ color: 'var(--color-pink-2)' }}>None</code>
-            </p>
-            <>
-              <div>
-                <PatreonButton />
-              </div>
-            </>
+            <div>
+              <PatreonButton />
+            </div>
+            {error === 'no_membership' && (
+              <small
+                style={{ fontWeight: 'bold', color: 'var(--color-scarlet-2)', margin: '0.5rem 0' }}
+              >
+                Cannot link your Patreon account: You need to become a patron before you can link
+                your Patreon account.
+                <br />
+              </small>
+            )}
+            <small style={{ fontStyle: 'italic', color: '#777' }}>
+              Link your Patreon account and become a patron to unlock more benefits.
+            </small>
           </>
         )}
+
         {membership && (
           <>
-            <p>
-              <b>Patreon Membership: </b>
-              <code style={{ color: 'var(--color-pink-2)' }}>
-                {PATREON_TIERS_BY_ID[membership.currentTier].name}
-              </code>
-            </p>
-            <p>
-              <b>Patreon Membership Rewards: </b>
-              <code style={{ color: 'var(--color-pink-2)' }}>
-                {membership.rewardMaxDexes} dexes
-                {membership.rewardFeaturedStreamer ? ', featured streamer' : ''}
-              </code>
-            </p>
-
-            <>
-              <div>
-                <PatreonUnlinkButton memberId={membership.patreonMemberId} />
-              </div>
-            </>
+            <div>
+              <PatreonUnlinkButton memberId={membership.patreonMemberId} />
+            </div>
           </>
         )}
         <hr />

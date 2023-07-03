@@ -108,7 +108,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.redirect(Routes.Profile + '?status=ok&provider=patreon&action=link')
         return
       }
-      res.redirect(Routes.Profile + '?status=error&provider=patreon&action=link')
+      res.redirect(
+        Routes.Profile + '?status=error&provider=patreon&action=link&error=no_membership'
+      )
       return
       break
     }

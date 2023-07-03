@@ -1,4 +1,8 @@
-import { PATREON_CAMPAIGN_ID, PATREON_TIERS_BY_ID } from '@pkg/patreon/lib/types/campaign'
+import {
+  PATREON_CAMPAIGN_ID,
+  PATREON_NO_TIER,
+  PATREON_TIERS_BY_ID,
+} from '@pkg/patreon/lib/types/campaign'
 
 import { Membership } from '../../lib/types'
 import { getPrismaClient } from '../../prisma/getPrismaClient'
@@ -108,4 +112,22 @@ export async function removePatreonMembership(
   })
 
   return result.count
+}
+
+export function createMembershipPlaceholder(userId: string): Membership {
+  return {
+    id: '0',
+    currentTier: PATREON_NO_TIER.id,
+    highestTier: PATREON_NO_TIER.id,
+    rewardMaxDexes: PATREON_NO_TIER.rewards.maxDexes,
+    rewardFeaturedStreamer: PATREON_NO_TIER.rewards.featuredStreamer,
+    patreonMemberId: null,
+    patreonCampaignId: PATREON_CAMPAIGN_ID,
+    patreonUserId: null,
+    patronStatus: null,
+    totalContributed: 0,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId,
+  }
 }

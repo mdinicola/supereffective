@@ -19,6 +19,12 @@ const Page = () => {
             You can help support the development and hosting costs of this website by making a
             donation.
             <br /> <br />
+            When you donate via Patreon, you will receive a special role on our Discord server and
+            you will also get special benefits on the website, such as extra dex trackers.
+            <br /> <br />
+            If you are a regular donor via Paypal, you will also have these benefits, but you will
+            need to contact us in order for us to link and grant them to your user.
+            <br /> <br />
             Thank you for your contribution, or at least for considering it ❤️.
             <br /> <br />
             <cite>— F. Javier Aguilar - Webmaster and Developer.</cite>
