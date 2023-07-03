@@ -6,10 +6,11 @@
   "scripts": {
     "build": "pnpm build:data && pnpm build:code",
     "build:code": "prisma generate && node lib/codegen/generate-ids.cjs",
-    "build:data": "scripts/sync-data.sh",
+    "build:data": "scripts/sync-data.sh && scripts/update-data-hash.sh",
     "dev": "pnpm build:code && pnpm pretty:code && DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
     "pretty:code": "cd ../../ && pnpm pretty:code && cd -",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "studio:prod": "./studio-prod.sh"
   },
   "dependencies": {
     "@pkg/firebase": "workspace:*",
