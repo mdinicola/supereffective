@@ -26,14 +26,6 @@ const linkPatreonAccount = async (
     return
   }
 
-  // await patreon.findMembership(envVars.PATREON_CREATOR_ACCESS_TOKEN, patron)
-
-  console.log('----------------------------------')
-  console.log('PATRON identity data\n', JSON.stringify(patron, null, 2))
-  console.log('----------------------------------')
-
-  console.log('----------------------------------')
-  console.log('PATRON memberships\n')
   const memberData = await patreon.findMembership(envVars.PATREON_CREATOR_ACCESS_TOKEN, patron)
 
   if (!memberData) {
@@ -55,6 +47,16 @@ const linkPatreonAccount = async (
     patronStatus: memberData.membership.attributes.patron_status,
     totalContributed: memberData.membership.attributes.lifetime_support_cents,
   })
+
+  if (!record) {
+    console.error(
+      `addPatreonMembership: could not add membership for user ${userId}. Patron data: ${JSON.stringify(
+        memberData,
+        null,
+        2
+      )}`
+    )
+  }
 
   return record || undefined
 }
@@ -98,16 +100,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const membership = await linkPatreonAccount(res, guard.user.uid, oauthTokenData.access_token)
 
-  console.log(`membership linked: ${JSON.stringify(membership, null, 2)}`)
-
   console.log('----------------------------------')
 
   switch (httpMethod) {
     case 'GET': {
       if (membership) {
+        console.log(`membership linked: ${JSON.stringify(membership, null, 2)}`)
         res.redirect(Routes.Profile + '?status=ok&provider=patreon&action=link')
         return
       }
+      console.log(`membership could not be linked: ${JSON.stringify(membership, null, 2)}`)
       res.redirect(
         Routes.Profile + '?status=error&provider=patreon&action=link&error=no_membership'
       )

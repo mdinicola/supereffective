@@ -53,13 +53,31 @@ export function ProfileView({
               <PatreonButton />
             </div>
             {error === 'no_membership' && (
-              <small
-                style={{ fontWeight: 'bold', color: 'var(--color-scarlet-2)', margin: '0.5rem 0' }}
-              >
-                Cannot link your Patreon account: You need to become a patron before you can link
-                your Patreon account.
+              <>
+                <small
+                  style={{
+                    fontWeight: 'bold',
+                    color: 'var(--color-scarlet-2)',
+                    margin: '0.5rem 0',
+                  }}
+                >
+                  Cannot link your Patreon account: You need to become a patron before you can link
+                  your Patreon account.
+                </small>
                 <br />
-              </small>
+                <small
+                  style={{
+                    fontWeight: 'normal',
+                    color: 'var(--color-scarlet-2)',
+                    margin: '0.5rem 0',
+                  }}
+                >
+                  If you think this could be a mistake, please send us a message via Patreon,
+                  indicating your Support ID and we will investigate the issue.
+                </small>
+                <br />
+                <br />
+              </>
             )}
             <small style={{ fontStyle: 'italic', color: '#777' }}>
               Link your Patreon account and become a patron to unlock more benefits.
