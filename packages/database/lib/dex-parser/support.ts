@@ -28,10 +28,14 @@ export function convertDexFromLegacyToV4(dex: LoadedDex): DeserializedLivingDexD
   if (!dex.userId) {
     throw new Error(`LoadedDex has no userId`)
   }
+
+  const createdAt = _sanitizeDate(dex.createdAt)
+  const updatedAt = _sanitizeDate(dex.updatedAt)
+
   return {
     $id: dex.id,
-    creationTime: dex.createdAt?.toISOString() ?? new Date().toISOString(),
-    lastUpdateTime: dex.updatedAt?.toISOString() ?? new Date().toISOString(),
+    creationTime: createdAt.toISOString(),
+    lastUpdateTime: updatedAt.toISOString(),
     gameId: dex.gameId,
     title: dex.title,
     ownerId: dex.userId,
