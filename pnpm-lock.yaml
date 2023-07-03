@@ -314,8 +314,8 @@ importers:
         specifier: ^18.2.6
         version: 18.2.6
       lucide-react:
-        specifier: ^0.257.0
-        version: 0.257.0(react@18.2.0)
+        specifier: ^0.258.0
+        version: 0.258.0(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2557,7 +2557,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.9
-      caniuse-lite: 1.0.30001509
+      caniuse-lite: 1.0.30001511
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2739,7 +2739,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001509
+      caniuse-lite: 1.0.30001511
       electron-to-chromium: 1.4.447
       node-releases: 2.0.12
       update-browserslist-db: 1.0.11(browserslist@4.21.9)
@@ -2797,8 +2797,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite@1.0.30001509:
-    resolution: {integrity: sha512-2uDDk+TRiTX5hMcUYT/7CSyzMZxjfGu0vAUjS2g0LSD8UoXOv0LtpH4LxGMemsiPq6LCVIUjNwVM0erkOkGCDA==}
+  /caniuse-lite@1.0.30001511:
+    resolution: {integrity: sha512-NaWPJawcoedlghN4P7bDNeADD7K+rZaY6V8ZcME7PkEZo/nfOg+lnrUgRWiKbNxcQ4/toFKSxnS4WdbyPZnKkw==}
 
   /caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
@@ -5491,8 +5491,8 @@ packages:
       lru-cache: 4.0.2
     dev: false
 
-  /lucide-react@0.257.0(react@18.2.0):
-    resolution: {integrity: sha512-iP/RIvOhB8hI+AeocKXBleP9NopM1MgQbwB8hCfNdxYqJrQreJCsEvBtmXb3SS92kxwEGWp6ikJ0XQ6hqaYsdA==}
+  /lucide-react@0.258.0(react@18.2.0):
+    resolution: {integrity: sha512-3evnpKadBrjLr2HHJ66eDZ1y0vPS6pm8NiNDaLqhddUUyJGnA+lfDPZfbVkuAFq7Xaa1TEy7Sg17sM7mHpMKrA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -5951,7 +5951,7 @@ packages:
       '@next/env': 13.4.7
       '@swc/helpers': 0.5.1
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001509
+      caniuse-lite: 1.0.30001511
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
