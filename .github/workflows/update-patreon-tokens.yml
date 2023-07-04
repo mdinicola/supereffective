@@ -40,6 +40,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
+      - name: Use assets cache
+        id: assets-cache
+        uses: actions/cache@v3
+        with:
+          path: '**/packages/database/.cache'
+          key: ${{ runner.os }}-assets-cache-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-assets-cache-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -55,4 +64,4 @@ jobs:
         env:
           VERCEL_DEPLOY_URL: ${{ secrets.VERCEL_DEPLOY_URL }}
         run: |
-          curl -s -X POST "${VERCEL_DEPLOY_URL}"
+          curl -s -X POST "${VERCEL_DEPLOY_URL}?buildCache=false"
