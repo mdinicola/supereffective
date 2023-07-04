@@ -177,6 +177,7 @@ export function createMembershipPlaceholder(userId: string): Membership {
     patreonUserId: null,
     patronStatus: null,
     totalContributed: 0,
+    overridenRewards: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId,

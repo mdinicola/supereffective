@@ -19,7 +19,7 @@
     "lint:fix": "turbo run lint:all:fix",
     "migrate": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate deploy",
     "migrate:deploy": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate deploy",
-    "migrate:dev": "pnpm pkg:database prisma generate && pnpm pkg:database prisma migrate dev",
+    "migrate:dev": "env-cmd pnpm pkg:database prisma generate && env-cmd pnpm pkg:database prisma migrate dev",
     "open": "open http://localhost:3001 && open http://localhost:3002 && open http://localhost:1080",
     "pkg:auth": "pnpm --filter '@pkg/auth'",
     "pkg:database": "pnpm --filter '@pkg/database'",
