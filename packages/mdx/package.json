@@ -13,7 +13,7 @@
     "chokidar": "^3.5.3",
     "glob": "^10.3.1",
     "gray-matter": "^4.0.3",
-    "next": "13.4.7",
+    "next": "13.4.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.7",
