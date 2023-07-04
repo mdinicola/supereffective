@@ -1,0 +1,28 @@
+name: Update Tokens every 12h
+
+on:
+  schedule:
+    - cron: '0 3 * * 1' # every Monday at 3am
+  workflow_dispatch:
+
+jobs:
+  update_tokens:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update Patreon Tokens
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+        run: |
+          pnpm pkg:patreon run refreshCreatorToken
+
+      - name: Redeploy vercel project
+        env:
+          VERCEL_DEPLOY_URL: ${{ secrets.VERCEL_DEPLOY_URL }}
+        run: |
+          curl -s -X POST "${VERCEL_DEPLOY_URL}"

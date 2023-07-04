@@ -83,6 +83,7 @@ model Membership {
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // rewards
+  overridenRewards       Boolean @default(false) // do not override rewards if true, when syncing with Patreon
   rewardMaxDexes         Int     @default(50)
   rewardFeaturedStreamer Boolean @default(false)
 

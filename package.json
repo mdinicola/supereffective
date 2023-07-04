@@ -23,6 +23,7 @@
     "open": "open http://localhost:3001 && open http://localhost:3002 && open http://localhost:1080",
     "pkg:auth": "pnpm --filter '@pkg/auth'",
     "pkg:database": "pnpm --filter '@pkg/database'",
+    "pkg:patreon": "pnpm --filter '@pkg/patreon'",
     "pkg:ui": "pnpm --filter '@pkg/ui'",
     "pkg:website": "pnpm --filter '@app/website'",
     "pretty": "turbo run pretty:all",

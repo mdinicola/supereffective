@@ -1,6 +1,8 @@
+import patreon from '@pkg/patreon/lib/patreonClient'
 import {
   PATREON_CAMPAIGN_ID,
   PATREON_NO_TIER,
+  PATREON_TIERS,
   PATREON_TIERS_BY_ID,
 } from '@pkg/patreon/lib/types/campaign'
 
@@ -31,6 +33,55 @@ export async function getPatreonMembershipByMemberId(
   })
 
   return record || null
+}
+
+export async function linkPatreonAccount(
+  userId: string,
+  accessToken: string,
+  creatorAccessToken: string
+): Promise<Membership | undefined> {
+  const patron = await patreon.getIdentity(accessToken)
+
+  if (!patron) {
+    throw new Error('linkPatreonAccount: patreon.getIdentity call failed')
+  }
+
+  const memberData = await patreon.findMembership(creatorAccessToken, patron)
+
+  if (!memberData) {
+    console.warn(`linkPatreonAccount: could not find membership for user ${userId}`)
+    return
+  }
+
+  const tier = Object.values(PATREON_TIERS).find(
+    tier => tier.name === memberData.tier.attributes.title
+  )
+
+  if (!tier) {
+    throw new Error(`linkPatreonAccount: invalid tier: "${memberData.tier.attributes.title}"`)
+  }
+
+  const record = await addPatreonMembership(userId, {
+    currentTier: tier.id,
+    patreonMemberId: memberData.membership.id,
+    patreonUserId: memberData.user.id,
+    patronStatus: memberData.membership.attributes.patron_status,
+    totalContributed: memberData.membership.attributes.lifetime_support_cents,
+  })
+
+  if (!record) {
+    console.error(
+      `linkPatreonAccount: could not add membership for user ${userId}. Patron data: ${JSON.stringify(
+        memberData,
+        null,
+        2
+      )}`
+    )
+
+    throw new Error(`linkPatreonAccount: could not add membership for user ${userId}`)
+  }
+
+  return record
 }
 
 export async function addPatreonMembership(

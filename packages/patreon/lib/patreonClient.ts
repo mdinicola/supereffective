@@ -56,6 +56,30 @@ async function createAccessToken(
   )
 }
 
+async function createAccessTokenWithRefreshToken(
+  refreshToken: string,
+  clientId: string,
+  clientSecret: string
+): Promise<PatreonTokenData | undefined> {
+  /*POST www.patreon.com/api/oauth2/token
+    ?grant_type=refresh_token
+    &refresh_token=<the user‘s refresh_token>
+    &client_id=<your client id>
+    &client_secret=<your client secret> */
+
+  return await _handleResponse(
+    axiosInstance.post(
+      PATREON_API_URLS.oauth2.token,
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+      })
+    )
+  )
+}
+
 async function getIdentity(accessToken: string): Promise<IdentityResponse | undefined> {
   const query = {
     ...identityFields,
@@ -168,13 +192,12 @@ async function findMembership(
     tier: tier as TierResource,
   }
 
-  console.log(JSON.stringify(aggregate, null, 2))
-
   return aggregate
 }
 
 const patreonClient = {
   createAccessToken,
+  createAccessTokenWithRefreshToken,
   getIdentity,
   getCampaignMembers,
   getCampaignMemberById,
