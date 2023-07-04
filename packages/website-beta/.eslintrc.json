@@ -1,3 +1,24 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": ["next", "next/core-web-vitals", "turbo", "prettier"],
+  "rules": {
+    // images
+    "@next/next/no-img-element": "warn",
+    "jsx-a11y/alt-text": "error",
+    // components
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-key": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.cjs"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      },
+      "env": {
+        "node": true,
+        "commonjs": true
+      }
+    }
+  ]
 }

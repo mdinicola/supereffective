@@ -7,6 +7,7 @@
     "build": "pnpm build:nextjs && pnpm build:sitemap",
     "build:nextjs": "next build",
     "build:sitemap": "next-sitemap",
+    "clear-cache": "rm -rf .next/cache .turbo",
     "dev": "PORT=3001 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",

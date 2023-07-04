@@ -3,36 +3,41 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:beta": "next build",
+    "build:beta": "pnpm build:nextjs && pnpm build:sitemap",
+    "build:nextjs": "next build",
+    "build:sitemap": "next-sitemap",
+    "clear-cache": "rm -rf .next/cache .turbo",
     "dev:beta": "PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
-    "start": "next start"
+    "prepare": "panda codegen",
+    "start:beta": "PORT=3002 next start",
+    "test": "echo \"No tests yet on packages/website-beta\""
   },
   "dependencies": {
     "@pkg/auth": "workspace:*",
     "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
     "@pkg/mdx": "workspace:*",
-    "@pkg/ui": "workspace:*",
+    "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.2",
-    "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "^20.3.3",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.44.0",
+    "@types/node": "20.3.3",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
+    "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "lucide-react": "^0.258.0",
     "next": "13.4.8",
     "next-axiom": "^0.18.0",
-    "postcss": "^8.4.24",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.1.6"
+    "next-sitemap": "^4.1.8",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.1.6",
+    "zod": "^3.21.4",
+    "zustand": "^4.3.9"
   },
-  "prisma": {
-    "schema": "../database/lib/schema.prisma"
+  "devDependencies": {
+    "@pandacss/dev": "^0.5.1"
   }
 }

@@ -34,4 +34,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vscode
+# sitemaps
+/public/robots.txt
+/public/sitemap.xml
+/public/sitemap-*.xml
+
+# app
+.cache/

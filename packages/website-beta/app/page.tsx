@@ -1,16 +1,5 @@
-import React from 'react'
+import { css } from '../styled-system/css'
 
-import Main from '@/components/layout/Main'
-import Prose from '@/components/layout/Prose'
-import { NavBar } from '@/components/navigation/NavBar'
-
-export default function Home(): React.ReactElement {
-  return (
-    <>
-      <NavBar />
-      <Main>
-        <Prose />
-      </Main>
-    </>
-  )
+export default function Home() {
+  return <div className={css({ fontSize: '2xl', fontWeight: 'bold' })}>Hello 🐼!</div>
 }

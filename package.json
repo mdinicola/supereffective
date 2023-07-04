@@ -8,8 +8,10 @@
   "scripts": {
     "build": "env-cmd turbo run build && pnpm format",
     "build:vercel": "pnpm migrate:deploy && turbo run build && pnpm format",
+    "clear-cache": "pnpm -r clear-cache",
     "data:update": "pnpm update:data",
     "dev": "pnpm dev:with-docker && env-cmd pnpm migrate && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
+    "dev:beta": "pnpm dev:with-docker && env-cmd pnpm migrate && env-cmd turbo run dev:beta --no-deps --no-cache --parallel --concurrency 10",
     "dev:with-docker": "docker-compose up -d",
     "format": "pnpm pretty && pnpm lint:fix",
     "postinstall": "make postinstall",

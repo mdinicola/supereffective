@@ -1,7 +1,0 @@
-.root {
-  @apply dark:bg-black dark:bg-opacity-50;
-}
-
-.wr {
-  @apply max-w-7xl mx-auto md:py-8;
-}
