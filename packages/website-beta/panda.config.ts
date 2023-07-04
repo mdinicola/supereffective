@@ -1,4 +1,25 @@
-import { defineConfig } from '@pandacss/dev'
+import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
+
+// applied to the base @layer
+const globalCss = defineGlobalStyles({
+  '*': {
+    pos: 'relative',
+    boxSizing: 'border-box',
+  },
+  'html, body': {
+    maxWidth: '100vw',
+    overflowX: 'hidden',
+  },
+  a: {
+    color: 'blue.600',
+    textDecoration: 'underline',
+  },
+  '@media (prefers-color-scheme: dark)': {
+    html: {
+      colorScheme: 'dark',
+    },
+  },
+})
 
 export default defineConfig({
   // Whether to use css reset
@@ -19,8 +40,13 @@ export default defineConfig({
     extend: {},
   },
 
+  presets: ['@pandacss/dev/presets'],
+
+  jsxFramework: 'react',
+
   // The output directory for your css system
   outdir: 'styled-system',
+  globalCss,
 })
 
 /**

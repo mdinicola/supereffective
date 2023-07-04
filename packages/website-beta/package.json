@@ -7,10 +7,11 @@
     "build:nextjs": "next build",
     "build:sitemap": "next-sitemap",
     "clear-cache": "rm -rf .next/cache .turbo",
+    "codegen": "panda codegen",
     "dev:beta": "PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
-    "prepare": "panda codegen",
+    "prepare": "pnpm codegen",
     "start:beta": "PORT=3002 next start",
     "test": "echo \"No tests yet on packages/website-beta\""
   },

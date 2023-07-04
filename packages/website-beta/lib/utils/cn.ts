@@ -1,6 +1,6 @@
 import { BoolLike } from '@/lib/types/utility'
 
-type ClassNameLike = string | BoolLike
+export type ClassNameLike = string | BoolLike
 
 export function cn(
   ...classNames: (ClassNameLike | ClassNameLike[] | [BoolLike, ...ClassNameLike[]])[]
