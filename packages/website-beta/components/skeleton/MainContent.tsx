@@ -13,9 +13,14 @@ export default function MainContent({ children, className, ...rest }: MainConten
       className={cn(
         css({
           flex: '1',
-          bg: 'gray.900',
+          overflowY: 'auto',
+          color: 'gray.100',
+          bgColor: 'gray.800',
+          minH: '400px',
           p: 4,
+          borderRadius: 'xl',
         }),
+        'main-content',
         className
       )}
     >

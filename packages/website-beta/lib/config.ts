@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import _config from '@pkg/config/default'
 
-import themeColors from '@/lib/theme/colors'
+import { token } from '@/styled-system/tokens'
 
 const rootMetadata: Metadata = {
   title: {
@@ -17,15 +17,12 @@ const rootMetadata: Metadata = {
     statusBarStyle: 'black-translucent',
     capable: true,
   },
-  themeColor: themeColors.standalone,
+  themeColor: token('colors.amber.800'),
   viewport: 'width=device-width, initial-scale=1',
 }
 
 const config = {
   ..._config,
-  theme: {
-    colors: themeColors,
-  },
   rootMetadata,
 }
 

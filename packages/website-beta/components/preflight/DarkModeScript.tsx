@@ -1,16 +1,18 @@
-type DarkModeScriptProps = {
+'use client'
+
+type ScriptProps = {
   className?: string
   localStorageKey?: string
   autoDetect?: boolean
   defaultEnabled?: boolean
 }
 
-export function DarkModeScript({
+export default function DarkModeScript({
   className = 'dark',
   localStorageKey = 'darkMode',
   autoDetect = true,
   defaultEnabled = true,
-}: DarkModeScriptProps) {
+}: ScriptProps) {
   const code = `
   (function() {
     const autoDetect = ${String(autoDetect)};
