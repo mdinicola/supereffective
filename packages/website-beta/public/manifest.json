@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "SuperEffective.gg",
+  "short_name": "SuperEffective",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#a692eb",
+  "background_color": "#a692eb",
+  "icons": [
+    {
+      "src": "/images/favicon/apple-touch-icon.png?v=20230331",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/favicon/android-chrome-192x192.png?v=20230331",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon/android-chrome-512x512.png?v=20230331",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

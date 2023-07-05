@@ -17,6 +17,7 @@ const rootMetadata: Metadata = {
     statusBarStyle: 'black-translucent',
     capable: true,
   },
+  manifest: '/manifest.json',
   themeColor: token('colors.amber.800'),
   viewport: 'width=device-width, initial-scale=1',
 }

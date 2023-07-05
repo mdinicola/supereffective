@@ -60,18 +60,18 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          pink: {
-            '100': { value: '#EFC8DD' },
-            '200': { value: '#e5abcb' },
-            '300': { value: '#db8db9' },
-            '400': { value: '#cf6ea8' },
-            '500': { value: '#c34e97' },
-            '600': { value: '#a64481' },
-            '700': { value: '#8a3b6b' },
-            '800': { value: '#6f3257' },
-            '900': { value: '#562843' },
-            '950': { value: '#3d1f30' },
-          },
+          // pink: {
+          //   '100': { value: '#EFC8DD' },
+          //   '200': { value: '#e5abcb' },
+          //   '300': { value: '#db8db9' },
+          //   '400': { value: '#cf6ea8' },
+          //   '500': { value: '#c34e97' },
+          //   '600': { value: '#a64481' },
+          //   '700': { value: '#8a3b6b' },
+          //   '800': { value: '#6f3257' },
+          //   '900': { value: '#562843' },
+          //   '950': { value: '#3d1f30' },
+          // },
           green: {
             '100': { value: '#cddcbc' },
             '200': { value: '#b3ca99' },

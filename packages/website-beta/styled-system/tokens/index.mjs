@@ -727,6 +727,50 @@ const tokens = {
     "value": "#4c0519",
     "variable": "var(--epiLsK)"
   },
+  "colors.pink.50": {
+    "value": "#fdf2f8",
+    "variable": "var(--hPYfGc)"
+  },
+  "colors.pink.100": {
+    "value": "#fce7f3",
+    "variable": "var(--ioAkJk)"
+  },
+  "colors.pink.200": {
+    "value": "#fbcfe8",
+    "variable": "var(--eyVWNz)"
+  },
+  "colors.pink.300": {
+    "value": "#f9a8d4",
+    "variable": "var(--nXIqK)"
+  },
+  "colors.pink.400": {
+    "value": "#f472b6",
+    "variable": "var(--hGgStN)"
+  },
+  "colors.pink.500": {
+    "value": "#ec4899",
+    "variable": "var(--dviDWY)"
+  },
+  "colors.pink.600": {
+    "value": "#db2777",
+    "variable": "var(--kUZZAj)"
+  },
+  "colors.pink.700": {
+    "value": "#be185d",
+    "variable": "var(--gKbLdu)"
+  },
+  "colors.pink.800": {
+    "value": "#9d174d",
+    "variable": "var(--UhnuV)"
+  },
+  "colors.pink.900": {
+    "value": "#831843",
+    "variable": "var(--hYEIxc)"
+  },
+  "colors.pink.950": {
+    "value": "#500724",
+    "variable": "var(--dPgAHx)"
+  },
   "colors.fuchsia.50": {
     "value": "#fdf4ff",
     "variable": "var(--kpTESD)"
@@ -1386,50 +1430,6 @@ const tokens = {
   "colors.slate.950": {
     "value": "#020617",
     "variable": "var(--iFDdka)"
-  },
-  "colors.pink.50": {
-    "value": "#fdf2f8",
-    "variable": "var(--hPYfGc)"
-  },
-  "colors.pink.100": {
-    "value": "#EFC8DD",
-    "variable": "var(--ioAkJk)"
-  },
-  "colors.pink.200": {
-    "value": "#e5abcb",
-    "variable": "var(--eyVWNz)"
-  },
-  "colors.pink.300": {
-    "value": "#db8db9",
-    "variable": "var(--nXIqK)"
-  },
-  "colors.pink.400": {
-    "value": "#cf6ea8",
-    "variable": "var(--hGgStN)"
-  },
-  "colors.pink.500": {
-    "value": "#c34e97",
-    "variable": "var(--dviDWY)"
-  },
-  "colors.pink.600": {
-    "value": "#a64481",
-    "variable": "var(--kUZZAj)"
-  },
-  "colors.pink.700": {
-    "value": "#8a3b6b",
-    "variable": "var(--gKbLdu)"
-  },
-  "colors.pink.800": {
-    "value": "#6f3257",
-    "variable": "var(--UhnuV)"
-  },
-  "colors.pink.900": {
-    "value": "#562843",
-    "variable": "var(--hYEIxc)"
-  },
-  "colors.pink.950": {
-    "value": "#3d1f30",
-    "variable": "var(--dPgAHx)"
   },
   "colors.green.50": {
     "value": "#f0fdf4",
