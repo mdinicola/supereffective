@@ -36,8 +36,21 @@ const fluentlayout: PatternConfig = {
   }),
 }
 
+const fullwords: PatternConfig = {
+  description: 'A pattern that makes text wrap at word boundaries, without breaking word letters.',
+  properties: {},
+  blocklist: ['overflowWrap', 'hyphens'],
+  transform: props => ({
+    hyphens: 'none',
+    overflowWrap: 'normal',
+    ...props,
+  }),
+}
+
 const patterns: Record<string, PatternConfig> = {
   vscrollable,
   fluentlayout,
+  fullwords,
 }
+
 export default patterns

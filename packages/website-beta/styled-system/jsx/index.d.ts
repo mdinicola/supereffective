@@ -2,6 +2,7 @@
 export * from './factory'
 export * from './vscrollable'
 export * from './fluentlayout'
+export * from './fullwords'
 export * from './box'
 export * from './flex'
 export * from './stack'

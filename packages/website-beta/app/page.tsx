@@ -1,6 +1,7 @@
 import DefaultLayout from '@/components/layouts/DefaultLayout'
 import Button from '@/components/primitives/Button'
 import { css } from '@/styled-system/css'
+import { fullwords } from '@/styled-system/patterns'
 
 export default function Page() {
   return (
@@ -21,7 +22,7 @@ export default function Page() {
         })}
       >
         <h2
-          className={css({
+          className={fullwords({
             textAlign: 'left',
             fontSize: '3rem',
             lineHeight: '2.5rem',
@@ -30,8 +31,6 @@ export default function Page() {
               lineHeight: '3.5rem',
             },
             fontWeight: '900',
-            hyphens: 'none',
-            overflowWrap: 'normal',
             letterSpacing: '-0.025em',
             maxWidth: '80%',
             my: 12,
