@@ -219,7 +219,7 @@ function _documentToDex(doc: StorableDex): LoadedDex {
         GameSetId,
         GameId,
         string,
-        number
+        number,
       ]
     }
   }

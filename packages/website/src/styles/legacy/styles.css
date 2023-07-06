@@ -35,7 +35,8 @@
 }
 
 .cursor-pen-emoji {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✏️</text></svg>")
+  cursor:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✏️</text></svg>")
       20 24,
     auto;
 }
@@ -46,7 +47,11 @@
   margin: 1.4rem 0 2.5rem;
   color: #ffffff;
   font-size: 2.2rem;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
   filter: drop-shadow(1px 1px 0px #000) drop-shadow(-1px -1px 0px #000)
     drop-shadow(-1px 1px 0px #000) drop-shadow(1px -1px 0px #000);
   word-spacing: 0.5rem;
@@ -57,7 +62,9 @@
 .female-symbol {
   content: '♀';
   color: deeppink;
-  text-shadow: 1px 1px rgba(255, 255, 255, 0.55), -1px -1px rgba(255, 255, 255, 0.55);
+  text-shadow:
+    1px 1px rgba(255, 255, 255, 0.55),
+    -1px -1px rgba(255, 255, 255, 0.55);
   font-weight: bold;
   font-family: fantasy, system-ui, sans-serif;
 }
@@ -65,7 +72,9 @@
 .male-symbol {
   content: '♂︎';
   color: deepskyblue;
-  text-shadow: 1px 1px rgba(255, 255, 255, 0.55), -1px -1px rgba(255, 255, 255, 0.55);
+  text-shadow:
+    1px 1px rgba(255, 255, 255, 0.55),
+    -1px -1px rgba(255, 255, 255, 0.55);
   font-weight: bold;
   font-family: fantasy, system-ui, sans-serif;
 }

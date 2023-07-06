@@ -27,17 +27,20 @@
 }
 
 .dex-game-lgp {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-10deg, #efe7ae, #f9d94d, #efe7ae);
 }
 
 .dex-game-lge {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-10deg, #f2e5b3, #c2803e, #f2e5b3);
 }
 
 .dex-game-go {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-45deg, #88e6ff 0%, #2254e7 33%, #88e6ff 100%);
 }
 
@@ -46,22 +49,26 @@
 }
 
 .dex-game-sh {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-10deg, #cf4075, #5d0e33, #cf4075);
 }
 
 .dex-game-sw {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
     linear-gradient(-45deg, #72d6ff, #264277, #6ad5ff);
 }
 
 .dex-game-sp {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
     linear-gradient(-10deg, #bb7ed5, #edb8ff, #bb7ed5);
 }
 
 .dex-game-bd {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center center fixed,
     linear-gradient(-10deg, #e0f4ff, #016fdd, #abe6ff);
 }
 
@@ -71,11 +78,13 @@
 }
 
 .dex-game-s {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-10deg, #d12342, #81041c, #d12342);
 }
 
 .dex-game-v {
-  background: url('/assets/gui/bgs/la/bg-gray-25.png') center,
+  background:
+    url('/assets/gui/bgs/la/bg-gray-25.png') center,
     linear-gradient(-10deg, #bb51b7, #510a74, #bb51b7);
 }

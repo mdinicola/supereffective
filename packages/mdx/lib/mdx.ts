@@ -50,20 +50,23 @@ function _getMDXFileContent<D extends MDXDataType>(
 
 function _createGetAllEntriesFn(baseDir: string): (type: string) => MDXFileContent<any>[] {
   const allFiles = _getAllMDXFiles(baseDir)
-  const entriesByDir = allFiles.reduce((acc, file) => {
-    const content = _getMDXFileContent(baseDir, file)
-    if (!content._source.type) {
-      throw new Error(`Missing type for MDX file: ${file}`)
-    }
+  const entriesByDir = allFiles.reduce(
+    (acc, file) => {
+      const content = _getMDXFileContent(baseDir, file)
+      if (!content._source.type) {
+        throw new Error(`Missing type for MDX file: ${file}`)
+      }
 
-    const contentType = content._source.type.toLowerCase()
+      const contentType = content._source.type.toLowerCase()
 
-    if (!acc[contentType]) {
-      acc[contentType] = []
-    }
-    acc[contentType].push(content)
-    return acc
-  }, {} as Record<string, MDXFileContent<any>[]>)
+      if (!acc[contentType]) {
+        acc[contentType] = []
+      }
+      acc[contentType].push(content)
+      return acc
+    },
+    {} as Record<string, MDXFileContent<any>[]>
+  )
 
   return (type: string) => entriesByDir[type.toLowerCase()] || []
 }

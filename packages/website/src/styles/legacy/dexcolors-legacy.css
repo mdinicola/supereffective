@@ -20,48 +20,62 @@
 
 /* BRILLIANT DIAMOND */
 .dex-game-bd {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(-96deg, #019edd, hsla(0, 0%, 100%, 0)), #e0f4ff;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(-96deg, #019edd, hsla(0, 0%, 100%, 0)),
+    #e0f4ff;
 }
 
 .dex-game-card-bd {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(40deg, #29c0ff, hsla(0, 0%, 100%, 0)), #013348;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(40deg, #29c0ff, hsla(0, 0%, 100%, 0)),
+    #013348;
 }
 
 /* SHINING PEARL */
 .dex-game-sp {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(-96deg, #ab74bd, hsla(0, 0%, 100%, 0)), #f6ded6;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(-96deg, #ab74bd, hsla(0, 0%, 100%, 0)),
+    #f6ded6;
 }
 
 .dex-game-card-sp {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(40deg, #e39aff, hsla(0, 0%, 100%, 0)), #3c2942;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(40deg, #e39aff, hsla(0, 0%, 100%, 0)),
+    #3c2942;
 }
 
 /* VIOLET */
 .dex-game-v {
-  background: linear-gradient(rgba(81, 10, 116, 0.47), rgba(81, 10, 116, 0.3)),
+  background:
+    linear-gradient(rgba(81, 10, 116, 0.47), rgba(81, 10, 116, 0.3)),
     url('/assets/gui/bgs/sv-violet-pattern-sm.jpg') repeat top left;
 }
 
 .dex-game-card-v {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(30deg, #510a74, hsla(0, 0%, 100%, 0), #510a74), #bb51b7;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(30deg, #510a74, hsla(0, 0%, 100%, 0), #510a74),
+    #bb51b7;
 }
 
 /* SCARLET */
 .dex-game-s {
   background: linear-gradient(-100deg, #b22c32, hsla(0, 0%, 100%, 0), #fc2500), #fa976c;
 
-  background: linear-gradient(rgba(93, 14, 51, 0.48), rgba(93, 14, 51, 0.27)),
+  background:
+    linear-gradient(rgba(93, 14, 51, 0.48), rgba(93, 14, 51, 0.27)),
     url('/assets/gui/bgs/sv-violet-pattern-sm.jpg') repeat top left;
 }
 
 .dex-game-card-s {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(30deg, #5d0e33, hsla(0, 0%, 100%, 0), #5d0e33), #d12342;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(30deg, #5d0e33, hsla(0, 0%, 100%, 0), #5d0e33),
+    #d12342;
 }
 
 .dex-game-card-s:hover,
@@ -102,13 +116,17 @@
 }
 
 .dex-game-go {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(-105deg, #88e6ff, hsla(0, 0%, 100%, 0), #88e6ff), #2254e7;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(-105deg, #88e6ff, hsla(0, 0%, 100%, 0), #88e6ff),
+    #2254e7;
 }
 
 .dex-game-card-go {
-  background: url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
-    linear-gradient(305deg, #88e6ff, hsla(0, 0%, 100%, 0), #88e6ff), #2254e7;
+  background:
+    url('/assets/gui/bgs/patterns/twinkle-txr-2.png?t=2') center,
+    linear-gradient(305deg, #88e6ff, hsla(0, 0%, 100%, 0), #88e6ff),
+    #2254e7;
 }
 
 .dex-game-card-go:hover {

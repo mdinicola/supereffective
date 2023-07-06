@@ -22,7 +22,7 @@
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.2",
-    "@types/node": "^20.3.3",
+    "@types/node": "^20.4.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-modal": "^3.16.0",

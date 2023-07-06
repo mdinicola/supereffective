@@ -333,7 +333,9 @@
 }
 
 .editable .pkBoxCell img {
-  transition: filter 250ms, opacity 250ms;
+  transition:
+    filter 250ms,
+    opacity 250ms;
 }
 
 .listedViewMode .pkBoxCell.uncaught img,
@@ -341,13 +343,17 @@
   opacity: 0.8;
   /*filter: grayscale(80%) contrast(1);*/
   filter: contrast(0) brightness(0.2);
-  transition: opacity 250ms, filter 250ms;
+  transition:
+    opacity 250ms,
+    filter 250ms;
 }
 
 .pkBoxCell.shiny.shinyLocked img {
   opacity: 0.2;
   /*filter: grayscale(80%) contrast(1);*/
-  transition: opacity 250ms, filter 250ms;
+  transition:
+    opacity 250ms,
+    filter 250ms;
 }
 
 .pkBoxCell.uncaught:hover img,
