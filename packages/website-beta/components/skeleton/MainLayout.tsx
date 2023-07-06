@@ -1,6 +1,6 @@
 import { DivAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
-import { css } from '@/styled-system/css'
+import { fluentlayout } from '@/styled-system/patterns'
 
 type MainLayoutProps = DivAttributes<{
   children: React.ReactNode
@@ -11,16 +11,10 @@ export default function MainLayout({ children, className, ...rest }: MainLayoutP
     <div
       {...rest}
       className={cn(
-        css({
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          h: '100dvh',
-          minW: '300px',
+        fluentlayout({
           gap: 3,
           px: 3,
           pt: 3,
-          maxH: '100dvh',
           bgColor: 'gray.900',
         }),
         'main-layout',

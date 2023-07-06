@@ -1,4 +1,8 @@
-import Link, { LinkProps } from 'next/link'
+'use client'
+
+import { useRef } from 'react'
+import { AriaButtonProps, useButton } from 'react-aria'
+import Link from 'next/link'
 
 import { AnchorAttributes, ButtonAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
@@ -36,7 +40,7 @@ const buttonCva = cva({
       bg: 'gray.50',
       borderColor: 'gray.950',
     },
-    _active: {
+    '&:active, &.pressed': {
       transform: 'translate(3px, 3px)',
       boxShadow: 'none',
     },
@@ -138,43 +142,51 @@ const buttonCva = cva({
 type CvaProps = Parameters<typeof buttonCva>[0]
 type ButtonProps = (ButtonAttributes | AnchorAttributes) & {
   variant?: CvaProps
-}
+} & AriaButtonProps
 
 export default function Button({ href, variant, ...rest }: ButtonProps) {
-  const classNames = cn(buttonCva(variant), rest.className)
+  const ref = useRef(null)
+  const { buttonProps: ariaProps, isPressed } = useButton(
+    {
+      ...rest,
+      onPress: () => {
+        console.log('Button pressed', new Date())
+      },
+      elementType: href ? 'a' : 'button',
+    },
+    ref
+  )
+  const classNames = cn(buttonCva(variant), [isPressed, 'pressed'], rest.className)
 
   if (href && !href.startsWith('http')) {
     // internal link
-    const linkProps = rest as LinkProps
 
     return (
-      <Link className={classNames} tabIndex={0} {...linkProps} href={href}>
+      <Link className={classNames} tabIndex={0} {...ariaProps} href={href} ref={ref}>
         {rest.children}
       </Link>
     )
   }
   if (href) {
     // external link
-    const anchorProps = rest as AnchorAttributes
 
     return (
       <a
         className={classNames}
         tabIndex={0}
-        {...anchorProps}
+        {...ariaProps}
         href={href}
         target="_blank"
         rel="norefer nofollow"
+        ref={ref}
       >
         {rest.children}
       </a>
     )
   }
 
-  const buttonProps = rest as ButtonAttributes
-
   return (
-    <button className={classNames} tabIndex={0} {...buttonProps}>
+    <button className={classNames} tabIndex={0} {...ariaProps} ref={ref}>
       {rest.children}
     </button>
   )

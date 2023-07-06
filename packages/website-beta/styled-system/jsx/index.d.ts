@@ -1,5 +1,7 @@
 /* eslint-disable */
 export * from './factory'
+export * from './vscrollable'
+export * from './fluentlayout'
 export * from './box'
 export * from './flex'
 export * from './stack'

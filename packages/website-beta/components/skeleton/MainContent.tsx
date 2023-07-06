@@ -1,6 +1,6 @@
 import { DivAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
-import { css } from '@/styled-system/css'
+import { vscrollable } from '@/styled-system/patterns'
 
 type MainContentProps = DivAttributes<{
   children: React.ReactNode
@@ -11,12 +11,10 @@ export default function MainContent({ children, className, ...rest }: MainConten
     <main
       {...rest}
       className={cn(
-        css({
+        vscrollable({
           flex: '1',
-          overflowY: 'auto',
           color: 'gray.100',
           bgColor: 'gray.800',
-          overscrollBehavior: 'none',
           // minH: '400px',
           borderRadius: 'xl',
         }),
