@@ -249,7 +249,7 @@ export const Pokedex = ({
           handleLoadMore()
         }
       },
-      { rootMargin: '200px' }
+      { rootMargin: '50px' }
     )
     observer.observe(loadMoreRef.current)
     return () => observer.disconnect()
@@ -446,15 +446,9 @@ export const Pokedex = ({
   )
 
   const loadMoreBtn = hasMorePokemon ? (
-    <div className={css.loadMoreBtnCell} ref={loadMoreRef}>
-      <div className="text-center">
-        <Image
-          src="/assets/placeholders/home3d-icon/unknown-white.png"
-          width={96}
-          height={96}
-          className={css.pkimg}
-          alt=""
-        />
+    <div className={css.loadMoreBtnCell}>
+      <div className="text-center" ref={loadMoreRef}>
+        <Button onClick={handleLoadMore}>Load More</Button>
       </div>
     </div>
   ) : null

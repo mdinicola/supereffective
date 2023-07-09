@@ -432,8 +432,14 @@
   padding: 1em; */
 }
 
-.loadMoreBtnCell img {
-  visibility: hidden;
+.loadMoreBtnCell button {
+  padding: 4px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  width: 80px;
+  height: 50px;
+  min-width: auto;
+  background-color: #513659;
 }
 
 .externalLinks {

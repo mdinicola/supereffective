@@ -250,7 +250,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           handleLoadMore()
         }
       },
-      { rootMargin: '400px' }
+      { rootMargin: '100px' }
     )
     observer.observe(loadMoreRef.current)
     return () => observer.disconnect()
