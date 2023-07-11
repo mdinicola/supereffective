@@ -24,11 +24,13 @@ import { readVercelEnvVars, updateVercelEnvVars } from './vercelApi'
 
   const varsUpdate = {
     PATREON_CREATOR_ACCESS_TOKEN: {
-      ...vercelEnvVars.PATREON_CREATOR_ACCESS_TOKEN,
+      id: vercelEnvVars.PATREON_CREATOR_ACCESS_TOKEN.id,
+      key: vercelEnvVars.PATREON_CREATOR_ACCESS_TOKEN.key,
       value: token.access_token,
     },
     PATREON_CREATOR_REFRESH_TOKEN: {
-      ...vercelEnvVars.PATREON_CREATOR_REFRESH_TOKEN,
+      id: vercelEnvVars.PATREON_CREATOR_REFRESH_TOKEN.id,
+      key: vercelEnvVars.PATREON_CREATOR_REFRESH_TOKEN.key,
       value: token.refresh_token,
     },
   }
