@@ -40,8 +40,6 @@ export const getLegacyDexesApi = async (
 
   const dexes = await getLegacyDexes(userId, _email)
 
-  console.log('legacy dexes', dexes)
-
   const resp: ApiResponse = {
     statusCode: 200,
     data: dexes,

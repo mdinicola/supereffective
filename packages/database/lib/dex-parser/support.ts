@@ -29,8 +29,8 @@ export function convertDexFromLegacyToV4(dex: LoadedDex): DeserializedLivingDexD
     throw new Error(`LoadedDex has no userId`)
   }
 
-  const createdAt = _sanitizeDate(dex.createdAt)
-  const updatedAt = _sanitizeDate(dex.updatedAt)
+  const createdAt = sanitizeDate(dex.createdAt)
+  const updatedAt = sanitizeDate(dex.updatedAt)
 
   return {
     $id: dex.id,
@@ -255,7 +255,14 @@ function _documentToDex(doc: StorableDex): LoadedDex {
     lostPokemon: [],
   }
 }
-function _sanitizeDate(date: Date | SerializableDate | string | undefined): Date {
+
+export function sanitizeDate(
+  date: Date | SerializableDate | { seconds: Number; nanoseconds: Number } | string | undefined
+): Date {
+  if (date === undefined) {
+    return new Date()
+  }
+
   if (date instanceof Date) {
     return date
   }
@@ -264,11 +271,19 @@ function _sanitizeDate(date: Date | SerializableDate | string | undefined): Date
     return new Date(date)
   }
 
+  if ('seconds' in date) {
+    return new Date(Number(date.seconds) * 1000)
+  }
+
+  if (typeof date === 'object' && Object.keys(date).length === 2) {
+    return new Date(date._value)
+  }
+
   if (typeof date === 'object' && date._type && date._type === 'Date' && date._value) {
     return new Date(date._value)
   }
 
-  return new Date('2023-07-01T10:00:00.000Z')
+  return new Date('2023-01-01T00:00:00.000Z')
 }
 
 function _normalizePokemonList(

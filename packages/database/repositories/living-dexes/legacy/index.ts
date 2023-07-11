@@ -6,6 +6,7 @@ import {
   convertFirebaseStorableDexToLoadedDex,
   dexToLoadedDex,
   loadedDexToDex,
+  sanitizeDate,
 } from '../../../lib/dex-parser/support'
 import { getPrismaClient, PrismaTypes } from '../../../prisma/getPrismaClient'
 import { isShinyLocked } from '../../pokemon'
@@ -173,8 +174,8 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
           data: dexToSave.data,
           gameId: dexToSave.gameId,
           title: dexToSave.title,
-          creationTime: dexToSave.creationTime,
-          lastUpdateTime: dexToSave.lastUpdateTime || new Date(),
+          creationTime: sanitizeDate(dexToSave.creationTime),
+          lastUpdateTime: sanitizeDate(dexToSave.lastUpdateTime),
         })
       }
 
@@ -196,7 +197,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
               gameId: dexToSave.gameId,
               title: dexToSave.title,
               creationTime: new Date(),
-              lastUpdateTime: dexToSave.lastUpdateTime,
+              lastUpdateTime: sanitizeDate(dexToSave.lastUpdateTime),
             },
           })
           .then(result => ({ ...dex, id: result.id }))
@@ -209,7 +210,7 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
             title: dexToSave.title,
             specVer: dexToSave.specVer,
             data: dexToSave.data,
-            lastUpdateTime: dexToSave.lastUpdateTime,
+            lastUpdateTime: sanitizeDate(dexToSave.lastUpdateTime),
             userId,
           },
         })
