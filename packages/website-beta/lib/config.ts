@@ -18,11 +18,19 @@ const rootMetadata: Metadata = {
     capable: true,
   },
   manifest: '/manifest.json',
-  themeColor: token('colors.amber.800'),
-  viewport: 'width=device-width, initial-scale=1',
+  themeColor: token('colors.gray.900'),
+  viewport: {
+    // 'width=device-width, initial-scale=1, viewport-fit=cover',
+    width: 'device-width',
+    initialScale: 1,
+    minimumScale: 1,
+    maximumScale: 1,
+    viewportFit: 'cover',
+  },
 }
 
 const config = {
+  debugMode: false, // process.env.NODE_ENV === 'development',
   ..._config,
   rootMetadata,
 }

@@ -11,5 +11,10 @@ export type FullwordsProperties = {
 
 type FullwordsOptions = FullwordsProperties & Omit<SystemStyleObject, keyof FullwordsProperties | 'overflowWrap' | 'hyphens'>
 
+interface FullwordsPatternFn {
+  (options?: FullwordsOptions): string
+  raw: (options: FullwordsOptions) => FullwordsOptions
+}
+
 /** A pattern that makes text wrap at word boundaries, without breaking word letters. */
-export declare function fullwords(options?: FullwordsOptions): string
+export declare const fullwords: FullwordsPatternFn;

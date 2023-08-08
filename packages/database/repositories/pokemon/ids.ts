@@ -1532,6 +1532,11 @@ export const _pokemonIds = [
   'fezandipiti',
   'ogerpon',
   'terapagos',
+  'terapagos-terastal',
+  'dipplin',
+  'archaludon',
+  'ragingbolt',
+  'ironcrown',
 ] as const
 
 export type PokemonId = (typeof _pokemonIds)[number]

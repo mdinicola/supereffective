@@ -76,7 +76,8 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 
 1. Clone the repository
 2. Install dependencies: `pnpm install`
-3. Configure your DB connection strings.
+3. Generate necessary data and code locally: `pnpm codegen`
+4. Configure your DB connection strings.
    You can use the `db` service in `docker-compose.yml` to spawn a local DB, or use a provider like Neon.tech,
    then configure the database env vars in:
 
@@ -93,9 +94,7 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 ## Maintenance scripts
 
 - `pnpm build`: builds the website.
-- `pnpm update:packages`: update all dependencies to their latest version (a shortcut for `pnpm update -r --latest`).
-- `pnpm update:data`: update the data from `itsjavi/supereffective-assets` repo, and regenerates data-dependent code,
-  like the consts with IDs for Pokemon, moves, etc.
+- `pnpm codegen`: pulls the data from `itsjavi/supereffective-assets` repo, and generates all necessary code (including CSS).
 
 For other scripts, please check the `package.json` files.
 

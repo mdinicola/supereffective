@@ -1,8 +1,6 @@
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
-import { envVars } from './env'
-
 const config = {
   dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
@@ -18,7 +16,8 @@ const config = {
       'in your journey as a trainer. Follow us to stay up-to-date.',
   },
   links: {
-    twitter: 'https://twitter.com/supereffectiv',
+    twitter: 'https://mobile.twitter.com/supereffectiv',
+    patreon: 'https://www.patreon.com/supereffective',
     github: 'https://github.com/itsjavi',
     github_dataset: 'https://github.com/itsjavi/supereffective-assets',
     github_site: 'https://github.com/itsjavi/supereffective',
@@ -33,6 +32,8 @@ const config = {
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
   assets: {
+    version: '20230809-01',
+    baseUrl: 'https://itsjavi.com/supereffective-assets/assets',
     dataUrl: 'https://itsjavi.com/supereffective-assets/assets/data',
     fontsUrl: 'https://itsjavi.com/supereffective-assets/assets/fonts',
     imagesUrl: 'https://itsjavi.com/supereffective-assets/assets/images',

@@ -10,7 +10,8 @@
     "eliostruyf.vscode-front-matter",
     "unifiedjs.vscode-mdx",
     "pkief.material-icon-theme",
-    "yechunan.json-color-token"
+    "yechunan.json-color-token",
+    "zenclabs.previewjs"
   ],
   "unwantedRecommendations": ["eamodio.gitlens"]
 }

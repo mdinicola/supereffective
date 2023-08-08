@@ -1,13 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "gg.supereffective",
   "name": "SuperEffective.gg",
   "short_name": "SuperEffective",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#a692eb",
-  "background_color": "#a692eb",
+  "theme_color": "#111827",
+  "background_color": "#111827",
+  "shortcuts": [
+    {
+      "name": "Pokedex",
+      "short_name": "Pokedex",
+      "description": "Search for Pokemon",
+      "url": "/pokedex"
+    }
+  ],
   "icons": [
     {
       "src": "/images/favicon/apple-touch-icon.png?v=20230331",

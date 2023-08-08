@@ -3,18 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "description": "Mailing abstraction layer",
-  "scripts": {
-    "lint": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\"",
-    "lint:fix": "eslint \"./**/*.{ts,tsx,js,mjs,cjs}\" --fix",
-    "test": "echo 'No tests found.'"
-  },
   "dependencies": {
     "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@types/node": "^20.4.0",
-    "@types/nodemailer": "^6.4.8",
-    "nodemailer": "^6.9.3",
-    "resend": "^0.16.0",
+    "@types/node": "^20.4.9",
+    "@types/nodemailer": "^6.4.9",
+    "nodemailer": "^6.9.4",
+    "resend": "^0.17.2",
     "typescript": "^5.1.6"
   }
 }

@@ -10,3 +10,4 @@ transform:(props) => __spreadValues({
 export const getFullwordsStyle = (styles = {}) => fullwordsConfig.transform(styles, { map: mapObject })
 
 export const fullwords = (styles) => css(getFullwordsStyle(styles))
+fullwords.raw = (styles) => styles

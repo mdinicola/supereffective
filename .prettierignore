@@ -17,5 +17,6 @@ v8-compile-cache-*
 .ignore/
 generated/
 .generated/
-assets/
+assets/**/*.json
 styled-system/
+.vscode/templates

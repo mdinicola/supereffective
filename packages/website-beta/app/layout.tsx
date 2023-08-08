@@ -1,29 +1,26 @@
-import { MDXRefreshMeta } from '@pkg/mdx/components/MDXRefreshMeta'
+import BaseHead from '@/components/layouts/shared/BaseHead'
 
+import './globals-legacy.css'
 import './globals.css'
 
-import { isDevelopmentEnv } from '@pkg/utils/lib/env'
-
-import { monaSans } from '@/app/fonts'
-import DarkModeScript from '@/components/preflight/DarkModeScript'
-import StandaloneModeScript from '@/components/preflight/StandaloneModeScript'
+import { monaSans } from '@/app/_static/fonts'
+import PrimaryLayout from '@/components/layouts/PrimaryLayout'
 import config from '@/lib/config'
 
 export const metadata = config.rootMetadata
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={'dark standalone-aware'} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`dark${config.debugMode ? ' debug-mode' : ''}`}
+      suppressHydrationWarning
+    >
       <head>
-        {isDevelopmentEnv() && (
-          // Forces a page refresh when a new MDX file is changed
-          <MDXRefreshMeta />
-        )}
-        <DarkModeScript defaultEnabled={true} />
+        <BaseHead />
       </head>
       <body className={monaSans.className}>
-        {children}
-        <StandaloneModeScript />
+        <PrimaryLayout>{children}</PrimaryLayout>
       </body>
     </html>
   )

@@ -1,183 +1,108 @@
 'use client'
 
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { AriaButtonProps, useButton } from 'react-aria'
 import Link from 'next/link'
 
 import { AnchorAttributes, ButtonAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
-import { cva } from '@/styled-system/css'
+import { buttonRecipe, ButtonRecipeProps } from '@/styled-system-config/recipes/buttonRecipe'
+import { css } from '@/styled-system/css'
 
-const buttonCva = cva({
-  base: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    py: '1.5',
-    px: 6,
-    mr: '3px',
-    mb: '3px',
-    _last: {
-      mr: 0,
-    },
-    userSelect: 'none',
-    WebkitTapHighlightColor: 'transparent',
-    borderRadius: 'md',
-    lineHeight: '1.5rem',
-    verticalAlign: 'text-bottom',
-    textAlign: 'center',
-    fontSize: 'sm',
-    fontWeight: 'medium',
-    transition: 'all 0.2s',
-    cursor: 'pointer',
-    border: '2px solid',
-    bg: 'gray.100',
-    borderColor: 'gray.950',
-    color: 'gray.900',
-    boxShadow: '3px 3px 0px 0px token(colors.gray.950)',
-    textDecoration: 'none',
-    _hover: {
-      bg: 'gray.50',
-      borderColor: 'gray.950',
-    },
-    '&:active, &.pressed': {
-      transform: 'translate(3px, 3px)',
-      boxShadow: 'none',
-    },
-    _focusVisible: {
-      outline: 'none',
-      borderColor: 'neutral.50 !important',
-    },
-  },
-  variants: {
-    color: {
-      black: {
-        bg: 'neutral.900',
-        color: 'gray.100',
-        borderColor: 'neutral.950',
-        boxShadow: '3px 3px 0px 0px token(colors.neutral.950)',
-        _hover: {
-          bg: 'neutral.800',
-        },
-      },
-      red: {
-        bg: 'red.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'red.400',
-        },
-      },
-      green: {
-        bg: 'green.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'green.400',
-        },
-      },
-      blue: {
-        bg: 'blue.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'blue.400',
-        },
-      },
-      yellow: {
-        bg: 'yellow.300',
-        color: 'gray.900',
-        _hover: {
-          bg: 'yellow.200',
-        },
-      },
-      gold: {
-        bg: 'gold.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'gold.400',
-        },
-      },
-      orange: {
-        bg: 'orange.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'orange.400',
-        },
-      },
-      pink: {
-        bg: 'pink.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'pink.400',
-        },
-      },
-      purple: {
-        bg: 'purple.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'purple.400',
-        },
-      },
-      teal: {
-        bg: 'teal.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'teal.400',
-        },
-      },
-      brown: {
-        bg: 'brown.500',
-        color: 'gray.900',
-        _hover: {
-          bg: 'brown.400',
-        },
-      },
-    },
-    size: {
-      sm: { fontSize: 'sm', py: '0.5', px: 4 },
-      lg: { fontSize: 'lg', py: 3, px: 9, fontWeight: 'semibold', borderRadius: 'lg' },
-      xl: { fontSize: 'xl', py: 5, px: 12, fontWeight: 'bold', borderRadius: 'xl' },
-    },
-  },
-})
+type ButtonProps = Omit<
+  Omit<ButtonAttributes | AnchorAttributes, 'size'> & AriaButtonProps & ButtonRecipeProps,
+  'onClick'
+> & {
+  hardLink?: boolean
+}
 
-type CvaProps = Parameters<typeof buttonCva>[0]
-type ButtonProps = (ButtonAttributes | AnchorAttributes) & {
-  variant?: CvaProps
-} & AriaButtonProps
-
-export default function Button({ href, variant, ...rest }: ButtonProps) {
+export default function Button({ href, hardLink, color, size, ...rest }: ButtonProps) {
   const ref = useRef(null)
+  const isInternalLink = (href && !href.startsWith('http')) || (href && href.startsWith('#'))
+  const isExternalLink = href && href.startsWith('http')
+
+  if (rest.title) {
+    rest['aria-label'] = rest.title
+  }
+
+  const defaultOnPress = (e: any) => {
+    if (isInternalLink && !href.startsWith('#')) {
+      if (navigating) {
+        e.preventDefault()
+        e.stopPropagation()
+        return
+      }
+      setNavigating(true)
+      setTimeout(() => {
+        setNavigating(false)
+      }, 3000)
+    }
+  }
+  const [navigating, setNavigating] = React.useState(false)
   const { buttonProps: ariaProps, isPressed } = useButton(
     {
       ...rest,
-      onPress: () => {
-        console.log('Button pressed', new Date())
+      onPress: e => {
+        defaultOnPress(e)
+        rest.onPress?.(e)
       },
       elementType: href ? 'a' : 'button',
     },
     ref
   )
-  const classNames = cn(buttonCva(variant), [isPressed, 'pressed'], rest.className)
+  const classNames = cn(
+    buttonRecipe({
+      color,
+      size,
+    }),
+    [isPressed, 'pressed'],
+    [
+      navigating && isInternalLink,
+      css({
+        animation: 'pulse 1s ease infinite',
+      }),
+    ],
+    rest.className
+  )
 
-  if (href && !href.startsWith('http')) {
-    // internal link
-
+  if (isInternalLink) {
+    if (hardLink) {
+      return (
+        <a
+          className={classNames}
+          tabIndex={0}
+          {...ariaProps}
+          title={rest.title}
+          href={href}
+          ref={ref}
+        >
+          {rest.children}
+        </a>
+      )
+    }
     return (
-      <Link className={classNames} tabIndex={0} {...ariaProps} href={href} ref={ref}>
+      <Link
+        className={classNames}
+        tabIndex={0}
+        {...ariaProps}
+        title={rest.title}
+        href={href}
+        ref={ref}
+      >
         {rest.children}
       </Link>
     )
   }
-  if (href) {
-    // external link
-
+  if (isExternalLink) {
     return (
       <a
         className={classNames}
         tabIndex={0}
         {...ariaProps}
+        title={rest.title}
         href={href}
         target="_blank"
-        rel="norefer nofollow"
+        rel={`${rest.rel || 'external noopener noreferrer'}`}
         ref={ref}
       >
         {rest.children}

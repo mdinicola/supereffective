@@ -1,10 +1,9 @@
 import { BoolLike } from '@/lib/types/utility'
 
 export type ClassNameLike = string | BoolLike
+export type ClassNamesArg = ClassNameLike | ClassNameLike[] | [BoolLike, ...ClassNameLike[]]
 
-export function cn(
-  ...classNames: (ClassNameLike | ClassNameLike[] | [BoolLike, ...ClassNameLike[]])[]
-): string {
+export function cn(...classNames: ClassNamesArg[]): string {
   return classNames
     .flatMap(arg => {
       if (

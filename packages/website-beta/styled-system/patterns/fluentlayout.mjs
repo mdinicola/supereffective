@@ -8,6 +8,10 @@ transform:(props) => __spreadValues({
   justifyContent: "space-between",
   h: "100dvh",
   maxH: "100dvh",
+  _standalone: {
+    h: "100vh",
+    maxH: "100vh"
+  },
   minW: "300px",
   overflow: "hidden",
   gap: 3
@@ -16,3 +20,4 @@ transform:(props) => __spreadValues({
 export const getFluentlayoutStyle = (styles = {}) => fluentlayoutConfig.transform(styles, { map: mapObject })
 
 export const fluentlayout = (styles) => css(getFluentlayoutStyle(styles))
+fluentlayout.raw = (styles) => styles

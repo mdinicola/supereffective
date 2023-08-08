@@ -4,7 +4,7 @@ import Image from 'next/image'
 import config from '#/config'
 import { classNames } from '#/utils/legacyUtils'
 
-const spriteVersion = '20230626-01'
+const assetsVersion = config.assets.version
 
 const variantFolder = {
   '2d': 'home2d-icon',
@@ -44,7 +44,7 @@ export default function PkImgFile({
     className
   )
 
-  let imageSrc = `${config.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${spriteVersion}`
+  let imageSrc = `${config.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetsVersion}`
 
   if (nid === 'placeholder') {
     imageSrc = '/assets/gui/placeholders/placeholder-64x64.png'

@@ -49,15 +49,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
-      - name: Use assets cache
-        id: assets-cache
-        uses: actions/cache@v3
-        with:
-          path: '**/packages/database/.cache'
-          key: ${{ runner.os }}-assets-cache-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-assets-cache-
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -80,7 +71,7 @@ jobs:
         run: pnpm install
 
       - name: Run code generators
-        run: pnpm -r build:code
+        run: pnpm -r codegen
 
       - name: Prettify
         run: pnpm pretty

@@ -1,7 +1,9 @@
 /* eslint-disable */
 export * from './factory'
+export * from './is-valid-prop'
 export * from './vscrollable'
 export * from './fluentlayout'
+export * from './safearea'
 export * from './fullwords'
 export * from './box'
 export * from './flex'

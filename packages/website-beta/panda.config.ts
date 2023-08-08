@@ -1,8 +1,11 @@
 import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
 
-import colors from '@/lib/panda/colors'
-import globalCss from '@/lib/panda/globalCss'
-import patterns from '@/lib/panda/patterns'
+import colors from '@/styled-system-config/colors'
+import globalCss from '@/styled-system-config/globalCss'
+import patterns from '@/styled-system-config/patterns'
+import sizes from '@/styled-system-config/sizes'
+
+import utilities from './styled-system-config/utilities'
 
 export default defineConfig({
   // Whether to use css reset
@@ -16,6 +19,7 @@ export default defineConfig({
     './app/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
     './lib/**/*.{js,jsx,ts,tsx}',
+    './styled-system-config/**/*.{js,jsx,ts,tsx}',
   ],
 
   // Files to exclude
@@ -32,7 +36,17 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: colors,
+        sizes: sizes,
       },
+    },
+  },
+  utilities: {
+    extend: utilities,
+  },
+
+  conditions: {
+    extend: {
+      standalone: '@media (display-mode: standalone)',
     },
   },
 
@@ -42,4 +56,9 @@ export default defineConfig({
 
   // The output directory for your css system
   outdir: 'styled-system',
+
+  studio: {
+    logo: '🐼',
+    outdir: 'styled-system-docs',
+  },
 })

@@ -5,6 +5,7 @@ import type { Tokens } from '../tokens'
 
 type PropertyValueTypes  = {
 	aspectRatio: "auto" | "square" | "landscape" | "portrait" | "wide" | "ultrawide" | "golden";
+	zIndex: Tokens["zIndex"];
 	top: Tokens["spacing"];
 	left: Tokens["spacing"];
 	insetInline: Tokens["spacing"];
@@ -124,10 +125,12 @@ type PropertyValueTypes  = {
 	borderLeft: Tokens["borders"];
 	borderLeftColor: Tokens["colors"];
 	borderInlineStart: Tokens["borders"];
+	borderInlineStartWidth: Tokens["borderWidths"];
 	borderInlineStartColor: Tokens["colors"];
 	borderRight: Tokens["borders"];
 	borderRightColor: Tokens["colors"];
 	borderInlineEnd: Tokens["borders"];
+	borderInlineEndWidth: Tokens["borderWidths"];
 	borderInlineEndColor: Tokens["colors"];
 	borderTop: Tokens["borders"];
 	borderTopColor: Tokens["colors"];
@@ -137,6 +140,7 @@ type PropertyValueTypes  = {
 	borderBlockEndColor: Tokens["colors"];
 	borderBlockStart: Tokens["borders"];
 	borderBlockStartColor: Tokens["colors"];
+	opacity: Tokens["opacity"];
 	boxShadow: Tokens["shadows"];
 	boxShadowColor: Tokens["colors"];
 	filter: "auto";
@@ -150,13 +154,13 @@ type PropertyValueTypes  = {
 	transitionTimingFunction: Tokens["easings"];
 	transitionDelay: Tokens["durations"];
 	transitionDuration: Tokens["durations"];
-	transitionProperty: "all" | "none" | "opacity" | "shadow" | "transform" | "base" | "background" | "colors";
+	transition: "all" | "common" | "background" | "colors" | "opacity" | "shadow" | "transform";
 	animation: Tokens["animations"];
 	animationDelay: Tokens["durations"];
 	scale: "auto" | CssProperties["scale"];
 	translate: "auto" | CssProperties["translate"];
-	translateX: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full";
-	translateY: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full";
+	translateX: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full" | "-1/2" | "-1/3" | "-2/3" | "-1/4" | "-2/4" | "-3/4" | "-full";
+	translateY: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full" | "-1/2" | "-1/3" | "-2/3" | "-1/4" | "-2/4" | "-3/4" | "-full";
 	accentColor: Tokens["colors"];
 	caretColor: Tokens["colors"];
 	scrollbar: "visible" | "hidden";
@@ -197,6 +201,7 @@ type PropertyValueTypes  = {
 	stroke: Tokens["colors"];
 	srOnly: boolean;
 	debug: boolean;
+	bgColor: Tokens["colors"] | CssProperties["backgroundColor"];
 	colorPalette: "rose" | "pink" | "fuchsia" | "indigo" | "sky" | "cyan" | "emerald" | "lime" | "yellow" | "amber" | "orange" | "red" | "neutral" | "stone" | "zinc" | "gray" | "slate" | "green" | "brown" | "gold" | "silver" | "teal" | "blue" | "purple" | "scarlet" | "violet";
 	textStyle: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl";
 }
@@ -286,13 +291,16 @@ type PropertyValueTypes  = {
 	borderYWidth: Shorthand<"borderBlockWidth">;
 	borderYColor: Shorthand<"borderBlockColor">;
 	borderStart: Shorthand<"borderInlineStart">;
+	borderStartWidth: Shorthand<"borderInlineStartWidth">;
 	borderStartColor: Shorthand<"borderInlineStartColor">;
 	borderEnd: Shorthand<"borderInlineEnd">;
+	borderEndWidth: Shorthand<"borderInlineEndWidth">;
 	borderEndColor: Shorthand<"borderInlineEndColor">;
 	shadow: Shorthand<"boxShadow">;
 	shadowColor: Shorthand<"boxShadowColor">;
 	x: Shorthand<"translateX">;
 	y: Shorthand<"translateY">;
+	bgc: Shorthand<"bgColor">;
 }
 
 export type PropertyValue<T extends string> = T extends keyof PropertyTypes

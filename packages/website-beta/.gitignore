@@ -41,3 +41,4 @@ next-env.d.ts
 
 # app
 .cache/
+styled-system-docs/*

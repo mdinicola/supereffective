@@ -36,6 +36,16 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
     },
+    "codegen": {
+      "dependsOn": ["^codegen"],
+      "outputs": [
+        "data/**",
+        "styled-system/**",
+        "@prisma/client/**",
+        "repositories/**",
+        "prisma/**"
+      ]
+    },
     "//#pretty:all": {
       "description": "Run the pretty:all script from the root package ('`//#` signifies `root package`)",
       "outputs": [],

@@ -52,6 +52,32 @@
     text-decoration: underline
     }
 
+  img, svg {
+    display: block;
+    max-width: 100%;
+    height: auto
+    }
+
+  svg.filled {
+    fill: currentColor
+    }
+
+  button svg, button img {
+    display: inline-block;
+    margin: var(--fcTUxn);
+    vertical-align: middle;
+    pointer-events: none
+    }
+
+  .unsupported-browser-overlay {
+    display: none !important;
+    width: 1px !important;
+    height: 1px !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
+    pointer-events: none
+    }
+
   @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark

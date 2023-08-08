@@ -11,5 +11,10 @@ export type FluentlayoutProperties = {
 
 type FluentlayoutOptions = FluentlayoutProperties & Omit<SystemStyleObject, keyof FluentlayoutProperties | 'display' | 'h' | 'maxH' | 'flexDirection' | 'justifyContent' | 'overflow' | 'minW'>
 
+interface FluentlayoutPatternFn {
+  (options?: FluentlayoutOptions): string
+  raw: (options: FluentlayoutOptions) => FluentlayoutOptions
+}
+
 /** A flex container that fills the viewport height, and has a minimum width of 300px. */
-export declare function fluentlayout(options?: FluentlayoutOptions): string
+export declare const fluentlayout: FluentlayoutPatternFn;

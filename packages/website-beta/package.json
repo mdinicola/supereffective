@@ -9,37 +9,54 @@
     "clear-cache": "rm -rf .next/cache .turbo",
     "codegen": "panda codegen",
     "dev": "PORT=3002 next dev",
+    "dev:beta": "PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
+    "panda:show": "panda studio --build --config panda.config.ts && panda studio --preview",
     "prepare": "pnpm codegen",
     "start:beta": "PORT=3002 next start",
     "test": "echo \"No tests yet on packages/website-beta\""
   },
+  "browserslist": [
+    "> 0.2% and not dead and supports css-cascade-layers",
+    "maintained node versions"
+  ],
   "dependencies": {
+    "@csstools/postcss-cascade-layers": "^4.0.0",
+    "@csstools/postcss-color-mix-function": "^2.0.1",
+    "@pandacss/types": "^0.10.0",
     "@pkg/auth": "workspace:*",
     "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
     "@pkg/mdx": "workspace:*",
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@prisma/nextjs-monorepo-workaround-plugin": "^4.16.2",
-    "@types/node": "20.4.0",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
-    "eslint": "8.44.0",
-    "eslint-config-next": "13.4.8",
-    "lucide-react": "^0.258.0",
-    "next": "13.4.8",
-    "next-axiom": "^0.18.0",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.1.1",
+    "@svgr/webpack": "^8.0.1",
+    "@tanstack/react-virtual": "3.0.0-beta.54",
+    "@types/node": "20.4.9",
+    "@types/react": "18.2.19",
+    "@types/react-dom": "18.2.7",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.12",
+    "lucide-react": "^0.265.0",
+    "next": "13.4.12",
+    "next-axiom": "1.0.0-rc.1",
     "next-sitemap": "^4.1.8",
+    "postcss-preset-env": "^9.1.1",
     "react": "18.2.0",
     "react-aria": "^3.26.0",
     "react-dom": "18.2.0",
+    "react-stately": "^3.24.0",
     "typescript": "5.1.6",
     "zod": "^3.21.4",
-    "zustand": "^4.3.9"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.5.1"
+    "@pandacss/dev": "^0.10.0",
+    "postcss-load-config": "^4.0.1"
+  },
+  "overrides": {
+    "@tanstack/react-virtual": "3.0.0-beta.54"
   }
 }

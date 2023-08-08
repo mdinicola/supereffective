@@ -11,5 +11,10 @@ export type VscrollableProperties = {
 
 type VscrollableOptions = VscrollableProperties & Omit<SystemStyleObject, keyof VscrollableProperties | 'overflowY' | 'overscrollBehavior' | 'overflowX' | 'maxW'>
 
+interface VscrollablePatternFn {
+  (options?: VscrollableOptions): string
+  raw: (options: VscrollableOptions) => VscrollableOptions
+}
+
 /** A vertically scrollable container, that blocks the x-axis scrollbar. */
-export declare function vscrollable(options?: VscrollableOptions): string
+export declare const vscrollable: VscrollablePatternFn;
