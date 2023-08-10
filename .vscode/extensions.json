@@ -2,15 +2,10 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "visualstudioexptteam.vscodeintellicode",
-    "visualstudioexptteam.vscodeintellicode-completions",
-    "visualstudioexptteam.intellicode-api-usage-examples",
     "christian-kohler.path-intellisense",
     "prisma.prisma",
     "eliostruyf.vscode-front-matter",
-    "unifiedjs.vscode-mdx",
     "pkief.material-icon-theme",
-    "yechunan.json-color-token",
     "zenclabs.previewjs"
   ],
   "unwantedRecommendations": ["eamodio.gitlens"]

@@ -1,0 +1,27 @@
+name: 'Check code quality'
+description: 'Checks code quality: prettier, linters, build and test'
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      name: Run code generators
+      run: pnpm -r codegen
+
+    - shell: bash
+      name: Prettify
+      run: pnpm prettier-check
+
+    - shell: bash
+      name: Run ESLint
+      run: pnpm lint
+
+    - shell: bash
+      name: Build code
+      run: pnpm build
+
+    - shell: bash
+      run: pnpm build
+
+    - shell: bash
+      name: Run tests
+      run: pnpm test:ci
