@@ -38,7 +38,8 @@
     "test": "turbo run test:all",
     "test:all": "env-cmd jest",
     "test:ci": "pnpm test -- -- --ci",
-    "test:coverage": "pnpm test -- -- --coverage"
+    "test:coverage": "pnpm test -- -- --coverage",
+    "upgrade-packages": "make upgrade-packages"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
