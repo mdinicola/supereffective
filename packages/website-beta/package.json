@@ -16,7 +16,7 @@
     "prepare": "pnpm codegen",
     "start:beta": "PORT=3002 next start",
     "test": "echo \"No tests yet on packages/website-beta\"",
-    "vercel:build": "cd ../../ && pnpm vercel:build",
+    "vercel:build": "cd ../../ && pnpm vercel:build && cd - && pnpm build:beta",
     "vercel:dev": "cd ../../ && pnpm dev",
     "vercel:install": "cd ../../ && pnpm install"
   },
