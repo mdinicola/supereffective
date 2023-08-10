@@ -1,6 +1,6 @@
 {
   "name": "@app/website-beta",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "build:beta": "pnpm build:nextjs && pnpm build:sitemap",
