@@ -36,6 +36,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
     },
+    "build:beta": {
+      "dependsOn": ["^build:beta"],
+      "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
+    },
     "codegen": {
       "dependsOn": ["^codegen"],
       "outputs": [

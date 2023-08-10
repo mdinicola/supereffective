@@ -39,7 +39,8 @@
     "test:ci": "pnpm test -- -- --ci",
     "test:coverage": "pnpm test -- -- --coverage",
     "upgrade-packages": "make upgrade-packages",
-    "vercel:build": "pnpm codegen && pnpm lint && pnpm migrate:deploy && turbo run build"
+    "vercel:build": "pnpm codegen && pnpm lint && pnpm migrate:deploy && turbo run build",
+    "vercel:build:beta": "pnpm codegen && pnpm lint && pnpm migrate:deploy && turbo run build:beta"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
