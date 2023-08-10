@@ -20,8 +20,5 @@ runs:
       run: pnpm build
 
     - shell: bash
-      run: pnpm build
-
-    - shell: bash
       name: Run tests
       run: pnpm test:ci
