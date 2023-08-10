@@ -37,7 +37,7 @@
     "studio:prod": "pnpm pkg:database studio:prod",
     "test": "turbo run test:all",
     "test:all": "env-cmd jest",
-    "test:ci": "pnpm test -- -- --ci --coverage",
+    "test:ci": "pnpm test -- -- --ci",
     "test:coverage": "pnpm test -- -- --coverage"
   },
   "dependencies": {
