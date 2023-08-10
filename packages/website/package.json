@@ -12,7 +12,10 @@
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
     "start": "PORT=3001 next start",
-    "test": "echo \"No tests yet on packages/website\""
+    "test": "echo \"No tests yet on packages/website\"",
+    "vercel:build": "cd ../../ && pnpm vercel:build",
+    "vercel:dev": "cd ../../ && pnpm dev",
+    "vercel:install": "cd ../../ && pnpm install"
   },
   "dependencies": {
     "@pkg/auth": "workspace:*",

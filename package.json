@@ -7,7 +7,6 @@
   "author": "Javi Aguilar https://itsjavi.com",
   "scripts": {
     "build": "pnpm codegen && pnpm format && env-cmd turbo run build",
-    "build:vercel": "pnpm codegen && pnpm lint && pnpm migrate:deploy && turbo run build",
     "clear-cache": "pnpm -r clear-cache",
     "codegen": "turbo run codegen",
     "dev": "pnpm dev:prepare && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
@@ -39,7 +38,8 @@
     "test:all": "env-cmd jest",
     "test:ci": "pnpm test -- -- --ci",
     "test:coverage": "pnpm test -- -- --coverage",
-    "upgrade-packages": "make upgrade-packages"
+    "upgrade-packages": "make upgrade-packages",
+    "vercel:build": "pnpm codegen && pnpm lint && pnpm migrate:deploy && turbo run build"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
