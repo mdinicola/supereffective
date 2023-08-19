@@ -2,17 +2,14 @@
 
 import { useRef, useState } from 'react'
 import Link from 'next/link'
-import {
-  ArrowDown01Icon,
-  ArrowDownAZIcon,
-  ArrowUp01Icon,
-  ArrowUpAZIcon,
-  ShapesIcon,
-  XCircleIcon,
-} from 'lucide-react'
 
 import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/repositories/pokemon'
 
+import ArrowDown01Icon from '@/components/icons/ArrowDown01Icon'
+import ArrowDownAZIcon from '@/components/icons/ArrowDownAZIcon'
+import ArrowUp01Icon from '@/components/icons/ArrowUp01Icon'
+import ArrowUpAZIcon from '@/components/icons/ArrowUpAZIcon'
+import XCircleIcon from '@/components/icons/XCircleIcon'
 import VirtualScrollContainer from '@/components/overlays/virtualscroll/VirtualScrollContainer'
 import { PokeImg } from '@/components/pkm/imgs/PokeImg'
 import Button from '@/components/primitives/Button'
@@ -182,37 +179,44 @@ export default function SearchBar({ className, close, ...rest }: SearchBarProps)
           gap: 2,
         })}
       >
-        <Button className={css({ paddingInline: 3 })} color="blue">
-          <ShapesIcon size={24} />
-        </Button>
-        <Button
-          className={css({ paddingInline: 3 })}
-          color={sortBy === 'name' ? 'gold' : 'black'}
-          onPress={() => {
-            if (sortBy === 'name') {
-              setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
-              return
-            }
-            setSortBy('name')
-          }}
+        <div
+          className={css({
+            display: 'flex',
+            flex: 1,
+            gap: 2,
+          })}
         >
-          {(sortBy !== 'name' || sortOrder === 'asc') && <ArrowDownAZIcon size={24} />}
-          {sortBy === 'name' && sortOrder === 'desc' && <ArrowUpAZIcon size={24} />}
-        </Button>
-        <Button
-          className={css({ paddingInline: 3 })}
-          color={sortBy === 'dexNum' ? 'gold' : 'black'}
-          onPress={() => {
-            if (sortBy === 'dexNum') {
-              setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
-              return
-            }
-            setSortBy('dexNum')
-          }}
-        >
-          {(sortBy !== 'dexNum' || sortOrder === 'asc') && <ArrowDown01Icon size={24} />}
-          {sortBy === 'dexNum' && sortOrder === 'desc' && <ArrowUp01Icon size={24} />}
-        </Button>
+          <Button
+            title="Sort by name"
+            className={css({ paddingInline: 3, flex: 1 })}
+            color={sortBy === 'name' ? 'gold' : 'black'}
+            onPress={() => {
+              if (sortBy === 'name') {
+                setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+                return
+              }
+              setSortBy('name')
+            }}
+          >
+            {(sortBy !== 'name' || sortOrder === 'asc') && <ArrowDownAZIcon size={24} />}
+            {sortBy === 'name' && sortOrder === 'desc' && <ArrowUpAZIcon size={24} />}
+          </Button>
+          <Button
+            title="Sort by dex number"
+            className={css({ paddingInline: 3, flex: 1 })}
+            color={sortBy === 'dexNum' ? 'gold' : 'black'}
+            onPress={() => {
+              if (sortBy === 'dexNum') {
+                setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+                return
+              }
+              setSortBy('dexNum')
+            }}
+          >
+            {(sortBy !== 'dexNum' || sortOrder === 'asc') && <ArrowDown01Icon size={24} />}
+            {sortBy === 'dexNum' && sortOrder === 'desc' && <ArrowUp01Icon size={24} />}
+          </Button>
+        </div>
         <Button
           className={css({ paddingInline: 3 })}
           color="black"

@@ -1,5 +1,5 @@
-import { SearchIcon, UserCircle2Icon } from 'lucide-react'
-
+import SearchIcon from '@/components/icons/SearchIcon'
+import UserCircle2Icon from '@/components/icons/UserCircle2Icon'
 import SearchBarTrigger from '@/components/overlays/searchbar/SearchBarTrigger'
 import UserSidebar from '@/components/overlays/sidebars/UserSidebar'
 import Button from '@/components/primitives/Button'

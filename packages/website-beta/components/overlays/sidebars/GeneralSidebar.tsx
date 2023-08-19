@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { HeartIcon } from 'lucide-react'
 
 import DiscordIcon from '@/assets/brands/social/discord.svg'
 import GithubIcon from '@/assets/brands/social/github.svg'
 import TwitterIcon from '@/assets/brands/social/twitter.svg'
 import LogoIcon from '@/assets/logo/logo.svg'
+import HeartIcon from '@/components/icons/HeartIcon'
 import Button from '@/components/primitives/Button'
 import config from '@/lib/config'
 import { DivAttributes } from '@/lib/types/react'

@@ -22,11 +22,11 @@
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/client": "^5.1.1",
-    "@types/node": "^20.4.9",
+    "@types/node": "^20.5.1",
     "prisma": "^5.1.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
-    "zod": "^3.21.4"
+    "zod": "^3.22.2"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"
