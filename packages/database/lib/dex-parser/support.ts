@@ -186,6 +186,17 @@ export function convertDexFromV4ToLegacyStd(
   }
 }
 
+export const findFirstPokemonInBoxes = (pokemonId: string, boxes: DexBox[]): NullableDexPokemon => {
+  let pokemon: NullableDexPokemon = null
+
+  boxes.some(box => {
+    pokemon = box.pokemon.find(pkm => pkm?.pid === pokemonId) || null
+    return !!pokemon
+  })
+
+  return pokemon
+}
+
 export function dexToLoadedDex(dex: LivingDex): LoadedDex {
   const dataMd = convertDexFromV4ToLegacy(dex, parseLivingDex(dex.data))
   const loadedDex = convertFirebaseStorableDexToLoadedDex(dex.id, dataMd)

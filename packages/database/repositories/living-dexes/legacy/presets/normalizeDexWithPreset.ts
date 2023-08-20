@@ -11,7 +11,11 @@ import { PresetDex, PresetDexBox } from './types'
 
 const _LEFTOVER_BOX_NAME = 'TERU-SAMA'
 
-export const normalizeDexWithPreset = (oldDex: LoadedDex, preset: PresetDex): LoadedDex => {
+export const normalizeDexWithPreset = (
+  oldDex: LoadedDex,
+  preset: PresetDex,
+  sideBySideShinies = true
+): LoadedDex => {
   // Create the new dex
   const newDex = createDexFromPreset(oldDex.gameId, preset, oldDex.userId)
   newDex.id = oldDex.id // Important!  otherwise we will create duplicated dexes
@@ -20,9 +24,31 @@ export const normalizeDexWithPreset = (oldDex: LoadedDex, preset: PresetDex): Lo
 
   // fully generate all boxes, taking all the available pokemon info from the old one
   const presetBoxes = normalizePresetBoxes(newDex.gameId, preset)
-  const [nonShinyBoxes, nonShinyLost] = _matchBoxes(false, oldDex.boxes, preset, presetBoxes)
-  const [shinyBoxes, shinyLost] = _matchBoxes(true, oldDex.boxes, preset, presetBoxes)
-  newDex.boxes = nonShinyBoxes.concat(shinyBoxes)
+  const [nonShinyBoxes, nonShinyLost] = _matchBoxes(
+    false,
+    oldDex.boxes,
+    preset,
+    presetBoxes,
+    sideBySideShinies
+  )
+  const [shinyBoxes, shinyLost] = _matchBoxes(
+    true,
+    oldDex.boxes,
+    preset,
+    presetBoxes,
+    sideBySideShinies
+  )
+  newDex.boxes = sideBySideShinies
+    ? nonShinyBoxes.flatMap((box, i) => [box, shinyBoxes[i]])
+    : nonShinyBoxes.concat(shinyBoxes)
+
+  // rewrite titles:
+
+  newDex.boxes = newDex.boxes.map((box, i) => {
+    box.title = createBoxTitle(newDex.gameSetId, null, i + 1)
+    return box
+  })
+
   newDex.lostPokemon = nonShinyLost.pokemon.concat(shinyLost.pokemon)
 
   return recalculateCounters(newDex)
@@ -32,7 +58,8 @@ function _matchBoxes(
   asShiny: boolean,
   oldBoxes: DexBox[],
   preset: PresetDex,
-  presetBoxes: PresetDexBox[]
+  presetBoxes: PresetDexBox[],
+  sideBySideShinies = true
 ): [DexBox[], DexBox] {
   // Collect all the pokemon
   const pkmHashMap: { [key: string]: (DexPokemon | null)[] } = {}
@@ -48,7 +75,7 @@ function _matchBoxes(
     })
   })
 
-  const initialBoxIndex = asShiny ? presetBoxes.length : 0
+  const initialBoxIndex = sideBySideShinies ? 0 : asShiny ? presetBoxes.length : 0
 
   const newBoxes = presetBoxes.map((box, boxIndex) => ({
     title: createBoxTitle(preset.gameSet as GameSetId, box.title, boxIndex + 1 + initialBoxIndex),

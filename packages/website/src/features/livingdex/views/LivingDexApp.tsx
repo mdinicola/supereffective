@@ -39,7 +39,6 @@ import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
 import { ExternLink, SiteLink } from '#/primitives/legacy/Link/Links'
 import { DexSocialLinks } from '#/primitives/legacy/SocialLinks/SocialLinks'
 import {
-  ToolbarButton,
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
@@ -48,6 +47,7 @@ import { classNameIf } from '#/utils/legacyUtils'
 
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
+import { PkBoxGroupShinyMix } from './PkBoxShinyMix'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
 type SyncState = 'changed' | 'synced'
@@ -87,10 +87,12 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const numBoxes = loadedDex.boxes.length || 0
   const [viewMode, setViewMode] = useState<ViewMode>(numBoxes > 2 ? 'boxed' : 'listed')
   const [modalContent, setModalContent] = useState<ModalContent | null>(null)
-  const [showShiny, setShowShiny] = useState(false)
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
   const livingdex = useContext(LivingDexContext)
   const [saveError, setSaveError] = useState<Error | null>(null)
+  const [showRegularBoxes, setShowRegularBoxes] = useState(true)
+  const [showShinyBoxes, setShowShinyBoxes] = useState(false)
+  const showMixedShinies = showShinyBoxes && showRegularBoxes
 
   const dex = livingdex.state
 
@@ -409,7 +411,16 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     prevState: string | null,
     prevAction: string | null
   ) => {
-    console.log('handleSettingsToolbar', newAction, prevState, prevAction)
+    if (newAction === 'toggle-showRegularBoxes') {
+      setShowRegularBoxes(!showRegularBoxes)
+      return
+    }
+
+    if (newAction === 'toggle-showShinyBoxes') {
+      setShowShinyBoxes(!showShinyBoxes)
+      return
+    }
+
     if (newAction === 'import') {
       handleImport()
       return
@@ -556,7 +567,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     <div id={'dex-' + dex.id} className={styles.toolbar}>
       <div className={styles.toolbarContainer}>
         <ToolbarButtonGroupGroup collapsed={true}>
-          <ToolbarButton
+          {/* <ToolbarButton
             actionName={null}
             icon={'home3'}
             href={'/apps/livingdex'}
@@ -564,7 +575,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             onClick={() => {
               // tracker.dexesHomeClicked()
             }}
-          />
+          /> */}
           {/*Todo: fix button group internal state not updating when selectMode changes (initialAction related?)*/}
           {viewMode !== 'boxed' && (
             <ToolbarButtonGroup
@@ -678,8 +689,40 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           <ToolbarButtonGroup
             initialAction={null}
             isDropdown
-            dropdownNoActionIcon={'cog'}
+            isMultiple
+            dropdownNoActionIcon={'pkg-shiny'}
             onButtonClick={handleSettingsToolbar}
+            dropdownTitle={'Shiny options'}
+            isDeselectable={false}
+            items={(() => {
+              return [
+                {
+                  actionName: 'toggle-showShinyBoxes',
+                  icon: 'pkg-shiny',
+                  label: showShinyBoxes ? 'Shiny: ON' : 'Shiny: OFF',
+                  status: showShinyBoxes ? 'selected' : null,
+                  className: styles.saveBtn,
+                  showLabel: true,
+                },
+                {
+                  actionName: 'toggle-showRegularBoxes',
+                  icon: 'star_outline',
+                  label: showRegularBoxes ? 'Regular: ON' : 'Regular: OFF',
+                  title: 'Show shiny boxes mixed with the non-shiny ones',
+                  status: showRegularBoxes ? 'selected' : null,
+                  className: styles.saveBtn,
+                  showLabel: true,
+                },
+              ]
+            })()}
+          />
+          <ToolbarButtonGroup
+            initialAction={null}
+            isDropdown
+            isMultiple
+            dropdownNoActionIcon={'wrench'}
+            onButtonClick={handleSettingsToolbar}
+            dropdownTitle={'Tools'}
             isDeselectable={false}
             items={(() => {
               return [
@@ -787,6 +830,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   )
 
   let genericModal = null
+  const BoxGroupComponent = showMixedShinies ? PkBoxGroupShinyMix : PkBoxGroup
+
   if (modalContent !== null) {
     genericModal = (
       <ReactModal
@@ -843,28 +888,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       <SiteLink href={'/apps/livingdex/missing#g-' + dex.gameId}>
         <i className={'icon-pkg-pokeball-outlined'} /> View Missing
       </SiteLink>
-    </span>
-  )
-
-  const shinyAnchor = (
-    <span
-      onClick={() => {
-        setShowShiny(true)
-      }}
-      className={styles.nonShinyAnchor}
-    >
-      <i className={'icon-pkg-shiny'} /> View Shiny Mode
-    </span>
-  )
-
-  const nonShinyAnchor = (
-    <span
-      onClick={() => {
-        setShowShiny(false)
-      }}
-      className={styles.shinyAnchor}
-    >
-      <i className={'icon-pkg-pokedex'} /> View Normal Mode
     </span>
   )
 
@@ -947,25 +970,16 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         )}
         <div
           className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
-          style={{ right: hasShinyMode ? '200px' : '1rem' }}
+          style={{ right: '1rem' }}
         >
           {missingAnchor}
         </div>
 
-        {hasShinyMode && (
-          <div
-            className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
-          >
-            {showShiny && nonShinyAnchor}
-            {!showShiny && shinyAnchor}
-          </div>
-        )}
-
-        <PkBoxGroup
+        <BoxGroupComponent
           dex={dex}
           perPage={2}
-          showNonShiny={!showShiny}
-          showShiny={showShiny}
+          showShiny={showShinyBoxes}
+          showNonShiny={showRegularBoxes}
           selectMode={selectMode}
           viewMode={viewMode}
           usePixelIcons={false}
@@ -1003,7 +1017,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             <i>
               <span>
                 <sup>(*) </sup>
-                {dex.boxes.length / 2} boxes for each mode (regular and shiny).
+                {dex.boxes.length / 2} boxes are needed for each mode (regular and shiny), a total
+                of {dex.boxes.length} boxes.
                 <br />
                 <br />
               </span>

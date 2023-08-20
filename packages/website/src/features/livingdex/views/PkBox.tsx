@@ -1,5 +1,7 @@
 import { ReactElement, useEffect, useRef, useState } from 'react'
 
+import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
+import { createBoxTitle } from '@pkg/database/repositories/living-dexes/legacy/presets/createBoxTitle'
 import {
   DexBox,
   LoadedDex,
@@ -34,6 +36,7 @@ interface PkBoxProps {
   children: any[]
   tabIndex?: number | undefined
   title: string
+  isOverflowing?: boolean
   className?: string
   onClick?: (boxIndex: number, boxData: DexBox) => void
   editable: boolean
@@ -59,7 +62,7 @@ export interface PkBoxCellProps {
   viewMode: ViewMode
 }
 
-interface PkBoxGroupProps {
+export interface PkBoxGroupProps {
   dex: LoadedDex
   selectMode: SelectMode
   showNonShiny: boolean
@@ -157,7 +160,11 @@ export function PkBox(props: PkBoxProps) {
   return (
     <div className={classes}>
       <header className={styles.pkBoxHeader + ' pkBoxHeader'}>
-        <div className={styles.pkBoxHeaderTitle}>
+        <div
+          className={
+            styles.pkBoxHeaderTitle + ' ' + (props.isOverflowing ? styles.overflowingBox : '')
+          }
+        >
           {!props.editable && props.title}
           {props.editable && (
             <InlineTextEditor
@@ -384,6 +391,10 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       return
     }
 
+    const nextIdx = (box.shiny ? shinyBoxElements : boxElements).length + 1
+    const boxTitle = createBoxTitle(props.dex.gameSetId, null, nextIdx)
+    const isOverflowing = nextIdx > getGameSetByGameId(dex.gameId).storage.boxes
+
     ;(box.shiny ? shinyBoxElements : boxElements).push(
       <PkBox
         boxIndex={boxIndex}
@@ -392,11 +403,13 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         // editable={props.editable}
         editable={false} // disabled for now
         shiny={box.shiny}
+        isOverflowing={isOverflowing}
         onBoxTitleEdit={props.onBoxTitleEdit}
         viewMode={props.viewMode}
         selectMode={props.selectMode}
         tabIndex={boxTabIndex}
-        title={box.title || `[Box ${boxIndex + 1}]`}
+        // title={box.title || `[Box ${boxIndex + 1}]`}
+        title={boxTitle}
         onClick={props.onBoxClick}
       >
         {boxCells}

@@ -175,6 +175,10 @@
   /*user-select: none;*/
 }
 
+.pkBoxHeaderTitle.overflowingBox {
+  color: #be2c2c;
+}
+
 .pkBoxHeaderTitleEditor {
   display: block;
 }

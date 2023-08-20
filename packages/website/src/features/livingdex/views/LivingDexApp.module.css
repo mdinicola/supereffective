@@ -195,6 +195,17 @@ span.saveBtn:hover {
   cursor: pointer;
 }
 
+.topRightCallout.disabledTopCallout {
+  cursor: not-allowed;
+}
+
+.topRightCallout.disabledTopCallout span {
+  background: #444;
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .topRightCallout span a {
   text-decoration: none;
 }

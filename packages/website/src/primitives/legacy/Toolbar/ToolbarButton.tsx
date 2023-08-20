@@ -100,6 +100,7 @@ export interface ToolbarButtonGroupProps {
   initialAction: string | null
   isDeselectable?: boolean
   isDropdown?: boolean
+  isMultiple?: boolean
   dropdownPosition?: 'left' | 'right' | 'middle'
   dropdownTitle?: string
   className?: string
@@ -121,6 +122,7 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
     isDeselectable,
     className,
     onButtonClick,
+    isMultiple,
     isDropdown,
     dropdownTitle,
     dropdownPosition,
@@ -253,6 +255,10 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
     )
   }
 
+  const dropdownIcon = isMultiple
+    ? dropdownNoActionIcon
+    : selectedActionIcon || dropdownNoActionIcon
+
   return (
     <span
       className={classes}
@@ -265,8 +271,8 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
         <ToolbarButton
           actionName={'open-dropdown'}
           className={styles.dropdownTrigger}
-          status={selectedAction !== null ? 'selected' : null}
-          icon={selectedActionIcon || dropdownNoActionIcon || 'square'}
+          status={selectedAction !== null && !isMultiple ? 'selected' : null}
+          icon={dropdownIcon || 'square'}
           label={props.label || props.dropdownTitle}
         />
       )}
