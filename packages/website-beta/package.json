@@ -10,6 +10,7 @@
     "codegen": "panda codegen",
     "dev": "PORT=3002 next dev",
     "dev:beta": "PORT=3002 next dev",
+    "dev:debug-beta": "NODE_OPTIONS='--inspect' PORT=3002 next dev",
     "lint": "next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
     "panda:show": "panda studio --build --config panda.config.ts && panda studio --preview",

@@ -12,6 +12,7 @@
     "codegen": "turbo run codegen",
     "dev": "pnpm dev:prepare && env-cmd turbo run dev --no-deps --no-cache --parallel --concurrency 20",
     "dev:beta": "pnpm dev:prepare && env-cmd turbo run dev:beta --no-deps --no-cache --parallel --concurrency 10",
+    "dev:debug": "pnpm dev:prepare && env-cmd pnpm -r dev:debug",
     "dev:prepare": "docker-compose up -d && env-cmd pnpm migrate && env-cmd pnpm codegen",
     "format": "pnpm pretty && pnpm lint:fix",
     "postinstall": "make postinstall",

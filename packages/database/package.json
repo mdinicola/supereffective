@@ -11,7 +11,7 @@
     "codegen:ids": "node lib/codegen/generate-ids.cjs && cd ../../ && pnpm prettier  --write \"packages/database/**/*.{cjs,mjs,js,ts,tsx,json,yml,yaml,css,scss,md,mdx}\" && cd -",
     "codegen:prisma": "prisma generate",
     "data:update": "tsx scripts/data-download.ts && scripts/data-update-hash.sh",
-    "dev": "pnpm codegen && pnpm studio:dev",
+    "dev:db": "pnpm codegen && pnpm studio:dev",
     "prisma": "prisma",
     "studio:dev": "DATABASE_URL=$STUDIO_DATABASE_URL DIRECT_DATABASE_URL=$STUDIO_DATABASE_URL prisma studio --port 5555 --browser none",
     "studio:prod": "./studio-prod.sh"
