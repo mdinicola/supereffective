@@ -2,9 +2,14 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
-import { convertDexFromLegacyToV4 } from '@pkg/database/lib/dex-parser/support'
+import { DeserializedLivingDexDoc } from '@pkg/database/lib/dex-parser'
+import {
+  convertDexFromLegacyToV4,
+  convertDexFromV4ToLegacyStd,
+} from '@pkg/database/lib/dex-parser/support'
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
 import { isCatchable } from '@pkg/database/repositories/living-dexes/legacy'
+import { convertStorableDexToLoadedDex } from '@pkg/database/repositories/living-dexes/legacy/converters/convertStorableDexToLoadedDex'
 import {
   getPresetByIdForGame,
   getPresetsForGame,
@@ -19,6 +24,7 @@ import {
   LoadedDex,
   NullableDexPokemon,
 } from '@pkg/database/repositories/living-dexes/legacy/types'
+import { slugify } from '@pkg/utils/lib/primitives/strings'
 
 import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
@@ -101,6 +107,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   })
 
   const auth = useSession()
+  const currentUser = auth.currentUser
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
   const lastSavedAtString =
@@ -322,11 +329,96 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     const element = document.createElement('a')
     element.setAttribute('href', url)
     // element.setAttribute('download', dex.title + '.md')
-    element.setAttribute('download', dex.title + '.json')
+    element.setAttribute('download', slugify(dex.title) + '.livingdex.json')
     element.style.display = 'none'
     document.body.appendChild(element)
     element.click()
     document.body.removeChild(element)
+  }
+
+  const handleImport = () => {
+    // open file dialog *.dex.json
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = e => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (!file) {
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = e => {
+        const result = e.target?.result
+        if (typeof result !== 'string') {
+          return
+        }
+        try {
+          const data: DeserializedLivingDexDoc = JSON.parse(result)
+          data.$id = dex.id
+
+          if (data.gameId !== dex.gameId) {
+            const errMsg = `The file you selected is not a valid Living Dex file for game '${dex.gameId}'.`
+            alert('Error: ' + errMsg)
+            throw new Error(errMsg)
+          }
+
+          if (data.legacyPresetId !== dex.presetId) {
+            const errMsg = `The preset of this Dex and the one of the JSON file are different.`
+            alert('Error: ' + errMsg)
+            throw new Error(errMsg)
+          }
+
+          if (!currentUser) {
+            throw new Error('Cannot import dex if not logged in')
+          }
+
+          const loadedDex = convertStorableDexToLoadedDex(
+            convertDexFromV4ToLegacyStd(dex.id, currentUser.uid, data)
+          )
+          // loadedDex.id = undefined // TODO: this is a hack to force a new id to be generated
+          app.setDex(loadedDex)
+
+          setModalContent({
+            title: 'Import successful',
+            content: (
+              <div>
+                <p>
+                  The Living Dex has been imported successfully. You can now continue editing it.
+                </p>
+                <p>
+                  <strong>Nothing will be saved until you do some change.</strong>
+                </p>
+              </div>
+            ),
+            confirmButton: 'OK',
+            cancelButton: null,
+            prevState: { dex, preset: preset as any },
+          })
+        } catch (e) {
+          alert('The file you selected is not a valid Living Dex JSON file.')
+          throw e
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }
+
+  const handleSettingsToolbar = (
+    newAction: string | null,
+    prevState: string | null,
+    prevAction: string | null
+  ) => {
+    console.log('handleSettingsToolbar', newAction, prevState, prevAction)
+    if (newAction === 'import') {
+      handleImport()
+      return
+    }
+
+    if (newAction === 'export') {
+      handleExport()
+      return
+    }
   }
 
   const handleRemoveDex = () => {
@@ -586,17 +678,27 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           <ToolbarButtonGroup
             initialAction={null}
             isDropdown
-            onButtonClick={handleExport}
             dropdownNoActionIcon={'cog'}
+            onButtonClick={handleSettingsToolbar}
             isDeselectable={false}
             items={(() => {
               return [
+                {
+                  actionName: 'import',
+                  icon: 'upload',
+                  label: 'Import JSON file',
+                  status: '',
+                  className: styles.saveBtn,
+                  // onClick: handleImport,
+                  showLabel: true,
+                },
                 {
                   actionName: 'export',
                   icon: 'download',
                   label: 'Export as JSON',
                   status: '',
                   className: styles.saveBtn,
+                  // onClick: handleExport,
                   showLabel: true,
                 },
               ]
@@ -703,16 +805,18 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 <div className={'modal-dialog-message'}>{modalContent?.content}</div>
                 <div className={'modal-dialog-buttons'}>
                   <div className={'text-center'}>
-                    <Button
-                      onClick={() => {
-                        if (modalContent?.onCancel) {
-                          modalContent.onCancel()
-                        }
-                        setModalContent(null)
-                      }}
-                    >
-                      {modalContent?.cancelButton || 'Cancel'}
-                    </Button>
+                    {modalContent?.cancelButton && (
+                      <Button
+                        onClick={() => {
+                          if (modalContent?.onCancel) {
+                            modalContent.onCancel()
+                          }
+                          setModalContent(null)
+                        }}
+                      >
+                        {modalContent.cancelButton || 'Cancel'}
+                      </Button>
+                    )}
                     <Button
                       onClick={() => {
                         if (modalContent?.onConfirm) {

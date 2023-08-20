@@ -20,9 +20,19 @@ export const saveDexApi = async (
   currentUserId: string
 ): Promise<ApiResponse> => {
   const dex: LoadedDex = jsonDecode(data || '{}')
+  const validation = LoadedDexSchema.safeParse(dex)
 
-  if (!isValidID(currentUserId) || !_validDex(dex)) {
-    return apiErrors.invalidRequest
+  if (!isValidID(currentUserId)) {
+    return apiErrors.notAuthorized
+  }
+
+  if (!validation.success) {
+    return {
+      statusCode: 400,
+      data: {
+        message: validation.error.message,
+      },
+    }
   }
 
   const userDexes = await getLegacyLivingDexRepository().getManyByUser(currentUserId)

@@ -62,9 +62,9 @@ export const convertStorableDexToLoadedDex = (doc: StorableDex): LoadedDex => {
     caughtShiny: -1,
     totalShiny: -1,
 
-    boxes: boxes.map(box => {
+    boxes: boxes.map((box, i) => {
       return {
-        title: '', // title will be replaced with preset name
+        title: box.title || `Box ${i + 1}`, // title will be replaced with preset name
         pokemon: convertPokemonListToNormalized(box.pokemon, schemaVersion),
         shiny: box.shiny || false,
       }

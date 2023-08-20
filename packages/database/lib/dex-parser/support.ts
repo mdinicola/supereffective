@@ -96,7 +96,6 @@ export function convertDexFromV4ToLegacy(
   if (!dex.legacyPresetId || !dex.legacyPresetVersion) {
     throw new Error(`Dex has no legacy preset ID or version`)
   }
-  dexRecord
 
   return {
     id: dexRecord.id,
@@ -104,6 +103,55 @@ export function convertDexFromV4ToLegacy(
     updatedAt: dexRecord.lastUpdateTime,
     userId: dexRecord.userId,
     title: dexRecord.title || 'Untitled',
+    sver: DEX_SCHEMA_VERSION,
+    preset: [
+      getGameSetByGameId(dex.gameId).id,
+      dex.gameId,
+      dex.legacyPresetId,
+      dex.legacyPresetVersion,
+    ],
+    caught: [0, 0], //  [caught, total]
+    caughtShiny: [0, 0],
+    boxes: dex.boxes.map(
+      (box): DexBox => ({
+        title: box.title,
+        shiny: box.shiny,
+        pokemon: box.pokemon.map((pokemon): NullableDexPokemon => {
+          if (!pokemon) {
+            return null
+          }
+
+          const pkmEntry = getPokemonEntry(pokemon.id)
+
+          return {
+            pid: pokemon.id,
+            nid: pkmEntry.nid,
+            caught: pokemon.captured,
+            shiny: pokemon.shiny,
+            alpha: pokemon.emblemMarks.includes('alpha'),
+            gmax: pokemon.emblemMarks.includes('gmax'),
+          }
+        }),
+      })
+    ),
+  }
+}
+
+export function convertDexFromV4ToLegacyStd(
+  id: string | undefined,
+  userId: string,
+  dex: DeserializedLivingDexDoc
+): StorableDex {
+  if (!dex.legacyPresetId || !dex.legacyPresetVersion) {
+    throw new Error(`Dex has no legacy preset ID or version`)
+  }
+
+  return {
+    id: id,
+    createdAt: sanitizeDate(dex.creationTime),
+    updatedAt: sanitizeDate(dex.lastUpdateTime),
+    userId: userId,
+    title: dex.title || 'Untitled',
     sver: DEX_SCHEMA_VERSION,
     preset: [
       getGameSetByGameId(dex.gameId).id,
