@@ -392,7 +392,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
     }
 
     const nextIdx = (box.shiny ? shinyBoxElements : boxElements).length + 1
-    const boxTitle = createBoxTitle(props.dex.gameSetId, null, nextIdx)
+    const boxTitle = createBoxTitle(props.dex.gameSetId, box.title, nextIdx)
     const isOverflowing = nextIdx > getGameSetByGameId(dex.gameId).storage.boxes
 
     ;(box.shiny ? shinyBoxElements : boxElements).push(

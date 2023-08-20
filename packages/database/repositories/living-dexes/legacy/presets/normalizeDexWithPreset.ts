@@ -45,7 +45,11 @@ export const normalizeDexWithPreset = (
   // rewrite titles:
 
   newDex.boxes = newDex.boxes.map((box, i) => {
-    box.title = createBoxTitle(newDex.gameSetId, null, i + 1)
+    box.title = createBoxTitle(
+      newDex.gameSetId,
+      box.title?.startsWith('Box') ? null : box.title,
+      i + 1
+    )
     return box
   })
 
