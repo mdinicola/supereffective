@@ -1,7 +1,8 @@
 /* eslint-disable */
 import type { SystemStyleObject, ConditionalValue } from '../types'
-import type { PropertyValue } from '../types/prop-type'
 import type { Properties } from '../types/csstype'
+import type { PropertyValue } from '../types/prop-type'
+import type { DistributiveOmit } from '../types/system-types'
 import type { Tokens } from '../tokens'
 
 export type SafeareaProperties = {
@@ -9,11 +10,11 @@ export type SafeareaProperties = {
 }
 
 
-type SafeareaOptions = SafeareaProperties & Omit<SystemStyleObject, keyof SafeareaProperties | 'padding' | 'paddingX' | 'paddingY' | 'paddingTop' | 'paddingRight' | 'paddingBottom' | 'paddingLeft' | 'paddingBlock' | 'paddingInline' | 'paddingInlineStart' | 'paddingInlineEnd' | 'paddingBlockStart' | 'paddingBlockEnd' | 'paddingEnd' | 'paddingStart' | 'px' | 'py'>
+type SafeareaStyles = SafeareaProperties & DistributiveOmit<SystemStyleObject, keyof SafeareaProperties | 'padding' | 'paddingX' | 'paddingY' | 'paddingTop' | 'paddingRight' | 'paddingBottom' | 'paddingLeft' | 'paddingBlock' | 'paddingInline' | 'paddingInlineStart' | 'paddingInlineEnd' | 'paddingBlockStart' | 'paddingBlockEnd' | 'paddingEnd' | 'paddingStart' | 'px' | 'py'>
 
 interface SafeareaPatternFn {
-  (options?: SafeareaOptions): string
-  raw: (options: SafeareaOptions) => SafeareaOptions
+  (styles?: SafeareaStyles): string
+  raw: (styles: SafeareaStyles) => SafeareaStyles
 }
 
 /** A pattern that adds padding to the top, right, bottom and left, to account for safe area insets. */

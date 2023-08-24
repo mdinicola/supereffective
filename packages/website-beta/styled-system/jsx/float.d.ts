@@ -2,8 +2,9 @@
 import type { FunctionComponent } from 'react'
 import type { FloatProperties } from '../patterns/float'
 import type { HTMLStyledProps } from '../types/jsx'
+import type { DistributiveOmit } from '../types/system-types'
 
-export type FloatProps = FloatProperties & Omit<HTMLStyledProps<'div'>, keyof FloatProperties >
+export type FloatProps = FloatProperties & DistributiveOmit<HTMLStyledProps<'div'>, keyof FloatProperties >
 
 
 export declare const Float: FunctionComponent<FloatProps>

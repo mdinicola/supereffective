@@ -2,8 +2,9 @@
 import type { FunctionComponent } from 'react'
 import type { CircleProperties } from '../patterns/circle'
 import type { HTMLStyledProps } from '../types/jsx'
+import type { DistributiveOmit } from '../types/system-types'
 
-export type CircleProps = CircleProperties & Omit<HTMLStyledProps<'div'>, keyof CircleProperties >
+export type CircleProps = CircleProperties & DistributiveOmit<HTMLStyledProps<'div'>, keyof CircleProperties >
 
 
 export declare const Circle: FunctionComponent<CircleProps>

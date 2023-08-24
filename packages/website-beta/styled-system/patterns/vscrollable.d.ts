@@ -1,7 +1,8 @@
 /* eslint-disable */
 import type { SystemStyleObject, ConditionalValue } from '../types'
-import type { PropertyValue } from '../types/prop-type'
 import type { Properties } from '../types/csstype'
+import type { PropertyValue } from '../types/prop-type'
+import type { DistributiveOmit } from '../types/system-types'
 import type { Tokens } from '../tokens'
 
 export type VscrollableProperties = {
@@ -9,11 +10,11 @@ export type VscrollableProperties = {
 }
 
 
-type VscrollableOptions = VscrollableProperties & Omit<SystemStyleObject, keyof VscrollableProperties | 'overflowY' | 'overscrollBehavior' | 'overflowX' | 'maxW'>
+type VscrollableStyles = VscrollableProperties & DistributiveOmit<SystemStyleObject, keyof VscrollableProperties | 'overflowY' | 'overscrollBehavior' | 'overflowX' | 'maxW'>
 
 interface VscrollablePatternFn {
-  (options?: VscrollableOptions): string
-  raw: (options: VscrollableOptions) => VscrollableOptions
+  (styles?: VscrollableStyles): string
+  raw: (styles: VscrollableStyles) => VscrollableStyles
 }
 
 /** A vertically scrollable container, that blocks the x-axis scrollbar. */

@@ -22,7 +22,7 @@
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
     "@prisma/client": "^5.2.0",
-    "@types/node": "^20.5.3",
+    "@types/node": "^20.5.4",
     "prisma": "^5.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
