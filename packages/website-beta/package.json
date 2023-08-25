@@ -28,7 +28,7 @@
   "dependencies": {
     "@csstools/postcss-cascade-layers": "^4.0.0",
     "@csstools/postcss-color-mix-function": "^2.0.1",
-    "@pandacss/types": "^0.12.1",
+    "@pandacss/types": "^0.12.2",
     "@pkg/auth": "workspace:*",
     "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
@@ -38,7 +38,7 @@
     "@prisma/nextjs-monorepo-workaround-plugin": "^5.2.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-virtual": "3.0.0-beta.54",
-    "@types/node": "20.5.4",
+    "@types/node": "20.5.6",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "eslint": "8.47.0",
@@ -52,12 +52,12 @@
     "react-aria": "^3.27.0",
     "react-dom": "18.2.0",
     "react-stately": "^3.25.0",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "zod": "^3.22.2",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.12.1",
+    "@pandacss/dev": "^0.12.2",
     "postcss-load-config": "^4.0.1"
   },
   "overrides": {

@@ -14,7 +14,7 @@ type FluentlayoutStyles = FluentlayoutProperties & DistributiveOmit<SystemStyleO
 
 interface FluentlayoutPatternFn {
   (styles?: FluentlayoutStyles): string
-  raw: (styles: FluentlayoutStyles) => FluentlayoutStyles
+  raw: (styles: FluentlayoutStyles) => SystemStyleObject
 }
 
 /** A flex container that fills the viewport height, and has a minimum width of 300px. */

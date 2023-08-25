@@ -14,7 +14,7 @@ type SafeareaStyles = SafeareaProperties & DistributiveOmit<SystemStyleObject, k
 
 interface SafeareaPatternFn {
   (styles?: SafeareaStyles): string
-  raw: (styles: SafeareaStyles) => SafeareaStyles
+  raw: (styles: SafeareaStyles) => SystemStyleObject
 }
 
 /** A pattern that adds padding to the top, right, bottom and left, to account for safe area insets. */

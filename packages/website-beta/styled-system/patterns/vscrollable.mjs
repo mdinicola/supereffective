@@ -12,4 +12,4 @@ transform:(props) => __spreadValues({
 export const getVscrollableStyle = (styles = {}) => vscrollableConfig.transform(styles, { map: mapObject })
 
 export const vscrollable = (styles) => css(getVscrollableStyle(styles))
-vscrollable.raw = (styles) => styles
+vscrollable.raw = getVscrollableStyle

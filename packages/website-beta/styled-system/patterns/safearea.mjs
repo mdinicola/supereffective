@@ -15,4 +15,4 @@ transform:(_a) => {
 export const getSafeareaStyle = (styles = {}) => safeareaConfig.transform(styles, { map: mapObject })
 
 export const safearea = (styles) => css(getSafeareaStyle(styles))
-safearea.raw = (styles) => styles
+safearea.raw = getSafeareaStyle

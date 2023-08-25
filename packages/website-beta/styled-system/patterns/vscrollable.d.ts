@@ -14,7 +14,7 @@ type VscrollableStyles = VscrollableProperties & DistributiveOmit<SystemStyleObj
 
 interface VscrollablePatternFn {
   (styles?: VscrollableStyles): string
-  raw: (styles: VscrollableStyles) => VscrollableStyles
+  raw: (styles: VscrollableStyles) => SystemStyleObject
 }
 
 /** A vertically scrollable container, that blocks the x-axis scrollbar. */

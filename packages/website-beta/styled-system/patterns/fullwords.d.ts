@@ -14,7 +14,7 @@ type FullwordsStyles = FullwordsProperties & DistributiveOmit<SystemStyleObject,
 
 interface FullwordsPatternFn {
   (styles?: FullwordsStyles): string
-  raw: (styles: FullwordsStyles) => FullwordsStyles
+  raw: (styles: FullwordsStyles) => SystemStyleObject
 }
 
 /** A pattern that makes text wrap at word boundaries, without breaking word letters. */

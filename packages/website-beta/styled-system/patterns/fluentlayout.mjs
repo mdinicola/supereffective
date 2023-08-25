@@ -20,4 +20,4 @@ transform:(props) => __spreadValues({
 export const getFluentlayoutStyle = (styles = {}) => fluentlayoutConfig.transform(styles, { map: mapObject })
 
 export const fluentlayout = (styles) => css(getFluentlayoutStyle(styles))
-fluentlayout.raw = (styles) => styles
+fluentlayout.raw = getFluentlayoutStyle
