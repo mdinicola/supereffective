@@ -164,6 +164,7 @@ const Page = () => {
         perPage={2}
         showNonShiny={true}
         showShiny={false}
+        shinyAfterRegular={false}
         selectMode={'cell'}
         viewMode={'boxed'}
         usePixelIcons={false}
