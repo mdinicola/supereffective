@@ -1,6 +1,6 @@
+import { NextRouter, useRouter } from 'next/router'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
-import { NextRouter, useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { DeserializedLivingDexDoc } from '@pkg/database/lib/dex-parser'
@@ -998,7 +998,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       {toolbar}
       {isEditable && removeDexModal}
       {genericModal !== null && genericModal}
-      <div className={'text-center ' + classNameIf(isEditable, styles.toolbarApp)}>
+      <div className={'text-center ' + styles.toolbarApp}>
         <div className={'inner-container bordered-container text-center ' + styles.dexHeader}>
           <div className={styles.dexLogo}>
             <GameLogo game={dex.gameId} size={160} asSwitchIcon={true} />
