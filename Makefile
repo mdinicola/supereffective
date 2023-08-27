@@ -43,4 +43,4 @@ vercel-build:
 # upgrade packages to the latest versions, and pin/fix some of them (like alphas and betas)
 upgrade-packages:
 	pnpm -r update --latest
-	cd packages/website-beta && pnpm add "@tanstack/react-virtual@3.0.0-beta.54" && pnpm add "lucide-react@0.263.1"
+	cd packages/website-beta && pnpm add "@tanstack/react-virtual@3.0.0-beta.54"
