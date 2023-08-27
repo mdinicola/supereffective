@@ -1,12 +1,10 @@
 import Link from 'next/link'
 
-import EditIcon from '@/components/icons/EditIcon'
-import ImageIcon from '@/components/icons/ImageIcon'
-import Settings2Icon from '@/components/icons/Settings2Icon'
 import Button from '@/components/primitives/Button'
 import { DivAttributes } from '@/lib/types/react'
 import { css } from '@/styled-system/css'
 import { flex } from '@/styled-system/patterns'
+import { EditIcon, ImageIcon, Settings2Icon } from 'lucide-react'
 
 import Sidebar, { flexIconsClass, sidebarBodyClass } from './Sidebar'
 

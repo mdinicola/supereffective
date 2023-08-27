@@ -1,7 +1,6 @@
 {
   "editor.wordWrapColumn": 100,
   "editor.rulers": [100],
-  "typescript.tsdk": "node_modules/.pnpm/typescript@5.1.6/node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports": true,

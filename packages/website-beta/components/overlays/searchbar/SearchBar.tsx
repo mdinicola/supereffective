@@ -1,15 +1,10 @@
 'use client'
 
-import { useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRef, useState } from 'react'
 
 import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/repositories/pokemon'
 
-import ArrowDown01Icon from '@/components/icons/ArrowDown01Icon'
-import ArrowDownAZIcon from '@/components/icons/ArrowDownAZIcon'
-import ArrowUp01Icon from '@/components/icons/ArrowUp01Icon'
-import ArrowUpAZIcon from '@/components/icons/ArrowUpAZIcon'
-import XCircleIcon from '@/components/icons/XCircleIcon'
 import VirtualScrollContainer from '@/components/overlays/virtualscroll/VirtualScrollContainer'
 import { PokeImg } from '@/components/pkm/imgs/PokeImg'
 import Button from '@/components/primitives/Button'
@@ -18,6 +13,15 @@ import useVirtualScroll from '@/lib/hooks/useVirtualScroll'
 import { DivAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
 import { css } from '@/styled-system/css'
+import { XCircleIcon } from 'lucide-react'
+// @ts-ignore
+import ArrowUpAZIcon from 'lucide-react--icons/arrow-up-a-z'
+// @ts-ignore
+import ArrowDownAZIcon from 'lucide-react--icons/arrow-down-a-z'
+// @ts-ignore
+import ArrowUp01Icon from 'lucide-react--icons/arrow-up-0-1'
+// @ts-ignore
+import ArrowDown01Icon from 'lucide-react--icons/arrow-down-1-0'
 
 type SearchBarProps = DivAttributes<{
   children?: never
@@ -101,7 +105,7 @@ export default function SearchBar({ className, close, ...rest }: SearchBarProps)
   const [searchValue, setSearchValue] = useState('')
 
   const searchResults = pokemonSearch.search(searchValue)
-  const filteredPokemon = allPokes.filter(pk => {
+  const filteredPokemon = allPokes.filter((pk: any) => {
     if (searchValue.length === 0) {
       return true
     }
@@ -111,7 +115,7 @@ export default function SearchBar({ className, close, ...rest }: SearchBarProps)
   const [sortBy, setSortBy] = useState<'name' | 'dexNum'>('dexNum')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 
-  filteredPokemon.sort((a, b) => {
+  filteredPokemon.sort((a: any, b: any) => {
     if (sortBy === 'dexNum') {
       if (a.dexNum === null || a.dexNum === 0) {
         return sortOrder === 'asc' ? 1 : -1

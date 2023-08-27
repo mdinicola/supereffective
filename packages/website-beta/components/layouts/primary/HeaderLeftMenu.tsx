@@ -1,7 +1,7 @@
-import MenuIcon from '@/components/icons/MenuIcon'
 import GeneralSidebar from '@/components/overlays/sidebars/GeneralSidebar'
 import Button from '@/components/primitives/Button'
 import { css } from '@/styled-system/css'
+import { MenuIcon } from 'lucide-react'
 
 import HeaderLogo from './HeaderLogo'
 
