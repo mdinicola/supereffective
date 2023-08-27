@@ -22,7 +22,7 @@ export interface ToolbarButtonProps {
   className?: string
   onClick?: (actionName: string | null) => void
   status?: ToolbarButtonStatus
-  icon?: string
+  icon?: string | React.ReactNode
   label?: string
   showLabel?: boolean
 
@@ -65,6 +65,13 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
     }
   }
 
+  const iconElement = (
+    <>
+      {icon && typeof icon === 'string' && <i className={'icon-' + icon} />}
+      {icon && typeof icon !== 'string' && icon}
+    </>
+  )
+
   if (props.href) {
     return (
       <Link
@@ -75,7 +82,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
         target={props.target}
         {...rest}
       >
-        {icon && <i className={'icon-' + icon} />}
+        {iconElement}
         {label && showLabel && <span className={styles.label}>{label}</span>}
       </Link>
     )
@@ -88,7 +95,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
       title={!showLabel ? label : undefined}
       {...rest}
     >
-      {icon && <i className={'icon-' + icon} />}
+      {iconElement}
       {label && showLabel && <span className={styles.label}>{label}</span>}
     </span>
   )
@@ -104,7 +111,7 @@ export interface ToolbarButtonGroupProps {
   dropdownPosition?: 'left' | 'right' | 'middle'
   dropdownTitle?: string
   className?: string
-  dropdownNoActionIcon?: string
+  dropdownNoActionIcon?: string | React.ReactNode
   onButtonClick?: (
     newAction: string | null,
     prevState: ToolbarButtonStatus,

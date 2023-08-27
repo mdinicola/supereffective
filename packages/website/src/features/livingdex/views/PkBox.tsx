@@ -66,6 +66,7 @@ export interface PkBoxGroupProps {
   dex: LoadedDex
   selectMode: SelectMode
   showNonShiny: boolean
+  shinyAfterRegular: boolean
   showShiny: boolean
   viewMode: ViewMode
   usePixelIcons: boolean

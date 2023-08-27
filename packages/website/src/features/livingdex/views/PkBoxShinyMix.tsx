@@ -14,6 +14,11 @@ import styles from './PkBox.module.css'
 import PkImgFile from './PkImgFile'
 
 export function PkBoxGroupShinyMix(props: PkBoxGroupProps) {
+  const showShiny = props.showShiny ?? false
+  const showRegular = props.showNonShiny ?? true
+  const showMixed = showShiny && showRegular
+  const showShinyAfterRegular = showMixed && (props.shinyAfterRegular ?? false)
+
   let initialPerPage = props.perPage || 1
   const loadMoreRef = useRef(null)
 
@@ -62,33 +67,16 @@ export function PkBoxGroupShinyMix(props: PkBoxGroupProps) {
     [[], []] as [DexBox[], DexBox[]]
   )
 
-  // const mixedBoxes = regularBoxes.flatMap((box, index) => {
-  //   const shinyBox: DexBox = {
-  //     ...box,
-  //     shiny: true,
-  //     pokemon: box.pokemon.map(pkm => {
-  //       if (pkm === null) {
-  //         return null
-  //       }
-  //       return {
-  //         ...pkm,
-  //         shiny: true,
-  //         ...findFirstPokemonInBoxes(pkm.pid, shinyBoxes),
-  //       }
-  //     }),
-  //   }
+  const _boxes = showShinyAfterRegular ? [...regularBoxes, ...shinyBoxes] : dex.boxes
 
-  //   return [box, shinyBox]
-  // })
-
-  dex.boxes.forEach((box, boxIndex) => {
+  _boxes.forEach((box, boxIndex) => {
     let boxCells: any[] = []
     const boxTabIndex = props.selectMode === 'box' ? initialTabIndex + boxIndex : undefined
 
     box.pokemon.forEach((cellPkm, cellIndex) => {
       let cellTabIndex: number | undefined =
         initialTabIndex +
-        dex.boxes.length +
+        _boxes.length +
         boxIndex * legacyConfig.limits.maxPokemonPerBox +
         cellIndex
 
@@ -228,7 +216,6 @@ export function PkBoxGroupShinyMix(props: PkBoxGroupProps) {
       </PkBox>
     )
   })
-
   const totalBoxCount = boxElements.length
   const pagedBoxElements = boxElements.slice(0, perPage)
   const hasMoreBoxes = perPage < totalBoxCount

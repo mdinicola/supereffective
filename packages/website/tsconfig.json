@@ -23,7 +23,8 @@
     ],
     "paths": {
       "#/*": ["./src/*"],
-      "#/pages": ["./pages/*"]
+      "#/pages": ["./pages/*"],
+      "lucide-react--icons/*": ["./node_modules/lucide-react/dist/esm/icons/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

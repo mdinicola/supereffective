@@ -1,6 +1,14 @@
-import { NextRouter, useRouter } from 'next/router'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
+import { NextRouter, useRouter } from 'next/router'
+import {
+  BracesIcon,
+  ListTodoIcon,
+  Settings2Icon,
+  ToggleLeftIcon,
+  ToggleRightIcon,
+  WandIcon,
+} from 'lucide-react'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { DeserializedLivingDexDoc } from '@pkg/database/lib/dex-parser'
@@ -151,6 +159,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   )
   const [showShinyBoxes, setShowShinyBoxes] = useState(
     readUrlParamRouter('shiny', router, undefined) === '1'
+  )
+  const [shinyAfterRegular, setShinyAfterRegular] = useState(
+    readUrlParamRouter('shinyafter', router, '0') === '1'
   )
   const showMixedShinies = showShinyBoxes && showRegularBoxes
 
@@ -484,6 +495,12 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       return
     }
 
+    if (newAction === 'toggle-shinyAfterRegular') {
+      setUrlParamRouter('shinyafter', shinyAfterRegular ? '0' : '1', router)
+      setShinyAfterRegular(!shinyAfterRegular)
+      return
+    }
+
     if (newAction === 'import') {
       handleImport()
       return
@@ -660,11 +677,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     },
   ]
 
-  if (!isEditable) {
-    // remove "import" tool
-    toolbarWrenchTools.shift()
-  }
-
   const toolbar = (
     <div id={'dex-' + dex.id} className={styles.toolbar}>
       <div className={styles.toolbarContainer}>
@@ -740,7 +752,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               isDropdown
               dropdownTitle={'Marker tool'}
               dropdownPosition={'left'}
-              dropdownNoActionIcon={'pencil2'}
+              dropdownNoActionIcon={<ListTodoIcon />}
               items={[
                 {
                   actionName: 'catch',
@@ -780,7 +792,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               isDropdown
               dropdownTitle={'Change Box Preset'}
               dropdownPosition={'middle'}
-              dropdownNoActionIcon={'sync_alt'}
+              dropdownNoActionIcon={<WandIcon />}
               items={Object.values(getPresetsForGame(dex.gameId))
                 .filter(p => !p.isHidden)
                 .map(pr => ({
@@ -796,7 +808,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             initialAction={null}
             isDropdown
             isMultiple
-            dropdownNoActionIcon={'pkg-shiny'}
+            dropdownNoActionIcon={<Settings2Icon />}
             onButtonClick={handleSettingsToolbar}
             dropdownTitle={'Shiny options'}
             dropdownPosition={'left'}
@@ -804,19 +816,34 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             items={(() => {
               return [
                 {
+                  actionName: 'toggle-showRegularBoxes',
+                  icon: <>{showRegularBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
+                  label: showRegularBoxes ? 'Show non-shiny' : 'Show non-shiny',
+                  status: showRegularBoxes ? 'selected' : null,
+                  title: 'Show shiny boxes mixed with the non-shiny ones',
+                  className: styles.saveBtn,
+                  showLabel: true,
+                },
+                {
                   actionName: 'toggle-showShinyBoxes',
-                  icon: 'pkg-shiny',
-                  label: showShinyBoxes ? 'Shiny: ON' : 'Shiny: OFF',
+                  icon: <>{showShinyBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
+                  label: showShinyBoxes ? 'Show shiny' : 'Show shiny',
                   status: showShinyBoxes ? 'selected' : null,
                   className: styles.saveBtn,
                   showLabel: true,
                 },
                 {
-                  actionName: 'toggle-showRegularBoxes',
-                  icon: 'star_outline',
-                  label: showRegularBoxes ? 'Regular: ON' : 'Regular: OFF',
-                  title: 'Show shiny boxes mixed with the non-shiny ones',
-                  status: showRegularBoxes ? 'selected' : null,
+                  actionName: 'toggle-shinyAfterRegular',
+                  icon: <>{shinyAfterRegular ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
+                  label: shinyAfterRegular ? 'Shiny after non-shiny' : 'Shiny after non-shiny',
+                  status:
+                    shinyAfterRegular && showShinyBoxes
+                      ? 'selected'
+                      : showShinyBoxes
+                      ? null
+                      : 'disabled',
+
+                  title: 'Show shiny Pokémon boxes after the regular ones, instead of mixing them',
                   className: styles.saveBtn,
                   showLabel: true,
                 },
@@ -832,19 +859,21 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               ]
             })()}
           />
-          <ToolbarButtonGroup
-            initialAction={null}
-            isDropdown
-            isMultiple
-            dropdownNoActionIcon={'wrench'}
-            dropdownPosition={isEditable ? 'right' : 'left'}
-            onButtonClick={handleSettingsToolbar}
-            dropdownTitle={'Tools'}
-            isDeselectable={false}
-            items={(() => {
-              return toolbarWrenchTools
-            })()}
-          />
+          {isEditable && (
+            <ToolbarButtonGroup
+              initialAction={null}
+              isDropdown
+              isMultiple
+              dropdownNoActionIcon={<BracesIcon />}
+              dropdownPosition={isEditable ? 'right' : 'left'}
+              onButtonClick={handleSettingsToolbar}
+              dropdownTitle={'Tools'}
+              isDeselectable={false}
+              items={(() => {
+                return toolbarWrenchTools
+              })()}
+            />
+          )}
         </ToolbarButtonGroupGroup>
         {isEditable && (
           <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
@@ -1082,6 +1111,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           perPage={2}
           showShiny={showShinyBoxes}
           showNonShiny={showRegularBoxes}
+          shinyAfterRegular={shinyAfterRegular}
           selectMode={selectMode}
           viewMode={viewMode}
           usePixelIcons={false}
