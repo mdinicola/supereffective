@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HeartIcon } from 'lucide-react'
 
 import DiscordIcon from '@/assets/brands/social/discord.svg'
 import GithubIcon from '@/assets/brands/social/github.svg'
@@ -10,7 +11,6 @@ import { DivAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
 import { css } from '@/styled-system/css'
 import { flex } from '@/styled-system/patterns'
-import { HeartIcon } from 'lucide-react'
 
 import { RefreshButton } from './RefreshButton'
 import Sidebar, { flexIconsClass, sidebarBodyClass } from './Sidebar'

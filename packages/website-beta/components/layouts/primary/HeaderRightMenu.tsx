@@ -1,8 +1,9 @@
+import { SearchIcon, UserCircle2Icon } from 'lucide-react'
+
 import SearchBarTrigger from '@/components/overlays/searchbar/SearchBarTrigger'
 import UserSidebar from '@/components/overlays/sidebars/UserSidebar'
 import Button from '@/components/primitives/Button'
 import { css } from '@/styled-system/css'
-import { SearchIcon, UserCircle2Icon } from 'lucide-react'
 
 export default function HeaderRightMenu() {
   return (

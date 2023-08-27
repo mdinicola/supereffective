@@ -1,7 +1,16 @@
 'use client'
 
-import Link from 'next/link'
 import { useRef, useState } from 'react'
+import Link from 'next/link'
+import { XCircleIcon } from 'lucide-react'
+// @ts-ignore
+import ArrowDown01Icon from 'lucide-react--icons/arrow-down-1-0'
+// @ts-ignore
+import ArrowDownAZIcon from 'lucide-react--icons/arrow-down-a-z'
+// @ts-ignore
+import ArrowUp01Icon from 'lucide-react--icons/arrow-up-0-1'
+// @ts-ignore
+import ArrowUpAZIcon from 'lucide-react--icons/arrow-up-a-z'
 
 import { getPokemonEntries, getPokemonSearchIndex } from '@pkg/database/repositories/pokemon'
 
@@ -13,15 +22,6 @@ import useVirtualScroll from '@/lib/hooks/useVirtualScroll'
 import { DivAttributes } from '@/lib/types/react'
 import { cn } from '@/lib/utils/cn'
 import { css } from '@/styled-system/css'
-import { XCircleIcon } from 'lucide-react'
-// @ts-ignore
-import ArrowUpAZIcon from 'lucide-react--icons/arrow-up-a-z'
-// @ts-ignore
-import ArrowDownAZIcon from 'lucide-react--icons/arrow-down-a-z'
-// @ts-ignore
-import ArrowUp01Icon from 'lucide-react--icons/arrow-up-0-1'
-// @ts-ignore
-import ArrowDown01Icon from 'lucide-react--icons/arrow-down-1-0'
 
 type SearchBarProps = DivAttributes<{
   children?: never

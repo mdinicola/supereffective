@@ -1,7 +1,8 @@
 'use client'
 
-import Button from '@/components/primitives/Button'
 import { RefreshCwIcon } from 'lucide-react'
+
+import Button from '@/components/primitives/Button'
 
 export function RefreshButton() {
   return (
