@@ -799,7 +799,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             dropdownNoActionIcon={'pkg-shiny'}
             onButtonClick={handleSettingsToolbar}
             dropdownTitle={'Shiny options'}
-            dropdownPosition={isEditable ? 'right' : 'left'}
+            dropdownPosition={'left'}
             isDeselectable={false}
             items={(() => {
               return [
