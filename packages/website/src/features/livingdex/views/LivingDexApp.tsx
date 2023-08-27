@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
+import { NextRouter, useRouter } from 'next/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { DeserializedLivingDexDoc } from '@pkg/database/lib/dex-parser'
@@ -75,23 +76,82 @@ interface ModalContent {
 
 const saveTimeout = 2000
 
+// const toggleUrlParam = (param: string, value: string) => {
+//   const url = new URL(window.location.href)
+//   const params = new URLSearchParams(url.search)
+//   if (params.get(param) === value) {
+//     params.delete(param)
+//   } else {
+//     params.set(param, value)
+//   }
+//   url.search = params.toString()
+//   window.history.replaceState({}, '', url.toString())
+// }
+
+// const readUrlParam = (param: string) => {
+//   const url = new URL(window.location.href)
+//   const params = new URLSearchParams(url.search)
+//   return params.get(param)
+// }
+
+const setUrlParamRouter = (
+  param: string,
+  value: string | number | null | undefined,
+  router: NextRouter
+) => {
+  if (!value) {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, [param]: undefined },
+    })
+    return
+  }
+  router.push({
+    pathname: router.pathname,
+    query: { ...router.query, [param]: value },
+  })
+}
+
+const readUrlParamRouter = (
+  param: string,
+  router: NextRouter,
+  defaultValue?: string
+): string | undefined => {
+  const value = router.query[param]
+  if (value === undefined) {
+    return defaultValue
+  }
+
+  return value as string
+}
+
 export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
-  const initialMarkTypes: MarkType[] = ['catch']
-  const allMarkTypes: MarkType[] = ['catch', 'shiny', 'gmax', 'alpha', 'ability', 'gender']
-  const viewOnlyModeMarkTypes: MarkType[] = ['shiny', 'gmax', 'alpha', 'ability']
+  const router = useRouter()
+  const initialMarkTypes: MarkType[] = String(readUrlParamRouter('marks', router, 'catch')).split(
+    ','
+  ) as MarkType[]
+  const allMarkTypes: MarkType[] = ['catch', 'shiny', 'gmax', 'alpha']
+  // const viewOnlyModeMarkTypes: MarkType[] = ['shiny', 'gmax', 'alpha']
   const [savingState, setSavingState] = useState<SavingState>('ready')
   const [syncState, setSyncState] = useState<SyncState>('synced')
   const [selectMode, setSelectMode] = useState<SelectMode>('cell')
   const [currentTool, setCurrentTool] = useState<ActionTool>(defaultTool)
   const [showRemoveModal, setShowRemoveModal] = useState(false)
   const numBoxes = loadedDex.boxes.length || 0
-  const [viewMode, setViewMode] = useState<ViewMode>(numBoxes > 2 ? 'boxed' : 'listed')
+  const defaultViewMode = numBoxes > 2 ? 'boxed' : 'listed'
+  const [viewMode, setViewMode] = useState<ViewMode>(
+    readUrlParamRouter('mode', router, defaultViewMode) as ViewMode
+  )
   const [modalContent, setModalContent] = useState<ModalContent | null>(null)
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
   const livingdex = useContext(LivingDexContext)
   const [saveError, setSaveError] = useState<Error | null>(null)
-  const [showRegularBoxes, setShowRegularBoxes] = useState(true)
-  const [showShinyBoxes, setShowShinyBoxes] = useState(false)
+  const [showRegularBoxes, setShowRegularBoxes] = useState(
+    readUrlParamRouter('nonshiny', router, '1') === '1'
+  )
+  const [showShinyBoxes, setShowShinyBoxes] = useState(
+    readUrlParamRouter('shiny', router, undefined) === '1'
+  )
   const showMixedShinies = showShinyBoxes && showRegularBoxes
 
   const dex = livingdex.state
@@ -111,6 +171,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const auth = useSession()
   const currentUser = auth.currentUser
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
+  console.log('markTypes', markTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
   const lastSavedAtString =
     lastSavedAt && lastSavedAt.toLocaleDateString
@@ -412,11 +473,13 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     prevAction: string | null
   ) => {
     if (newAction === 'toggle-showRegularBoxes') {
+      setUrlParamRouter('nonshiny', showRegularBoxes ? '0' : '1', router)
       setShowRegularBoxes(!showRegularBoxes)
       return
     }
 
     if (newAction === 'toggle-showShinyBoxes') {
+      setUrlParamRouter('shiny', showShinyBoxes ? '0' : '1', router)
       setShowShinyBoxes(!showShinyBoxes)
       return
     }
@@ -428,6 +491,19 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
 
     if (newAction === 'export') {
       handleExport()
+      return
+    }
+
+    if (newAction === 'toggle-marks') {
+      const routerMarks = readUrlParamRouter('marks', router, undefined)
+      if (!routerMarks) {
+        setUrlParamRouter('marks', allMarkTypes.join(','), router)
+        setMarkTypes(allMarkTypes)
+        return
+      }
+
+      setUrlParamRouter('marks', undefined, router)
+      setMarkTypes([])
       return
     }
   }
@@ -469,6 +545,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       setSelectMode('cell')
     }
     setViewMode(newAction as ViewMode)
+    setUrlParamRouter('mode', newAction, router)
     // tracker.dexViewModeChanged(dex, newAction)
   }
 
@@ -544,23 +621,48 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     // TODO tracker.dexPresetChanged(dex, newAction)
   }
 
-  const handleActionToolToolbar = (
-    newAction: string | null,
-    prevState: string | null,
-    prevAction: string | null
-  ) => {
+  const handleActionToolToolbar = (newAction: string | null) => {
     if (newAction === currentTool) {
       return
     }
     if (newAction === 'all-marks') {
       setMarkTypes(allMarkTypes)
+      setUrlParamRouter('marks', allMarkTypes.join(','), router)
     } else if (newAction === 'no-marks') {
       setMarkTypes([])
+      setUrlParamRouter('marks', '', router)
     } else {
       setMarkTypes([newAction as MarkType])
+      setUrlParamRouter('marks', newAction, router)
     }
     setCurrentTool(newAction as ActionTool)
     // tracker.dexMarkingToolSelected(dex, newAction)
+  }
+
+  const toolbarWrenchTools = [
+    {
+      actionName: 'import',
+      icon: 'upload',
+      label: 'Import JSON file',
+      status: '',
+      className: styles.saveBtn,
+      // onClick: handleImport,
+      showLabel: true,
+    },
+    {
+      actionName: 'export',
+      icon: 'download',
+      label: 'Export as JSON',
+      status: '',
+      className: styles.saveBtn,
+      // onClick: handleExport,
+      showLabel: true,
+    },
+  ]
+
+  if (!isEditable) {
+    // remove "import" tool
+    toolbarWrenchTools.shift()
   }
 
   const toolbar = (
@@ -577,7 +679,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             }}
           /> */}
           {/*Todo: fix button group internal state not updating when selectMode changes (initialAction related?)*/}
-          {viewMode !== 'boxed' && (
+          {isEditable && viewMode !== 'boxed' && (
             <ToolbarButtonGroup
               initialAction={selectMode}
               onButtonClick={handleSelectModeToolbar}
@@ -599,7 +701,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               ]}
             />
           )}
-          {viewMode === 'boxed' && (
+          {isEditable && viewMode === 'boxed' && (
             <ToolbarButtonGroup
               initialAction={selectMode}
               onButtonClick={handleSelectModeToolbar}
@@ -631,60 +733,64 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               },
             ]}
           />
-          <ToolbarButtonGroup
-            initialAction={currentTool}
-            onButtonClick={handleActionToolToolbar}
-            isDropdown
-            dropdownTitle={'Marker tool'}
-            dropdownPosition={'left'}
-            dropdownNoActionIcon={'pencil2'}
-            items={[
-              {
-                actionName: 'catch',
-                icon: 'pkg-pokeball',
-                label: 'Caught Marker Tool',
-              }, // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
-              {
-                actionName: 'gmax',
-                icon: 'pkg-dynamax',
-                label: 'Gigantamax Marker Tool',
-                status: gameSymbols.includes('gmax') ? undefined : 'hidden',
-              },
-              {
-                actionName: 'alpha',
-                icon: 'pkg-wild',
-                label: 'Alpha Marker Tool',
-                status: gameSymbols.includes('alpha') ? undefined : 'hidden',
-              },
-              null,
-              {
-                actionName: 'all-marks',
-                icon: 'eye',
-                label: 'Show All (Read-only)',
-              },
-              {
-                actionName: 'no-marks',
-                icon: 'eye-blocked',
-                label: 'Hide Marks & Uncaught',
-              },
-            ]}
-          />
-          <ToolbarButtonGroup
-            initialAction={preset?.id || null}
-            onButtonClick={handleChangePresetToolbar}
-            isDropdown
-            dropdownTitle={'Change Box Preset'}
-            dropdownPosition={'middle'}
-            dropdownNoActionIcon={'sync_alt'}
-            items={Object.values(getPresetsForGame(dex.gameId))
-              .filter(p => !p.isHidden)
-              .map(pr => ({
-                actionName: pr.id,
-                label: pr.name,
-                title: pr.description,
-                status: pr.id === preset?.id ? 'selected' : null,
-              }))}
-          />
+          {isEditable && (
+            <ToolbarButtonGroup
+              initialAction={currentTool}
+              onButtonClick={handleActionToolToolbar}
+              isDropdown
+              dropdownTitle={'Marker tool'}
+              dropdownPosition={'left'}
+              dropdownNoActionIcon={'pencil2'}
+              items={[
+                {
+                  actionName: 'catch',
+                  icon: 'pkg-pokeball',
+                  label: 'Caught Marker Tool',
+                }, // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
+                {
+                  actionName: 'gmax',
+                  icon: 'pkg-dynamax',
+                  label: 'Gigantamax Marker Tool',
+                  status: gameSymbols.includes('gmax') ? undefined : 'hidden',
+                },
+                {
+                  actionName: 'alpha',
+                  icon: 'pkg-wild',
+                  label: 'Alpha Marker Tool',
+                  status: gameSymbols.includes('alpha') ? undefined : 'hidden',
+                },
+                null,
+                {
+                  actionName: 'all-marks',
+                  icon: 'eye',
+                  label: 'Show All (Read-only)',
+                },
+                {
+                  actionName: 'no-marks',
+                  icon: 'eye-blocked',
+                  label: 'Hide Marks & Uncaught',
+                },
+              ]}
+            />
+          )}
+          {isEditable && (
+            <ToolbarButtonGroup
+              initialAction={preset?.id || null}
+              onButtonClick={handleChangePresetToolbar}
+              isDropdown
+              dropdownTitle={'Change Box Preset'}
+              dropdownPosition={'middle'}
+              dropdownNoActionIcon={'sync_alt'}
+              items={Object.values(getPresetsForGame(dex.gameId))
+                .filter(p => !p.isHidden)
+                .map(pr => ({
+                  actionName: pr.id,
+                  label: pr.name,
+                  title: pr.description,
+                  status: pr.id === preset?.id ? 'selected' : null,
+                }))}
+            />
+          )}
 
           <ToolbarButtonGroup
             initialAction={null}
@@ -693,6 +799,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             dropdownNoActionIcon={'pkg-shiny'}
             onButtonClick={handleSettingsToolbar}
             dropdownTitle={'Shiny options'}
+            dropdownPosition={isEditable ? 'right' : 'left'}
             isDeselectable={false}
             items={(() => {
               return [
@@ -713,6 +820,15 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   className: styles.saveBtn,
                   showLabel: true,
                 },
+                null,
+                {
+                  actionName: 'toggle-marks',
+                  icon: 'eye',
+                  status: markTypes.length > 0 ? 'selected' : null,
+                  label: 'Toggle Marks & Uncaught',
+                  className: styles.saveBtn,
+                  showLabel: true,
+                },
               ]
             })()}
           />
@@ -721,69 +837,53 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             isDropdown
             isMultiple
             dropdownNoActionIcon={'wrench'}
+            dropdownPosition={isEditable ? 'right' : 'left'}
             onButtonClick={handleSettingsToolbar}
             dropdownTitle={'Tools'}
             isDeselectable={false}
             items={(() => {
-              return [
-                {
-                  actionName: 'import',
-                  icon: 'upload',
-                  label: 'Import JSON file',
-                  status: '',
-                  className: styles.saveBtn,
-                  // onClick: handleImport,
-                  showLabel: true,
-                },
-                {
-                  actionName: 'export',
-                  icon: 'download',
-                  label: 'Export as JSON',
-                  status: '',
-                  className: styles.saveBtn,
-                  // onClick: handleExport,
-                  showLabel: true,
-                },
-              ]
+              return toolbarWrenchTools
             })()}
           />
         </ToolbarButtonGroupGroup>
-        <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
-          <ToolbarButtonGroup
-            initialAction={null}
-            onButtonClick={handleSave}
-            items={(() => {
-              //let icon = undefined
-              let icon = 'cloud-upload'
-              let text: string | undefined = ''
-              let status: ToolbarButtonStatus = null
-              if (savingState === 'saving') {
-                // icon = undefined
-                icon = 'spinner'
-                status = 'loading'
-                text = 'Saving...'
-              } else if (savingState === 'saved') {
-                icon = 'checkmark' // 'cloud-check'
-                status = 'success'
-                text = undefined //'Saved!'
-              } else if (savingState === 'error') {
-                icon = 'cross' // 'cloud-check'
-                status = 'error'
-                text = 'Error' //'Saved!'
-              }
-              return [
-                {
-                  actionName: 'upload',
-                  icon: icon,
-                  label: text,
-                  status: status,
-                  className: styles.saveBtn,
-                  showLabel: true,
-                },
-              ]
-            })()}
-          />
-        </ToolbarButtonGroupGroup>
+        {isEditable && (
+          <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
+            <ToolbarButtonGroup
+              initialAction={null}
+              onButtonClick={handleSave}
+              items={(() => {
+                //let icon = undefined
+                let icon = 'cloud-upload'
+                let text: string | undefined = ''
+                let status: ToolbarButtonStatus = null
+                if (savingState === 'saving') {
+                  // icon = undefined
+                  icon = 'spinner'
+                  status = 'loading'
+                  text = 'Saving...'
+                } else if (savingState === 'saved') {
+                  icon = 'checkmark' // 'cloud-check'
+                  status = 'success'
+                  text = undefined //'Saved!'
+                } else if (savingState === 'error') {
+                  icon = 'cross' // 'cloud-check'
+                  status = 'error'
+                  text = 'Error' //'Saved!'
+                }
+                return [
+                  {
+                    actionName: 'upload',
+                    icon: icon,
+                    label: text,
+                    status: status,
+                    className: styles.saveBtn,
+                    showLabel: true,
+                  },
+                ]
+              })()}
+            />
+          </ToolbarButtonGroupGroup>
+        )}
       </div>
     </div>
   )
@@ -891,11 +991,13 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     </span>
   )
 
+  const hasAllMarks = markTypes.length === allMarkTypes.length
+
   return (
     <>
-      {isEditable && toolbar}
+      {toolbar}
       {isEditable && removeDexModal}
-      {isEditable && genericModal !== null && genericModal}
+      {genericModal !== null && genericModal}
       <div className={'text-center ' + classNameIf(isEditable, styles.toolbarApp)}>
         <div className={'inner-container bordered-container text-center ' + styles.dexHeader}>
           <div className={styles.dexLogo}>
@@ -983,9 +1085,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           selectMode={selectMode}
           viewMode={viewMode}
           usePixelIcons={false}
-          revealPokemon={currentTool === 'all-marks'}
+          revealPokemon={hasAllMarks}
           editable={isEditable}
-          markTypes={isEditable ? markTypes : viewOnlyModeMarkTypes}
+          markTypes={markTypes}
           onBoxTitleEdit={isEditable ? handleBoxTitleEdit : undefined}
           onBoxClick={isEditable ? handleBoxClick : undefined}
           onPokemonClick={isEditable ? handlePkmClick : undefined}
