@@ -7,10 +7,12 @@ env:
 on:
   push:
     branches:
-      - 'main'
+      - main
+      - 'update-deps/*'
   pull_request:
     branches:
       - main
+      - 'update-deps/*'
 
 concurrency:
   group: checkCodeQuality-${{ github.ref }}
