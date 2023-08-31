@@ -164,14 +164,14 @@ importers:
   packages/firebase:
     dependencies:
       '@firebase/app':
-        specifier: ^0.9.17
-        version: 0.9.17
+        specifier: ^0.9.18
+        version: 0.9.18
       '@firebase/auth':
         specifier: ^1.3.0
-        version: 1.3.0(@firebase/app@0.9.17)(encoding@0.1.13)
+        version: 1.3.0(@firebase/app@0.9.18)(encoding@0.1.13)
       '@firebase/firestore':
-        specifier: ^4.1.2
-        version: 4.1.2(@firebase/app@0.9.17)(encoding@0.1.13)
+        specifier: ^4.1.3
+        version: 4.1.3(@firebase/app@0.9.18)(encoding@0.1.13)
       '@pkg/config':
         specifier: workspace:*
         version: link:../config
@@ -365,8 +365,8 @@ importers:
         specifier: 13.4.19
         version: 13.4.19(eslint@8.48.0)(typescript@5.2.2)
       lucide-react:
-        specifier: 0.272.0
-        version: 0.272.0(react@18.2.0)
+        specifier: 0.274.0
+        version: 0.274.0(react@18.2.0)
       next:
         specifier: 13.4.19
         version: 13.4.19(@babel/core@7.22.11)(react-dom@18.2.0)(react@18.2.0)
@@ -446,8 +446,8 @@ importers:
         specifier: 13.4.19
         version: 13.4.19(eslint@8.48.0)(typescript@5.2.2)
       lucide-react:
-        specifier: 0.272.0
-        version: 0.272.0(react@18.2.0)
+        specifier: 0.274.0
+        version: 0.274.0(react@18.2.0)
       next:
         specifier: 13.4.19
         version: 13.4.19(@babel/core@7.22.11)(react-dom@18.2.0)(react@18.2.0)
@@ -590,7 +590,7 @@ packages:
       remark-parse: 10.0.2
       remark-rehype: 10.1.0
       remark-smartypants: 2.0.0
-      shiki: 0.14.3
+      shiki: 0.14.4
       unified: 10.1.2
       unist-util-visit: 4.1.2
       vfile: 5.3.7
@@ -2714,8 +2714,8 @@ packages:
     resolution: {integrity: sha512-AeweANOIo0Mb8GiYm3xhTEBVCmPwTYAu9Hcd2qSkLuga/6+j9b1Jskl5bpiSQWy9eJ/j5pavxj6eYogmnuzm+Q==}
     dev: false
 
-  /@firebase/app@0.9.17:
-    resolution: {integrity: sha512-jBEGJ3km90M6sAc2O0baScDs0JAD1gGvZo7AniNVg06kvmaj+KEfGOaASwhlHNvIE2sYrOBqgobZADgaiYp5KQ==}
+  /@firebase/app@0.9.18:
+    resolution: {integrity: sha512-SIJi3B/LzNezaEgbFCFIem12+51khkA3iewYljPQPUArWGSAr1cO9NK8TvtJWax5GMKSmQbJPqgi6a+gxHrWGQ==}
     dependencies:
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
@@ -2728,7 +2728,7 @@ packages:
     resolution: {integrity: sha512-VOaGzKp65MY6P5FI84TfYKBXEPi6LmOCSMMzys6o2BN2LOsqy7pCuZCup7NYnfbk5OkkQKzvIfHOzTm0UDpkyg==}
     dev: false
 
-  /@firebase/auth@1.3.0(@firebase/app@0.9.17)(encoding@0.1.13):
+  /@firebase/auth@1.3.0(@firebase/app@0.9.18)(encoding@0.1.13):
     resolution: {integrity: sha512-vjK4CHbY9aWdiVOrKi6mpa8z6uxeaf7LB/MZTHuZOiGHMcUoTGB6TeMbRShyqk1uaMrxhhZ5Ar/dR0965E1qyA==}
     peerDependencies:
       '@firebase/app': 0.x
@@ -2737,7 +2737,7 @@ packages:
       '@react-native-async-storage/async-storage':
         optional: true
     dependencies:
-      '@firebase/app': 0.9.17
+      '@firebase/app': 0.9.18
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
@@ -2783,13 +2783,13 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@firebase/firestore@4.1.2(@firebase/app@0.9.17)(encoding@0.1.13):
-    resolution: {integrity: sha512-PZkXw2yfVcKgVvsd1rohOJ27bJz/p+TccwdraMgE701eDAj5xccGPmCVvMfFq0nz+BmQVuD5wUUVBBRMVCGOfw==}
+  /@firebase/firestore@4.1.3(@firebase/app@0.9.18)(encoding@0.1.13):
+    resolution: {integrity: sha512-3kw/oZrLAIHuSDTAlKguZ1e0hAgWgiBl4QQm2mIPBvBAs++iEkuv9DH2tr6rbYpT6dWtdn6jj0RN0XeqOouJRg==}
     engines: {node: '>=10.10.0'}
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.17
+      '@firebase/app': 0.9.18
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
@@ -3592,7 +3592,7 @@ packages:
       pkg-types: 1.0.3
       pluralize: 8.0.0
       postcss: 8.4.27
-      preferred-pm: 3.0.3
+      preferred-pm: 3.1.1
       ts-morph: 19.0.0
       ts-pattern: 5.0.4
       tsconfck: 2.1.2(typescript@5.2.2)
@@ -6609,12 +6609,12 @@ packages:
       ora: 6.3.1
       p-limit: 4.0.0
       path-to-regexp: 6.2.1
-      preferred-pm: 3.0.3
+      preferred-pm: 3.1.1
       prompts: 2.4.2
       rehype: 12.0.1
       semver: 7.5.4
       server-destroy: 1.0.1
-      shiki: 0.14.3
+      shiki: 0.14.4
       string-width: 5.1.2
       strip-ansi: 7.1.0
       tsconfig-resolver: 3.0.1
@@ -6623,7 +6623,7 @@ packages:
       vfile: 5.3.7
       vite: 4.4.9(@types/node@20.5.7)
       vitefu: 0.2.4(vite@4.4.9)
-      which-pm: 2.0.0
+      which-pm: 2.1.1
       yargs-parser: 21.1.1
       zod: 3.22.2
     transitivePeerDependencies:
@@ -6663,8 +6663,8 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.10
-      caniuse-lite: 1.0.30001524
-      fraction.js: 4.3.2
+      caniuse-lite: 1.0.30001525
+      fraction.js: 4.3.4
       normalize-range: 0.1.2
       picocolors: 1.0.0
       postcss: 8.4.27
@@ -6679,8 +6679,8 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.10
-      caniuse-lite: 1.0.30001524
-      fraction.js: 4.3.2
+      caniuse-lite: 1.0.30001525
+      fraction.js: 4.3.4
       normalize-range: 0.1.2
       picocolors: 1.0.0
       postcss: 8.4.29
@@ -6920,7 +6920,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001524
+      caniuse-lite: 1.0.30001525
       electron-to-chromium: 1.4.506
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11(browserslist@4.21.10)
@@ -6994,13 +6994,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.10
-      caniuse-lite: 1.0.30001524
+      caniuse-lite: 1.0.30001525
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite@1.0.30001524:
-    resolution: {integrity: sha512-Jj917pJtYg9HSJBF95HVX3Cdr89JUyLT4IZ8SvM5aDRni95swKgYi3TgYLH5hnGfPE/U1dg6IfZ50UsIlLkwSA==}
+  /caniuse-lite@1.0.30001525:
+    resolution: {integrity: sha512-/3z+wB4icFt3r0USMwxujAqRvaD/B7rvGTsKhbhSQErVrJvkZCLhgNLJxU8MevahQVH6hCU9FsHdNUFbiwmE7Q==}
 
   /caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
@@ -8438,8 +8438,8 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /fraction.js@4.3.2:
-    resolution: {integrity: sha512-9VLF466MqX1OUP7/d9r7/Vsvu6Hpp+taXBLmiR5x6mEYfT0BDkGVBt5TyA1aDu1WzIE1sF8F66evOFaz7iAEGQ==}
+  /fraction.js@4.3.4:
+    resolution: {integrity: sha512-pwiTgt0Q7t+GHZA4yaLjObx4vXmmdcS0iSJ19o8d/goUGgItX9UZWKWNnLHehxviD8wU2IWRsnR8cD5+yOJP2Q==}
 
   /fs-extra@11.1.1:
     resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
@@ -9398,7 +9398,7 @@ packages:
       define-properties: 1.2.0
       get-intrinsic: 1.2.1
       has-symbols: 1.0.3
-      reflect.getprototypeof: 1.0.3
+      reflect.getprototypeof: 1.0.4
     dev: false
 
   /jackspeak@2.3.1:
@@ -10293,8 +10293,8 @@ packages:
       lru-cache: 4.0.2
     dev: false
 
-  /lucide-react@0.272.0(react@18.2.0):
-    resolution: {integrity: sha512-TXk88XsL9YC9psZR6GSXDLpbppxlm2jN2uMjIWI5A7sPWb/dllib59lNcORC20N33TEeelDwcTR0dLKl/fhYLw==}
+  /lucide-react@0.274.0(react@18.2.0):
+    resolution: {integrity: sha512-qiWcojRXEwDiSimMX1+arnxha+ROJzZjJaVvCC0rsG6a9pUPjZePXSq7em4ZKMp0NDm1hyzPNkM7UaWC3LU2AA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -10948,7 +10948,7 @@ packages:
       '@next/env': 13.4.19
       '@swc/helpers': 0.5.1
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001524
+      caniuse-lite: 1.0.30001525
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -11888,8 +11888,8 @@ packages:
     resolution: {integrity: sha512-X9BODrvQ4Ekwv9GURm9AKAGaomqXmip7NQTZgY7gcNmr7XE83adOMJvd3N42id1tMFU7ojiynRsYnY6/BRFxLA==}
     dev: false
 
-  /preferred-pm@3.0.3:
-    resolution: {integrity: sha512-+wZgbxNES/KlJs9q40F/1sfOd/j7f1O9JaHcW5Dsn3aUUOZg3L2bjpVUcKV2jvtElYfoTuQiNeMfQJ4kwUAhCQ==}
+  /preferred-pm@3.1.1:
+    resolution: {integrity: sha512-CsZgOVLKHifdoRu2y66P1s6oLb2WfT5Njkcgi80I/52FWTTVkWG6z0Z13vPkXC4hsT0nMrYXqX30buH8+D2eRQ==}
     engines: {node: '>=10'}
     dependencies:
       find-up: 5.0.0
@@ -12262,8 +12262,8 @@ packages:
     dependencies:
       picomatch: 2.3.1
 
-  /reflect.getprototypeof@1.0.3:
-    resolution: {integrity: sha512-TTAOZpkJ2YLxl7mVHWrNo3iDMEkYlva/kgFcXndqMgbo/AZUmmavEkdXV+hXtE4P8xdyEKRzalaFqZVuwIk/Nw==}
+  /reflect.getprototypeof@1.0.4:
+    resolution: {integrity: sha512-ECkTw8TmJwW60lOTR+ZkODISW6RQ8+2CL3COqtiJKLd6MmB45hN51HprHFziKLGkAuTGQhBb91V8cy+KHlaCjw==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -12663,8 +12663,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  /shiki@0.14.3:
-    resolution: {integrity: sha512-U3S/a+b0KS+UkTyMjoNojvTgrBHjgp7L6ovhFVZsXmBGnVdQ4K4U9oK0z63w538S91ATngv1vXigHCSWOwnr+g==}
+  /shiki@0.14.4:
+    resolution: {integrity: sha512-IXCRip2IQzKwxArNNq1S+On4KPML3Yyn8Zzs/xRgcgOWIr8ntIK3IKzjFPfjy/7kt9ZMjc+FItfqHRBg8b6tNQ==}
     dependencies:
       ansi-sequence-parser: 1.1.1
       jsonc-parser: 3.2.0
@@ -13769,6 +13769,14 @@ packages:
 
   /which-pm@2.0.0:
     resolution: {integrity: sha512-Lhs9Pmyph0p5n5Z3mVnN0yWcbQYUAD7rbQUiMsQxOJ3T57k7RFe35SUwWMf7dsbDZks1uOmw4AecB/JMDj3v/w==}
+    engines: {node: '>=8.15'}
+    dependencies:
+      load-yaml-file: 0.2.0
+      path-exists: 4.0.0
+    dev: true
+
+  /which-pm@2.1.1:
+    resolution: {integrity: sha512-xzzxNw2wMaoCWXiGE8IJ9wuPMU+EYhFksjHxrRT8kMT5SnocBPRg69YAMtyV4D12fP582RA+k3P8H9J5EMdIxQ==}
     engines: {node: '>=8.15'}
     dependencies:
       load-yaml-file: 0.2.0
