@@ -11,17 +11,25 @@ let baseConfig = {
     turbo: true,
   },
   images: {
-    domains: ['itsjavi.com', 'localhost'],
+    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'itsjavi.com',
+        port: '',
+        pathname: '/supereffective-assets/assets/images/**',
+      },
+    ],
     minimumCacheTTL: 60 * 60 * 24 * 7 * 4, // 4 weeks
   },
-  async rewrites() {
-    return [
-      {
-        source: '/supereffective-assets/:match*',
-        destination: 'https://itsjavi.com/supereffective-assets/assets/:match*',
-      },
-    ]
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/supereffective-assets/:match*',
+  //       destination: 'https://itsjavi.com/supereffective-assets/assets/:match*',
+  //     },
+  //   ]
+  // },
 }
 
 const withPlugins = withAxiom(
