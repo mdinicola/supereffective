@@ -9,7 +9,15 @@ import styles from './PageSkeleton.module.css'
 
 export default function PageSkeleton({ children }: { children: React.ReactNode }) {
   return (
-    <div className={['page', styles.page, `bdg-gr-teal-pattern`, ' main-site-bg', 'dex-tracker-ui'].join(' ')}>
+    <div
+      className={[
+        'page',
+        styles.page,
+        `bdg-gr-teal-pattern`,
+        ' main-site-bg',
+        'dex-tracker-ui',
+      ].join(' ')}
+    >
       <MainHeader />
       {_renderAnnouncementBanners()}
       <main className={['main', styles.main, ''].join(' ')}>{children}</main>

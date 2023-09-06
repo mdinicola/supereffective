@@ -247,6 +247,7 @@
   display: block;
 }
 .types .tooltip [data-type] {
+  box-sizing: content-box;
   border: 2px solid var(--dexDarkColor);
 }
 
