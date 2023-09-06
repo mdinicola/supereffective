@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
@@ -10,6 +10,7 @@ import Button from '#/primitives/legacy/Button/Button'
 import { ExternLink } from '#/primitives/legacy/Link/Links'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
+import { TypeIcon } from '@supeffective/dextracker-ui'
 import css from './Pokedex.module.css'
 
 export interface PokedexProps {
@@ -94,7 +95,7 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type1)}
               data-flow="bottom"
             >
-              <i className={`icon-type-${pokemon.type1}--colored-circle`} />
+              <TypeIcon typeId={pokemon.type1} size="md" colored filled />
             </span>
           )}
           {pokemon.type2 && (
@@ -104,7 +105,7 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type2)}
               data-flow="bottom"
             >
-              <i className={`icon-type-${pokemon.type2}--colored-circle`} />
+              <TypeIcon typeId={pokemon.type2} size="md" colored filled />
             </span>
           )}
         </div>

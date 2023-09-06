@@ -241,13 +241,13 @@
 
 .types .tooltip {
   font-size: 0.9rem;
-  border-radius: 100%;
-  border: 2px solid var(--dexDarkColor);
-  background: #fff;
   padding: 0;
   line-height: 0;
   letter-spacing: 0;
   display: block;
+}
+.types .tooltip [data-type] {
+  border: 2px solid var(--dexDarkColor);
 }
 
 .types .tooltip i {

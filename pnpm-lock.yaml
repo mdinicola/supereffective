@@ -346,6 +346,9 @@ importers:
       '@prisma/nextjs-monorepo-workaround-plugin':
         specifier: ^5.2.0
         version: 5.2.0
+      '@supeffective/dextracker-ui':
+        specifier: ^0.2.1
+        version: 0.2.1(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)
       '@types/node':
         specifier: ^20.5.9
         version: 20.5.9
@@ -480,7 +483,7 @@ importers:
         version: 3.22.2
       zustand:
         specifier: ^4.4.1
-        version: 4.4.1(@types/react@18.2.21)(react@18.2.0)
+        version: 4.4.1(@types/react@18.2.21)(immer@10.0.2)(react@18.2.0)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.14.0
@@ -3793,6 +3796,46 @@ packages:
     requiresBuild: true
     dev: false
 
+  /@r1stack/cn@0.4.5:
+    resolution: {integrity: sha512-y5lxFSpHrsQ2nGsMmu4hhS75x3968g8VRhsE9Rph0F9csO7nLSocemHL1sqa5HN8BXxS7L/xU4GCQb/R6Ctj5Q==}
+    dev: false
+
+  /@r1stack/core@0.4.5:
+    resolution: {integrity: sha512-O1YF+C5Cvzz+aPiwkM9QFwGWzW5uiUM0NbUDWBc82VTYF8g8AxeWoHFayZRb77FxuPj+rAzQcbEnmmM9nE5loA==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@r1stack/react@0.4.5(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-xDLvOkHbXrnM+WmzgY7L7K7sK60TvQfs4PQI3py0vwV7Y57AgmAbgx+/D+6MAHpiali2rYQLq3fb4caO8P7TnA==}
+    peerDependencies:
+      '@r1stack/core': 0.4.5
+      '@types/node': ^20.4.9
+      '@types/react': ^18.2.19
+      '@types/react-dom': ^18.2.7
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@r1stack/core': 0.4.5
+      '@types/node': 20.5.9
+      '@types/react': 18.2.21
+      '@types/react-dom': 18.2.7
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@r1stack/search@0.4.5:
+    resolution: {integrity: sha512-sXEb4WJlDnF6+3ashMsfTb63BVNMhJyVonu+RSopn60Lhu+yi7EK1CJL2LwCrALQ/PjfNSu8bOSD5isKoy4b1w==}
+    dependencies:
+      '@r1stack/core': 0.4.5
+    dev: false
+
+  /@r1stack/storage@0.4.5:
+    resolution: {integrity: sha512-P5TcTQ+tKIfPnBiVXPl45LNAOu2Y0bG3q+46elfcCs/ZoIpB+1HCOsxr96EP1nP/yy/QT+XOHDz2b7Wx6rAqYw==}
+    dependencies:
+      '@r1stack/core': 0.4.5
+    dev: false
+
   /@react-aria/breadcrumbs@3.5.4(react@18.2.0):
     resolution: {integrity: sha512-CtBAL7xDDHXpZvmglhEYbNAXeoXNl4Ke+Rwn2WTHVr9blry3P17IL4Elou5QAkyzI2GNHnXUs9K6lzX/uLv+kQ==}
     peerDependencies:
@@ -5061,6 +5104,59 @@ packages:
     dependencies:
       '@sinonjs/commons': 3.0.0
     dev: true
+
+  /@supeffective/assets-sdk@0.2.1:
+    resolution: {integrity: sha512-uHm+/dkLuOyGapyjICrnxcU8uQGEYpNsF1uJlkFly+25UJpsWnU+PXD7wwQolTLhhdu+ZUpAvaIZKJUvnOqs2w==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@supeffective/dextracker-core@0.2.1:
+    resolution: {integrity: sha512-+KgmODSp4H/DAfd+a+P6gkPNL23vhlanFc3W15THiP1QZoAtmn1gCDo92YeRYia7BqCJmDHxLCX19n9QCWrSwQ==}
+    dependencies:
+      '@supeffective/assets-sdk': 0.2.1
+      '@supeffective/dextracker-parser': 0.2.1
+      zod: 3.22.2
+    dev: false
+
+  /@supeffective/dextracker-icons@0.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Ur4oEKKhKksbvQAr2PI0vO2RllEZWWyziMGFgeXpQFtdYrMf2SbzDpFpTFP5v8V60dV1WAsOCTesMQU72xrUdQ==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@supeffective/dextracker-parser@0.2.1:
+    resolution: {integrity: sha512-qCXxdFpljOJLEzqcW1Q4by4bMdx/1l2U5DND1/dPGjl3Nd3e4cudsby6Mq4u9q8n/G7nmMK2wLYgCi0myu7I7g==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@supeffective/dextracker-ui@0.2.1(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21):
+    resolution: {integrity: sha512-oPtOv+Qn28SHKhGUZB1mEWjTwtfLXZN3afElvm2uoxTvD3W1Htbw6k9ubHEvt75qNVy8d0ndBkpCDOudZf4ZfA==}
+    dependencies:
+      '@r1stack/cn': 0.4.5
+      '@r1stack/core': 0.4.5
+      '@r1stack/react': 0.4.5(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
+      '@r1stack/search': 0.4.5
+      '@r1stack/storage': 0.4.5
+      '@supeffective/assets-sdk': 0.2.1
+      '@supeffective/dextracker-core': 0.2.1
+      '@supeffective/dextracker-icons': 0.2.1(react-dom@18.2.0)(react@18.2.0)
+      immer: 10.0.2
+      lucide-react: 0.274.0(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-virtuoso: 4.5.1(react-dom@18.2.0)(react@18.2.0)
+      zustand: 4.4.1(@types/react@18.2.21)(immer@10.0.2)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+    dev: false
 
   /@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.22.15):
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -9023,6 +9119,10 @@ packages:
     engines: {node: '>= 4'}
     dev: false
 
+  /immer@10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
+    dev: false
+
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -12253,6 +12353,17 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-virtuoso@4.5.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Jdo9M/T5PcDAczvmXAKwvb/BW0MCMr/cb+3j2m9192zlQgQ+syMdJR42i+Sk80ln5aSNaL1fnxleJzdKsCc4lw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16 || >=17 || >= 18'
+      react-dom: '>=16 || >=17 || >= 18'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -13910,7 +14021,7 @@ packages:
   /zod@3.22.2:
     resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
 
-  /zustand@4.4.1(@types/react@18.2.21)(react@18.2.0):
+  /zustand@4.4.1(@types/react@18.2.21)(immer@10.0.2)(react@18.2.0):
     resolution: {integrity: sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -13926,6 +14037,7 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.21
+      immer: 10.0.2
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
