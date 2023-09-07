@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { HTMLAttributes } from 'react'
+import Image from 'next/image'
 
 import config from '#/config'
 import { classNames } from '#/utils/legacyUtils'

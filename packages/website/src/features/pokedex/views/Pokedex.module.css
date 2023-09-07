@@ -278,6 +278,7 @@
 
 .gameIcons {
   display: flex;
+  gap: 0.4rem;
   text-align: center;
   align-items: center;
   justify-items: center;

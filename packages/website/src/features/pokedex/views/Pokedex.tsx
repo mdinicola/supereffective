@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { TypeIcon } from '@supeffective/dextracker-ui'
+import { GameLabel, TypeIcon } from '@supeffective/dextracker-ui'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
@@ -119,7 +119,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
-                <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} colored rounded size="sm" />
               </div>
             ))}
             {pokemon.location.eventOnlyIn.map((gameSetId: GameSetId) => (
@@ -129,7 +129,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name + ' (Event Only)'}
                 data-flow="bottom"
               >
-                <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} colored rounded size="xs" />
                 <span className={`icon-pkg-pokeball-outlined`} title="Event Only"></span>
               </div>
             ))}
@@ -148,7 +148,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
-                <span className={`gameset-tag gameset-${gameSetId}`}>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} colored rounded size="xs" />
               </div>
             ))}
             {pokemon.location.storableIn.length === 0 && <b>---</b>}

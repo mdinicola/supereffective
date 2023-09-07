@@ -347,8 +347,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0
       '@supeffective/dextracker-ui':
-        specifier: ^0.3.0
-        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.1
+        version: 0.3.1(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
       '@types/node':
         specifier: ^20.5.9
         version: 20.5.9
@@ -3796,6 +3796,46 @@ packages:
     requiresBuild: true
     dev: false
 
+  /@r1stack/cn@0.4.5:
+    resolution: {integrity: sha512-y5lxFSpHrsQ2nGsMmu4hhS75x3968g8VRhsE9Rph0F9csO7nLSocemHL1sqa5HN8BXxS7L/xU4GCQb/R6Ctj5Q==}
+    dev: false
+
+  /@r1stack/core@0.4.5:
+    resolution: {integrity: sha512-O1YF+C5Cvzz+aPiwkM9QFwGWzW5uiUM0NbUDWBc82VTYF8g8AxeWoHFayZRb77FxuPj+rAzQcbEnmmM9nE5loA==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@r1stack/react@0.4.5(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-xDLvOkHbXrnM+WmzgY7L7K7sK60TvQfs4PQI3py0vwV7Y57AgmAbgx+/D+6MAHpiali2rYQLq3fb4caO8P7TnA==}
+    peerDependencies:
+      '@r1stack/core': 0.4.5
+      '@types/node': ^20.4.9
+      '@types/react': ^18.2.19
+      '@types/react-dom': ^18.2.7
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@r1stack/core': 0.4.5
+      '@types/node': 20.5.9
+      '@types/react': 18.2.21
+      '@types/react-dom': 18.2.7
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@r1stack/search@0.4.5:
+    resolution: {integrity: sha512-sXEb4WJlDnF6+3ashMsfTb63BVNMhJyVonu+RSopn60Lhu+yi7EK1CJL2LwCrALQ/PjfNSu8bOSD5isKoy4b1w==}
+    dependencies:
+      '@r1stack/core': 0.4.5
+    dev: false
+
+  /@r1stack/storage@0.4.5:
+    resolution: {integrity: sha512-P5TcTQ+tKIfPnBiVXPl45LNAOu2Y0bG3q+46elfcCs/ZoIpB+1HCOsxr96EP1nP/yy/QT+XOHDz2b7Wx6rAqYw==}
+    dependencies:
+      '@r1stack/core': 0.4.5
+    dev: false
+
   /@react-aria/breadcrumbs@3.5.4(react@18.2.0):
     resolution: {integrity: sha512-CtBAL7xDDHXpZvmglhEYbNAXeoXNl4Ke+Rwn2WTHVr9blry3P17IL4Elou5QAkyzI2GNHnXUs9K6lzX/uLv+kQ==}
     peerDependencies:
@@ -5065,14 +5105,48 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
-  /@supeffective/dextracker-ui@0.3.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-C0DGRSk9qqqtdyG/AV/a/sXI0hckwwmPNnvHoHHozrZiud6rSX1/vRuYWKfm4a6KFStWXTXuV9sKQRGctFn77w==}
+  /@supeffective/assets-sdk@0.3.1:
+    resolution: {integrity: sha512-Aq1oFzf1T7dNmt/qWC5dZt5oNsRmXRuiCt7KKgr+4/ilnexpsWG3mIoSepUUgOCt3rqWbwyC8YoBnQ7R4fsgYA==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@supeffective/dextracker-core@0.3.1:
+    resolution: {integrity: sha512-5pOX5+GfnXoQtiFJEtGgkZKWa8CFClb69n1A9QfcuSzyc97tvJG1nlbCjmBS9LWRRTI4ROddbP4umHDKKdxQRQ==}
+    dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@supeffective/dextracker-icons@0.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DYJFh60Y0+I6OlApK1D+R+lp8GByfgPhw99xwYzsT1UynKSVyKiJmqn6V177waF99y1c3+Dqzrt9x3Labkfbkg==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@supeffective/dextracker-ui@0.3.1(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ckAx3viQ4ZGkLCE+Y97WMGvZIQoy4bOHWuWyH+oHp/RE2xRCh4eHpJFU3UgYbytSxJkNncymfVxN5wOO5aaYAQ==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@r1stack/cn': 0.4.5
+      '@r1stack/react': 0.4.5(@r1stack/core@0.4.5)(@types/node@20.5.9)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
+      '@r1stack/search': 0.4.5
+      '@r1stack/storage': 0.4.5
+      '@supeffective/assets-sdk': 0.3.1
+      '@supeffective/dextracker-core': 0.3.1
+      '@supeffective/dextracker-icons': 0.3.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - '@r1stack/core'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
     dev: false
 
   /@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.22.15):
