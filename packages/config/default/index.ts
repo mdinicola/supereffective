@@ -32,7 +32,8 @@ const config = {
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
   assets: {
-    version: '20230809-01',
+    version: '20230809-01', // !!! changing this will make Vercel to optimize all images again (producing costs of 5$ every 1000 extra images)
+    pokeImgVersion: '20230809-01',
     baseUrl: 'https://itsjavi.com/supereffective-assets/assets',
     dataUrl: 'https://itsjavi.com/supereffective-assets/assets/data',
     fontsUrl: 'https://itsjavi.com/supereffective-assets/assets/fonts',

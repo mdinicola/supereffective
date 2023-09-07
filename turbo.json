@@ -34,11 +34,13 @@
     "build": {
       "description": "A package's `build` script depends on that package's dependencies and devDependencies `build` tasks being completed first. The `^` symbol signifies `upstream script`.",
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
+      "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"],
+      "outputMode": "new-only"
     },
     "build:beta": {
       "dependsOn": ["^build:beta"],
-      "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"]
+      "outputs": ["dist/**", ".next/**", "data/**", "repositories/**"],
+      "outputMode": "new-only"
     },
     "codegen": {
       "dependsOn": ["^codegen"],

@@ -1,10 +1,10 @@
-import { HTMLAttributes } from 'react'
 import Image from 'next/image'
+import { HTMLAttributes } from 'react'
 
 import config from '#/config'
 import { classNames } from '#/utils/legacyUtils'
 
-const assetsVersion = config.assets.version
+const assetsVersion = config.assets.pokeImgVersion
 
 const variantFolder = {
   '2d': 'home2d-icon',
@@ -54,6 +54,7 @@ export default function PkImgFile({
     <span className={classes} {...rest}>
       <Image
         loading="lazy"
+        // unoptimized
         quality={100}
         width={imgW}
         height={imgH}
