@@ -251,6 +251,7 @@ export const _itemIds = [
   'coverfossil',
   'plumefossil',
   'dreamball',
+  'bignugget',
   'weaknesspolicy',
   'assaultvest',
   'pixieplate',
