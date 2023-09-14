@@ -25,7 +25,7 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@prisma/nextjs-monorepo-workaround-plugin": "^5.2.0",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.3.0",
     "@supeffective/dextracker-ui": "^0.3.1",
     "@types/node": "^20.6.0",
     "@types/react": "^18.2.21",
