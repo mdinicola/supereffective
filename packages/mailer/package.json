@@ -6,7 +6,7 @@
   "dependencies": {
     "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@types/node": "^20.6.0",
+    "@types/node": "^20.6.1",
     "@types/nodemailer": "^6.4.10",
     "nodemailer": "^6.9.5",
     "resend": "^1.0.0",
