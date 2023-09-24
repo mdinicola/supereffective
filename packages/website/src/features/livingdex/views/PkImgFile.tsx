@@ -1,10 +1,8 @@
-import { HTMLAttributes } from 'react'
 import Image from 'next/image'
+import { HTMLAttributes } from 'react'
 
 import config from '#/config'
 import { classNames } from '#/utils/legacyUtils'
-
-const assetsVersion = config.assets.pokeImgVersion
 
 const variantFolder = {
   '2d': 'home2d-icon',
@@ -44,7 +42,8 @@ export default function PkImgFile({
     className
   )
 
-  let imageSrc = `${config.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetsVersion}`
+  const assetVersion = config.assets.getPokeImgVersion(nid)
+  let imageSrc = `${config.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetVersion}`
 
   if (nid === 'placeholder') {
     imageSrc = '/assets/gui/placeholders/placeholder-64x64.png'
@@ -54,7 +53,7 @@ export default function PkImgFile({
     <span className={classes} {...rest}>
       <Image
         loading="lazy"
-        // unoptimized
+        unoptimized
         quality={100}
         width={imgW}
         height={imgH}

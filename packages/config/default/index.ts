@@ -1,6 +1,12 @@
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
+// !!! Changing these versions will make Vercel to optimize all images again 
+//      (producing costs of 5$ every 1000 extra images)
+
+const ASSETS_CACHE_VERSION = '20230809-01'
+const ASSETS_CACHE_VERSION_INCREMENTAL = '20230924-01'
+
 const config = {
   dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
@@ -32,8 +38,20 @@ const config = {
     webhookCallbackUrl: `${getBaseUrl()}/api/webhooks/patreon`,
   },
   assets: {
-    version: '20230809-01', // !!! changing this will make Vercel to optimize all images again (producing costs of 5$ every 1000 extra images)
-    pokeImgVersion: '20230809-01',
+    version: ASSETS_CACHE_VERSION,
+    getPokeImgVersion(nid: string): string {
+      if (nid.includes('paldea') || nid.includes('bloodmoon')) {
+        return ASSETS_CACHE_VERSION_INCREMENTAL
+      }
+    
+      const dexNum = parseInt(nid.split('-')[0].replace(/^0+/, ''))
+    
+      if (dexNum > 1010) {
+        return ASSETS_CACHE_VERSION_INCREMENTAL
+      }
+    
+      return ASSETS_CACHE_VERSION
+    },
     baseUrl: 'https://itsjavi.com/supereffective-assets/assets',
     dataUrl: 'https://itsjavi.com/supereffective-assets/assets/data',
     fontsUrl: 'https://itsjavi.com/supereffective-assets/assets/fonts',
