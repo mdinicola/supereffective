@@ -1,7 +1,7 @@
 import { isDevelopmentEnv } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
-// !!! Changing these versions will make Vercel to optimize all images again 
+// !!! Changing these versions will make Vercel to optimize all images again
 //      (producing costs of 5$ every 1000 extra images)
 
 const ASSETS_CACHE_VERSION = '20230809-01'
@@ -43,13 +43,13 @@ const config = {
       if (nid.includes('paldea') || nid.includes('bloodmoon')) {
         return ASSETS_CACHE_VERSION_INCREMENTAL
       }
-    
+
       const dexNum = parseInt(nid.split('-')[0].replace(/^0+/, ''))
-    
+
       if (dexNum > 1010) {
         return ASSETS_CACHE_VERSION_INCREMENTAL
       }
-    
+
       return ASSETS_CACHE_VERSION
     },
     baseUrl: 'https://itsjavi.com/supereffective-assets/assets',

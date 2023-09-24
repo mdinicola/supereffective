@@ -431,8 +431,8 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.2.2)
       '@tanstack/react-virtual':
-        specifier: 3.0.0-alpha.0
-        version: 3.0.0-alpha.0(react@18.2.0)
+        specifier: 3.0.0-beta.60
+        version: 3.0.0-beta.60(react@18.2.0)
       '@types/node':
         specifier: 20.6.5
         version: 20.6.5
@@ -3837,10 +3837,6 @@ packages:
       '@r1stack/core': 0.4.5
     dev: false
 
-  /@reach/observe-rect@1.2.0:
-    resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
-    dev: false
-
   /@react-aria/breadcrumbs@3.5.5(react@18.2.0):
     resolution: {integrity: sha512-8O+ntzq8yxmsXVQmLTJGovSespTAuJ17PWvgIL8HsYh7FOU/TRM/rhileaDlZBlIpZtI/hbs+d9MuC6ZOXkl7w==}
     peerDependencies:
@@ -5463,15 +5459,17 @@ packages:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
 
-  /@tanstack/react-virtual@3.0.0-alpha.0(react@18.2.0):
-    resolution: {integrity: sha512-WpHU/dt34NwZZ8qtiE05TF+nX/b1W6qrWZarO+s8jJFpPVicrTbJKp5Bjt4eSJuk7aYw272oEfsH3ABBRgj+3A==}
-    engines: {node: '>=12'}
+  /@tanstack/react-virtual@3.0.0-beta.60(react@18.2.0):
+    resolution: {integrity: sha512-F0wL9+byp7lf/tH6U5LW0ZjBqs+hrMXJrj5xcIGcklI0pggvjzMNW9DdIBcyltPNr6hmHQ0wt8FDGe1n1ZAThA==}
     peerDependencies:
-      react: '>=16'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.22.15
-      '@reach/observe-rect': 1.2.0
+      '@tanstack/virtual-core': 3.0.0-beta.60
       react: 18.2.0
+    dev: false
+
+  /@tanstack/virtual-core@3.0.0-beta.60:
+    resolution: {integrity: sha512-QlCdhsV1+JIf0c0U6ge6SQmpwsyAT0oQaOSZk50AtEeAyQl9tQrd6qCHAslxQpgphrfe945abvKG8uYvw3hIGA==}
     dev: false
 
   /@tootallnate/once@2.0.0:
