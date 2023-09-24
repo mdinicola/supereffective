@@ -298,6 +298,14 @@ export const _abilityIds = [
   'armortail',
   'eartheater',
   'myceliummight',
+  'hospitality',
+  'mindseye',
+  'embodyaspectteal',
+  'embodyaspectwellspring',
+  'embodyaspecthearthflame',
+  'embodyaspectcornerstone',
+  'toxicchain',
+  'supersweetsyrup',
 ] as const
 
 export type AbilityId = (typeof _abilityIds)[number]

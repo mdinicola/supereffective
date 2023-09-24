@@ -414,6 +414,13 @@ export const _itemIds = [
   'covertcloak',
   'loadeddice',
   'auspiciousarmor',
+  'fairyfeather',
+  'syrupyapple',
+  'unremarkableteacup',
+  'masterpieceteacup',
+  'cornerstonemask',
+  'wellspringmask',
+  'hearthflamemask',
 ] as const
 
 export type ItemId = (typeof _itemIds)[number]
