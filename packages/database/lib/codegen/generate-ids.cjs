@@ -4,11 +4,11 @@ const path = require('node:path')
 const dataDir = path.resolve(path.join(__dirname, '..', '..', 'data'))
 const srcDir = path.resolve(path.join(__dirname, '..', '..', 'repositories'))
 
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'abilities.json')),
-  path.resolve(path.join(srcDir, 'abilities', 'ids.ts')),
-  'ability'
-)
+// generateIdsTsFile(
+//   path.resolve(path.join(dataDir, 'abilities.json')),
+//   path.resolve(path.join(srcDir, 'abilities', 'ids.ts')),
+//   'ability'
+// )
 
 generateIdsTsFile(
   path.resolve(path.join(dataDir, 'items.json')),
@@ -28,11 +28,11 @@ generateIdsTsFile(
   'nature'
 )
 
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'pokedexes.json')),
-  path.resolve(path.join(srcDir, 'pokedexes', 'ids.ts')),
-  'pokedex'
-)
+// generateIdsTsFile(
+//   path.resolve(path.join(dataDir, 'pokedexes.json')),
+//   path.resolve(path.join(srcDir, 'pokedexes', 'ids.ts')),
+//   'pokedex'
+// )
 
 generateIdsTsFile(
   path.resolve(path.join(dataDir, 'pokemon.json')),

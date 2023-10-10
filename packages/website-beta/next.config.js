@@ -8,7 +8,7 @@ let baseConfig = {
   reactStrictMode: true,
   transpilePackages: ['@pkg/*'],
   experimental: {
-    // turbo: true, // removed, use next --turbo instead (not compatible yet with Server Actions)
+    turbo: {}, // removed, use next --turbo instead (not compatible yet with Server Actions)
     serverActions: true,
     serverActionsBodySizeLimit: '2mb',
     // useDeploymentId: true,

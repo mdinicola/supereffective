@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/compat/router'
 
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 
@@ -11,6 +11,6 @@ export function RedirectArea({ routeUri, children }: RedirectAreaProps): JSX.Ele
   const router = useRouter()
   const content = children ? children : <LoadingBanner />
 
-  router.push(routeUri)
+  router?.push(routeUri)
   return <>{content}</>
 }

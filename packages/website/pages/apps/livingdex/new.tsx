@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { getSession } from '@pkg/auth/lib/serverside/getSession'
@@ -49,7 +49,7 @@ const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
       return
     }
     createdDexId.current = dex.id
-    router.push(`/apps/livingdex/${dex.id}`)
+    router?.push(`/apps/livingdex/${dex.id}`)
   }
 
   useEffect(() => {

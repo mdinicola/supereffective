@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm codegen",
     "build:beta": "pnpm codegen",
-    "codegen": "pnpm codegen:data && pnpm codegen:prisma && pnpm codegen:ids",
+    "codegen": "rm -rf ./data && pnpm codegen:data && pnpm codegen:prisma && pnpm codegen:ids",
     "codegen:data": "pnpm data:update",
     "codegen:ids": "node lib/codegen/generate-ids.cjs && cd ../../ && pnpm prettier  --write \"packages/database/**/*.{cjs,mjs,js,ts,tsx,json,yml,yaml,css,scss,md,mdx}\" && cd -",
     "codegen:prisma": "prisma generate",
@@ -21,12 +21,12 @@
     "@pkg/mdx": "workspace:*",
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@prisma/client": "^5.3.1",
-    "@types/node": "^20.6.5",
-    "prisma": "^5.3.1",
+    "@prisma/client": "^5.4.2",
+    "@types/node": "^20.8.4",
+    "prisma": "^5.4.2",
     "tsx": "^3.13.0",
     "typescript": "^5.2.2",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"

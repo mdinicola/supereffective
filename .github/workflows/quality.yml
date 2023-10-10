@@ -2,7 +2,7 @@ name: Quality Checks
 
 env:
   NODE_VERSION: '>=18.5.0'
-  PNPM_VERSION: 8.6
+  PNPM_VERSION: 8.9
 
 on:
   push:

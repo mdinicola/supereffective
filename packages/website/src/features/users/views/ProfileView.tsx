@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
@@ -16,7 +16,10 @@ export function ProfileView({
 }: {
   membership?: Membership | undefined
 }): JSX.Element | null {
-  const { status, error, provider, action } = useRouter().query
+  const router = useRouter()
+  const { status, error, provider, action } = router
+    ? router.query
+    : { status: undefined, error: undefined, provider: undefined, action: undefined }
   const auth = useSession()
   const signOut = useSignOut()
 

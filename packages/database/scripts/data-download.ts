@@ -1,29 +1,35 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const upstreamUrl = 'https://itsjavi.com/supereffective-assets/assets/data'
+const upstreamUrlAssets = 'https://itsjavi.com/supereffective-assets/assets/data'
+const upstreamUrlSdk = 'https://itsjavi.com/supereffective-sdk/data'
+
 const dataFiles = [
-  'legacy/box-presets.json',
-  'legacy/games.json',
-  'legacy/gamesets.json',
-  'legacy/pokemon.json',
-  'abilities.json',
-  'colors.json',
-  'gamesets.json',
-  'gamesupersets.json',
-  'items.json',
-  'languages.json',
-  'locations.json',
-  'marks.json',
-  'moves.json',
-  'natures.json',
-  'originmarks.json',
-  'pokedexes.json',
-  'pokemon.d.json.ts',
-  'pokemon.json',
-  'regions.json',
-  'ribbons.json',
-  'types.json',
+  // base url, remote file, local file
+  [upstreamUrlSdk, 'legacy-boxpresets.min.json', 'legacy/box-presets.json'],
+  [upstreamUrlSdk, 'legacy-pokemon.min.json', 'legacy/pokemon.json'],
+  [upstreamUrlSdk, 'abilities.min.json', 'abilities.json'],
+  [upstreamUrlSdk, 'colors.min.json', 'colors.json'],
+  [upstreamUrlSdk, 'items.min.json', 'items.json'],
+  [upstreamUrlSdk, 'languages.min.json', 'languages.json'],
+  [upstreamUrlSdk, 'locations.min.json', 'locations.json'],
+  [upstreamUrlSdk, 'marks.min.json', 'marks.json'],
+  [upstreamUrlSdk, 'moves.min.json', 'moves.json'],
+  [upstreamUrlSdk, 'natures.min.json', 'natures.json'],
+  [upstreamUrlSdk, 'originmarks.min.json', 'originmarks.json'],
+  [upstreamUrlSdk, 'pokedexes.min.json', 'pokedexes.json'],
+  [upstreamUrlSdk, 'pokemon.min.json', 'pokemon.json'],
+  [upstreamUrlSdk, 'regions.min.json', 'regions.json'],
+  [upstreamUrlSdk, 'ribbons.min.json', 'ribbons.json'],
+  [upstreamUrlSdk, 'types.min.json', 'types.json'],
+
+  // TODO: change to upstreamUrlSdk
+  [upstreamUrlAssets, 'legacy/games.json', 'legacy/games.json'],
+  [upstreamUrlAssets, 'legacy/gamesets.json', 'legacy/gamesets.json'],
+  [upstreamUrlAssets, 'gamesets.json', 'gamesets.json'],
+  [upstreamUrlAssets, 'gamesupersets.json', 'gamesupersets.json'],
+  // 'abilities.json',
+  // 'pokedexes.json',
 ]
 
 const dataDir = path.resolve(path.join(__dirname, '../data'))
@@ -41,9 +47,10 @@ async function download(url: string, dest: string) {
 const main = async () => {
   await fs.mkdir(dataDir + '/legacy', { recursive: true })
   await Promise.all(
-    dataFiles.map(async file => {
-      const url = `${upstreamUrl}/${file}`
-      const filePath = path.join(dataDir, file)
+    dataFiles.map(async mapping => {
+      const [upstreamUrl, remoteFile, localFile] = mapping
+      const url = `${upstreamUrl}/${remoteFile}`
+      const filePath = path.join(dataDir, localFile)
       return download(url, filePath)
     })
   )

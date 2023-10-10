@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
@@ -27,7 +27,7 @@ export default function Page({ csrfToken }: { csrfToken: string | null }) {
   }
 
   if (auth.isAuthenticated() && auth.isVerified() && auth.isOperable()) {
-    router.push(Routes.Profile)
+    router?.push(Routes.Profile)
     return <LoadingBanner />
   }
 

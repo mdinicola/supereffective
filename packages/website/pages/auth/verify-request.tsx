@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 
@@ -12,7 +12,7 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 export default function Page() {
   const auth = useSession()
   const router = useRouter()
-  const nextUrl = router.query.nextUrl as string | undefined
+  const nextUrl = router?.query.nextUrl as string | undefined
 
   if (auth.isLoading()) {
     return <LoadingBanner />

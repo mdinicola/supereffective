@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
-import { NextRouter, useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
+import { NextRouter } from 'next/router'
 import {
   BracesIcon,
   ListTodoIcon,
@@ -105,8 +106,11 @@ const saveTimeout = 2000
 const setUrlParamRouter = (
   param: string,
   value: string | number | null | undefined,
-  router: NextRouter
+  router?: NextRouter | null
 ) => {
+  if (!router) {
+    throw new Error('NextRouter is not mounted, cannot set an URL param.')
+  }
   if (!value) {
     router.push({
       pathname: router.pathname,
@@ -122,10 +126,10 @@ const setUrlParamRouter = (
 
 const readUrlParamRouter = (
   param: string,
-  router: NextRouter,
+  router?: NextRouter | null,
   defaultValue?: string
 ): string | undefined => {
-  const value = router.query[param]
+  const value = router ? router.query[param] : undefined
   if (value === undefined) {
     return defaultValue
   }
@@ -182,7 +186,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const auth = useSession()
   const currentUser = auth.currentUser
   const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
-  console.log('markTypes', markTypes)
+  // console.log('markTypes', markTypes)
   const { dexesLoading, saveDex, deleteDex } = useDexesContext()
   const lastSavedAtString =
     lastSavedAt && lastSavedAt.toLocaleDateString

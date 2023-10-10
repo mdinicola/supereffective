@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useRouter } from 'next/compat/router'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import config from '#/config'
 import { UserTrayView } from '#/features/users/views/UserTrayView'
@@ -11,7 +11,7 @@ import styles from './MainHeader.module.css'
 
 export default function MainHeader() {
   const router = useRouter()
-  const pageSrc = Array.isArray(router.query.s) ? router.query.s[0] : router.query.s
+  const pageSrc = router ? (Array.isArray(router.query.s) ? router.query.s[0] : router.query.s) : ''
 
   const [navbarOpen, setNavbarOpen] = useState(false)
 

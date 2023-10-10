@@ -8,7 +8,7 @@ let baseConfig = {
   reactStrictMode: true,
   transpilePackages: ['@pkg/*'],
   experimental: {
-    turbo: true,
+    turbo: {},
   },
   images: {
     domains: ['localhost'],

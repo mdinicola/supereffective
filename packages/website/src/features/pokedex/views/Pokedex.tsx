@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { GameLabel, TypeIcon } from '@supeffective/dextracker-ui'
+import { GameLabel, TypeIcon } from '@supeffective/ui-legacy'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'

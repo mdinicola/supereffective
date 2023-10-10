@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { isSignInEnabled } from '@pkg/config/default/featureFlags'
@@ -21,7 +21,7 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
     return <LoadingBanner />
   }
 
-  if (router.query.error) {
+  if (router && router.query.error) {
     router.push(Routes.AuthError + '?error=' + router.query.error)
     return <LoadingBanner />
   }

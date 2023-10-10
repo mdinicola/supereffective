@@ -1,6 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/compat/router'
 import Link, { LinkProps } from 'next/link'
-import { useRouter } from 'next/router'
 
 import config from '#/config'
 
@@ -48,7 +48,7 @@ export const abs_url = (relativePath: string) => {
 export function SiteLink({ children, href, className, activeClass = '', ...props }: NavLinkProps) {
   const router = useRouter()
   let classes = []
-  classes.push(router.pathname === href ? (activeClass ? activeClass + ' active' : 'active') : '')
+  classes.push(router?.pathname === href ? (activeClass ? activeClass + ' active' : 'active') : '')
   if (href === '/') {
     classes.push('home')
   }

@@ -1,6 +1,6 @@
 // ?error=errorString
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/compat/router'
 
 import { Routes } from '#/config/routes'
 import PageMeta from '#/features/pages/components/PageMeta'
@@ -9,7 +9,7 @@ import { abs_url } from '#/primitives/legacy/Link/Links'
 
 export default function Page() {
   const router = useRouter()
-  const { error } = router.query
+  const error = router?.query.error || null
   let errorMessage: React.ReactNode = 'Unexpected sign in error'
   switch (String(error).toLowerCase()) {
     case 'verification':
