@@ -17,7 +17,6 @@
     "studio:prod": "./studio-prod.sh"
   },
   "dependencies": {
-    "@pkg/firebase": "workspace:*",
     "@pkg/mdx": "workspace:*",
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",

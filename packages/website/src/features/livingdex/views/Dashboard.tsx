@@ -3,40 +3,16 @@ import { useState } from 'react'
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { LivingDexResolvedUserLimits } from '@pkg/database/repositories/living-dexes/legacy/types'
 
-import { Routes } from '#/config/routes'
 import { useDexesContext } from '#/features/livingdex/state/LivingDexListContext'
 import { GameCardList } from '#/features/livingdex/views/gameCard/GameCard'
 import { WelcomeContent } from '#/features/livingdex/views/WelcomeContent'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
-import Button, { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
-
-import styles from './Dashboard.module.css'
+import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 
 const WelcomeContentContainer = (): JSX.Element => {
   return (
     <div className={'page-container dex-count-0'}>
       <WelcomeContent />
-    </div>
-  )
-}
-
-const ImportLegacyDexesContainer = (): JSX.Element => {
-  return (
-    <div className={styles.importer}>
-      <form method="GET" action={Routes.LegacyLivingDexImport}>
-        <p>
-          ℹ️ Did you previously log in with Github, Twitter or Google and created Living Dexes with
-          those accounts? <br />
-          <br />
-          If you are logged in with the same email linked to the social account you used in the
-          past, you can restore your previous dexes and link them to your current user.
-        </p>
-        <div>
-          <Button type="submit" className="btn btn-primary">
-            Restore
-          </Button>
-        </div>
-      </form>
     </div>
   )
 }
@@ -56,7 +32,6 @@ const AuthenticatedDashboardContainer = ({
   if (dexes === undefined || dexes.length === 0) {
     return (
       <>
-        <ImportLegacyDexesContainer />
         <WelcomeContentContainer />
       </>
     )
@@ -91,7 +66,6 @@ const AuthenticatedDashboardContainer = ({
           <i className="icon-pkg-pokeball-outlined" /> View Missing Pokémon
         </ButtonInternalLink>
       </div>
-      <ImportLegacyDexesContainer />
       <WelcomeContent />
     </div>
   )

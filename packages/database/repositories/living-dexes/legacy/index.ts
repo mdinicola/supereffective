@@ -1,13 +1,7 @@
-import getFirestoreDb from '@pkg/firebase/lib/getFirestoreDb'
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
 import { PATREON_NO_TIER } from '../../../../patreon/lib/types/campaign'
-import {
-  convertFirebaseStorableDexToLoadedDex,
-  dexToLoadedDex,
-  loadedDexToDex,
-  sanitizeDate,
-} from '../../../lib/dex-parser/support'
+import { dexToLoadedDex, loadedDexToDex, sanitizeDate } from '../../../lib/dex-parser/support'
 import { getPrismaClient, PrismaTypes } from '../../../prisma/getPrismaClient'
 import { isShinyLocked } from '../../pokemon'
 import { getPatreonMembershipByUserId } from '../../users/patrons'
@@ -130,21 +124,6 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
           throw error
         })
         .then(dexes => dexes.map(dex => dexToLoadedDex(dex)))
-    },
-    getManyByUserFromFirebase: async (userUid: string) => {
-      return getFirestoreDb()
-        .findDocumentsByUser<StorableDex>(
-          collectionName,
-          userUid,
-          {},
-          ['updatedAt', 'desc'],
-          DEFAULT_DEX_LIST_LIMIT
-        )
-        .catch(error => {
-          console.error('Error getting many dexes from Firebase', error)
-          throw error
-        })
-        .then(docs => docs.map(doc => convertFirebaseStorableDexToLoadedDex(doc.id || '??', doc)))
     },
     import: async (dexes: LoadedDex[], userId: string) => {
       const createManyArgs: {

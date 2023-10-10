@@ -59,7 +59,6 @@ Website is a NextJS application with the following structure:
 - auth: Authentication abstraction layer
 - config: Project confing and env vars wrapper
 - database: Database abstraction layer. It also abstracts the Pokemon JSON data from supereffective-assets.
-- firebase: Firebase abstraction layer (only needed for website v3).
 - mailer: Transactional mailing service abstraction layer
 - mdx: MDX abstraction layer (loader and react components).
 - patreon: All necessary code to connect to Patreon API and get infos

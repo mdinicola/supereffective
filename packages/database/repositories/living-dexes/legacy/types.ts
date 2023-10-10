@@ -70,7 +70,6 @@ export type LivingDexRepository = {
     dexes: LoadedDex[],
     limits: LivingDexUserLimits
   ) => LivingDexResolvedUserLimits
-  getManyByUserFromFirebase: (userUid: string) => Promise<LoadedDexList>
   getManyByUser: (userUid: string) => Promise<LoadedDexList>
   import: (dexes: LoadedDex[], userId: string) => Promise<number>
   save: (dex: LoadedDex, userId: string) => Promise<LoadedDex>

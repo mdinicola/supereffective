@@ -22,11 +22,6 @@ const serverVars = z.object({
   DATABASE_URL: z.string().url(),
   DIRECT_DATABASE_URL: z.string().url(),
   SHADOW_DATABASE_URL: z.string().url(),
-  // firebase
-  FIREBASE_DATABASE_URL: z.string().url(),
-  FIREBASE_ADMIN_PROJECT_ID: z.string(),
-  FIREBASE_ADMIN_CLIENT_EMAIL: z.string().email(),
-  FIREBASE_ADMIN_PRIVATE_KEY: z.string(),
   // patreon
   PATREON_CLIENT_ID: z.string(),
   PATREON_CLIENT_SECRET: z.string(),
@@ -62,11 +57,6 @@ const initialEnvVars: InitialProjectEnvVars = {
   DATABASE_URL: process.env.DATABASE_URL,
   DIRECT_DATABASE_URL: process.env.DIRECT_DATABASE_URL,
   SHADOW_DATABASE_URL: process.env.SHADOW_DATABASE_URL,
-  // firebase
-  FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
-  FIREBASE_ADMIN_PROJECT_ID: process.env.FIREBASE_ADMIN_PROJECT_ID,
-  FIREBASE_ADMIN_CLIENT_EMAIL: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-  FIREBASE_ADMIN_PRIVATE_KEY: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
   // patreon
   PATREON_CLIENT_ID: process.env.PATREON_CLIENT_ID,
   PATREON_CLIENT_SECRET: process.env.PATREON_CLIENT_SECRET,
