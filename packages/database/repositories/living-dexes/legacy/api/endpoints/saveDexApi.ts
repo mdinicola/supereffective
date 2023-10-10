@@ -2,24 +2,43 @@ import { jsonDecode } from '@pkg/utils/lib/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@pkg/utils/lib/types'
 
 import { isValidID } from '../../../../../validators'
+import { _pokemonIds } from '../../../../pokemon/ids'
 import { getLegacyLivingDexRepository } from '../../index'
 import { LoadedDex } from '../../types'
 import { LoadedDexSchema } from '../../validators'
-
-function _validDex(dex: LoadedDex): boolean {
-  return LoadedDexSchema.safeParse(dex).success
-}
 
 async function _canCreateMoreDexes(dexes: LoadedDex[], currentUserId: string): Promise<boolean> {
   const limits = await getLegacyLivingDexRepository().getLimitsForUser(currentUserId)
   return dexes.length < limits.maxDexes
 }
 
+const validPokemonIds = _pokemonIds
+
+function sanitizeDex(dex: LoadedDex): LoadedDex {
+  for (const i in dex.boxes) {
+    const box = dex.boxes[i]
+    const sanitizedPokemon = []
+    for (const j in box.pokemon) {
+      const pkm = box.pokemon[j]
+      if (pkm !== null && !validPokemonIds.includes(pkm.pid)) {
+        continue
+      }
+      sanitizedPokemon.push(pkm)
+    }
+    dex.boxes[i].pokemon = sanitizedPokemon
+  }
+
+  return {
+    ...dex,
+    userId: undefined,
+  }
+}
+
 export const saveDexApi = async (
   data: string | undefined | null,
   currentUserId: string
 ): Promise<ApiResponse> => {
-  const dex: LoadedDex = jsonDecode(data || '{}')
+  const dex: LoadedDex = sanitizeDex(jsonDecode(data || '{}'))
   const validation = LoadedDexSchema.safeParse(dex)
 
   if (!isValidID(currentUserId)) {
@@ -42,7 +61,8 @@ export const saveDexApi = async (
     return {
       statusCode: 400,
       data: {
-        message: 'You already have a game for this game set',
+        message:
+          'You cannot create more dexes with your current Tier, please support us via Patreon.',
       },
     }
   }
