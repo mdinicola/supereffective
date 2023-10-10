@@ -1,6 +1,8 @@
+import { PatternProperties } from '@pandacss/types/dist/pattern'
+
 import { PatternConfig } from '@/styled-system/types/pattern'
 
-const vscrollable: PatternConfig = {
+const vscrollable: PatternConfig<PatternProperties> = {
   description: 'A vertically scrollable container, that blocks the x-axis scrollbar.',
   properties: {},
   blocklist: ['overflowY', 'overscrollBehavior', 'overflowX', 'maxW'],
@@ -13,7 +15,7 @@ const vscrollable: PatternConfig = {
   }),
 }
 
-const safearea: PatternConfig = {
+const safearea: PatternConfig<PatternProperties> = {
   description:
     'A pattern that adds padding to the top, right, bottom and left, to account for safe area insets.',
   properties: {},
@@ -45,7 +47,7 @@ const safearea: PatternConfig = {
   }),
 }
 
-const fluentlayout: PatternConfig = {
+const fluentlayout: PatternConfig<PatternProperties> = {
   description: 'A flex container that fills the viewport height, and has a minimum width of 300px.',
   properties: {},
   blocklist: ['display', 'h', 'maxH', 'flexDirection', 'justifyContent', 'overflow', 'minW'],
@@ -66,7 +68,7 @@ const fluentlayout: PatternConfig = {
   }),
 }
 
-const fullwords: PatternConfig = {
+const fullwords: PatternConfig<PatternProperties> = {
   description: 'A pattern that makes text wrap at word boundaries, without breaking word letters.',
   properties: {},
   blocklist: ['overflowWrap', 'hyphens'],
@@ -77,7 +79,7 @@ const fullwords: PatternConfig = {
   }),
 }
 
-const patterns: Record<string, PatternConfig> = {
+const patterns: { [k: string]: PatternConfig } = {
   vscrollable,
   fluentlayout,
   safearea,

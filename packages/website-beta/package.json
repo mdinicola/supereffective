@@ -28,7 +28,7 @@
   "dependencies": {
     "@csstools/postcss-cascade-layers": "^4.0.0",
     "@csstools/postcss-color-mix-function": "^2.0.7",
-    "@pandacss/types": "^0.15.5",
+    "@pandacss/types": "^0.15.0",
     "@pkg/auth": "workspace:*",
     "@pkg/config": "workspace:*",
     "@pkg/database": "workspace:*",
@@ -57,7 +57,7 @@
     "zustand": "^4.4.3"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.15.5",
+    "@pandacss/dev": "^0.15.0",
     "postcss-load-config": "^4.0.1"
   },
   "overrides": {
