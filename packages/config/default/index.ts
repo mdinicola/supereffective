@@ -1,5 +1,5 @@
-import {isDevelopmentEnv} from '@pkg/utils/lib/env'
-import {getBaseUrl} from '@pkg/utils/lib/nextjs/urls'
+import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
 
 // !!! Changing these versions will make Vercel to optimize all images again
 //      (producing costs of 5$ every 1000 extra images)
