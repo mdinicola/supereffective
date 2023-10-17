@@ -65,7 +65,6 @@ Website is a NextJS application with the following structure:
 - ui: Stateless UI components, assets, fonts, SVGs, and tools. Uses TailwindCSS and Lucide Icons.
 - utils: Generic utilities for various environments (universal, commonjs, react, nextjs)
 - website: v3 site, using Next pages dir
-- website-beta: v4 site (WIP), using Next app dir
 
 ## Prerequisites
 
@@ -82,13 +81,10 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 
 - packages/database/.env
 - packages/website/.env.local
-- packages/website-beta/.env.local
 
 1. Run the website in development mode: run any of: `pnpm dev` / `make`.
 2. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
-   - Beta website: http://localhost:3002
    - Dev Mail server: http://localhost:1080
-   - Prisma Studio: http://localhost:5555
 
 ## Maintenance scripts
 
