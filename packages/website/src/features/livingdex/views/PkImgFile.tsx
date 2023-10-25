@@ -1,12 +1,11 @@
 import { HTMLAttributes } from 'react'
-import Image from 'next/image'
 
 import config from '#/config'
 import { classNames } from '#/utils/legacyUtils'
 
 const variantFolder = {
   '2d': 'home2d-icon',
-  '3d': 'home3d-icon',
+  '3d': 'home3d-icon-bordered',
   pixelart: 'gen8-icon',
 }
 
@@ -51,17 +50,15 @@ export default function PkImgFile({
 
   return (
     <span className={classes} {...rest}>
-      <Image
+      <img
         loading="lazy"
-        unoptimized
-        quality={100}
         width={imgW}
         height={imgH}
         className={'pkimg-img-loading'}
         src={imageSrc}
         alt={title || nid}
-        onLoadingComplete={imgElem => {
-          imgElem.classList.remove('pkimg-img-loading')
+        onLoad={e => {
+          e.currentTarget.classList.remove('pkimg-img-loading')
         }}
       />
     </span>

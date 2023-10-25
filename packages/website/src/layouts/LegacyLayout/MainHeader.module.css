@@ -21,17 +21,17 @@
 
 .headerLogo {
   display: flex;
-  overflow: hidden;
+  overflow: visible;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .headerLogo img {
   display: inline-block;
   vertical-align: middle;
-  height: 32px;
+  height: 80px;
   width: auto;
-  margin-right: 5px;
+  margin: 18px 0 0 0;
   transition: all 0.2s ease-in-out;
 }
 
@@ -40,15 +40,18 @@
 }
 
 :global(.loading) .headerLogo img {
-  animation: spin 2s infinite linear;
+  animation: zoom-in-out 2s infinite linear;
 }
 
-@keyframes spin {
+@keyframes zoom-in-out {
   0% {
-    transform: scale(1.6) rotate(2deg);
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
   }
   100% {
-    transform: scale(1.6) rotate(360deg);
+    transform: scale(1);
   }
 }
 
@@ -57,7 +60,7 @@
     transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: rotate(180deg) scale(1.5);
+    transform: rotate(180deg) scale(1.2);
   }
   100% {
     transform: rotate(360deg) scale(1);
@@ -136,8 +139,8 @@
   letter-spacing: 2px;
   /*background: rgba(75, 75, 75, 0.2);*/
   padding: 10px;
-  top: 4px;
-  right: 4px;
+  top: 10px;
+  right: 0px;
   width: 64px;
   text-align: center;
   border-radius: 0.5rem;
@@ -182,7 +185,11 @@
   display: none;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 900px) {
+  .headerLogo img {
+    height: 72px;
+  }
+
   .navbarOpenOverlay {
     display: block;
   }
@@ -202,8 +209,9 @@
   .headerTop .menu {
     display: none;
     position: fixed;
-    top: 49px;
+    top: 62px;
     right: 0;
+    min-width: 200px;
     width: auto;
     height: 100vh;
     margin: 0;

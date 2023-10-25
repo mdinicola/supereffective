@@ -85,6 +85,8 @@ v8-compile-cache-*
 ignore/
 ignored/
 .local/
+~lock.*
+*~lock~
 
 # pnpm
 .pnpm-store

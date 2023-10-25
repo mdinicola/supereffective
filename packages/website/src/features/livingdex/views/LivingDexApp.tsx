@@ -1103,12 +1103,14 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             <br />
           </>
         )}
-        <div
-          className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
-          style={{ right: '1rem' }}
-        >
-          {missingAnchor}
-        </div>
+        {auth.isAuthenticated() && (
+          <div
+            className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
+            style={{ right: '1rem' }}
+          >
+            {missingAnchor}
+          </div>
+        )}
 
         <BoxGroupComponent
           dex={dex}

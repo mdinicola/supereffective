@@ -16,8 +16,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-teal-3);
-  border-bottom: 2px solid var(--color-teal-2);
+  background-color: rgba(134, 202, 195, 0.8);
+  border-bottom: 2px solid rgba(55, 174, 164, 0.8);
   padding: 0 2rem;
   gap: 2rem;
 }
@@ -258,12 +258,13 @@ span.saveBtn:hover {
 
 @media only screen and (max-width: 760px) {
   .toolbarContainer {
-    padding: 0 0.6rem;
+    padding: 0 1.2rem 0 0.6rem;
     gap: 0.6rem;
   }
 
   .dexHeader {
     flex-direction: column;
+    /* margin-top: calc(var(--toolbar-height)) !important; */
   }
 
   .counters {

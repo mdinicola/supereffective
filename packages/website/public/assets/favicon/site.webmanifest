@@ -1,28 +1,19 @@
 {
-  "name": "SuperEffective",
-  "short_name": "SuperEffective",
-  "start_url": "/apps/livingdex",
-  "scope": "/",
-  "icons": [
-    {
-      "src": "/assets/favicon/apple-touch-icon.png?v=20230331",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/assets/favicon/android-chrome-192x192.png?v=20230331",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/favicon/android-chrome-512x512.png?v=20230331",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "theme_color": "#a692eb",
-  "background_color": "#a692eb",
-  "display": "standalone",
-  "orientation": "portrait"
+    "name": "SuperEffective",
+    "short_name": "SuperEffective",
+    "icons": [
+        {
+            "src": "/assets/favicon/android-chrome-192x192.png?v=2024-001",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/android-chrome-512x512.png?v=2024-001",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "display": "standalone"
 }

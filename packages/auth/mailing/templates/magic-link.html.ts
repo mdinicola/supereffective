@@ -355,7 +355,7 @@ const html = /* html */ `
                                 <tr>
                                   <td align="center" style="padding: 0; margin: 0; font-size: 0px">
                                     <img
-                                      src="https://supereffective.gg/assets/logo/logo.png"
+                                      src="https://supereffective.gg/assets/logo/logo2024.png"
                                       alt
                                       style="
                                         display: block;

@@ -16,9 +16,11 @@
 }
 
 .full-main-height {
-  --footer-height: 260px; /* approx. height of footer */
+  --footer-height: 260px;
+  /* approx. height of footer */
   position: relative;
-  min-height: 70vh; /*this keeps the footer at the bottom*/
+  min-height: 70vh;
+  /*this keeps the footer at the bottom*/
   min-height: calc(100vh - var(--footer-height) - var(--menu-height));
 }
 
@@ -159,6 +161,10 @@ blockquote {
     padding: 1.5rem 5px;
   }
 
+  .page-container:first-of-type {
+    margin-top: var(--menu-height);
+  }
+
   .inner-container {
     padding: 1rem;
   }
@@ -236,6 +242,7 @@ blockquote {
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -245,10 +252,24 @@ blockquote {
   0% {
     opacity: 0.25;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.25;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
