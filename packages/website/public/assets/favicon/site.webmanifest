@@ -3,13 +3,13 @@
     "short_name": "SuperEffective",
     "icons": [
         {
-            "src": "/assets/favicon/android-chrome-192x192.png?v=2024-001",
+            "src": "/assets/favicon/android-chrome-192x192.png?v=2024-002",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/assets/favicon/android-chrome-512x512.png?v=2024-001",
-            "sizes": "512x512",
+            "src": "/assets/favicon/android-chrome-384x384.png?v=2024-002",
+            "sizes": "384x384",
             "type": "image/png"
         }
     ],

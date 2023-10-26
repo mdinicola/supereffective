@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import { useRouter } from 'next/compat/router'
+import {useRouter} from 'next/compat/router'
 import Image from 'next/image'
 import Link from 'next/link'
+import {useState} from 'react'
 
 import config from '#/config'
-import { UserTrayView } from '#/features/users/views/UserTrayView'
-import { ExternLink, SiteLink } from '#/primitives/legacy/Link/Links'
+import {UserTrayView} from '#/features/users/views/UserTrayView'
+import {ExternLink,SiteLink} from '#/primitives/legacy/Link/Links'
 
 import styles from './MainHeader.module.css'
 
@@ -25,7 +25,7 @@ export default function MainHeader() {
         <div className={styles.headerTop}>
           <Link href="/" className={styles.headerLogo} tabIndex={0} title={config.texts.siteName}>
             <Image
-              src="/assets/logo/logo2024-cropped.png"
+              src="/assets/logo/logo2024-cropped.png?v=3"
               width="76"
               height="66"
               alt={config.texts.siteName}
