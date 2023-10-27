@@ -7,7 +7,7 @@ import {
 } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { createDexFromPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/createDexFromPreset'
 
-import { PkBoxGroup } from '#/features/livingdex/views/PkBox'
+import { PkBoxGroup } from '#/features/livingdex/views/PkBoxGroup'
 import PageMeta from '#/features/pages/components/PageMeta'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
 import Button from '#/primitives/legacy/Button/Button'
