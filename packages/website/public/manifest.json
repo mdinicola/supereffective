@@ -1,6 +1,8 @@
 {
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
     "name": "SuperEffective",
     "short_name": "SuperEffective",
+    "start_url": "/",
     "icons": [
         {
             "src": "/assets/favicon/android-chrome-192x192.png?v=2024-002",

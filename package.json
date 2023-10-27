@@ -34,6 +34,7 @@
     "pretty:all": "pnpm pretty:code && pnpm pretty:pkgjsons",
     "pretty:code": "prettier --write \"**/*.{cjs,mjs,js,ts,tsx,json,yml,yaml,xml,css,scss,md,mdx}\"",
     "pretty:pkgjsons": "sort-package-json \"package.json\" \"packages/*/package.json\"",
+    "quality-checks": "pnpm -r codegen && pnpm prettier-check && pnpm lint && pnpm build && pnpm test:ci",
     "studio:dev": "env-cmd pnpm pkg:database studio:dev",
     "studio:prod": "pnpm pkg:database studio:prod",
     "test": "turbo run test:all",

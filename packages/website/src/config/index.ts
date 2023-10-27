@@ -7,7 +7,7 @@ const config = {
   version: {
     num: '3.7.5',
   },
-  themeColor: '#1B1D1F',
+  themeColor: '#000000',
 }
 
 export default config
