@@ -1,6 +1,7 @@
 :root {
   /* Dimensions */
   --menu-height: 64px;
+  --menu-offset: env(titlebar-area-height, 0px);
   --toolbar-height: 80px;
 
   /* Color Presets */
