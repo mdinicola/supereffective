@@ -19,7 +19,7 @@ function LegacyApp({ Component, pageProps }: AppProps | any) {
               <Component {...pageProps} />
             </PageSkeleton>
             <SimpleAnalytics />
-            <PWAServiceWorker />
+            <PWAServiceWorker disabled />
           </ErrorBoundary>
         </LivingDexProvider>
       </LivingDexListProvider>
