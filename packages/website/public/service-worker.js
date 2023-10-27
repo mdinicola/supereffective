@@ -1,27 +1,24 @@
 // Based off of https://github.com/pwa-builder/PWABuilder/blob/main/docs/sw.js
-
 /*
-      Welcome to our basic Service Worker! This Service Worker offers a basic offline experience
-      while also being easily customizeable. You can add in your own code to implement the capabilities
-      listed below, or change anything else you would like.
+  Welcome to our basic Service Worker! This Service Worker offers a basic offline experience
+  while also being easily customizeable. You can add in your own code to implement the capabilities
+  listed below, or change anything else you would like.
 
+  Need an introduction to Service Workers? Check our docs here: https://docs.pwabuilder.com/#/home/sw-intro
+  Want to learn more about how our Service Worker generation works? Check our docs here: https://docs.pwabuilder.com/#/studio/existing-app?id=add-a-service-worker
 
-      Need an introduction to Service Workers? Check our docs here: https://docs.pwabuilder.com/#/home/sw-intro
-      Want to learn more about how our Service Worker generation works? Check our docs here: https://docs.pwabuilder.com/#/studio/existing-app?id=add-a-service-worker
-
-      Did you know that Service Workers offer many more capabilities than just offline? 
-        - Background Sync: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/06
-        - Periodic Background Sync: https://web.dev/periodic-background-sync/
-        - Push Notifications: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/07?id=push-notifications-on-the-web
-        - Badges: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/07?id=application-badges
-    */
+  Did you know that Service Workers offer many more capabilities than just offline? 
+    - Background Sync: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/06
+    - Periodic Background Sync: https://web.dev/periodic-background-sync/
+    - Push Notifications: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/07?id=push-notifications-on-the-web
+    - Badges: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/07?id=application-badges
+*/
 
 const HOSTNAME_WHITELIST = [
-  self.location.hostname,
+  // self.location.hostname, // do not cache app files
   'itsjavi.com',
   'fonts.gstatic.com',
   'fonts.googleapis.com',
-  //   'cdn.jsdelivr.net',
 ]
 
 // The Util Function to hack URLs of intercepted requests
@@ -63,7 +60,7 @@ self.addEventListener('activate', event => {
  *  void respondWith(Promise<Response> r)
  */
 self.addEventListener('fetch', event => {
-  // Skip some of cross-origin requests, like those for Google Analytics.
+  // Only cache GET requests of the whitelisted domains
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
     // Stale-while-revalidate
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
@@ -80,6 +77,10 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       Promise.race([fetched.catch(_ => cached), cached])
         .then(resp => resp || fetched)
+        .then(resp => {
+          resp.headers.set('X-SuperEffective-Worker', 'true')
+          return resp
+        })
         .catch(_ => {
           /* eat any errors */
         })
