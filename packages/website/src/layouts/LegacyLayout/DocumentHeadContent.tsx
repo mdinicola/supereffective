@@ -26,13 +26,18 @@ export default function DocumentHeadContent(): JSX.Element {
         sizes="16x16"
         href="/assets/favicon/favicon-16x16.png?v=20231027"
       />
-      <link rel="manifest" href="/manifest.json?v=20231027" />
+      <link rel="manifest" href="/manifest.webmanifest" />
       <link
         rel="mask-icon"
         href="/assets/favicon/safari-pinned-tab.svg?v=20231027"
         color={bgColor}
       />
       <link rel="shortcut icon" href="/assets/favicon/favicon.ico?v=20231027" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-touch-fullscreen" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+
+      {/* ----- PWA settings: */}
       <meta name="apple-mobile-web-app-title" content={config.texts.standaloneTitle} />
       <meta name="application-name" content={config.texts.standaloneTitle} />
       <meta name="msapplication-TileColor" content={bgColor} />
