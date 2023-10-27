@@ -71,7 +71,7 @@ const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
     return <LoadingBanner content={'Creating your dex...'} />
   }
 
-  console.log(limits)
+  // console.log(limits)
   const _canCreateMoreDexes = limits.remainingDexes > 0
 
   if (!_canCreateMoreDexes && dexes != null) {

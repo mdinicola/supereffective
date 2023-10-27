@@ -15,7 +15,7 @@ export const GameCard = ({ dex, linkable }: { dex: LoadedDex; linkable: boolean 
   const timestamp = dateString ? Date.parse(dateString as unknown as string) : null
   const lastUpdated = timestamp ? new Date(timestamp) : null
 
-  console.log(dateString, lastUpdated)
+  // console.log(dateString, lastUpdated)
   const content = (
     <div
       className={[

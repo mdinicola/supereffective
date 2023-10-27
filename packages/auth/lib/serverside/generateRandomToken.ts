@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 export const AUTH_TOKEN_SIZE = 22
 export function generateRandomToken(): string {
   const token = nanoid(AUTH_TOKEN_SIZE)
-  console.log(token)
+  // console.log(token)
   const tokenSerial = _groupStringByDashes(token.replace(/[_-]/g, ''))
 
   return tokenSerial
