@@ -15,6 +15,7 @@ export type DexPokemon = {
   // post load props:
   shinyLocked?: boolean
   shinyBase?: string | null
+  matchesFilter?: boolean
 }
 
 export type NullableDexPokemon = DexPokemon | null
@@ -25,6 +26,13 @@ export type DexBox = {
   title?: string
   pokemon: DexPokemonList
   shiny: boolean
+  unfilteredIndex?: number
+}
+
+export type PkFilterAttribute = 'pid' | 'nid'
+export interface PkFilter {
+  query: string
+  attribute: PkFilterAttribute
 }
 
 export type StorableDex = {

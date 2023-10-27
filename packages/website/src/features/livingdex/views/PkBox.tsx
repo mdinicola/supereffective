@@ -4,15 +4,19 @@ import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
 import { createBoxTitle } from '@pkg/database/repositories/living-dexes/legacy/presets/createBoxTitle'
 import {
   DexBox,
+  DexPokemonList,
   LoadedDex,
   NullableDexPokemon,
+  PkFilter,
 } from '@pkg/database/repositories/living-dexes/legacy/types'
 import { getPokemonEntry } from '@pkg/database/repositories/pokemon'
+import { slugify } from '@pkg/utils/lib/primitives/strings'
 
 import legacyConfig from '#/config/legacyConfig'
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import Button from '#/primitives/legacy/Button/Button'
 import InlineTextEditor from '#/primitives/legacy/Input/InlineTextEditor'
+import { TextInput } from '#/primitives/legacy/Input/TextInput'
 import { classNameIf, classNames } from '#/utils/legacyUtils'
 
 import styles from './PkBox.module.css'
@@ -77,6 +81,14 @@ export interface PkBoxGroupProps {
   onBoxTitleEdit?: (boxIndex: number, newTitle: string) => void
   markTypes: MarkType[]
   perPage: number
+}
+
+export interface PkBoxGroupFilterProps {
+  onFilter: (filter: PkFilter) => void
+}
+
+export interface PkBoxGroupState {
+  filter: PkFilter | null
 }
 
 const keyDownHandler = (
@@ -199,7 +211,8 @@ export function PkBoxCell(props: PkBoxCellProps) {
   const classes = classNames(
     styles.pkBoxCell,
     props.className,
-    classNameIf(props.revealPokemon, styles.reveal)
+    classNameIf(props.revealPokemon, styles.reveal),
+    classNameIf(!!props.pokemonData?.matchesFilter, 'filterMatch')
   )
 
   const clickHandler = () => {
@@ -231,11 +244,63 @@ export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean 
   )
 }
 
+// A simple debounce. Probably not a good spot for this but I didn't know where else to put it
+function debounce(fn: Function, delay: number): Function {
+  let timer: ReturnType<typeof setTimeout>
+  return (filter: PkFilter) => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(fn.bind(null, filter), delay)
+  }
+}
+
+// This is the actual filter component
+export function PkBoxGroupFilter(props: PkBoxGroupFilterProps) {
+  const FILTER_DEBOUNCE = 300 //milliseconds
+  const ATTRIBUTE_MAP = {
+    pid: 'name',
+    nid: 'number',
+  }
+  const { onFilter } = props
+  const attribute = 'pid' // hard coding this for now but could be dynamic later
+
+  // Debounce our callback that was passed in so we don't call it more than we have to
+  const debouncedFilter = debounce(onFilter, FILTER_DEBOUNCE)
+
+  // wrap our debounced callback in a function that extracts the actual useful value out of the event
+  // and turns it into a filter object
+  const handleFilterInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filter: PkFilter = {
+      query: e.target.value.toLowerCase(),
+      attribute,
+    }
+
+    debouncedFilter(filter)
+  }
+
+  return (
+    <div className={'pkBoxGroupFilter'}>
+      <form>
+        <TextInput
+          type="text"
+          name="filter"
+          placeholder={`Type in a pokémon's ${ATTRIBUTE_MAP[attribute]}`}
+          onChange={handleFilterInput}
+        />
+      </form>
+    </div>
+  )
+}
+
 export function PkBoxGroup(props: PkBoxGroupProps) {
   let initialPerPage = props.perPage || 1
   const loadMoreRef = useRef(null)
+  const [state, setState] = useState<PkBoxGroupState>({
+    filter: null,
+  })
 
-  if (props.viewMode === 'listed' || props.dex.boxes.length <= 2) {
+  const filteredDex = state.filter ? createFilteredDex(props.dex, state.filter) : props.dex
+
+  if (props.viewMode === 'listed' || filteredDex.boxes.length <= 2) {
     initialPerPage = 10
   }
 
@@ -244,6 +309,66 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
   const handleLoadMore = (): void => {
     setPerPage(Math.min(perPage + initialPerPage, totalBoxCount))
     // setIsIntersecting(false)
+  }
+
+  // Goes through a box and marks individual pokemon that match the given filter
+  function modifyFilteredBox(box: DexBox, unfilteredIndex: number, filter: PkFilter): DexBox {
+    const updatedPokemon: DexPokemonList = box.pokemon.map(currentPokemon => {
+      const matchesFilter = pokemonMatcher(filter, currentPokemon)
+      return currentPokemon ? { ...currentPokemon, matchesFilter } : null
+    })
+
+    return { ...box, unfilteredIndex, pokemon: updatedPokemon }
+  }
+
+  // Reduces the list of boxes down to only those that contains a match
+  function boxReducer(
+    filter: PkFilter,
+    boxList: DexBox[],
+    currentBox: DexBox,
+    unfilteredIndex: number
+  ): DexBox[] {
+    const { pokemon } = currentBox
+
+    // Look for a match within the box
+    const foundMatch = !!pokemon.find(pokemonMatcher.bind(null, filter))
+
+    // If there was a match, mark the matching pokemon and add it to the list
+    return foundMatch
+      ? [...boxList, modifyFilteredBox(currentBox, unfilteredIndex, filter)]
+      : boxList
+  }
+
+  // Normalizes strings to be compared for filtering
+  function normalizeFilterData(string: string): string {
+    return slugify(string.trim()).replace(/-/g, '')
+  }
+
+  // Compares a pokemon to a filter and indicates whether there is a match
+  function pokemonMatcher(filter: PkFilter, currentPokemon: NullableDexPokemon): boolean {
+    if (!currentPokemon) {
+      return false
+    }
+
+    const { attribute = 'pid', query } = filter
+    const pokemonAttribute = currentPokemon[attribute] ?? ''
+    const pokemonAttributeSlug = normalizeFilterData(pokemonAttribute)
+    const querySlug = normalizeFilterData(query)
+
+    return pokemonAttributeSlug.includes(querySlug)
+  }
+
+  // Reduces the boxes within the dex to only those that contain a pokemon matching the query
+  function createFilteredDex(dex: LoadedDex, filter: PkFilter): LoadedDex {
+    const { boxes } = dex
+
+    const filteredBoxes = boxes.reduce(boxReducer.bind(null, filter), [])
+    return { ...dex, boxes: filteredBoxes }
+  }
+
+  // Sets the new filter state
+  const handleBoxFilter = (filter: PkFilter): void => {
+    setState({ filter })
   }
 
   useEffect(() => {
@@ -264,19 +389,20 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
     return () => observer.disconnect()
   }, [perPage])
 
-  const { dex, usePixelIcons } = props
+  const { usePixelIcons } = props
   let boxElements: ReactElement[] = []
   let shinyBoxElements: ReactElement[] = []
   const initialTabIndex = 1
 
-  dex.boxes.forEach((box, boxIndex) => {
+  filteredDex.boxes.forEach((box, boxIndex) => {
     let boxCells: any[] = []
+    const unfilteredBoxIndex = box.unfilteredIndex || boxIndex
     const boxTabIndex = props.selectMode === 'box' ? initialTabIndex + boxIndex : undefined
 
     box.pokemon.forEach((cellPkm, cellIndex) => {
       let cellTabIndex: number | undefined =
         initialTabIndex +
-        dex.boxes.length +
+        filteredDex.boxes.length +
         boxIndex * legacyConfig.limits.maxPokemonPerBox +
         cellIndex
 
@@ -288,7 +414,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         //  || (cellPkm.shiny && cellPkm.shinyBase)
         boxCells.push(
           <PkBoxEmptyCell
-            boxIndex={boxIndex}
+            boxIndex={unfilteredBoxIndex}
             pokemonIndex={cellIndex}
             tabIndex={cellTabIndex}
             pokemonData={cellPkm}
@@ -334,7 +460,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
 
       boxCells.push(
         <PkBoxCell
-          boxIndex={boxIndex}
+          boxIndex={unfilteredBoxIndex}
           pokemonIndex={cellIndex}
           tabIndex={cellTabIndex}
           pokemonData={cellPkm}
@@ -394,7 +520,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
 
     const nextIdx = (box.shiny ? shinyBoxElements : boxElements).length + 1
     const boxTitle = createBoxTitle(props.dex.gameSetId, box.title, nextIdx)
-    const isOverflowing = nextIdx > getGameSetByGameId(dex.gameId).storage.boxes
+    const isOverflowing = nextIdx > getGameSetByGameId(props.dex.gameId).storage.boxes
 
     ;(box.shiny ? shinyBoxElements : boxElements).push(
       <PkBox
@@ -456,6 +582,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
               </div>
             </div>
           }
+          <PkBoxGroupFilter onFilter={handleBoxFilter} />
           <div className={classes}>
             <div
               className={[styles.pkBoxGroupContent, 'pkBoxCount-' + pagedBoxElements.length].join(
