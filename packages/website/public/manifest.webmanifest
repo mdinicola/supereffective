@@ -7,13 +7,14 @@
   "start_url": "./",
   "theme_color": "#1a1d1f",
   "background_color": "#1a1d1f",
-  "display": "standalone",
   "lang": "en-US",
   "orientation": "portrait",
+  "display": "standalone",
   "display_override": ["window-controls-overlay"],
   "edge_side_panel": {
     "preferred_width": 496
   },
+  "categories": ["games", "utilities"],
   "icons": [
     {
       "src": "/assets/favicon/favicon-48x48.png",
@@ -168,6 +169,5 @@
         }
       ]
     }
-  ],
-  "categories": ["games", "utilities"]
+  ]
 }
