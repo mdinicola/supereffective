@@ -109,16 +109,5 @@
       ]
     }
   ],
-  "launch_handler": {
-    "client_mode": "auto"
-  },
-  "handle_links": "preferred",
-  "protocol_handlers": [
-    {
-      "protocol": "web+supereffective",
-      "url": "/%s"
-    }
-  ],
-  "related_applications": [],
   "categories": ["games", "utilities"]
 }
