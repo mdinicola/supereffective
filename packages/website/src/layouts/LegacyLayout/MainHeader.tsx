@@ -1,11 +1,11 @@
-import {useRouter} from 'next/compat/router'
+import { useState } from 'react'
+import { useRouter } from 'next/compat/router'
 import Image from 'next/image'
 import Link from 'next/link'
-import {useState} from 'react'
 
 import config from '#/config'
-import {UserTrayView} from '#/features/users/views/UserTrayView'
-import {ExternLink,SiteLink} from '#/primitives/legacy/Link/Links'
+import { UserTrayView } from '#/features/users/views/UserTrayView'
+import { ExternLink, SiteLink } from '#/primitives/legacy/Link/Links'
 
 import styles from './MainHeader.module.css'
 

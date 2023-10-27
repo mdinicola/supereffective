@@ -40,7 +40,6 @@ import config from '#/config'
 import legacyConfig from '#/config/legacyConfig'
 import { useDexesContext } from '#/features/livingdex/state/LivingDexListContext'
 import { GameLogo } from '#/features/livingdex/views/GameLogo'
-import { MarkType, PkBoxGroup, SelectMode, ViewMode } from '#/features/livingdex/views/PkBox'
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import { useScrollToLocation } from '#/hooks/useScrollToLocation'
 import { LoadingBanner } from '#/layouts/LegacyLayout/LoadingBanner'
@@ -57,7 +56,9 @@ import { classNameIf } from '#/utils/legacyUtils'
 
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
-import { PkBoxGroupShinyMix } from './PkBoxShinyMix'
+import { PkBoxGroup } from './PkBoxGroup'
+import { PkBoxGroupShinyMixed } from './PkBoxGroupShinyMixed'
+import { MarkType, SelectMode, ViewMode } from './pkBoxTypes'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
 type SyncState = 'changed' | 'synced'
@@ -963,7 +964,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   )
 
   let genericModal = null
-  const BoxGroupComponent = showMixedShinies ? PkBoxGroupShinyMix : PkBoxGroup
+  const BoxGroupComponent = showMixedShinies ? PkBoxGroupShinyMixed : PkBoxGroup
 
   if (modalContent !== null) {
     genericModal = (
