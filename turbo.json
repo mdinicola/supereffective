@@ -41,6 +41,7 @@
     "codegen": {
       "dependsOn": ["^codegen"],
       "outputs": [
+        "data.head",
         "data/**",
         "styled-system/**",
         "@prisma/client/**",
