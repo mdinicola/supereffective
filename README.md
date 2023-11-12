@@ -78,7 +78,7 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 2. Install dependencies: `pnpm install`
 3. Generate necessary data and code locally: `pnpm codegen`
 4. Configure your PostgreSQL DB connection strings.
-   You can use the `db` service in `docker-compose.yml` to spawn a local DB using Docker, 
+   You can use the `db` service in `docker-compose.yml` to spawn a local DB using Docker,
    or or use a provider like Neon.tech,
    then configure the database env vars in:
 
