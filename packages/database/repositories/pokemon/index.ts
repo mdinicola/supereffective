@@ -4,17 +4,17 @@ import { SimpleSearchIndex } from '@pkg/utils/lib/searching/algos/SimpleSearchIn
 import pokemonEntries from '../../data/legacy/pokemon.json'
 import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry } from './types'
 
-export const getPokemonEntries = (): PokemonEntry[] => {
+export const getPokemonEntries = createMemoizedCallback((): PokemonEntry[] => {
   return (pokemonEntries as RawPokemonEntry[]).map(_transformPokemon)
-}
+})
 
-export const getPokemonEntryMap = (): PokemonEntryMap => {
+export const getPokemonEntryMap = createMemoizedCallback((): PokemonEntryMap => {
   const map: PokemonEntryMap = new Map<string, PokemonEntry>()
   getPokemonEntries().forEach(entry => {
     map.set(entry.id, entry)
   })
   return map
-}
+})
 
 export const getPokemonSearchIndex = createMemoizedCallback((): PokemonEntrySearchIndex => {
   const index = new SimpleSearchIndex<PokemonEntry[]>()
