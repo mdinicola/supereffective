@@ -2,7 +2,7 @@ name: Update Tokens every 12h
 
 env:
   NODE_VERSION: '>=18.5.0'
-  PNPM_VERSION: 8.9
+  PNPM_VERSION: 8.10
 
 on:
   schedule:

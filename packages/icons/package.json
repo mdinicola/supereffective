@@ -28,8 +28,8 @@
     "typelint": "tsc --noEmit"
   },
   "dependencies": {
-    "@supeffective/dataset": "^0.8.0",
-    "@supeffective/icons": "^0.8.0",
+    "@supeffective/dataset": "^0.8.1",
+    "@supeffective/icons": "^0.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
