@@ -263,11 +263,7 @@ export function PkBoxGroupShinyMixed(props: PkBoxGroupProps) {
         }
         <PkBoxGroupFilter onChange={handleBoxFilter} />
         <div className={classes}>
-          <div
-            className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(
-              ' '
-            )}
-          >
+          <div className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}>
             {pagedBoxElements}
             {loadMoreBtn}
           </div>

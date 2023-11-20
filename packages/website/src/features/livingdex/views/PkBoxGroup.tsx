@@ -323,9 +323,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
             <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(
-                ' '
-              )}
+              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}
             >
               {pagedBoxElements}
               {loadMoreBtn}
@@ -345,9 +343,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
             <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(
-                ' '
-              )}
+              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}
             >
               {pagedBoxElements}
             </div>
