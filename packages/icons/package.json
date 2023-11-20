@@ -1,0 +1,49 @@
+{
+  "name": "@pkg/icons",
+  "version": "0.7.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Javier Aguilar",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "pnpm codegen && tsup",
+    "codegen": "panda codegen && panda",
+    "prepublishOnly": "pnpm run build",
+    "publint-check": "pnpm publint",
+    "typelint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supeffective/dataset": "^0.8.0",
+    "@supeffective/icons": "^0.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.17.5",
+    "@pandacss/types": "^0.17.5",
+    "@types/node": "^20.9.2",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "postcss": "^8.4.31",
+    "publint": "^0.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}

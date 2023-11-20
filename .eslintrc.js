@@ -13,6 +13,7 @@ module.exports = {
     '**/dist/**',
     '**/generated/**',
     '**/.vscode/**',
+    '**/styled-system/**',
   ],
   rules: {
     // nextjs

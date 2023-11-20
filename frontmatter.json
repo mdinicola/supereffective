@@ -32,15 +32,6 @@
     "name": "isDraft",
     "type": "boolean"
   },
-  "frontMatter.taxonomy.tags": [
-    "HOME",
-    "bdsp",
-    "legends-arceus",
-    "livingdex",
-    "scarlet-violet",
-    "sword-shield"
-  ],
-  "frontMatter.taxonomy.categories": ["Fakemon", "Games", "Rumors", "Website"],
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "Page",

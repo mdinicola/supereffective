@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { GameLabel, TypeIcon } from '@supeffective/ui-legacy'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
 import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/repositories/pokemon/types'
+import { GameLabel, TypeIcon } from '@pkg/icons'
 
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import Button from '#/primitives/legacy/Button/Button'
