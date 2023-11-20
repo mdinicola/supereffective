@@ -41,7 +41,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   return {
     props: {
-      membership: membership ? serializeObject(membership) : undefined,
+      membership: membership ? serializeObject(membership) : null,
     },
   }
 }

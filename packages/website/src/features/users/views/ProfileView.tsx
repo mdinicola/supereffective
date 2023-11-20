@@ -34,6 +34,7 @@ export function ProfileView({
 
     const hasMembership = !!membership?.patreonMemberId
     const _membership: Membership = membership ?? createMembershipPlaceholder(auth.currentUser.uid)
+    const _expirationDate = _membership.expiresAt ? new Date(_membership.createdAt) : null
 
     return (
       <>
@@ -50,6 +51,14 @@ export function ProfileView({
             {_membership.rewardFeaturedStreamer ? ', featured streamer' : ''}
           </code>
         </p>
+        {hasMembership && _expirationDate && (
+          <p>
+            <b>Membership Expiration Date: </b>
+            <code style={{ color: 'var(--color-pink-2)' }}>
+              {_expirationDate.toLocaleDateString()}
+            </code>
+          </p>
+        )}
 
         {!hasMembership && (
           <>
@@ -84,7 +93,8 @@ export function ProfileView({
               </>
             )}
             <small style={{ fontStyle: 'italic', color: '#777' }}>
-              Link your Patreon account and become a patron to unlock more benefits.
+              Link your Patreon account and become a patron to unlock extras in the website and
+              Discord.
             </small>
           </>
         )}
