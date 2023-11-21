@@ -42,6 +42,19 @@
   background: #000;
 }
 
+.ctrl.outlined {
+  background: none;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.ctrl.outlined:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.ctrl.outlined:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .ctrl.disabled,
 .ctrl[disabled],
 .ctrl.disabled:hover,

@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { legacyCanCreateMoreDexes } from '@pkg/database/repositories/living-dexes/legacy'
-import { LoadedDexList } from '@pkg/database/repositories/living-dexes/legacy/types'
 
 import PkImgFile from '#/features/livingdex/views/PkImgFile'
 import { useScrollToLocation } from '#/hooks/useScrollToLocation'
@@ -10,6 +9,29 @@ import { ButtonInternalLink } from '#/primitives/legacy/Button/Button'
 import { SiteLink } from '#/primitives/legacy/Link/Links'
 
 import styles from './WelcomeContent.module.css'
+
+function StartLivingDexButton({
+  text = 'Start a new Living Pokédex',
+  onClick,
+}: {
+  text: string
+  onClick?: () => void
+}) {
+  return (
+    <div className={'text-center'}>
+      <br />
+      <ButtonInternalLink
+        href={'/apps/livingdex/new'}
+        outlined
+        onClick={onClick}
+        rel="nofollow"
+        style={{ fontSize: '1rem' }}
+      >
+        <i className={'icon-pkg-box-home'} /> {text}
+      </ButtonInternalLink>
+    </div>
+  )
+}
 
 export const WelcomeContent = () => {
   useScrollToLocation()
@@ -25,9 +47,6 @@ export const WelcomeContent = () => {
   const canAddMoreDexes = legacyCanCreateMoreDexes()
   const ifCanAddMoreDexes = (children: any, fallback: any) =>
     canAddMoreDexes ? children : fallback
-  const onCreateBtn = (btnId: string) => {
-    // tracker.dexCreateBtnClicked(btnId)
-  }
 
   return (
     <>
@@ -60,6 +79,7 @@ export const WelcomeContent = () => {
             <br />A visual guide will also help you organize your Pokémon Boxes in an effective and
             understandable way. If you are looking for a way to quickly check which Pokémon you are
             missing and for which games, this is your website.
+            {canAddMoreDexes && <StartLivingDexButton text={'Start a new Living Pokédex'} />}
           </article>
           <div className={'text-block'}>
             <p>
@@ -67,11 +87,7 @@ export const WelcomeContent = () => {
               future plans, <a href={'#howto'}>how to use the app</a> or, <span /> if you are
               already familiar with it, you can just{' '}
               {ifCanAddMoreDexes(
-                <Link
-                  href={'/apps/livingdex/new'}
-                  onClick={() => onCreateBtn('btn-1')}
-                  rel="nofollow"
-                >
+                <Link href={'/apps/livingdex/new'} rel="nofollow">
                   create a new Living Pokédex <span />
                 </Link>,
                 ' open one of your existing Living Pokédex '
@@ -177,11 +193,7 @@ export const WelcomeContent = () => {
                     To use the app you have to be signed in with one of our providers (Google,
                     Twitter or Github) and
                     {ifCanAddMoreDexes(
-                      <Link
-                        href={'/apps/livingdex/new'}
-                        onClick={() => onCreateBtn('btn-2')}
-                        rel="nofollow"
-                      >
+                      <Link href={'/apps/livingdex/new'} rel="nofollow">
                         {' '}
                         create a new Dex{' '}
                       </Link>,
@@ -347,18 +359,7 @@ export const WelcomeContent = () => {
             A world of dreams and adventures with Pokémon awaits! Let's go! I'll be seeing you
             later!
           </p>
-          {canAddMoreDexes && (
-            <p className={'text-center'}>
-              <ButtonInternalLink
-                href={'/apps/livingdex/new'}
-                onClick={() => onCreateBtn('btn-3')}
-                rel="nofollow"
-                style={{ fontSize: '1rem' }}
-              >
-                <i className={'icon-pkg-box-home'} /> Start a new Living Pokédex
-              </ButtonInternalLink>
-            </p>
-          )}
+          {canAddMoreDexes && <StartLivingDexButton text={'Start a new Living Pokédex'} />}
         </article>
 
         <div className={'text-block text-center'}>

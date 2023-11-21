@@ -9,13 +9,14 @@ import { classNameIf, classNames } from '#/utils/legacyUtils'
 import styles from './Button.module.css'
 import stylesCtrl from './Control.module.css'
 
-export default function Button({ className, inverted, ...props }: any) {
+export default function Button({ className, inverted, outlined, ...props }: any) {
   return (
     <button
       className={classNames(
         styles.btn,
         stylesCtrl.ctrl,
         classNameIf(inverted, stylesCtrl.inverted),
+        classNameIf(outlined, stylesCtrl.outlined),
         className
       )}
       {...props}
@@ -25,7 +26,7 @@ export default function Button({ className, inverted, ...props }: any) {
   )
 }
 
-export function ButtonInternalLink({ href, inverted, className, ...props }: any) {
+export function ButtonInternalLink({ href, inverted, outlined, className, ...props }: any) {
   return (
     <Link
       href={href}
@@ -33,6 +34,7 @@ export function ButtonInternalLink({ href, inverted, className, ...props }: any)
         styles.btn,
         stylesCtrl.ctrl,
         classNameIf(inverted, stylesCtrl.inverted),
+        classNameIf(outlined, stylesCtrl.outlined),
         className
       )}
       {...props}
@@ -42,13 +44,14 @@ export function ButtonInternalLink({ href, inverted, className, ...props }: any)
   )
 }
 
-export function ButtonLink({ className, inverted, ...props }: any) {
+export function ButtonLink({ className, outlined, inverted, ...props }: any) {
   return (
     <a
       className={classNames(
         styles.btn,
         stylesCtrl.ctrl,
         classNameIf(inverted, stylesCtrl.inverted),
+        classNameIf(outlined, stylesCtrl.outlined),
         className
       )}
       {...props}

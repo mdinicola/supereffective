@@ -40,9 +40,11 @@ export const GamePresetSelector = ({
     return <LoadingBanner />
   }
 
+  const availableGamesDesc = [...getAvailableGames()].reverse()
+
   const gameSelectors = (
     <div className={styles.games}>
-      {getAvailableGames().map((gameId: string, index) => {
+      {availableGamesDesc.map((gameId: string, index) => {
         const game = getGameById(gameId)
         const gameClasses = classNames(
           styles.gameLogo,
