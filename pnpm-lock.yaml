@@ -2538,8 +2538,8 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@types/babel__core@7.20.4:
-    resolution: {integrity: sha512-mLnSC22IC4vcWiuObSRjrLd9XcBTGf59vUSoq2jkQDJ/QQ8PMI9rSuzE+aEV8karUMbskw07bKYoUJCKTUaygg==}
+  /@types/babel__core@7.20.5:
+    resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
       '@babel/parser': 7.23.4
       '@babel/types': 7.23.4
@@ -3067,7 +3067,7 @@ packages:
       '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.23.3)
       '@babel/traverse': 7.23.4
       '@babel/types': 7.23.4
-      '@types/babel__core': 7.20.4
+      '@types/babel__core': 7.20.5
       '@types/dom-view-transitions': 1.0.4
       '@types/yargs-parser': 21.0.3
       acorn: 8.11.2
@@ -3184,7 +3184,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.3
       '@jest/transform': 29.7.0
-      '@types/babel__core': 7.20.4
+      '@types/babel__core': 7.20.5
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 29.6.3(@babel/core@7.23.3)
       chalk: 4.1.2
@@ -3213,7 +3213,7 @@ packages:
     dependencies:
       '@babel/template': 7.22.15
       '@babel/types': 7.23.4
-      '@types/babel__core': 7.20.4
+      '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.4
     dev: true
 
