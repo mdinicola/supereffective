@@ -1,5 +1,4 @@
 import { getPokemonEntry, isShinyLocked } from '../../../pokemon'
-import { PokemonId } from '../../../pokemon/ids'
 import { DexPokemon } from '../types'
 import { PresetDexPokemon } from './types'
 
@@ -11,7 +10,7 @@ export function createDexPokemonFromPid(
   if (typeof pid === 'string') {
     const pkmEntry = getPokemonEntry(pid)
     return {
-      pid: pid as PokemonId,
+      pid: pid as string,
       nid: pkmEntry.nid,
       caught: false,
       shiny: shiny,

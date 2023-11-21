@@ -1,12 +1,9 @@
 import { BaseUserDocument } from '../../../lib/types'
-import { GameSetId } from '../../game-sets/ids'
-import { GameId } from '../../games/ids'
-import { PokemonId } from '../../pokemon/ids'
 
 export const DEX_SCHEMA_VERSION = 3
 
 export type DexPokemon = {
-  pid: PokemonId
+  pid: string
   nid: string
   caught: boolean
   gmax: boolean
@@ -38,7 +35,7 @@ export interface PkFilter {
 export type StorableDex = {
   title: string
   sver: typeof DEX_SCHEMA_VERSION // schema version
-  preset: [GameId, string, number] | [GameSetId, GameId, string, number] // [gameSetId], gameId, presetId, presetVersion
+  preset: [string, string, number] | [string, string, string, number] // [gameSetId], gameId, presetId, presetVersion
   caught: [number, number] // [caught regular, total regular]
   caughtShiny: [number, number] // [caught regular, total shinies]
   boxes: Array<DexBox>
@@ -47,8 +44,8 @@ export type StorableDex = {
 export type LoadedDex = {
   title: string
   schemaVersion: typeof DEX_SCHEMA_VERSION // schema version
-  gameId: GameId // e.g. "sw"
-  gameSetId: GameSetId // e.g. "swsh"
+  gameId: string // e.g. "sw"
+  gameSetId: string // e.g. "swsh"
   presetId: string // e.g. 'grouped-region' | 'fully-sorted' | 'grouped-species'
   presetVersion: number
   caughtRegular: number

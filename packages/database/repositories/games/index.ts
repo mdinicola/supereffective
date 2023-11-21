@@ -1,19 +1,21 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
-import gameList from '../../data/legacy/games.json'
-import { GameId, getGameIds } from './ids'
+import { fetchData } from '../utils'
+import { getGameIds } from './ids'
 import { LegacyGame, LegacyGameDict } from './types'
 
 export { getGameIds as getSupportedGameIds }
 
+const rawEntries: LegacyGame[] = await fetchData('/legacy-games.min.json')
+
 export const getGames = createMemoizedCallback((): LegacyGameDict => {
-  return gameList.reduce((acc: any, item) => {
+  return rawEntries.reduce((acc: any, item) => {
     acc[item.id] = item
     return acc
   }, {})
 })
 
-export function getGameById(id: GameId): LegacyGame {
+export function getGameById(id: string): LegacyGame {
   const absId = _getAbsoluteGameId(id)
   const data = getGames()[absId]
   if (data === undefined) {
@@ -22,7 +24,7 @@ export function getGameById(id: GameId): LegacyGame {
   return data
 }
 
-function _getAbsoluteGameId(gameId: string): GameId {
+function _getAbsoluteGameId(gameId: string): string {
   switch (gameId) {
     case 'lgp':
       return 'lgpe-lgp'
@@ -41,5 +43,5 @@ function _getAbsoluteGameId(gameId: string): GameId {
     case 'v':
       return 'sv-v'
   }
-  return gameId as GameId
+  return gameId as string
 }

@@ -1,11 +1,17 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 import { SimpleSearchIndex } from '@pkg/utils/lib/searching/algos/SimpleSearchIndex'
 
-import pokemonEntries from '../../data/legacy/pokemon.json'
+import { fetchData } from '../utils'
 import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry } from './types'
 
+const rawEntries: RawPokemonEntry[] = await fetchData('/legacy-pokemon.min.json')
+
+if (!Array.isArray(rawEntries)) {
+  throw new Error('Invalid data format for fetched legacy/pokemon.min.json')
+}
+
 export const getPokemonEntries = createMemoizedCallback((): PokemonEntry[] => {
-  return (pokemonEntries as RawPokemonEntry[]).map(_transformPokemon)
+  return rawEntries.map(_transformPokemon)
 })
 
 export const getPokemonEntryMap = createMemoizedCallback((): PokemonEntryMap => {

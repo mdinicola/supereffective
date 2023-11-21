@@ -3,8 +3,6 @@ import { LivingDex } from '@prisma/client'
 import { SerializableDate } from '@pkg/utils/lib/serialization/jsonSerializable'
 
 import { getGameSetByGameId } from '../../repositories/game-sets'
-import { GameSetId } from '../../repositories/game-sets/ids'
-import { GameId } from '../../repositories/games/ids'
 import { convertPokemonListToStorable } from '../../repositories/living-dexes/legacy/converters/convertPokemonListToStorable'
 import { getPresetByIdForGameSet, getPresets } from '../../repositories/living-dexes/legacy/presets'
 import { normalizeDexWithPreset } from '../../repositories/living-dexes/legacy/presets/normalizeDexWithPreset'
@@ -251,14 +249,14 @@ const defaultPresetVersion = 0
 function _documentToDex(doc: StorableDex): LoadedDex {
   const boxes: DexBox[] = doc.boxes || []
 
-  let gameId: GameId = defaultGame
-  let gameSetId: GameSetId = defaultGameSet
+  let gameId: string = defaultGame
+  let gameSetId: string = defaultGameSet
   let presetId = defaultPreset
   let presetVersion = defaultPresetVersion
 
   if (doc.game) {
     // legacy support
-    gameId = doc.game as GameId
+    gameId = doc.game as string
     if (gameId === 'home') {
       presetId = 'grouped-region'
       gameSetId = 'home'
@@ -269,17 +267,12 @@ function _documentToDex(doc: StorableDex): LoadedDex {
     // uses new preset field
     if (doc.preset.length === 3) {
       // uses beta preset field
-      ;[gameId, presetId, presetVersion] = doc.preset as [GameId, string, number]
+      ;[gameId, presetId, presetVersion] = doc.preset as [string, string, number]
       gameSetId = getGameSetByGameId(gameId).id
     }
     if (doc.preset.length === 4) {
       // uses final preset field
-      ;[gameSetId, gameId, presetId, presetVersion] = doc.preset as [
-        GameSetId,
-        GameId,
-        string,
-        number,
-      ]
+      ;[gameSetId, gameId, presetId, presetVersion] = doc.preset as [string, string, string, number]
     }
   }
 

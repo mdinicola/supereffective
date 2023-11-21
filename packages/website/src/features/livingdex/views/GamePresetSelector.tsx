@@ -2,7 +2,6 @@ import React from 'react'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { getGameById } from '@pkg/database/repositories/games'
-import { GameId } from '@pkg/database/repositories/games/ids'
 import { getAvailableGames } from '@pkg/database/repositories/living-dexes/legacy/gameAvailability'
 import { getPresetsForGame } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { PresetDex } from '@pkg/database/repositories/living-dexes/legacy/presets/types'
@@ -24,7 +23,7 @@ export const GamePresetSelector = ({
   resolvedLimits: LivingDexResolvedUserLimits
 }) => {
   const auth = useSession()
-  const [selectedGame, setSelectedGame] = React.useState<GameId | null>(null)
+  const [selectedGame, setSelectedGame] = React.useState<string | null>(null)
   const { dexes, dexesLoading } = useDexesContext()
 
   useScrollToLocation()
@@ -43,7 +42,7 @@ export const GamePresetSelector = ({
 
   const gameSelectors = (
     <div className={styles.games}>
-      {getAvailableGames().map((gameId: GameId, index) => {
+      {getAvailableGames().map((gameId: string, index) => {
         const game = getGameById(gameId)
         const gameClasses = classNames(
           styles.gameLogo,

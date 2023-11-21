@@ -1,6 +1,4 @@
-import { GameSetId } from '../../../game-sets/ids'
 import { getPokemonEntry, isShinyLocked } from '../../../pokemon'
-import { PokemonId } from '../../../pokemon/ids'
 import { isCatchable, recalculateCounters } from '../index'
 import { DexBox, DexPokemon, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'
@@ -82,7 +80,7 @@ function _matchBoxes(
   const initialBoxIndex = sideBySideShinies ? 0 : asShiny ? presetBoxes.length : 0
 
   const newBoxes = presetBoxes.map((box, boxIndex) => ({
-    title: createBoxTitle(preset.gameSet as GameSetId, box.title, boxIndex + 1 + initialBoxIndex),
+    title: createBoxTitle(preset.gameSet as string, box.title, boxIndex + 1 + initialBoxIndex),
     shiny: asShiny,
     pokemon: box.pokemon.map(pokemon => {
       if (pokemon === null) {
@@ -98,7 +96,7 @@ function _matchBoxes(
         gmax = pokemon.gmax === true
         alpha = pokemon.alpha === true
       } else {
-        pid = pokemon as PokemonId
+        pid = pokemon as string
         caught = false
         shiny = false
         shinyLocked = false

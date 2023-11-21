@@ -4,21 +4,6 @@ import { IDSchema, UserCreatedTitleSchema } from '../../../validators'
 import { _gameSetIds } from '../../game-sets/ids'
 import { _gameIds } from '../../games/ids'
 import { _pokemonIds } from '../../pokemon/ids'
-import { _pokemonTypeIds } from '../../types/ids'
-
-enum GameId {
-  RS_R = 'rs-r',
-  FRLG_FR = 'frlg-fr',
-  E = 'e',
-  DP_D = 'dp-d',
-}
-
-enum GameSetId {
-  RS = 'rs',
-  FRLG = 'frlg',
-  E = 'e',
-  DP = 'dp',
-}
 
 export type BaseUserDocument = {
   id?: string
@@ -50,7 +35,7 @@ export type DexBox = {
 export type StorableDex = {
   title: string
   sver: number
-  preset: [GameId, string, number] | [GameSetId, GameId, string, number]
+  preset: [string, string, number] | [string, string, string, number]
   caught: [number, number]
   caughtShiny: [number, number]
   boxes: Array<DexBox>
@@ -59,8 +44,8 @@ export type StorableDex = {
 export type LoadedDex = {
   title: string
   schemaVersion: number
-  gameId: GameId
-  gameSetId: GameSetId
+  gameId: string
+  gameSetId: string
   presetId: string
   presetVersion: number
   caughtRegular: number
@@ -79,7 +64,6 @@ export type LoadedDexList = Array<LoadedDex>
 export const GameIdSchema = z.enum(_gameIds)
 export const GameSetIdSchema = z.enum(_gameSetIds)
 export const PokemonIdSchema = z.enum(_pokemonIds)
-export const PokemonTypeSchema = z.enum(_pokemonTypeIds)
 
 export const BaseUserDocumentSchema = z
   .object({

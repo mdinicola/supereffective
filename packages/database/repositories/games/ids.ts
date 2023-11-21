@@ -41,7 +41,7 @@ export const _gameIds = [
   'sv-v',
 ] as const
 
-export type GameId = (typeof _gameIds)[number]
+type GameId = (typeof _gameIds)[number]
 
 export function getGameIds(): readonly GameId[] {
   return _gameIds

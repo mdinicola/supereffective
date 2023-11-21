@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from 'next'
 
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
-import { GameId } from '@pkg/database/repositories/games/ids'
 import { getLegacyLivingDexRepository } from '@pkg/database/repositories/living-dexes/legacy'
 import { getPresets } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { PresetDexMap } from '@pkg/database/repositories/living-dexes/legacy/presets/types'
@@ -18,7 +17,7 @@ const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => 
   const dex = deserializeObject<LoadedDex>(dexData)
   const metaTitle = `${dex.title} | Supereffective.gg Pokédex Tracker`
   const metaDescription = `${dex.title}, a Pokémon Living Dex created with Supereffective's Living Pokédex Tracker app. Caught ${dex.caughtRegular} / ${dex.totalRegular}.`
-  const gameSet = getGameSetByGameId(dex.gameId as GameId)
+  const gameSet = getGameSetByGameId(dex.gameId)
   const gameSetId = gameSet.id
 
   const containerClasses =

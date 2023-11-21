@@ -1,12 +1,11 @@
 import Image from 'next/image'
 
 import { getGameById } from '@pkg/database/repositories/games'
-import { GameId } from '@pkg/database/repositories/games/ids'
 
 import styles from './GameLogo.module.css'
 
 interface GameLogoProps {
-  game: GameId
+  game: string
   size: number
   asSwitchIcon: boolean
   ext?: string

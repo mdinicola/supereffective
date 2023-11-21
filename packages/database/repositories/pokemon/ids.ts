@@ -1547,7 +1547,7 @@ export const _pokemonIds = [
   'terapagos-terastal',
 ] as const
 
-export type PokemonId = (typeof _pokemonIds)[number]
+type PokemonId = (typeof _pokemonIds)[number]
 
 export function getPokemonIds(): readonly PokemonId[] {
   return _pokemonIds

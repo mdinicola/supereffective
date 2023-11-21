@@ -1,71 +1,36 @@
-const { generateIdsTsFile, generateIdsTsFileFromData } = require('./codegen.cjs')
+const { generateIdsTsFileFromData } = require('./codegen.cjs')
 const path = require('node:path')
-
-const dataDir = path.resolve(path.join(__dirname, '..', '..', 'data'))
 const srcDir = path.resolve(path.join(__dirname, '..', '..', 'repositories'))
 
-// generateIdsTsFile(
-//   path.resolve(path.join(dataDir, 'abilities.json')),
-//   path.resolve(path.join(srcDir, 'abilities', 'ids.ts')),
-//   'ability'
-// )
+const BASE_DATA_URL = 'https://itsjavi.com/supereffective-sdk/data'
 
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'items.json')),
-  path.resolve(path.join(srcDir, 'items', 'ids.ts')),
-  'item'
-)
+async function fetchDataFile(filename) {
+  return fetch(`${BASE_DATA_URL}/${filename}`).then(res => res.json())
+}
 
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'moves.json')),
-  path.resolve(path.join(srcDir, 'moves', 'ids.ts')),
-  'move'
-)
-
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'natures.json')),
-  path.resolve(path.join(srcDir, 'natures', 'ids.ts')),
-  'nature'
-)
-
-// generateIdsTsFile(
-//   path.resolve(path.join(dataDir, 'pokedexes.json')),
-//   path.resolve(path.join(srcDir, 'pokedexes', 'ids.ts')),
-//   'pokedex'
-// )
-
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'pokemon.json')),
-  path.resolve(path.join(srcDir, 'pokemon', 'ids.ts')),
-  'pokemon'
-)
-
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'regions.json')),
-  path.resolve(path.join(srcDir, 'regions', 'ids.ts')),
-  'region'
-)
-
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'types.json')),
-  path.resolve(path.join(srcDir, 'types', 'ids.ts')),
-  'pokemonType'
-)
-
-generateIdsTsFile(
-  path.resolve(path.join(dataDir, 'gamesets.json')),
-  path.resolve(path.join(srcDir, 'game-sets', 'ids.ts')),
-  'gameSet'
-)
-
-const _gameSetRecords = require(path.resolve(path.join(dataDir, 'gamesets.json')))
-
-const games = _gameSetRecords.flatMap(({ id: gameSetId, games }) => {
-  return Object.entries(games).map(([id, game]) => ({
-    id,
-    name: game,
-    gameSet: gameSetId,
-  }))
+fetchDataFile('pokemon.min.json').then(data => {
+  if (!Array.isArray(data)) {
+    throw new Error('[fetchDataFile] Expected array when fetching pokemon.min.json')
+  }
+  console.log(`[fetchDataFile] Fetched ${data.length} pokemon from pokemon.min.json`)
+  generateIdsTsFileFromData(data, path.resolve(path.join(srcDir, 'pokemon', 'ids.ts')), 'pokemon')
 })
 
-generateIdsTsFileFromData(games, path.resolve(path.join(srcDir, 'games', 'ids.ts')), 'game')
+fetchDataFile('legacy-gamesets.min.json').then(data => {
+  if (!Array.isArray(data)) {
+    throw new Error('[fetchDataFile] Expected array when fetching legacy-gamesets.min.json')
+  }
+
+  console.log(`[fetchDataFile] Fetched ${data.length} gamesets from legacy-gamesets.min.json`)
+  generateIdsTsFileFromData(data, path.resolve(path.join(srcDir, 'game-sets', 'ids.ts')), 'gameSet')
+
+  const games = data.flatMap(({ id: gameSetId, games }) => {
+    return Object.entries(games).map(([id, game]) => ({
+      id,
+      name: game,
+      gameSet: gameSetId,
+    }))
+  })
+
+  generateIdsTsFileFromData(games, path.resolve(path.join(srcDir, 'games', 'ids.ts')), 'game')
+})

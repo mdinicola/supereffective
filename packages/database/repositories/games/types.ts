@@ -1,10 +1,7 @@
-import { GameSetId } from '../game-sets/ids'
-import { GameId } from './ids'
-
 export type LegacyGame = {
-  id: GameId
+  id: string
   name: string
-  setId: GameSetId
+  setId: string
   supersetId: string
 }
-export type LegacyGameDict = { [id in GameId]: LegacyGame }
+export type LegacyGameDict = { [id in string]: LegacyGame }

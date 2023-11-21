@@ -5,8 +5,6 @@ import { useRouter } from 'next/compat/router'
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { getSession } from '@pkg/auth/lib/serverside/getSession'
 import { getGameSetByGameId } from '@pkg/database/repositories/game-sets'
-import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
-import { GameId } from '@pkg/database/repositories/games/ids'
 import { getLegacyLivingDexRepository } from '@pkg/database/repositories/living-dexes/legacy'
 import { getPresets } from '@pkg/database/repositories/living-dexes/legacy/presets'
 import { createDexFromPreset } from '@pkg/database/repositories/living-dexes/legacy/presets/createDexFromPreset'
@@ -29,7 +27,7 @@ import PkSpriteStyles from '#/styles/legacy/PkSpriteStyles'
 import { devLog } from '#/utils/logger'
 
 interface PageProps {
-  selectedGame: GameId | null
+  selectedGame: string | null
   selectedPreset: string | null
   limits: LivingDexResolvedUserLimits | null
 }
@@ -97,7 +95,7 @@ const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
 
   let foundPreset = null
   let gameSet = undefined
-  let gameSetId: GameSetId | '' = ''
+  let gameSetId: string = ''
 
   if (selectedGame) {
     gameSet = getGameSetByGameId(selectedGame)
@@ -137,11 +135,7 @@ const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
       {presetIsSelected && foundPreset && (
         <LivingDexApp
           presets={presets}
-          loadedDex={createDexFromPreset(
-            selectedGame as GameId,
-            foundPreset,
-            auth.currentUser?.uid
-          )}
+          loadedDex={createDexFromPreset(selectedGame, foundPreset, auth.currentUser?.uid)}
           onSave={onSaveHandler}
         />
       )}

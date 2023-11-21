@@ -1,7 +1,5 @@
-import { GameSetId } from '../../../game-sets/ids'
-
 export function createBoxTitle(
-  gameSet: GameSetId,
+  gameSet: string,
   prevTitle: string | null | undefined,
   currentBoxNum: number
 ): string {
@@ -14,7 +12,7 @@ export function createBoxTitle(
   return prevTitle ?? createDefaultBoxTitle(gameSet, currentBoxNum)
 }
 
-export function createDefaultBoxTitle(gameSet: GameSetId, currentBoxNum: number): string {
+export function createDefaultBoxTitle(gameSet: string, currentBoxNum: number): string {
   if (gameSet === 'go' || gameSet === 'lgpe') {
     return `Storage System`
   }

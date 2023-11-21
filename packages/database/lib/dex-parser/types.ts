@@ -1,11 +1,3 @@
-import { GameId } from '../../repositories/games/ids'
-import { ItemId } from '../../repositories/items/ids'
-import { MoveId } from '../../repositories/moves/ids'
-import { NatureId } from '../../repositories/natures/ids'
-import { OriginMarkId } from '../../repositories/origin-marks/ids'
-import { PokemonId } from '../../repositories/pokemon/ids'
-import { PokemonTypeId } from '../../repositories/types/ids'
-
 export const LIVINGDEX_DOC_SPEC_VERSIONS = ['v4'] as const
 
 export type LivingDexDocSpecVersion = (typeof LIVINGDEX_DOC_SPEC_VERSIONS)[number]
@@ -35,7 +27,7 @@ export interface LivingDexDocMeta {
   $id?: string
   format: LivingDexDocSpecVersion
   title: string
-  gameId: GameId
+  gameId: string
   ownerId: string
   creationTime: string
   lastUpdateTime: string
@@ -54,26 +46,26 @@ export interface LivingDexDocBox {
 }
 
 export interface LivingDexDocPokemon {
-  id: PokemonId
+  id: string
   captured: boolean
   shiny: boolean
-  originMark?: OriginMarkId
-  nature?: NatureId
+  originMark?: string
+  nature?: string
   pokerus?: 'infected' | 'cured'
   level?: number
   dynamaxLevel?: number
-  teraType?: PokemonTypeId
+  teraType?: string
   ball?: string
-  item?: ItemId
+  item?: string
   language?: string
   evs: [number, number, number, number, number, number] | []
   ivs: [number, number, number, number, number, number] | []
-  moves: [MoveId, MoveId, MoveId, MoveId] | []
+  moves: [string, string, string, string] | []
   emblemMarks: string[]
 }
 
 // export interface LivingDexDocGameConfig {
-//   gameId: GameId
+//   gameId: string
 //   boxes: number
 //   boxCapacity: number
 // }

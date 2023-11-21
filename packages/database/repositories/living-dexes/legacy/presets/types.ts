@@ -1,10 +1,6 @@
-import { GameSetId } from '../../../game-sets/ids'
-import { GameId } from '../../../games/ids'
-import { PokemonId } from '../../../pokemon/ids'
-
 export type PresetDexPokemon =
   | {
-      pid: PokemonId
+      pid: string
       caught?: boolean
       shiny?: boolean
       shinyLocked?: boolean
@@ -24,11 +20,11 @@ export type PresetDex = {
   id: string
   name: string
   version: number
-  game?: GameId | undefined
-  gameSet: GameSetId
+  game?: string | undefined
+  gameSet: string
   description: string
   isHidden?: boolean
   boxes: PresetDexBox[]
 }
 
-export type PresetDexMap = Record<GameSetId, Record<string, PresetDex>>
+export type PresetDexMap = Record<string, Record<string, PresetDex>>

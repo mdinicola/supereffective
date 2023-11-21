@@ -1,7 +1,3 @@
-import { GameId } from '../games/ids'
-import { RegionId } from '../regions/ids'
-import { GameSetId } from './ids'
-
 export type LegacyGameSetSymbol =
   | 'caught'
   | 'shiny'
@@ -14,16 +10,16 @@ export type LegacyGameSetSymbol =
   | 'apex'
 
 export type LegacyGameSet = {
-  id: GameSetId
+  id: string
   name: string
   codename: null | string
   superset: string
   generation: number
   releaseDate: string
-  games: Record<GameId, string>
+  games: Record<string, string>
   platforms: string[]
   series: string
-  region: RegionId
+  region: string
   originMark: string
   pokedexes: string[]
   hasShinies: boolean
@@ -36,4 +32,4 @@ export type LegacyGameSet = {
   nationalDex?: null
 }
 
-export type LegacyGameSetDict = Record<GameSetId, LegacyGameSet>
+export type LegacyGameSetDict = Record<string, LegacyGameSet>

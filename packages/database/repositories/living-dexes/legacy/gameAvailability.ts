@@ -1,10 +1,8 @@
-import { GameSetId } from '../../game-sets/ids'
 import { getSupportedGameIds } from '../../games'
-import { GameId } from '../../games/ids'
 import { LoadedDexList } from './types'
 
-export function getUsedGameSets(userDexes: LoadedDexList): GameSetId[] {
-  const gameSets = new Set<GameSetId>()
+export function getUsedGameSets(userDexes: LoadedDexList): string[] {
+  const gameSets = new Set<string>()
   userDexes.forEach(dex => {
     if (dex.gameSetId && !gameSets.has(dex.gameSetId)) {
       gameSets.add(dex.gameSetId)
@@ -13,8 +11,8 @@ export function getUsedGameSets(userDexes: LoadedDexList): GameSetId[] {
   return Array.from(gameSets)
 }
 
-export function getUsedGames(userDexes: LoadedDexList): GameId[] {
-  const games = new Set<GameId>()
+export function getUsedGames(userDexes: LoadedDexList): string[] {
+  const games = new Set<string>()
   userDexes.forEach(dex => {
     if (dex.gameId && !games.has(dex.gameId)) {
       games.add(dex.gameId)
@@ -23,7 +21,7 @@ export function getUsedGames(userDexes: LoadedDexList): GameId[] {
   return Array.from(games)
 }
 
-export function countGameDexes(userDexes: LoadedDexList, gameId: GameId): number {
+export function countGameDexes(userDexes: LoadedDexList, gameId: string): number {
   const counter = {
     count: 0,
   }
@@ -35,19 +33,19 @@ export function countGameDexes(userDexes: LoadedDexList, gameId: GameId): number
   return counter.count
 }
 
-// export function getAvailableGameSets(userDexes: LoadedDexList): GameSetId[] {
+// export function getAvailableGameSets(userDexes: LoadedDexList): string[] {
 //   const usedGameSets = new Set(getUsedGameSets(userDexes))
 //   return getSupportedGameSetIds().filter(gameSetId => !usedGameSets.has(gameSetId))
 // }
 
-export function getAvailableGames(): GameId[] {
+export function getAvailableGames(): string[] {
   return getSupportedGameIds().map(gameId => gameId)
 }
 
-export function hasUsedGameSet(userDexes: LoadedDexList, gameSetId: GameSetId): boolean {
+export function hasUsedGameSet(userDexes: LoadedDexList, gameSetId: string): boolean {
   return getUsedGameSets(userDexes).includes(gameSetId)
 }
 
-export function hasUsedGame(userDexes: LoadedDexList, gameId: GameId): boolean {
+export function hasUsedGame(userDexes: LoadedDexList, gameId: string): boolean {
   return getUsedGames(userDexes).includes(gameId)
 }

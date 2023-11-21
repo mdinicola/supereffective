@@ -1,6 +1,4 @@
 import { getGameSetByGameId } from '../../../game-sets'
-import { GameSetId } from '../../../game-sets/ids'
-import { GameId } from '../../../games/ids'
 import { DexBox, LoadedDex, StorableDex } from '../types'
 import { convertPokemonListToNormalized } from './convertPokemonListToNormalized'
 
@@ -13,14 +11,14 @@ const defaultPresetVersion = 0
 export const convertStorableDexToLoadedDex = (doc: StorableDex): LoadedDex => {
   const boxes: Array<DexBox> = doc.boxes || []
 
-  let game: GameId = defaultGame
-  let gameSet: GameSetId = defaultGameSet
+  let game: string = defaultGame
+  let gameSet: string = defaultGameSet
   let preset = defaultPreset
   let presetVersion = defaultPresetVersion
 
   if (doc.game) {
     // legacy support
-    game = doc.game as GameId
+    game = doc.game as string
     if (game === 'home') {
       preset = 'grouped-region'
       gameSet = 'home'
@@ -32,12 +30,12 @@ export const convertStorableDexToLoadedDex = (doc: StorableDex): LoadedDex => {
     // uses new preset field
     if (docPreset.length === 3) {
       // uses beta preset field
-      ;[game, preset, presetVersion] = docPreset as [GameId, string, number]
+      ;[game, preset, presetVersion] = docPreset as [string, string, number]
       gameSet = getGameSetByGameId(game).id
     }
     if (docPreset.length === 4) {
       // uses final preset field
-      ;[gameSet, game, preset, presetVersion] = docPreset as [GameSetId, GameId, string, number]
+      ;[gameSet, game, preset, presetVersion] = docPreset as [string, string, string, number]
     }
   }
 

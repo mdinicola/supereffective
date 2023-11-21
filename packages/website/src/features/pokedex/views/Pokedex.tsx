@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 import { getGameSetById } from '@pkg/database/repositories/game-sets'
-import { GameSetId } from '@pkg/database/repositories/game-sets/ids'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@pkg/database/repositories/pokemon/types'
 import { GameLabel, TypeIcon } from '@pkg/icons'
 
@@ -95,7 +94,7 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type1)}
               data-flow="bottom"
             >
-              <TypeIcon typeId={pokemon.type1} size="sm" colored filled />
+              <TypeIcon typeId={pokemon.type1 as any} size="sm" colored filled />
             </span>
           )}
           {pokemon.type2 && (
@@ -105,14 +104,14 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type2)}
               data-flow="bottom"
             >
-              <TypeIcon typeId={pokemon.type2} size="sm" colored filled />
+              <TypeIcon typeId={pokemon.type2 as any} size="sm" colored filled />
             </span>
           )}
         </div>
         <section>
           <div className={css.title}>Obtainable In</div>
           <div className={css.gameIcons}>
-            {pokemon.location.obtainableIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.obtainableIn.map((gameSetId: string) => (
               <div
                 key={gameSetId}
                 className={css.gameset}
@@ -122,7 +121,7 @@ export const PokemonInfoPanel = ({
                 <GameLabel gameId={gameSetId} colored rounded size="sm" />
               </div>
             ))}
-            {pokemon.location.eventOnlyIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.eventOnlyIn.map((gameSetId: string) => (
               <div
                 key={gameSetId}
                 className={css.gameset}
@@ -141,7 +140,7 @@ export const PokemonInfoPanel = ({
         <section>
           <div className={css.title}>Storable In</div>
           <div className={css.gameIcons}>
-            {pokemon.location.storableIn.map((gameSetId: GameSetId) => (
+            {pokemon.location.storableIn.map((gameSetId: string) => (
               <div
                 key={gameSetId}
                 className={css.gameset}

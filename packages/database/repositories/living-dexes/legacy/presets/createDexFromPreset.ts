@@ -1,5 +1,4 @@
 import { getGameById } from '../../../games'
-import { GameId } from '../../../games/ids'
 import { DEX_SCHEMA_VERSION, DexBox, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'
 import { createDexPokemonFromPid } from './createDexPokemonFromPid'
@@ -7,7 +6,7 @@ import { normalizePresetBoxes } from './normalizePresetBoxes'
 import { PresetDex } from './types'
 
 export const createDexFromPreset = (
-  gameId: GameId,
+  gameId: string,
   preset: PresetDex,
   userId: string | undefined
 ): LoadedDex => {

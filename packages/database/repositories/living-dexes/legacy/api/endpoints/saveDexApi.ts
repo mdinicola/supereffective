@@ -20,7 +20,7 @@ function sanitizeDex(dex: LoadedDex): LoadedDex {
     const sanitizedPokemon = []
     for (const j in box.pokemon) {
       const pkm = box.pokemon[j]
-      if (pkm !== null && !validPokemonIds.includes(pkm.pid)) {
+      if (pkm !== null && !validPokemonIds.includes(pkm.pid as any)) {
         continue
       }
       sanitizedPokemon.push(pkm)

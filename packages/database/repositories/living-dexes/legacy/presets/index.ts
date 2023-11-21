@@ -1,25 +1,25 @@
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
-import presetsJson from '../../../../data/legacy/box-presets.json'
 import { getGameSetByGameId } from '../../../game-sets'
-import { GameSetId } from '../../../game-sets/ids'
-import { GameId } from '../../../games/ids'
+import { fetchData } from '../../../utils'
 import { PresetDex, PresetDexMap } from './types'
+
+const presetsJson: PresetDexMap = await fetchData('/legacy-boxpresets.min.json')
 
 export const getPresets = createMemoizedCallback(() => {
   return presetsJson as PresetDexMap
 })
 
-export function getPresetsForGame(gameId: GameId): { [presetId: string]: PresetDex } {
+export function getPresetsForGame(gameId: string): { [presetId: string]: PresetDex } {
   return getPresets()[getGameSetByGameId(gameId).id] || {}
 }
 
-export function getPresetByIdForGame(gameId: GameId, presetId: string): PresetDex | undefined {
+export function getPresetByIdForGame(gameId: string, presetId: string): PresetDex | undefined {
   return getPresetByIdForGameSet(getGameSetByGameId(gameId).id, presetId)
 }
 
 export function getPresetByIdForGameSet(
-  gameSetId: GameSetId,
+  gameSetId: string,
   presetId: string
 ): PresetDex | undefined {
   const presets = getPresets()[gameSetId]
