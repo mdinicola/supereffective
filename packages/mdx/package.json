@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.0",
-    "@types/node": "^20.9.2",
-    "@types/react": "^18.2.37",
+    "@types/node": "^20.9.3",
+    "@types/react": "^18.2.38",
     "chokidar": "^3.5.3",
     "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
