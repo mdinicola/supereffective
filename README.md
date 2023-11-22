@@ -1,6 +1,6 @@
 # SuperEffective
 
-[![Check Code Quality](https://github.com/supeffective/supereffective/actions/workflows/quality.yml/badge.svg)](https://github.com/supeffective/supereffective/actions/workflows/quality.yml)
+[![Check Code Quality](https://github.com/supeffective/website-2022/actions/workflows/quality.yml/badge.svg)](https://github.com/supeffective/website-2022/actions/workflows/quality.yml)
 [![wakatime](https://wakatime.com/badge/user/f2eacdee-569c-4e49-b11f-81a764fb575e/project/838d78e4-9190-4513-9c76-0e7672feab70.svg)](https://wakatime.com/badge/user/f2eacdee-569c-4e49-b11f-81a764fb575e/project/838d78e4-9190-4513-9c76-0e7672feab70)
 
 Source code for supereffective.gg 's website.
