@@ -45,15 +45,9 @@ export default function MainFooter() {
               </SiteLink>
             </li>
             <li>
-              <ExternLink href={config.links.github_site} title={''}>
-                <i className="icon-embed2" title="Website Repository" />
-                <span>Website Repository</span>
-              </ExternLink>
-            </li>
-            <li>
-              <ExternLink href={config.links.github_dataset} title={''}>
-                <i className="icon-embed2" title="Assets Repository" />
-                <span>Assets Repository</span>
+              <ExternLink href={config.links.github_org} title={''}>
+                <i className="icon-embed2" title="Source Code" />
+                <span>Source Code</span>
               </ExternLink>
             </li>
             <li>
