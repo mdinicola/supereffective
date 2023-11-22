@@ -1,6 +1,6 @@
 # SuperEffective
 
-[![Check Code Quality](https://github.com/supeffective/website-2022/actions/workflows/quality.yml/badge.svg)](https://github.com/supeffective/website-2022/actions/workflows/quality.yml)
+[![Check Code Quality](https://github.com/supeffective/website/actions/workflows/quality.yml/badge.svg)](https://github.com/supeffective/website/actions/workflows/quality.yml)
 [![wakatime](https://wakatime.com/badge/user/f2eacdee-569c-4e49-b11f-81a764fb575e/project/838d78e4-9190-4513-9c76-0e7672feab70.svg)](https://wakatime.com/badge/user/f2eacdee-569c-4e49-b11f-81a764fb575e/project/838d78e4-9190-4513-9c76-0e7672feab70)
 
 Source code for supereffective.gg 's website.
@@ -107,7 +107,7 @@ For other scripts, please check the `package.json` files.
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
 
 - [Dataset repository](https://github.com/supeffective/dataset)
-- [Issue Reports and Tracking](https://github.com/supeffective/website-2022/issues)
+- [Issue Reports and Tracking](https://github.com/supeffective/website/issues)
 - [Project Roadmap and Task Board](https://github.com/users/itsjavi/projects/9)
 
 For other feedback that is not related to issues, please use our [Discord server](https://discord.gg/3fRXQFtrkN)
