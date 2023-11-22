@@ -107,8 +107,8 @@ importers:
         version: 3.22.4
     devDependencies:
       tsx:
-        specifier: ^4.2.0
-        version: 4.2.0
+        specifier: ^4.3.0
+        version: 4.3.0
 
   packages/config:
     dependencies:
@@ -146,8 +146,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0
       tsx:
-        specifier: ^4.2.0
-        version: 4.2.0
+        specifier: ^4.3.0
+        version: 4.3.0
       typescript:
         specifier: ^5.3.2
         version: 5.3.2
@@ -158,11 +158,11 @@ importers:
   packages/icons:
     dependencies:
       '@supeffective/dataset':
-        specifier: ^0.8.1
-        version: 0.8.1
+        specifier: ^0.8.3
+        version: 0.8.3
       '@supeffective/icons':
-        specifier: ^0.8.1
-        version: 0.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.5
+        version: 0.8.5(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -285,8 +285,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       tsx:
-        specifier: ^4.2.0
-        version: 4.2.0
+        specifier: ^4.3.0
+        version: 4.3.0
       typescript:
         specifier: ^5.3.2
         version: 5.3.2
@@ -1699,7 +1699,7 @@ packages:
       slash: 3.0.0
       string-length: 4.0.2
       strip-ansi: 6.0.1
-      v8-to-istanbul: 9.1.3
+      v8-to-istanbul: 9.2.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2373,14 +2373,16 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
-  /@supeffective/dataset@0.8.1:
-    resolution: {integrity: sha512-AbgrK3cAVRKMJBm8wDPo232lO7EkFTuPIWuHYcGtanrsINqO1wlRO4ecbc9bjmV7e9SDklpY/0OU+pKvYHEfDw==}
+  /@supeffective/dataset@0.8.3:
+    resolution: {integrity: sha512-fSZxEbrhhMlUYrn4xiySIYUujz5Kw4dVmTxxB77PM6gl9X6ZnqKvR4zuc+pHPTN24UurAOY9bSgQqgSUKYrvoA==}
+    requiresBuild: true
     dependencies:
       zod: 3.22.4
     dev: false
 
-  /@supeffective/icons@0.8.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-jySlJIDIw85sZ39tjT4ePXOIv07Kh/uEJ8xqMGyJUemTFwnk3ofMil0hjyCsXP3862SZLSjDcvZ4oh7edaOsdQ==}
+  /@supeffective/icons@0.8.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Qq3zrOKXlDEnJYrcAumDzKfdc4Xay8iG7IO43Zb2Z+uV4P//PJ/eJiy94OvtuUiT6HV+u0s6tHkHidhX4Y/g2w==}
+    requiresBuild: true
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -3321,6 +3323,7 @@ packages:
 
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
+    dev: true
 
   /buffer@6.0.3:
     resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
@@ -6085,8 +6088,8 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
-  /lru-cache@10.0.3:
-    resolution: {integrity: sha512-B7gr+F6MkqB3uzINHXNctGieGsRTMwIBgxkp0yq/5BwcuDzD4A8wQpHQW6vDAm1uKSLQghmRdD9sKqf2vJ1cEg==}
+  /lru-cache@10.1.0:
+    resolution: {integrity: sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==}
     engines: {node: 14 || >=16.14}
     dev: false
 
@@ -7306,7 +7309,7 @@ packages:
     resolution: {integrity: sha512-MkhCqzzBEpPvxxQ71Md0b1Kk51W01lrYvlMzSUaIzNsODdd7mqhiimSZlr+VegAz5Z6Vzt9Xg2ttE//XBhH3EQ==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
-      lru-cache: 10.0.3
+      lru-cache: 10.1.0
       minipass: 7.0.4
     dev: false
 
@@ -8127,15 +8130,10 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /source-map-support@0.5.21:
-    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
-    dependencies:
-      buffer-from: 1.1.2
-      source-map: 0.6.1
-
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
@@ -8543,14 +8541,13 @@ packages:
       - ts-node
     dev: true
 
-  /tsx@4.2.0:
-    resolution: {integrity: sha512-hvAXAz4KUYNyjXOjJJgyjT7YOGFUNLC8jnODI6Omc/wGKaZ7z0FvW5d2haqg1GLfX49H3nZOpLYRlHMYGI8Wbw==}
+  /tsx@4.3.0:
+    resolution: {integrity: sha512-zalfbBdr7tvYok5sSbnsv4uL+DhT1wRZwbWwuOXjhH8YtJxN2bpl6lpXMxuPThMAKzZ2qgrhuf5ckq/uSsm3CA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       esbuild: 0.18.20
       get-tsconfig: 4.7.2
-      source-map-support: 0.5.21
     optionalDependencies:
       fsevents: 2.3.3
 
@@ -8869,8 +8866,8 @@ packages:
       sade: 1.8.1
     dev: true
 
-  /v8-to-istanbul@9.1.3:
-    resolution: {integrity: sha512-9lDD+EVI2fjFsMWXc6dy5JJzBsVTcQ2fVkfBvncZ6xJWG9wtBhOldG+mHkSL0+V1K/xgZz0JDO5UT5hFwHUghg==}
+  /v8-to-istanbul@9.2.0:
+    resolution: {integrity: sha512-/EH/sDgxU2eGxajKdwLCDmQ4FWq+kpi3uCmBGpw1xJtnAxEjlD8j8PEiGWpCIMIs3ciNAgH0d3TTJiUkYzyZjA==}
     engines: {node: '>=10.12.0'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.20
