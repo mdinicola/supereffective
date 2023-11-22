@@ -107,7 +107,7 @@ For other scripts, please check the `package.json` files.
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
 
 - [Dataset repository](https://github.com/supeffective/dataset)
-- [Issue Reports and Tracking](https://github.com/supereffective/supereffective/issues)
+- [Issue Reports and Tracking](https://github.com/supeffective/website-2022/issues)
 - [Project Roadmap and Task Board](https://github.com/users/itsjavi/projects/9)
 
 For other feedback that is not related to issues, please use our [Discord server](https://discord.gg/3fRXQFtrkN)

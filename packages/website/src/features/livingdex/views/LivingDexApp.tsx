@@ -1,3 +1,7 @@
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import ReactModal from 'react-modal'
+import { useRouter } from 'next/compat/router'
+import { NextRouter } from 'next/router'
 import {
   BracesIcon,
   ListTodoIcon,
@@ -6,10 +10,6 @@ import {
   ToggleRightIcon,
   WandIcon,
 } from 'lucide-react'
-import { useRouter } from 'next/compat/router'
-import { NextRouter } from 'next/router'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import ReactModal from 'react-modal'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
 import { DeserializedLivingDexDoc } from '@pkg/database/lib/dex-parser'
