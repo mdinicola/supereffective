@@ -28,7 +28,7 @@ const config = {
     github_org: 'https://github.com/supeffective',
     github_site: 'https://github.com/supeffective/website',
     issue_report: 'https://github.com/supeffective/website/issues',
-    roadmap: 'https://github.com/users/itsjavi/projects/9',
+    roadmap: 'https://github.com/orgs/supeffective/projects',
     discord: 'https://discord.gg/3fRXQFtrkN',
     paypal_donate: 'https://www.paypal.me/itsjavidotcom/10',
     legacy_account_recovery_form: 'https://forms.gle/HxnV3qCs1UWJn7Tc6',

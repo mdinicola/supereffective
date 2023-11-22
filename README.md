@@ -108,7 +108,7 @@ Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUT
 
 - [Dataset repository](https://github.com/supeffective/dataset)
 - [Issue Reports and Tracking](https://github.com/supeffective/website/issues)
-- [Project Roadmap and Task Board](https://github.com/users/itsjavi/projects/9)
+- [Project Roadmap and Task Board](https://github.com/orgs/supeffective/projects)
 
 For other feedback that is not related to issues, please use our [Discord server](https://discord.gg/3fRXQFtrkN)
 
