@@ -2,7 +2,7 @@ const { generateIdsTsFileFromData } = require('./codegen.cjs')
 const path = require('node:path')
 const srcDir = path.resolve(path.join(__dirname, '..', '..', 'repositories'))
 
-const BASE_DATA_URL = 'https://itsjavi.com/supereffective-sdk/data'
+const BASE_DATA_URL = 'https://cdn.supeffective.com/dataset'
 
 async function fetchDataFile(filename) {
   return fetch(`${BASE_DATA_URL}/${filename}`).then(res => res.json())

@@ -31,7 +31,7 @@ export const siteLinks = {
       external: false,
     },
     {
-      url: 'https://itsjavi.com/koffing/',
+      url: 'https://cdn.supeffective.com/koffing/',
       content: 'Showdown Team Parser (Beta)',
       external: true,
     },

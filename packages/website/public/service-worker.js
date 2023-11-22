@@ -17,6 +17,7 @@
 const HOSTNAME_WHITELIST = [
   // self.location.hostname, // do not cache app files
   'itsjavi.com',
+  'cdn.supeffective.com',
   'fonts.gstatic.com',
   'fonts.googleapis.com',
 ]

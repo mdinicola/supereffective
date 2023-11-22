@@ -5,7 +5,7 @@
 
 Source code for supereffective.gg 's website.
 
-Data can be found in [supereffective-sdk](https://github.com/itsjavi/supereffective-sdk).
+Data can be found in https://github.com/supeffective/dataset
 
 ## Software Stack
 
@@ -20,7 +20,7 @@ We use the following technologies, services and tools:
 - MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
 - Next Auth, Prisma and Neon.tech PostgreSQL for authentication and dex data storage (after migrating from Firebase)
 - Vercel (Pro tier) for hosting and deployments
-- GitHub for hosting [static data](https://github.com/itsjavi/supereffective-sdk)
+- GitHub for hosting static JSON dataset
 - CloudFlare for caching and DNS
 - Docker, PostgreSQL and Maildev for local development environment
 - Other tools: ESLint, Prettier, Husky, etc.
@@ -60,7 +60,7 @@ Website is a NextJS application with the following structure:
 
 - auth: Authentication abstraction layer
 - config: Project confing and env vars wrapper
-- database: Database abstraction layer. It also abstracts the Pokemon JSON data from supereffective-sdk.
+- database: Database abstraction layer. It also abstracts the Pokemon JSON static dataset.
 - mailer: Transactional mailing service abstraction layer
 - mdx: MDX abstraction layer (loader and react components).
 - patreon: All necessary code to connect to Patreon API and get infos
@@ -91,8 +91,8 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
 
 ## Maintenance scripts
 
+- `pnpm codegen`: generates all necessary (including CSS) to build the website.
 - `pnpm build`: builds the website.
-- `pnpm codegen`: pulls the data from `itsjavi/supereffective-sdk` repo, and generates all necessary code (including CSS).
 
 For other scripts, please check the `package.json` files.
 
@@ -106,7 +106,7 @@ For other scripts, please check the `package.json` files.
 
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a PR.
 
-- [Dataset repository](https://github.com/itsjavi/supereffective-sdk)
+- [Dataset repository](https://github.com/supeffective/dataset)
 - [Issue Reports and Tracking](https://github.com/itsjavi/supereffective/issues)
 - [Project Roadmap and Task Board](https://github.com/users/itsjavi/projects/9)
 

@@ -1,5 +1,5 @@
 export const PKM_LOCAL_ASSETS_URL = 'http://localhost:3999/assets'
-export const PKM_REMOTE_ASSETS_URL = 'https://itsjavi.com/supereffective-assets/assets'
+export const PKM_REMOTE_ASSETS_URL = 'https://cdn.supeffective.com/assets'
 
 const envName = process.env.NODE_ENV ?? 'development'
 const envAssetsUrl = process.env.PKM_ASSETS_URL ?? undefined

@@ -1,4 +1,4 @@
-export const BASE_DATA_URL = 'https://itsjavi.com/supereffective-sdk/data'
+export const BASE_DATA_URL = 'https://cdn.supeffective.com/dataset'
 export const DEFAULT_FETCH_TTL = 1000 * 60 * 15 // 15 minutes
 
 type FetchInit = RequestInit & {

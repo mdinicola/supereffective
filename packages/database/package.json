@@ -4,8 +4,8 @@
   "private": true,
   "description": "Database abstraction layer (DBAL) and ORM for supereffective.gg",
   "scripts": {
-    "build": "pnpm codegen && pnpm codegen:format",
-    "codegen": "rm -rf ./data && pnpm codegen:data && pnpm codegen:prisma && pnpm codegen:ids",
+    "build": "pnpm codegen",
+    "codegen": "rm -rf ./data && pnpm codegen:data && pnpm codegen:prisma && pnpm codegen:ids && pnpm codegen:format",
     "codegen:data": "pnpm data:update",
     "codegen:format": "cd ../../ && pnpm prettier  --write \"packages/database/**/*.{cjs,mjs,js,ts,tsx,json,yml,yaml,css,scss,md,mdx}\" && cd -",
     "codegen:ids": "node lib/codegen/generate-ids.cjs",
