@@ -158,11 +158,11 @@ importers:
   packages/icons:
     dependencies:
       '@supeffective/dataset':
-        specifier: ^0.8.3
-        version: 0.8.3
+        specifier: ^0.8.4
+        version: 0.8.4
       '@supeffective/icons':
-        specifier: ^0.8.5
-        version: 0.8.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.6
+        version: 0.8.6(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2373,16 +2373,14 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
-  /@supeffective/dataset@0.8.3:
-    resolution: {integrity: sha512-fSZxEbrhhMlUYrn4xiySIYUujz5Kw4dVmTxxB77PM6gl9X6ZnqKvR4zuc+pHPTN24UurAOY9bSgQqgSUKYrvoA==}
-    requiresBuild: true
+  /@supeffective/dataset@0.8.4:
+    resolution: {integrity: sha512-41iOmU3Ev5jY2IN9DkCpY5CL8TIx37B3iAkp1tEQvqDDHscvJwbppPd5bXtpbS0wUBHac6I6DKOEF8tKM+OJcw==}
     dependencies:
       zod: 3.22.4
     dev: false
 
-  /@supeffective/icons@0.8.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Qq3zrOKXlDEnJYrcAumDzKfdc4Xay8iG7IO43Zb2Z+uV4P//PJ/eJiy94OvtuUiT6HV+u0s6tHkHidhX4Y/g2w==}
-    requiresBuild: true
+  /@supeffective/icons@0.8.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-7L12VbJPxp4Ds1nAoTwmEIgRIiIYGo2LaqJIL2nvparvKgCoNPinloKZfoGVfX71IScYYP/Kao8JTbJ9HVKZ0A==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -3311,7 +3309,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001564
-      electron-to-chromium: 1.4.590
+      electron-to-chromium: 1.4.592
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
 
@@ -3850,8 +3848,8 @@ packages:
       semver: 7.5.4
     dev: false
 
-  /electron-to-chromium@1.4.590:
-    resolution: {integrity: sha512-hohItzsQcG7/FBsviCYMtQwUSWvVF7NVqPOnJCErWsAshsP/CR2LAXdmq276RbESNdhxiAq5/vRo1g2pxGXVww==}
+  /electron-to-chromium@1.4.592:
+    resolution: {integrity: sha512-D3NOkROIlF+d5ixnz7pAf3Lu/AuWpd6AYgI9O67GQXMXTcCP1gJQRotOq35eQy5Sb4hez33XH1YdTtILA7Udww==}
 
   /emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
