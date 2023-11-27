@@ -6,7 +6,7 @@ env:
 
 on:
   schedule:
-    - cron: '0 3 * * *' # every day at 3am
+    - cron: '0 3,11,19 * * *' # every day at 3am
   workflow_dispatch:
 
 jobs:
