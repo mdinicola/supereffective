@@ -1,10 +1,9 @@
 const path = require('node:path')
-const withMDXFastRefresh = require('@pkg/mdx/lib/next-plugin/withMDXPageRefresh')
 const { withAxiom } = require('next-axiom')
 const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
 
 /** @type {import('next').NextConfig} */
-let baseConfig = {
+const baseConfig = {
   reactStrictMode: true,
   transpilePackages: ['@pkg/*'],
   images: {
@@ -13,11 +12,7 @@ let baseConfig = {
   },
 }
 
-const withPlugins = withAxiom(
-  withMDXFastRefresh(baseConfig, {
-    dir: path.resolve(path.join(__dirname, '..', '..', 'cms')),
-  })
-)
+const withPlugins = withAxiom(baseConfig)
 
 const withPrisma = {
   ...withPlugins,

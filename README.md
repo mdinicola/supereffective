@@ -7,6 +7,16 @@ Source code for supereffective.gg 's website.
 
 Data can be found in https://github.com/supeffective/dataset
 
+## Quick Start
+
+1. Clone the repository
+2. Install dependencies: `pnpm install`
+3. Generate necessary data and code locally: `pnpm codegen`
+4. Configure your PostgreSQL DB connection strings.
+   You can use the `db` service in `docker-compose.yml` to spawn a local DB using Docker,
+   or or use a provider like Neon.tech,
+   then configure the database env vars in:
+
 ## Software Stack
 
 We use the following technologies, services and tools:
@@ -81,13 +91,14 @@ You will need Docker (for the local DB and mail server), Node v18 LTS and pnpm v
    You can use the `db` service in `docker-compose.yml` to spawn a local DB using Docker,
    or or use a provider like Neon.tech,
    then configure the database env vars in:
-
-- packages/database/.env
-- packages/website/.env.local
-
-1. Run the website in development mode: run any of: `pnpm dev` / `make`.
-2. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
+   - packages/database/.env
+   - packages/website/.env.local
+5. Build the dist files of the different monorepo packages: `pnpm build`
+6. Run the website in development mode: run any of: `pnpm dev` / `make`.
+7. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
    - Dev Mail server: http://localhost:1080
+
+Or all in one command: `pnpm codegen && pnpm build && pnpm db:migrate && pnpm dev && pnpm open`
 
 ## Maintenance scripts
 
