@@ -4,9 +4,20 @@ import { hasTooManyValidVerificationTokens } from '@pkg/database/repositories/us
 import { sendMail } from '@pkg/mailer/lib/sendMail'
 import { EmailMessage } from '@pkg/mailer/lib/types'
 
+import pageConfig from '../../lib/pageConfig'
 import { renderHtml, renderText } from '../templates/magic-link.tpl'
 
 const maxTokens = 5
+
+const buildLoginMiddlePageUrl = (originUrl: string): string => {
+  const urlObj = new URL(originUrl)
+  const nextUrlObj = new URL(originUrl)
+  nextUrlObj.pathname = pageConfig.signInVerification
+  nextUrlObj.search = ''
+  nextUrlObj.searchParams.set(pageConfig.signInVerificationParam, urlObj.toString())
+
+  return nextUrlObj.toString()
+}
 
 const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
   const emailAlreadySent = await hasTooManyValidVerificationTokens(params.identifier, maxTokens)
@@ -17,17 +28,16 @@ const sendMagicLinkEmail = async (params: SendVerificationRequestParams) => {
     )
     return
   }
-  const { identifier, url, token } = params
+  const { identifier, url: loginUrl, token } = params
+
+  const middlePageUrl = buildLoginMiddlePageUrl(loginUrl)
   const message: EmailMessage = {
     to: identifier,
     // from: 'noreply@supereffective.gg',
     subject: `Sign in to SuperEffective.gg`,
     body: {
-      text: renderText(url, token),
-      html: renderHtml({
-        url: url,
-        token: token,
-      }),
+      text: renderText(middlePageUrl, token),
+      html: renderHtml(middlePageUrl, token),
     },
   }
 

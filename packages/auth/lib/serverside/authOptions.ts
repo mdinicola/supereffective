@@ -8,6 +8,7 @@ import { getPrismaClient } from '@pkg/database/prisma/getPrismaClient'
 
 import sendMagicLinkEmail from '../../mailing/actions/sendMagicLinkEmail'
 import { generateRandomToken } from './generateRandomToken'
+import pageConfig from '../pageConfig'
 
 const authOptions: AuthOptions = {
   session: {
@@ -32,13 +33,7 @@ const authOptions: AuthOptions = {
       return baseUrl
     },
   },
-  pages: {
-    signIn: '/login',
-    //signOut: '/auth/signout',
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/signin-sent', // (used for check email message)
-    //newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  },
+  pages: pageConfig.authJs,
   adapter: PrismaAdapter(getPrismaClient() as any),
   providers: [
     EmailProvider({

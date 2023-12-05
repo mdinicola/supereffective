@@ -46,13 +46,15 @@ export default function Page() {
               }}
             >
               Once you click on Continue, you will be authenticated on our website, and the Sign In
-              link sent to your email will no longer be valid, as it can only be used once.
+              link sent to your email will no longer be valid (it can only be used once).
             </p>
           </div>
         </article>
       </div>
     )
   }
+
+  console.error('Invalid callback url', { nextUrl, decodedNextUrl })
 
   return <RedirectArea routeUri={Routes.AuthError + '?error=InvalidCallbackUrl'} />
 }
