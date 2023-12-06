@@ -7,8 +7,8 @@ import { envVars } from '@pkg/config/default/env'
 import { getPrismaClient } from '@pkg/database/prisma/getPrismaClient'
 
 import sendMagicLinkEmail from '../../mailing/actions/sendMagicLinkEmail'
-import { generateRandomToken } from './generateRandomToken'
 import pageConfig from '../pageConfig'
+import { generateRandomToken } from './generateRandomToken'
 
 const authOptions: AuthOptions = {
   session: {
@@ -52,8 +52,17 @@ const authOptions: AuthOptions = {
       },
     }),
     PatreonProvider({
-      clientId: envVars.PATREON_CLIENT_ID,
-      clientSecret: envVars.PATREON_CLIENT_SECRET,
+      clientId: envVars.PATREON_APP_CLIENT_ID,
+      clientSecret: envVars.PATREON_APP_CLIENT_SECRET,
+      token: 'https://www.patreon.com/api/oauth2/token',
+      userinfo: 'https://www.patreon.com/api/oauth2/api/current_user',
+      authorization: {
+        url: 'https://www.patreon.com/oauth2/authorize?response_type=code',
+        params: {
+          scope: 'identity identity[email] identity.memberships',
+          grant_type: 'authorization_code',
+        },
+      },
     }),
   ],
 }

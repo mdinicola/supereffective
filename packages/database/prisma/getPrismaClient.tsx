@@ -17,9 +17,7 @@ const detectServerSide = () => {
 export const getPrismaClient = createMemoizedCallback((): PrismaClient => {
   detectServerSide()
 
-  const logLevels: Prisma.LogLevel[] = isDevelopmentEnv()
-    ? ['query', 'warn', 'error']
-    : ['warn', 'error']
+  const logLevels: Prisma.LogLevel[] = isDevelopmentEnv() ? ['warn', 'error'] : ['warn', 'error']
 
   const prisma =
     globalForPrisma.prisma ??

@@ -5,11 +5,12 @@ import { useSignOut } from '@pkg/auth/lib/hooks/useSignOut'
 import { hasPatreonFeaturesEnabled } from '@pkg/config/default/featureFlags'
 import { Membership } from '@pkg/database/lib/types'
 import { createMembershipPlaceholder } from '@pkg/database/repositories/users/memberships'
+import { patreonTiers } from '@pkg/patreon/lib/config'
 
 import { UserRestrictedArea } from '#/layouts/UserRestrictedArea'
-import Button, { PatreonButton, PatreonUnlinkButton } from '#/primitives/legacy/Button/Button'
+import Button from '#/primitives/legacy/Button/Button'
 
-import { PATREON_TIERS_BY_ID } from '../../../../../patreon/lib/types/campaign'
+import { PatreonButton, PatreonUnlinkButton } from '../components/PatreonButtons'
 
 export function ProfileView({
   membership,
@@ -41,7 +42,7 @@ export function ProfileView({
         <p>
           <b>Patreon Membership: </b>
           <code style={{ color: 'var(--color-pink-2)' }}>
-            {PATREON_TIERS_BY_ID[_membership.currentTier].name}
+            {patreonTiers[_membership.currentTier].name}
           </code>
         </p>
         <p>

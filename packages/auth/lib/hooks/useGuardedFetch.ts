@@ -5,7 +5,7 @@ import { useSession } from './useSession'
 export function useGuardedFetch<T = unknown>(
   url?: string,
   options?: RequestInit,
-  useCache = true,
+  useCache = true
 ): FetchState<T | undefined> {
   const user = useSession()
   const firewall = () => {

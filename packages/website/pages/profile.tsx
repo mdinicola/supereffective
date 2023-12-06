@@ -39,6 +39,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const membership = await getActivePatreonMembershipByUserId(session.currentUser.uid)
 
+  // console.log('membership', {membership, userId: session.currentUser.uid})
+
   return {
     props: {
       membership: membership ? serializeObject(membership) : null,

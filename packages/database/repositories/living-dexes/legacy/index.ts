@@ -1,6 +1,6 @@
+import { PATREON_NO_TIER } from '@pkg/patreon/lib/config'
 import createMemoizedCallback from '@pkg/utils/lib/caching/createMemoizedCallback'
 
-import { PATREON_NO_TIER } from '../../../../patreon/lib/types/campaign'
 import { dexToLoadedDex, loadedDexToDex, sanitizeDate } from '../../../lib/dex-parser/support'
 import { getPrismaClient, PrismaTypes } from '../../../prisma/getPrismaClient'
 import { isShinyLocked } from '../../pokemon'
@@ -89,13 +89,14 @@ export const getLegacyLivingDexRepository = createMemoizedCallback((): LivingDex
     getById,
     getLimitsForUser: async (userUid: string): Promise<LivingDexUserLimits> => {
       const membership = await getActivePatreonMembershipByUserId(userUid)
-      if (!membership) {
+      if (membership) {
         return {
-          maxDexes: PATREON_NO_TIER.rewards.maxDexes,
+          maxDexes: membership.rewardMaxDexes,
         }
       }
+
       return {
-        maxDexes: membership.rewardMaxDexes,
+        maxDexes: PATREON_NO_TIER.perks.dexLimit,
       }
     },
     getResolvedLimitsForUser: async (userUid: string): Promise<LivingDexResolvedUserLimits> => {

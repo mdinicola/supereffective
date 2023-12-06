@@ -23,11 +23,13 @@ const serverVars = z.object({
   DIRECT_DATABASE_URL: z.string().url(),
   SHADOW_DATABASE_URL: z.string().url(),
   // patreon
-  PATREON_CLIENT_ID: z.string(),
-  PATREON_CLIENT_SECRET: z.string(),
-  PATREON_CREATOR_ACCESS_TOKEN: z.string(),
-  PATREON_CREATOR_REFRESH_TOKEN: z.string(),
-  PATREON_WEBHOOK_SECRET: z.string(),
+  PATREON_APP_CLIENT_ID: z.string(),
+  PATREON_APP_CLIENT_SECRET: z.string(),
+  // PATREON_CLIENT_ID: z.string(),
+  // PATREON_CLIENT_SECRET: z.string(),
+  // PATREON_CREATOR_ACCESS_TOKEN: z.string(),
+  // PATREON_CREATOR_REFRESH_TOKEN: z.string(),
+  // PATREON_WEBHOOK_SECRET: z.string(),
 })
 
 const clientVars = z.object({})
@@ -58,11 +60,8 @@ const initialEnvVars: InitialProjectEnvVars = {
   DIRECT_DATABASE_URL: process.env.DIRECT_DATABASE_URL,
   SHADOW_DATABASE_URL: process.env.SHADOW_DATABASE_URL,
   // patreon
-  PATREON_CLIENT_ID: process.env.PATREON_CLIENT_ID,
-  PATREON_CLIENT_SECRET: process.env.PATREON_CLIENT_SECRET,
-  PATREON_CREATOR_ACCESS_TOKEN: process.env.PATREON_CREATOR_ACCESS_TOKEN,
-  PATREON_CREATOR_REFRESH_TOKEN: process.env.PATREON_CREATOR_REFRESH_TOKEN,
-  PATREON_WEBHOOK_SECRET: process.env.PATREON_WEBHOOK_SECRET,
+  PATREON_APP_CLIENT_ID: process.env.PATREON_APP_CLIENT_ID,
+  PATREON_APP_CLIENT_SECRET: process.env.PATREON_APP_CLIENT_SECRET,
 }
 
 export const envVars = parseEnvVars<ProjectEnvVars>(initialEnvVars, {
