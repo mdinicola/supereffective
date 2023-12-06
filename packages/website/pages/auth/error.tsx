@@ -19,6 +19,13 @@ export default function Page() {
       errorMessage =
         'Cannot send the Sign In link at this time due to an internal error. Please try again later.'
       break
+    case 'oauthaccountnotlinked':
+      errorMessage = 'The OAuth account might be already linked to another user'
+      break
+    case 'emailsignin':
+      errorMessage =
+        'Cannot send the Sign In link at this time due to an internal error. Please try again later.'
+      break
     default:
       errorMessage = <>Unexpected sign up error{error ? <i>{`: ${error}`}</i> : ''}</>
   }
