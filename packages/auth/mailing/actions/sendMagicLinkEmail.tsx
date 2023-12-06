@@ -3,6 +3,7 @@ import { SendVerificationRequestParams } from 'next-auth/providers'
 import { hasTooManyValidVerificationTokens } from '@pkg/database/repositories/users/getUser'
 import { sendMail } from '@pkg/mailer/lib/sendMail'
 import { EmailMessage } from '@pkg/mailer/lib/types'
+import { base64Encode } from '@pkg/utils/lib/serialization/base64'
 
 import pageConfig from '../../lib/pageConfig'
 import { renderHtml, renderText } from '../templates/magic-link.tpl'
@@ -10,11 +11,10 @@ import { renderHtml, renderText } from '../templates/magic-link.tpl'
 const maxTokens = 5
 
 const buildLoginMiddlePageUrl = (originUrl: string): string => {
-  const urlObj = new URL(originUrl)
   const nextUrlObj = new URL(originUrl)
   nextUrlObj.pathname = pageConfig.signInVerification
   nextUrlObj.search = ''
-  nextUrlObj.searchParams.set(pageConfig.signInVerificationParam, urlObj.toString())
+  nextUrlObj.searchParams.set(pageConfig.signInVerificationParam, base64Encode(originUrl))
 
   return nextUrlObj.toString()
 }

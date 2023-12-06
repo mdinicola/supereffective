@@ -1,6 +1,7 @@
 import { useRouter } from 'next/compat/router'
 
 import { useSession } from '@pkg/auth/lib/hooks/useSession'
+import { base64Decode } from '@pkg/utils/lib/serialization/base64'
 
 import { Routes } from '#/config/routes'
 import PageMeta from '#/features/pages/components/PageMeta'
@@ -18,7 +19,7 @@ export default function Page() {
     return <LoadingBanner />
   }
 
-  const decodedNextUrl = decodeURIComponent(nextUrl || '')
+  const decodedNextUrl = nextUrl ? base64Decode(decodeURIComponent(nextUrl)) : ''
 
   if (decodedNextUrl.startsWith('http')) {
     return (
