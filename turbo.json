@@ -18,12 +18,7 @@
     "RESEND_API_KEY",
     "DATABASE_URL",
     "DIRECT_DATABASE_URL",
-    "SHADOW_DATABASE_URL",
-    "NEXT_PUBLIC_PATREON_CLIENT_ID",
-    "PATREON_CLIENT_ID",
-    "PATREON_CREATOR_ACCESS_TOKEN",
-    "PATREON_CREATOR_REFRESH_TOKEN",
-    "PATREON_WEBHOOK_SECRET"
+    "SHADOW_DATABASE_URL"
   ],
   "globalDependencies": [".env", "tsconfig.json"],
   "pipeline": {
