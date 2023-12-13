@@ -6,10 +6,10 @@
   "dependencies": {
     "@pkg/config": "workspace:*",
     "@pkg/utils": "workspace:*",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.10.4",
     "@types/nodemailer": "^6.4.14",
     "nodemailer": "^6.9.7",
     "resend": "^2.0.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   }
 }
