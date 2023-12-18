@@ -34,11 +34,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.21.0",
-    "@pandacss/types": "^0.21.0",
-    "@types/node": "^20.10.4",
+    "@pandacss/dev": "^0.22.1",
+    "@pandacss/types": "^0.22.1",
+    "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.17",
+    "@types/react-dom": "^18.2.18",
     "postcss": "^8.4.32",
     "publint": "^0.2.6",
     "react": "^18.2.0",
