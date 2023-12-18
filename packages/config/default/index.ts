@@ -52,10 +52,10 @@ const config = {
 
       return ASSETS_CACHE_VERSION
     },
-    baseUrl: 'http://localhost:3999/assets',
-    dataUrl: 'http://localhost:4455/data',
-    fontsUrl: 'http://localhost:3999/assets/fonts',
-    imagesUrl: 'http://localhost:3999/assets/images',
+    baseUrl: 'https://cdn.supeffective.com/assets',
+    dataUrl: 'https://cdn.supeffective.com/dataset',
+    fontsUrl: 'https://cdn.supeffective.com/assets/fonts',
+    imagesUrl: 'https://cdn.supeffective.com/assets/images',
   },
 }
 
