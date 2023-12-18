@@ -1541,10 +1541,15 @@ export const _pokemonIds = [
   'ogerpon-hearthflame',
   'ogerpon-cornerstone',
   'archaludon',
+  'hydrapple',
+  'gougingfire',
   'ragingbolt',
+  'ironboulder',
   'ironcrown',
   'terapagos',
   'terapagos-terastal',
+  'terapagos-stellar',
+  'pecharunt',
 ] as const
 
 type PokemonId = (typeof _pokemonIds)[number]
