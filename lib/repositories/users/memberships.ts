@@ -1,9 +1,9 @@
-import { PATREON_NO_TIER, PATREON_TIERS_BY_ID, patreonCampaign } from '@/lib/patreon/lib/config'
-import { PatreonTier } from '@/lib/patreon/lib/types'
-import type { PatreonProfileResponse } from '@/lib/patreon/lib/types-api'
-import { fetchOauthPatreonIdentity, findHighestPatreonTier } from '@/lib/patreon/lib/utils'
+import { PATREON_NO_TIER, PATREON_TIERS_BY_ID, patreonCampaign } from '@/lib/patreon/config'
+import { PatreonTier } from '@/lib/patreon/types'
+import type { PatreonProfileResponse } from '@/lib/patreon/types-api'
+import { fetchOauthPatreonIdentity, findHighestPatreonTier } from '@/lib/patreon/utils'
+import { Membership } from '@/lib/prisma/types'
 
-import { Membership } from '../../lib/types'
 import { getPrismaClient } from '../../prisma/getPrismaClient'
 
 type OauthData = {

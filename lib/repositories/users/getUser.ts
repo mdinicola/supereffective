@@ -1,4 +1,5 @@
-import { User } from '../../lib/types'
+import { User } from '@/lib/prisma/types'
+
 import { getPrismaClient } from '../../prisma/getPrismaClient'
 
 export async function getUserByEmail(email: string): Promise<User | null> {

@@ -30,7 +30,12 @@ export async function fetchData<T>(relativeUrl: string, init?: FetchInit): Promi
   }
 
   return fetch(url, resolvedInit)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`[fetchData] Error fetching ${url}: ${res.status} ${res.statusText}`)
+      }
+      return res.json()
+    })
     .catch(err => {
       console.error(`[fetchData] Error fetching ${url}: ${err}`)
       return null

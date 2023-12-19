@@ -1,4 +1,4 @@
-import { getAllEntries } from '@/lib/mdx/lib/mdx'
+import { getAllEntries } from '@/lib/mdx/mdx'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
 import { getEntryStaticProps } from './getEntryStaticProps'

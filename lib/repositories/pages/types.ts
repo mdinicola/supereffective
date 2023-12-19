@@ -1,4 +1,4 @@
-import { MDXFileContent } from '@/lib/mdx/lib/types'
+import { MDXFileContent } from '@/lib/mdx/types'
 
 type Redirect =
   | {
