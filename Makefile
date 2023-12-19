@@ -15,7 +15,9 @@ code:
 
 postinstall:
 	echo "Running postinstall..."
-	if [ ! -f ".env" ]; then cp .env.dist .env; fi;
+	node lib/mdx/next-plugin/init.js
+	if [ "$$VERCEL" = "1" ]; then exit 0; fi;
+	if [ ! -f ".env" ]; then cp .env.dist .env.local; fi;
 	if [ "$$CI" = "1" ]; then exit 0; fi;
 	if [ ! -f ".husky/_/husky.sh" ]; then pnpm husky install; fi;
 	pnpm pretty:pkgjsons

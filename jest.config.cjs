@@ -8,9 +8,9 @@ module.exports = {
     '^.+\\.(t|j)sx?$': ['@swc/jest'],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  collectCoverageFrom: ['bin/*.{js,ts}', 'packages/**/*.{js,ts,jsx,tsx}'],
+  collectCoverageFrom: ['bin/*.{js,ts}', 'lib/**/*.{js,ts,jsx,tsx}', 'features/**/*.{js,ts,jsx,tsx}'],
   coveragePathIgnorePatterns: ['/node_modules/'],
-  modulePathIgnorePatterns: ['<rootDir>/cms', 'vercel/output', '/database/.cache'],
+  modulePathIgnorePatterns: ['<rootDir>/blogs', 'vercel/output', '/database/.cache'],
   transformIgnorePatterns: [`/node_modules/(?!${transformIgnorePackages.join('|')})`],
   moduleDirectories: ['node_modules', 'src'],
 }
