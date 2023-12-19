@@ -1,4 +1,4 @@
-import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+import { isDevelopmentEnv } from '@/lib/utils/env'
 
 const featureFlags = {
   core: {

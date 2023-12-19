@@ -1,5 +1,5 @@
-import { isDevelopmentEnv, isLocalAssetsEnabled } from '@pkg/utils/lib/env'
-import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
+import { isDevelopmentEnv, isLocalAssetsEnabled } from '@/lib/utils/env'
+import { getBaseUrl } from '@/lib/utils/nextjs/urls'
 
 const ASSETS_CACHE_VERSION = '20230809-01'
 const ASSETS_CACHE_VERSION_INCREMENTAL = '20230924-01'
@@ -14,8 +14,9 @@ const config = {
   dev: isDevelopmentEnv(),
   baseUrl: getBaseUrl(),
   version: {
-    num: '4.0.5',
+    num: '3.9.0',
   },
+  themeColor: '#1a1d1f',
   texts: {
     siteName: 'SuperEffective',
     standaloneTitle: 'SuperEffective',
@@ -59,6 +60,13 @@ const config = {
     dataUrl: dataCdn,
     fontsUrl: `${assetsCdn}/fonts`,
     imagesUrl: `${assetsCdn}/images`,
+  },
+  limits: {
+    saveBtnDelay: 2500,
+    maxDexes: isDevelopmentEnv() ? 4 : 20,
+    maxPokemonPerBox: 30,
+    maxBoxTitleSize: 15,
+    maxDexTitleSize: 32,
   },
 }
 

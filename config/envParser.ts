@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { isClientSide } from '@pkg/utils/lib/env'
+import { isClientSide } from '@/lib/utils/env'
 
 const CLIENT_ENV_PREFIX = 'NEXT_PUBLIC_'
 
