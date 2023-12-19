@@ -9,7 +9,7 @@ if (typeof window !== 'undefined') {
   throw new Error('This file should not be imported in the browser')
 }
 
-const cmsPath = path.resolve(process.env['CMS_PATH'] || path.join(process.cwd(), '..', '..', 'cms'))
+const cmsPath = path.resolve(process.env['CMS_PATH'] || path.join(process.cwd(), '..', '..', 'blogs'))
 console.log('Resolved CMS path:', cmsPath)
 
 export const getAllEntries = _createGetAllEntriesFn(cmsPath)

@@ -1,4 +1,4 @@
-import mdxRefresh from '../lib/next-plugin/withMDXPageRefresh.meta'
+import mdxRefresh from '../next-plugin/withMDXPageRefresh.meta'
 
 /**
  * Meta tag with a timestamp coming from the lib/next-plugin/withMDXPageRefresh.meta.ts file,
