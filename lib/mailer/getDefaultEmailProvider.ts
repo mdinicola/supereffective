@@ -1,4 +1,4 @@
-import { envVars } from '@pkg/config/default/env'
+import { envVars } from '@/config/env'
 
 import createNodemailerProvider from './providers/createNodemailerProvider'
 import createResendProvider from './providers/createResendProvider'
