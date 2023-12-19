@@ -1,20 +1,10 @@
 default: dev
 
 dev:
-	pnpm open
-	pnpm dev
-
-build:
-	pnpm build
-
-install:
-	pnpm install
-
-lint:
-	pnpm lint
+	pnpm dev-open
 
 pretty:
-	pnpm pretty
+	pnpm format
 
 data:
 	pnpm -r data:update
@@ -30,8 +20,7 @@ postinstall:
 	if [ ! -f ".husky/_/husky.sh" ]; then pnpm husky install; fi;
 	pnpm pretty:pkgjsons
 
-# These are only relevant if you have access to the Vercel team:
-
+# The vercel-* commands are only relevant if you have access to the Vercel team:
 vercel-login:
 	# npm i -g vercel
 	vercel login # login

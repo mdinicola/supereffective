@@ -1,8 +1,5 @@
 version: '3.8'
 volumes:
-  node_modules:
-  pnpm_store:
-  v8_compile_cache:
   postgresql_data:
 services:
   db:
