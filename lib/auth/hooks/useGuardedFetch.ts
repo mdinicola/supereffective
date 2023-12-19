@@ -1,4 +1,4 @@
-import { FetchState, useFetch } from '@pkg/utils/lib/react/hooks/useFetch'
+import { FetchState, useFetch } from '@/lib/utils/react/hooks/useFetch'
 
 import { useSession } from './useSession'
 

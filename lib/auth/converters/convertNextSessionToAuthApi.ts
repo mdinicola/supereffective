@@ -1,6 +1,6 @@
 import { signIn, signOut } from 'next-auth/react'
 
-import { User } from '@pkg/database/lib/types'
+import { User } from '@/lib/prisma/types'
 
 import { AuthApi, AuthStatus, AuthUser, NextSession } from '../types'
 import { convertPrismaUserToAuthUser } from './convertPrismaUserToAuthUser'

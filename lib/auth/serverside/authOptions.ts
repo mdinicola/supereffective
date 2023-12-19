@@ -3,10 +3,10 @@ import { AuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import PatreonProvider from 'next-auth/providers/patreon'
 
-import { envVars } from '@pkg/config/default/env'
-import { getPrismaClient } from '@pkg/database/prisma/getPrismaClient'
+import { envVars } from '@/config/env'
+import { getPrismaClient } from '@/lib/prisma/getPrismaClient'
 
-import sendMagicLinkEmail from '../../mailing/actions/sendMagicLinkEmail'
+import sendMagicLinkEmail from '../mailing/actions/sendMagicLinkEmail'
 import pageConfig from '../pageConfig'
 import { generateRandomToken } from './generateRandomToken'
 

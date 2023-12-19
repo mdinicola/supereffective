@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next'
 
-import { User } from '@pkg/database/lib/types'
-import { isServerSide } from '@pkg/utils/lib/env'
+import { User } from '@/lib/prisma/types'
+import { isServerSide } from '@/lib/utils/env'
 
 import { convertPrismaUserToAuthUserState } from '../converters/convertPrismaUserToAuthUserState'
 import { AuthUserState } from '../types'

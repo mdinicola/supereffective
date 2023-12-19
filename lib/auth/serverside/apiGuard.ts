@@ -1,6 +1,6 @@
-import { apiErrors, ApiResponse } from '@pkg/utils/lib/types'
+import { apiErrors, ApiResponse } from '@/lib/utils/types';
 
-import { AuthUser, AuthUserState } from '../types'
+import { AuthUser, AuthUserState } from '../types';
 
 export function apiGuard(
   session: AuthUserState | null,

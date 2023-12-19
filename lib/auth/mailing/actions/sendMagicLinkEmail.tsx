@@ -1,11 +1,11 @@
 import { SendVerificationRequestParams } from 'next-auth/providers'
 
-import { hasTooManyValidVerificationTokens } from '@pkg/database/repositories/users/getUser'
-import { sendMail } from '@pkg/mailer/lib/sendMail'
-import { EmailMessage } from '@pkg/mailer/lib/types'
-import { base64Encode } from '@pkg/utils/lib/serialization/base64'
+import { sendMail } from '@/lib/mailer/sendMail'
+import { EmailMessage } from '@/lib/mailer/types'
+import { hasTooManyValidVerificationTokens } from '@/lib/repositories/users/getUser'
+import { base64Encode } from '@/lib/utils/serialization/base64'
 
-import pageConfig from '../../lib/pageConfig'
+import pageConfig from '../../pageConfig'
 import { renderHtml, renderText } from '../templates/magic-link.tpl'
 
 const maxTokens = 5

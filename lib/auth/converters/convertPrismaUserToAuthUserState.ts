@@ -1,4 +1,4 @@
-import { User } from '@pkg/database/lib/types'
+import { User } from '@/lib/prisma/types'
 
 import { AuthStatus, AuthUserState } from '../types'
 import { convertPrismaUserToAuthUser } from './convertPrismaUserToAuthUser'
