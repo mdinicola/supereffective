@@ -1,6 +1,6 @@
+import { isValidID } from '@/lib/repositories/validators'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 
-import { isValidID } from '@/lib/repositories/validators'
 import { getLegacyLivingDexRepository } from '../../index'
 
 export const getDexesApi = async (userId: string): Promise<ApiResponse> => {

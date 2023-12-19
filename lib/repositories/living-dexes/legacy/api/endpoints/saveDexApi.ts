@@ -1,8 +1,8 @@
+import { _pokemonIds } from '@/lib/repositories/pokemon/ids'
+import { isValidID } from '@/lib/repositories/validators'
 import { jsonDecode } from '@/lib/utils/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 
-import { _pokemonIds } from '@/lib/repositories/pokemon/ids'
-import { isValidID } from '@/lib/repositories/validators'
 import { getLegacyLivingDexRepository } from '../../index'
 import { LoadedDex } from '../../types'
 import { LoadedDexSchema } from '../../validators'

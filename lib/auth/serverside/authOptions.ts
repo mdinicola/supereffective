@@ -6,7 +6,7 @@ import PatreonProvider from 'next-auth/providers/patreon'
 import { envVars } from '@/config/env'
 import { getPrismaClient } from '@/lib/prisma/getPrismaClient'
 
-import sendMagicLinkEmail from '../mailing/actions/sendMagicLinkEmail'
+import sendMagicLinkEmail from '../mails/actions/sendMagicLinkEmail'
 import pageConfig from '../pageConfig'
 import { generateRandomToken } from './generateRandomToken'
 
