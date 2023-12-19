@@ -1,11 +1,14 @@
-import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+import { isDevelopmentEnv, isLocalAssetsEnabled } from '@pkg/utils/lib/env'
 import { getBaseUrl } from '@pkg/utils/lib/nextjs/urls'
-
-// !!! Changing these versions will make Vercel to optimize all images again
-//      (producing costs of 5$ every 1000 extra images)
 
 const ASSETS_CACHE_VERSION = '20230809-01'
 const ASSETS_CACHE_VERSION_INCREMENTAL = '20230924-01'
+const dataCdn = isLocalAssetsEnabled()
+  ? 'http://localhost:4455/dist/data'
+  : 'https://cdn.supeffective.com/dataset'
+const assetsCdn = isLocalAssetsEnabled()
+  ? 'http://localhost:3999/assets'
+  : 'https://cdn.supeffective.com/assets'
 
 const config = {
   dev: isDevelopmentEnv(),
@@ -52,10 +55,10 @@ const config = {
 
       return ASSETS_CACHE_VERSION
     },
-    baseUrl: 'https://cdn.supeffective.com/assets',
-    dataUrl: 'https://cdn.supeffective.com/dataset',
-    fontsUrl: 'https://cdn.supeffective.com/assets/fonts',
-    imagesUrl: 'https://cdn.supeffective.com/assets/images',
+    baseUrl: assetsCdn,
+    dataUrl: dataCdn,
+    fontsUrl: `${assetsCdn}/fonts`,
+    imagesUrl: `${assetsCdn}/images`,
   },
 }
 

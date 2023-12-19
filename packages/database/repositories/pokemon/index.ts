@@ -7,7 +7,7 @@ import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry
 const rawEntries: RawPokemonEntry[] = await fetchData('/legacy-pokemon.min.json')
 
 if (!Array.isArray(rawEntries)) {
-  throw new Error('Invalid data format for fetched legacy/pokemon.min.json')
+  throw new Error('Invalid data format for legacy-pokemon.min.json (via fetch)')
 }
 
 export const getPokemonEntries = createMemoizedCallback((): PokemonEntry[] => {

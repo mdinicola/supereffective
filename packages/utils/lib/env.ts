@@ -10,12 +10,28 @@ export function isDevelopmentEnv(): boolean {
   return _getEnvName() === 'development'
 }
 
+export function isLocalDevelopmentEnv(): boolean {
+  return isDevelopmentEnv() && !isCIEnv() && !isVercelEnv()
+}
+
+export function isLocalAssetsEnabled(): boolean {
+  return (
+    isDevelopmentEnv() &&
+    (String(process.env['LOCAL_ASSETS_ENABLED']) === '1' ||
+      String(process.env['NEXT_PUBLIC_LOCAL_ASSETS_ENABLED']) === '1')
+  )
+}
+
 export function isPreviewEnv(): boolean {
   return _getEnvName() === 'preview'
 }
 
 export function isCIEnv(): boolean {
   return !!process.env['CI']
+}
+
+export function isVercelEnv(): boolean {
+  return !!process.env['VERCEL']
 }
 
 export function isServerSide(): boolean {

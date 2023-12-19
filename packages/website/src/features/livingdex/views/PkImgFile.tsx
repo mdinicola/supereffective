@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-import config from '#/config'
+import baseConfig from '@pkg/config/default'
+
 import { classNames } from '#/utils/legacyUtils'
 
 const variantFolder = {
@@ -41,8 +42,8 @@ export default function PkImgFile({
     className
   )
 
-  const assetVersion = config.assets.getPokeImgVersion(nid)
-  let imageSrc = `${config.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetVersion}`
+  const assetVersion = baseConfig.assets.getPokeImgVersion(nid)
+  let imageSrc = `${baseConfig.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetVersion}`
 
   if (nid === 'placeholder') {
     imageSrc = '/assets/gui/placeholders/placeholder-64x64.png'

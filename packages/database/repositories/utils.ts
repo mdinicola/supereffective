@@ -1,5 +1,9 @@
-export const BASE_DATA_URL = 'https://cdn.supeffective.com/dataset'
+import config from '@pkg/config/default'
+import { isDevelopmentEnv } from '@pkg/utils/lib/env'
+
+export const BASE_DATA_URL = config.assets.dataUrl
 export const DEFAULT_FETCH_TTL = 1000 * 60 * 15 // 15 minutes
+const LOCAL_FETCH_TTL = 1000 * 30 // 30 seconds
 
 type FetchInit = RequestInit & {
   next?: {
@@ -14,10 +18,13 @@ export async function fetchData<T>(relativeUrl: string, init?: FetchInit): Promi
   }
 
   const url = BASE_DATA_URL + relativeUrl
+  if (isDevelopmentEnv()) {
+    console.log('[fetchData] Fetching', url)
+  }
   const resolvedInit: FetchInit = {
     ...init,
     next: {
-      revalidate: DEFAULT_FETCH_TTL,
+      revalidate: isDevelopmentEnv() ? LOCAL_FETCH_TTL : DEFAULT_FETCH_TTL,
       ...(init && init.next),
     },
   }

@@ -17,6 +17,7 @@
     "studio:prod": "./studio-prod.sh"
   },
   "dependencies": {
+    "@pkg/config": "workspace:*",
     "@pkg/mdx": "workspace:*",
     "@pkg/patreon": "workspace:*",
     "@pkg/utils": "workspace:*",
