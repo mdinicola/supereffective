@@ -16,12 +16,12 @@
   "frontMatter.content.pageFolders": [
     {
       "title": "Articles",
-      "path": "[[workspace]]/cms/articles",
+      "path": "[[workspace]]/blogs/articles",
       "contentTypes": ["Article"]
     },
     {
       "title": "Pages",
-      "path": "[[workspace]]/cms/pages",
+      "path": "[[workspace]]/blogs/pages",
       "contentTypes": ["Page"]
     }
   ],
