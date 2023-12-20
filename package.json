@@ -16,7 +16,7 @@
     "dev-debug": "pnpm dev:prepare && NODE_OPTIONS='--inspect' pnpm dev:nextjs",
     "dev-open": "pnpm open && pnpm dev",
     "dev:db": "pnpm codegen && pnpm studio:dev",
-    "dev:nextjs": "PORT=3001 NEXT_PUBLIC_LOCAL_ASSETS_ENABLED=1 LOCAL_ASSETS_ENABLED=1 next dev",
+    "dev:nextjs": "PORT=3001 next dev",
     "dev:prepare": "docker-compose up -d && env-cmd pnpm migrate",
     "format": "turbo pretty && turbo lint:fix",
     "postinstall": "make postinstall",

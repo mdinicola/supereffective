@@ -15,11 +15,10 @@ export function isLocalDevelopmentEnv(): boolean {
 }
 
 export function isLocalAssetsEnabled(): boolean {
-  return (
-    isDevelopmentEnv() &&
-    (String(process.env['LOCAL_ASSETS_ENABLED']) === '1' ||
-      String(process.env['NEXT_PUBLIC_LOCAL_ASSETS_ENABLED']) === '1')
-  )
+  const envVarValue =
+    process.env['LOCAL_ASSETS_ENABLED'] ?? process.env['NEXT_PUBLIC_LOCAL_ASSETS_ENABLED']
+
+  return isDevelopmentEnv() && (String(envVarValue) === '1' || String(envVarValue) === 'true')
 }
 
 export function isPreviewEnv(): boolean {
