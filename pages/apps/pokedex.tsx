@@ -1,6 +1,6 @@
 import PageMeta from '@/features/pages/components/PageMeta'
 import { Pokedex } from '@/features/pokedex/views/Pokedex'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { abs_url } from '@/lib/components/legacy/Link/Links'
 import { getPageRepository } from '@/lib/repositories/pages/getPageRepository'
 import { PageEntry } from '@/lib/repositories/pages/types'

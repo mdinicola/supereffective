@@ -1,4 +1,5 @@
-import { getPokemonEntry, isShinyLocked } from '../../../pokemon'
+import { getPokemonEntry, isShinyLocked } from '@/lib/repositories/pokemon'
+
 import { DexPokemon, DexPokemonList } from '../types'
 import { convertPokemonListToStorable } from './convertPokemonListToStorable'
 

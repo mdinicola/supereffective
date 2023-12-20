@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { Entry, EntryType } from '@/lib/repositories/pages/types'
 import { getFullUrl } from '@/lib/utils/nextjs/urls'
 import { cleanupSpaces as clean } from '@/lib/utils/primitives/strings'

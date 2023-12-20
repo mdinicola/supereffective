@@ -1,4 +1,5 @@
-import { getGameById } from '../../../games'
+import { getGameById } from '@/lib/repositories/games'
+
 import { DEX_SCHEMA_VERSION, DexBox, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'
 import { createDexPokemonFromPid } from './createDexPokemonFromPid'

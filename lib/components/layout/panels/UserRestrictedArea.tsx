@@ -1,8 +1,8 @@
 import { Routes } from '@/config/routes'
 import { useSession } from '@/lib/auth/hooks/useSession'
 
-import { LoadingBanner } from './LegacyLayout/LoadingBanner'
-import { RedirectArea } from './RedirectArea'
+import { LoadingBanner } from './LoadingBanner'
+import { LoadingRedirectBanner } from './LoadingRedirectBanner'
 
 export type UserRestrictedAreaProps = {
   children: React.ReactNode
@@ -28,7 +28,13 @@ export function UserRestrictedArea({
     const redirectUri =
       Routes.VerifyEmail + '?email=' + encodeURIComponent(auth.currentUser?.email || '')
     return (
-      <>{unverifiedComponent ? unverifiedComponent : <RedirectArea routeUri={redirectUri} />}</>
+      <>
+        {unverifiedComponent ? (
+          unverifiedComponent
+        ) : (
+          <LoadingRedirectBanner routeUri={redirectUri} />
+        )}
+      </>
     )
   }
 
@@ -39,9 +45,9 @@ export function UserRestrictedArea({
         {unauthenticatedComponent ? (
           unauthenticatedComponent
         ) : (
-          <RedirectArea routeUri={redirectUri}>
+          <LoadingRedirectBanner routeUri={redirectUri}>
             <LoadingBanner />
-          </RedirectArea>
+          </LoadingRedirectBanner>
         )}
       </>
     )

@@ -1,4 +1,5 @@
-import { getGameSetByGameId } from '../../../game-sets'
+import { getGameSetByGameId } from '@/lib/repositories/game-sets'
+
 import { DexBox, LoadedDex, StorableDex } from '../types'
 import { convertPokemonListToNormalized } from './convertPokemonListToNormalized'
 

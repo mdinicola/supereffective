@@ -1,7 +1,7 @@
+import { getGameSetByGameId } from '@/lib/repositories/game-sets'
+import { fetchData } from '@/lib/repositories/utils'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
-import { getGameSetByGameId } from '../../../game-sets'
-import { fetchData } from '../../../utils'
 import { PresetDex, PresetDexMap } from './types'
 
 const presetsJson: PresetDexMap = await fetchData('/legacy-boxpresets.min.json')

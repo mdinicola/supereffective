@@ -1,5 +1,5 @@
 import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 
 export function OAuthButtonsView(): JSX.Element {
   const auth = useSession()

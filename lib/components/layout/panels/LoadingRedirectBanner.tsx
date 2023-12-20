@@ -1,13 +1,13 @@
 import { useRouter } from 'next/compat/router'
 
-import { LoadingBanner } from './LegacyLayout/LoadingBanner'
+import { LoadingBanner } from './LoadingBanner'
 
 export type RedirectAreaProps = {
   routeUri: string
   children?: React.ReactNode
 }
 
-export function RedirectArea({ routeUri, children }: RedirectAreaProps): JSX.Element {
+export function LoadingRedirectBanner({ routeUri, children }: RedirectAreaProps): JSX.Element {
   const router = useRouter()
   const content = children ? children : <LoadingBanner />
 

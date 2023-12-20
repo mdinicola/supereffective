@@ -1,7 +1,7 @@
 import React from 'react'
 import { log as axiomLogger } from 'next-axiom'
 
-import PageSkeleton from './LegacyLayout/PageSkeleton'
+import PageSkeleton from './PageSkeleton'
 
 class ErrorBoundary extends React.Component<any, { hasError: boolean; errorMessage?: string }> {
   constructor(props: any) {

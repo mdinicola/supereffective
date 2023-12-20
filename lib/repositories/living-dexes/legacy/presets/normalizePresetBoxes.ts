@@ -1,4 +1,5 @@
-import { getGameSetByGameId } from '../../../game-sets'
+import { getGameSetByGameId } from '@/lib/repositories/game-sets'
+
 import { NullablePresetDexPokemon, PresetDex, PresetDexBox } from './types'
 
 export function normalizePresetBoxes(gameId: string, preset: PresetDex): PresetDexBox[] {

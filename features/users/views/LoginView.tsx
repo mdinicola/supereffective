@@ -7,8 +7,8 @@ import EmailSigninView from '@/features/users/views/EmailSigninView'
 import { OAuthButtonsView } from '@/features/users/views/OAuthButtonsView'
 import TokenSignInView from '@/features/users/views/TokenSignInView'
 import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
-import { RedirectArea } from '@/lib/components/layouts/RedirectArea'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
 import { SiteLink } from '@/lib/components/legacy/Link/Links'
 
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
@@ -28,7 +28,7 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
   if (auth.isAuthenticated() && !auth.isVerified()) {
     // is probably a firebase user
     return (
-      <RedirectArea
+      <LoadingRedirectBanner
         routeUri={
           Routes.VerifyEmail + '?email=' + encodeURIComponent(auth.currentUser?.email || '')
         }
@@ -37,7 +37,7 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
   }
 
   if (auth.isAuthenticated() && auth.isOperable() && auth.isVerified()) {
-    return <RedirectArea routeUri={Routes.Profile} />
+    return <LoadingRedirectBanner routeUri={Routes.Profile} />
   }
 
   if (!isSignInEnabled()) {

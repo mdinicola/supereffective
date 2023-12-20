@@ -3,8 +3,8 @@ import { useRouter } from 'next/compat/router'
 import { Routes } from '@/config/routes'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
-import { RedirectArea } from '@/lib/components/layouts/RedirectArea'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
 import { ButtonLink } from '@/lib/components/legacy/Button/Button'
 import { abs_url } from '@/lib/components/legacy/Link/Links'
 import { base64Decode } from '@/lib/utils/serialization/base64'
@@ -56,5 +56,5 @@ export default function Page() {
 
   console.error('Invalid callback url', { nextUrl, decodedNextUrl })
 
-  return <RedirectArea routeUri={Routes.AuthError + '?error=InvalidCallbackUrl'} />
+  return <LoadingRedirectBanner routeUri={Routes.AuthError + '?error=InvalidCallbackUrl'} />
 }

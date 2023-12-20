@@ -1,4 +1,5 @@
-import { getPokemonEntry, isShinyLocked } from '../../../pokemon'
+import { getPokemonEntry, isShinyLocked } from '@/lib/repositories/pokemon'
+
 import { isCatchable, recalculateCounters } from '../index'
 import { DexBox, DexPokemon, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'

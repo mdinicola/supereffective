@@ -16,7 +16,7 @@ import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext
 import { GameLogo } from '@/features/livingdex/views/GameLogo'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import Button from '@/lib/components/legacy/Button/Button'
 import InlineTextEditor from '@/lib/components/legacy/Input/InlineTextEditor'
 import { ExternLink, SiteLink } from '@/lib/components/legacy/Link/Links'

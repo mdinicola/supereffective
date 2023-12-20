@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { PkBoxGroup } from '@/features/livingdex/views/PkBoxGroup'
 import PageMeta from '@/features/pages/components/PageMeta'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import Button from '@/lib/components/legacy/Button/Button'
 import { abs_url } from '@/lib/components/legacy/Link/Links'
 import {

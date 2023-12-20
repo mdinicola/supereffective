@@ -4,7 +4,7 @@ import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext
 import { GameCardList } from '@/features/livingdex/views/gameCard/GameCard'
 import { WelcomeContent } from '@/features/livingdex/views/WelcomeContent'
 import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { ButtonInternalLink } from '@/lib/components/legacy/Button/Button'
 import { LivingDexResolvedUserLimits } from '@/lib/repositories/living-dexes/legacy/types'
 

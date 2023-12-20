@@ -1,7 +1,7 @@
 import config from '@/config'
 
 import { ExternLink, links_to_li, SiteLink, siteLinks } from '../../legacy/Link/Links'
-import { LogoWhite } from './LogoWhite'
+import { LogoWhite } from '../LogoWhite'
 import styles from './MainFooter.module.css'
 
 export default function MainFooter() {

@@ -5,7 +5,7 @@ import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext
 import { GameLogo } from '@/features/livingdex/views/GameLogo'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { Pokedex } from '@/features/pokedex/views/Pokedex'
-import { LoadingBanner } from '@/lib/components/layouts/LegacyLayout/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { abs_url } from '@/lib/components/legacy/Link/Links'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
 import { getGameSetByGameId } from '@/lib/repositories/game-sets'
