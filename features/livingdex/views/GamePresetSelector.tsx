@@ -52,7 +52,7 @@ export const GamePresetSelector = ({
         return (
           <div
             key={index}
-            title={game.name}
+            title={'Pokémon ' + game.name}
             className={gameClasses}
             onClick={() => {
               window.location.hash = `#presets`
@@ -73,58 +73,54 @@ export const GamePresetSelector = ({
 
   return (
     <div className="page-container">
-      <div className="inner-container bordered-container bg-purple-light">
-        <div className={'inner-container inner-blueberry'}>
-          <h2>
-            <i className={'icon-pkg-box-home'} />
-            Create a new Living Pokédex
-          </h2>
-          <b>Select a game and then a preset</b> for your Living Pokédex. You can select any of them
-          to take a quick look and come back if you want to change your mind. Changes won't be saved
-          until you hit the "Save" button.
-          <br />
-          <br />
-          <p>
-            You can currently create <b>{resolvedLimits.remainingDexes}</b> more Living Pokédexes.
-          </p>
-        </div>
-        <div className={styles.selector + ' inner-container bg-purple'}>
-          {gameSelectors}
-          {selectedGame && (
-            <div id={'presets'} className={styles.presets}>
-              <div className={'text-center'}>
-                <div className={styles.gameTitle}>Pokémon {getGameById(selectedGame).name}</div>
-              </div>
-              {selectedGamePresets
-                .filter(p => !p.isHidden)
-                .map((p, index) => (
-                  <div key={index} className={styles.preset + ' inner-container bg-beige'}>
-                    <div className={styles.presetName}>
-                      <i className={'icon-sync_alt'} /> {p.name}
-                    </div>
-                    <div className={styles.presetDescription}>{p.description}</div>
-                    <div className={'text-right'}>
-                      <ButtonInternalLink
-                        href={`?game=${selectedGame}&preset=${p.id}`}
-                        className={styles.selectBtn}
-                      >
-                        Select this preset
-                      </ButtonInternalLink>
-                    </div>
-                  </div>
-                ))}
+      <div className={'inner-container bg-blueberry-darker'}>
+        <h2>
+          <i className={'icon-pkg-box-home'} />
+          Create a new Living Pokédex
+        </h2>
+        <b>Select a game and then a preset</b> for your Living Pokédex. You can select any of them
+        to take a quick look and come back if you want to change your mind. Changes won't be saved
+        until you hit the "Save" button.
+        <br />
+        <br />
+        <p>
+          You can currently create <b>{resolvedLimits.remainingDexes}</b> more Living Pokédexes.
+        </p>
+      </div>
+      <div className={styles.selector + ' inner-container bg-blueberry-darker'}>
+        {gameSelectors}
+        {selectedGame && (
+          <div id={'presets'} className={styles.presets}>
+            <div className={'text-center'}>
+              <div className={styles.gameTitle}>Pokémon {getGameById(selectedGame).name}</div>
             </div>
-          )}
-        </div>
-        {dexes.length > 0 && (
-          <div className={'text-center'}>
-            <br />
-            <ButtonInternalLink href="/apps/livingdex">
-              Go to your existing Dexes
-            </ButtonInternalLink>
+            {selectedGamePresets
+              .filter(p => !p.isHidden)
+              .map((p, index) => (
+                <div key={index} className={styles.preset + ' inner-container bg-blueberry-medium'}>
+                  <div className={styles.presetName}>
+                    <i className={'icon-sync_alt'} /> {p.name}
+                  </div>
+                  <div className={styles.presetDescription}>{p.description}</div>
+                  <div className={'text-right'}>
+                    <ButtonInternalLink
+                      href={`?game=${selectedGame}&preset=${p.id}`}
+                      className={styles.selectBtn}
+                    >
+                      Select this preset
+                    </ButtonInternalLink>
+                  </div>
+                </div>
+              ))}
           </div>
         )}
       </div>
+      {dexes.length > 0 && (
+        <div className={'text-center'}>
+          <br />
+          <ButtonInternalLink href="/apps/livingdex">Go to your existing Dexes</ButtonInternalLink>
+        </div>
+      )}
     </div>
   )
 }

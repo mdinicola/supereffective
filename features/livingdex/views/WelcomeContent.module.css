@@ -8,7 +8,8 @@
 
 .topRightCallout .calloutBtn {
   /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), var(--color-teal);*/
-  background: #fbb32e;
+
+  background-color: var(--color-blueberry-accent);
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
   padding: 0.4rem 1.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -19,12 +20,12 @@
 }
 
 .topRightCallout .heroCalloutBtn {
-  background: var(--color-gold-light);
+  background-color: var(--color-blueberry-accent);
   color: #000;
 }
 
 .topRightCallout .calloutBtn:hover {
-  background-color: var(--color-purple-lighter);
+  background-color: #fff;
+  color: #000;
   text-decoration: none;
-  color: #333;
 }

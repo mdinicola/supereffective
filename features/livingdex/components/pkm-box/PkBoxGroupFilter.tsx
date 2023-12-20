@@ -41,7 +41,7 @@ export function PkBoxGroupFilter(props: PkBoxGroupFilterProps) {
         <TextInput
           type="text"
           name="filter"
-          placeholder={`Type in a Pokémon's ${ATTRIBUTE_MAP[FILTER_ATTRIBUTE]}`}
+          placeholder={`Search by Pokémon ${ATTRIBUTE_MAP[FILTER_ATTRIBUTE]}`}
           onChange={handleFilterInput}
         />
       </form>

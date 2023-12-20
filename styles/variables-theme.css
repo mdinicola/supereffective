@@ -111,12 +111,16 @@
   --bg-pattern-cross: url('/assets/gui/bgs/patterns/pattern-cross.png') repeat;
 }
 
-.main-site-bg {
+.bg-blueberry-gradient-static {
   background: linear-gradient(var(--color-blueberry-dark), var(--color-blueberry-medium));
   color: #fff;
   background-repeat: no-repeat;
   background-size: 100% 102vh;
   background-attachment: fixed;
+}
+
+.bg-ball-pattern50 {
+  background: url('/assets/gui/bgs/patterns/pattern-ball50.png') center center;
 }
 
 .bg-white {

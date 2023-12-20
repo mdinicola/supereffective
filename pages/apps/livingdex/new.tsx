@@ -112,7 +112,7 @@ const Page = ({ selectedGame, selectedPreset, limits }: PageProps) => {
   const boxSize = gameSet ? gameSet.storage?.boxCapacity : ''
 
   const containerClasses =
-    `page-container dex-game full-main-height ` +
+    `page-container dex-game bg-ball-pattern50 full-main-height ` +
     `dex-gameset-${gameSetId} dex-game-${selectedGame} dex-preset-${selectedPreset} ` +
     `dex-boxsize-${boxSize}`
 

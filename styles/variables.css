@@ -154,3 +154,69 @@
   --color-box-header: var(--color-teal-2);
   --color-box-body: var(--color-teal-4);
 }
+
+.bg-blueberry-dark {
+  background-color: var(--color-blueberry-dark);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-gradient {
+  background: var(--color-blueberry-gradient);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-gradient-inv {
+  background: var(--color-blueberry-gradient-inv);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-dark-alpha20 {
+  background-color: var(--color-blueberry-dark-alpha20);
+}
+
+.bg-blueberry-dark-alpha50 {
+  background-color: var(--color-blueberry-dark-alpha50);
+}
+
+.bg-blueberry-dark-alpha80 {
+  background-color: var(--color-blueberry-dark-alpha80);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-darker {
+  background-color: var(--color-blueberry-darker);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-medium {
+  background-color: var(--color-blueberry-medium);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-medium-alpha20 {
+  background-color: var(--color-blueberry-medium-alpha20);
+}
+
+.bg-blueberry-medium-alpha50 {
+  background-color: var(--color-blueberry-medium-alpha50);
+}
+
+.bg-blueberry-medium-alpha80 {
+  background-color: var(--color-blueberry-medium-alpha80);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-medium-bright {
+  background-color: var(--color-blueberry-medium-bright);
+  color: #000;
+}
+
+.bg-blueberry-light {
+  background-color: var(--color-blueberry-light);
+  color: #000;
+}
+
+.bg-blueberry-accent {
+  background-color: var(--color-blueberry-accent);
+  color: #000;
+}

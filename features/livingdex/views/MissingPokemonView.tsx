@@ -132,7 +132,7 @@ const MissingPokemonView = () => {
         {showShiny && nonShinyAnchor}
         {!showShiny && shinyAnchor}
       </div>
-      <div className={'page-content'}>
+      <div className={'page-content '}>
         <div className={'text-center'}>
           <h2 className="main-title-outlined">
             <i className="icon-pkg-pokeball" /> Missing Pokémon

@@ -170,7 +170,8 @@ a.helpBtn {
 
 .topRightCallout span {
   /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), var(--color-teal);*/
-  background: #222;
+  background: var(--color-blueberry-darker);
+  border: 1px solid var(--color-blueberry-darker);
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
   padding: 0.4rem 1.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -197,9 +198,8 @@ a.helpBtn {
 }
 
 .topRightCallout span:hover {
-  background-color: #eee;
+  background-color: var(--color-blueberry-medium-bright);
   text-decoration: none;
-  color: #333;
 }
 
 .lostPkmBox {

@@ -12,7 +12,7 @@ export default function PageSkeleton({ children }: { children: React.ReactNode }
         'page',
         styles.page,
         `bdg-gr-teal-pattern`,
-        ' main-site-bg',
+        ' bg-blueberry-gradient-static',
         'dex-tracker-ui',
       ].join(' ')}
     >
