@@ -4,7 +4,7 @@ import {
   sanitizeDate,
 } from '@/features/livingdex/dex-parser/support'
 import { PATREON_NO_TIER } from '@/lib/patreon/config'
-import { PrismaTypes, getPrismaClient } from '@/lib/prisma/getPrismaClient'
+import { getPrismaClient, PrismaTypes } from '@/lib/prisma/getPrismaClient'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
 import { isShinyLocked } from '../../../../lib/data-client/pokemon'

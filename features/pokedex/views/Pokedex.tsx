@@ -1,6 +1,6 @@
-import { TypeIcon } from '@supeffective/icons'
-import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+import { TypeIcon } from '@supeffective/icons'
 
 // import { GameLabel, TypeIcon } from '@/lib/icons'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'

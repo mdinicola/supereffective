@@ -2,8 +2,8 @@ import PageMeta from '@/features/pages/components/PageMeta'
 import { getPageRepository } from '@/features/pages/repository/getPageRepository'
 import { PageEntry } from '@/features/pages/repository/types'
 import { Pokedex } from '@/features/pokedex/views/Pokedex'
-import { abs_url } from '@/lib/components/Links'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { abs_url } from '@/lib/components/Links'
 import { getPokemonEntries, getPokemonSearchIndex } from '@/lib/data-client/pokemon'
 
 export async function getStaticProps() {

@@ -1,6 +1,6 @@
+import { useContext, useEffect, useRef } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/compat/router'
-import { useContext, useEffect, useRef } from 'react'
 
 import { Routes } from '@/config/routes'
 import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
@@ -18,9 +18,9 @@ import PageMeta from '@/features/pages/components/PageMeta'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import { getSession } from '@/features/users/auth/serverside/getSession'
 import { ButtonInternalLink } from '@/lib/components/Button'
-import { abs_url } from '@/lib/components/Links'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { UnauthenticatedBanner } from '@/lib/components/layout/panels/UnauthenticatedBanner'
+import { abs_url } from '@/lib/components/Links'
 import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { devLog } from '@/lib/utils/logger'
 

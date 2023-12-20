@@ -1,3 +1,7 @@
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import ReactModal from 'react-modal'
+import { useRouter } from 'next/compat/router'
+import { NextRouter } from 'next/router'
 import {
   BracesIcon,
   ListTodoIcon,
@@ -6,10 +10,6 @@ import {
   ToggleRightIcon,
   WandIcon,
 } from 'lucide-react'
-import { useRouter } from 'next/compat/router'
-import { NextRouter } from 'next/router'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import ReactModal from 'react-modal'
 
 import config from '@/config'
 import { DexSocialLinks } from '@/features/livingdex/components/SocialLinks'
@@ -37,9 +37,9 @@ import { GameLogo } from '@/features/livingdex/views/GameLogo'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import Button from '@/lib/components/Button'
-import { ExternLink, SiteLink } from '@/lib/components/Links'
 import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { ExternLink, SiteLink } from '@/lib/components/Links'
 import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
 import { classNameIf } from '@/lib/utils/deprecated'
