@@ -6,7 +6,7 @@ import { useSession } from '@/features/users/auth/hooks/useSession'
 import { useSignOut } from '@/features/users/auth/hooks/useSignOut'
 import { createMembershipPlaceholder } from '@/features/users/repository/memberships'
 import Button from '@/lib/components/Button'
-import { UserRestrictedArea } from '@/lib/components/layout/panels/UserRestrictedArea'
+import { UserRestrictedArea } from '@/lib/components/panels/UserRestrictedArea'
 import { Membership } from '@/lib/prisma/types'
 
 import { PatreonButton, PatreonUnlinkButton } from '../components/PatreonButtons'

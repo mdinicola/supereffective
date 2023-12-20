@@ -8,9 +8,9 @@ import { useSignOut } from '@/features/users/auth/hooks/useSignOut'
 import { createCsrfToken } from '@/features/users/auth/serverside/createCsrfToken'
 import EmailSigninView from '@/features/users/views/EmailSigninView'
 import Button from '@/lib/components/Button'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { UnauthenticatedBanner } from '@/lib/components/layout/panels/UnauthenticatedBanner'
 import { abs_url } from '@/lib/components/Links'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
+import { UnauthenticatedBanner } from '@/lib/components/panels/UnauthenticatedBanner'
 
 export default function Page({ csrfToken }: { csrfToken: string | null }) {
   const auth = useSession()

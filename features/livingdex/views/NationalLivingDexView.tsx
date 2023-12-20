@@ -6,8 +6,8 @@ import { getPresetByIdForGame, getPresetsForGame } from '@/features/livingdex/re
 import { createDexFromPreset } from '@/features/livingdex/repository/presets/createDexFromPreset'
 import PageMeta from '@/features/pages/components/PageMeta'
 import Button from '@/lib/components/Button'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { abs_url } from '@/lib/components/Links'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 import { classNameIf } from '@/lib/utils/deprecated'
 
 const NationalLivingDexView = () => {

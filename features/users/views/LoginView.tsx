@@ -6,9 +6,9 @@ import { Routes } from '@/config/routes'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import EmailSigninView from '@/features/users/views/EmailSigninView'
 import TokenSignInView from '@/features/users/views/TokenSignInView'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
 import { SiteLink } from '@/lib/components/Links'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
+import { LoadingRedirectBanner } from '@/lib/components/panels/LoadingRedirectBanner'
 
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
   const router = useRouter()

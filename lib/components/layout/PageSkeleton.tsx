@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { TemporaryAnnouncementBanners } from './announcements'
+import { TemporaryAnnouncementBanners } from '../panels/announcements'
+import MainFooter from '../panels/MainFooter'
+import MainHeader from '../panels/MainHeader'
 import styles from './PageSkeleton.module.css'
-import MainFooter from './panels/MainFooter'
-import MainHeader from './panels/MainHeader'
 
 export default function PageSkeleton({ children }: { children: React.ReactNode }) {
   return (

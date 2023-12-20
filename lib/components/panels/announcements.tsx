@@ -1,4 +1,4 @@
-import AnnouncementBanner from './panels/AnnouncementBanner'
+import AnnouncementBanner from './AnnouncementBanner'
 
 export function TemporaryAnnouncementBanners() {
   return (

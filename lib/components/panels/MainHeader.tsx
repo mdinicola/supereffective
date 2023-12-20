@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { useRouter } from 'next/compat/router'
 import Image from 'next/image'
 import Link from 'next/link'
-import { SiDiscord, SiGithub, SiX as SiTwitterX } from '@icons-pack/react-simple-icons'
 
 import config from '@/config'
 import { UserTrayView } from '@/features/users/views/UserTrayView'
 
-import { ExternLink, SiteLink } from '../../Links'
+import { DiscordLinkIcon, GithubLinkIcon, TwitterLinkIcon } from '../icons/brand-icons'
+import { SiteLink } from '../Links'
 import styles from './MainHeader.module.css'
 
 export default function MainHeader() {
@@ -48,33 +48,15 @@ export default function MainHeader() {
             <SiteLink activeClass={styles.active} tabIndex={2} href="/apps/livingdex">
               <i className={'icon-pkg-box margin-r icon--2x'} /> Dex Tracker
             </SiteLink>
-            <ExternLink
-              className={styles.brandLink}
-              href={config.links.github_site}
-              tabIndex={4}
-              title={'Github'}
-            >
-              <SiGithub className={styles.brandIcon} size={18} />
+            <GithubLinkIcon className={styles.brandLink} tabIndex={4}>
               <span className="mobile-only">Github</span>
-            </ExternLink>
-            <ExternLink
-              className={styles.brandLink}
-              href={config.links.discord}
-              tabIndex={4}
-              title={'Discord'}
-            >
-              <SiDiscord className={styles.brandIcon} size={18} />
+            </GithubLinkIcon>
+            <DiscordLinkIcon className={styles.brandLink} tabIndex={4}>
               <span className="mobile-only">Discord</span>
-            </ExternLink>
-            <ExternLink
-              className={styles.brandLink}
-              href={config.links.twitter}
-              tabIndex={3}
-              title={'Twitter/X'}
-            >
-              <SiTwitterX className={styles.brandIcon} size={18} />
+            </DiscordLinkIcon>
+            <TwitterLinkIcon className={styles.brandLink} tabIndex={3}>
               <span className="mobile-only">Twitter/X</span>
-            </ExternLink>
+            </TwitterLinkIcon>
             <SiteLink
               className={styles.donateBtn}
               activeClass={styles.active}

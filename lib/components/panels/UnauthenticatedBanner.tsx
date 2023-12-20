@@ -1,6 +1,6 @@
 import { Routes } from '@/config/routes'
 
-import { ButtonInternalLink } from '../../Button'
+import { ButtonInternalLink } from '../Button'
 
 export const UnauthenticatedBanner = () => {
   return (

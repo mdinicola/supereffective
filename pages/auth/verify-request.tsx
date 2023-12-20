@@ -4,9 +4,9 @@ import { Routes } from '@/config/routes'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import { ButtonLink } from '@/lib/components/Button'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
 import { abs_url } from '@/lib/components/Links'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
+import { LoadingRedirectBanner } from '@/lib/components/panels/LoadingRedirectBanner'
 import { base64Decode } from '@/lib/utils/serialization/base64'
 
 export default function Page() {

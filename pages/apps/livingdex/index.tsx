@@ -7,8 +7,8 @@ import PageMeta from '@/features/pages/components/PageMeta'
 import { getPageRepository } from '@/features/pages/repository/getPageRepository'
 import { PageEntry } from '@/features/pages/repository/types'
 import { getSession } from '@/features/users/auth/serverside/getSession'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { abs_url } from '@/lib/components/Links'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 
 const Page = ({
   entry,

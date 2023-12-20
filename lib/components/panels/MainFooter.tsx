@@ -1,9 +1,8 @@
-import { SiDiscord, SiGithub, SiX as SiTwitterX } from '@icons-pack/react-simple-icons'
-
 import config from '@/config'
 
-import { ExternLink, SiteLink } from '../../Links'
-import { LogoWhite } from '../LogoWhite'
+import { DiscordLinkIcon, GithubLinkIcon, TwitterLinkIcon } from '../icons/brand-icons'
+import { LogoWhite } from '../layout/LogoWhite'
+import { ExternLink, SiteLink } from '../Links'
 import styles from './MainFooter.module.css'
 
 export default function MainFooter() {
@@ -79,27 +78,9 @@ export default function MainFooter() {
           <p className={titleClass}>Follow Us</p>
           <ul>
             <li className={styles.socialList}>
-              <ExternLink
-                className={styles.brandLink}
-                href={config.links.github_site}
-                title={'Github'}
-              >
-                <SiGithub className={styles.brandIcon} size={18} />
-              </ExternLink>
-              <ExternLink
-                className={styles.brandLink}
-                href={config.links.discord}
-                title={'Discord'}
-              >
-                <SiDiscord className={styles.brandIcon} size={18} />
-              </ExternLink>
-              <ExternLink
-                className={styles.brandLink}
-                href={config.links.twitter}
-                title={'Twitter/X'}
-              >
-                <SiTwitterX className={styles.brandIcon} size={18} />
-              </ExternLink>
+              <TwitterLinkIcon className={styles.brandLink} />
+              <DiscordLinkIcon className={styles.brandLink} />
+              <GithubLinkIcon className={styles.brandLink} />
             </li>
           </ul>
         </div>

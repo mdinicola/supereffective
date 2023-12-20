@@ -8,9 +8,6 @@ dependencies:
   '@ianvs/prettier-plugin-sort-imports':
     specifier: ^4.1.1
     version: 4.1.1(prettier@3.1.1)
-  '@icons-pack/react-simple-icons':
-    specifier: ^9.2.0
-    version: 9.2.0(react@18.2.0)
   '@next-auth/prisma-adapter':
     specifier: 1.0.7
     version: 1.0.7(@prisma/client@5.7.1)(next-auth@4.24.5)
@@ -66,8 +63,8 @@ dependencies:
     specifier: ^8.0.3
     version: 8.0.3
   lucide-react:
-    specifier: 0.298.0
-    version: 0.298.0(react@18.2.0)
+    specifier: 0.299.0
+    version: 0.299.0(react@18.2.0)
   nanoid:
     specifier: ^5.0.4
     version: 5.0.4
@@ -545,14 +542,6 @@ packages:
       semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /@icons-pack/react-simple-icons@9.2.0(react@18.2.0):
-    resolution: {integrity: sha512-09JZZx/jM4ugzwcUw4OSS1l6/83x2sJzG6jwzHpNmPufY1rq7apLdcK+4Cy9nebAuZEwaeVZQ69c8uib736LeA==}
-    peerDependencies:
-      react: ^16.13 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /@isaacs/cliui@8.0.2:
@@ -4022,8 +4011,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.298.0(react@18.2.0):
-    resolution: {integrity: sha512-tWoxZ663Zf/n8VxXTHnTJsU/w1ysWT1LORnIL1pzqElFdSqBhWbZeJ3sLdCZ5FpzpbkpkYEtluhuTyG2BTDYNQ==}
+  /lucide-react@0.299.0(react@18.2.0):
+    resolution: {integrity: sha512-59MiDzDzFI/efHhb4n0vGdXelMNwou7JlAFvVS4boA1G/7aYU7garPciYo73CODzkhrhz0JOgdtSTPSe5dMrlQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -4440,7 +4429,7 @@ packages:
     dependencies:
       next: 14.0.4(@babel/core@7.23.6)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      remeda: 1.31.0
+      remeda: 1.32.0
       whatwg-fetch: 3.6.20
     dev: false
 
@@ -5003,8 +4992,8 @@ packages:
       vfile: 6.0.1
     dev: false
 
-  /remeda@1.31.0:
-    resolution: {integrity: sha512-nRoIO0E/3Ruuq4LO4szkGfOGXstB2KbroMqjFRcNA2pBN594AMzRKqY347NIf7WIslIxbQ1cKBpUkQxUgmoxuQ==}
+  /remeda@1.32.0:
+    resolution: {integrity: sha512-bfQgEIewCxttmAm4Obx8TFWXBxuNYjZn9TyPIPXzQyCukJWDYkNecEf9m/sIczm72ZypoJWFew3F0YaeLGVgGg==}
     dev: false
 
   /require-directory@2.1.1:

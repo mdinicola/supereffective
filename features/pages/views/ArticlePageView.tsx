@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Entry, EntryType } from '@/features/pages/repository/types'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 import { cleanupSpaces as clean } from '@/lib/utils/strings'
 import { getFullUrl } from '@/lib/utils/urls'
 

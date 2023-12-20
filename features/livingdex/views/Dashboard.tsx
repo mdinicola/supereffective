@@ -6,7 +6,7 @@ import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext
 import { WelcomeContent } from '@/features/livingdex/views/WelcomeContent'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import { ButtonInternalLink } from '@/lib/components/Button'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 
 const WelcomeContentContainer = (): JSX.Element => {
   return (
