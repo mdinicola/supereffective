@@ -6,6 +6,10 @@
   height: var(--menu-height);
   z-index: 110;
   white-space: nowrap;
+  --pattern-height: 6px;
+  background: rgba(var(--color-blueberry-darker-rgb), 0.6);
+  /* background: url('/assets/patterns2/crystals5.png?s') top left;
+  background-size: 500px 200px; */
 }
 
 .headerTop {
@@ -17,8 +21,26 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  background: var(--color-blueberry-darker);
+  background: rgba(var(--color-blueberry-darker-rgb), 1);
+  z-index: 1;
+  /* border-image: url('/assets/gui/bgs/pattern-geometric2.jpg') 12 2;
+  border-image-slice: 1;
+  border-bottom-width: 20px;
+  border-bottom-style: solid; */
   border-bottom: 2px solid var(--color-blueberry-medium);
+}
+
+.headerTop:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: var(--pattern-height);
+  background: url('/assets/patterns/crystals5.png?s') top left;
+  opacity: 0.8;
+  background-size: 200px 100px;
+  /* border-bottom: 2px solid var(--color-blueberry-dark); */
 }
 
 .headerLogo {
@@ -26,19 +48,23 @@
   overflow: visible;
   align-items: center;
   padding: 0 1rem;
+  z-index: 2;
 }
 
 .headerLogo img {
   display: inline-block;
   vertical-align: middle;
-  height: 80px;
+  height: 64px;
   width: auto;
-  margin: 18px 0 0 0;
+  margin: 8px 0 0 0;
   transition: all 0.2s ease-in-out;
+  mix-blend-mode: color-burn;
+  filter: saturate(1) contrast(1) hue-rotate(120deg);
 }
 
 .headerLogo:hover img {
   transform: scale(1.2);
+  filter: none;
 }
 
 :global(.loading) .headerLogo img {
@@ -84,6 +110,7 @@
   align-content: center;
   font-size: 0.8rem;
   padding: 0 2rem;
+  padding-top: var(--pattern-height);
 }
 
 .menu a,

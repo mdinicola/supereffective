@@ -123,6 +123,8 @@
   --letter-spacing-tracked: 0.1em;
   --letter-spacing-negative: -0.05em;
   --letter-spacing-large: 0.25em;
+
+  /** BLUEBERRY **/
   --color-blueberry-dark: #152944;
   --color-blueberry-gradient: linear-gradient(
     var(--color-blueberry-dark),
@@ -132,11 +134,17 @@
     var(--color-blueberry-medium),
     var(--color-blueberry-dark)
   );
+  --color-blueberry-dark-rgb: 21, 41, 68;
   --color-blueberry-dark-alpha20: rgba(21, 41, 68, 0.2);
   --color-blueberry-dark-alpha50: rgba(21, 41, 68, 0.5);
   --color-blueberry-dark-alpha80: rgba(21, 41, 68, 0.8);
   --color-blueberry-darker: #0d1929;
+  --color-blueberry-darker-rgb: 13, 25, 41;
+  --color-blueberry-darker-alpha20: rgba(13, 25, 41, 0.2);
+  --color-blueberry-darker-alpha50: rgba(13, 25, 41, 0.5);
+  --color-blueberry-darker-alpha80: rgba(13, 25, 41, 0.8);
   --color-blueberry-medium: #164780;
+  --color-blueberry-medium-rgb: 22, 71, 128;
   --color-blueberry-medium-alpha20: rgba(22, 71, 128, 0.2);
   --color-blueberry-medium-alpha50: rgba(22, 71, 128, 0.5);
   --color-blueberry-medium-alpha80: rgba(22, 71, 128, 0.8);
@@ -185,6 +193,19 @@
 
 .bg-blueberry-darker {
   background-color: var(--color-blueberry-darker);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-blueberry-darker-alpha20 {
+  background-color: var(--color-blueberry-darker-alpha20);
+}
+
+.bg-blueberry-darker-alpha50 {
+  background-color: var(--color-blueberry-darker-alpha50);
+}
+
+.bg-blueberry-darker-alpha80 {
+  background-color: var(--color-blueberry-darker-alpha80);
   color: rgba(255, 255, 255, 0.8);
 }
 
