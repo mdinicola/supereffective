@@ -4,7 +4,8 @@ Thanks for your interest to contribute to `SuperEffective`. Please take a moment
 
 ## Repository
 
-supereffective.gg is a monorepo using turbo and pnpm workspaces. We use Node v18. The package manager used to install
+supereffective.gg is a Next.js app using turbo and pnpm.
+We use Node v20. The package manager used to install
 and link dependencies must be [pnpm v8](https://pnpm.io/). It can be installed as:
 
 ```sh
@@ -19,7 +20,7 @@ pnpm install
 
 ## Developing
 
-The main package can be found in `packages/website`. You can quickly test and debug your
+You can quickly test and debug your
 changes by running:
 
 ```sh
