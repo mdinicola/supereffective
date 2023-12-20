@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext } from 'next'
 
-import { getGameSetByGameId } from '@/features/common/game-sets'
 import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
 import { getPresets } from '@/features/livingdex/repository/legacy/presets'
 import { PresetDexMap } from '@/features/livingdex/repository/legacy/presets/types'
@@ -8,6 +7,7 @@ import { LoadedDex } from '@/features/livingdex/repository/legacy/types'
 import LivingDexApp from '@/features/livingdex/views/LivingDexApp'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { abs_url } from '@/lib/components/Links'
+import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { logger } from '@/lib/utils/logger'
 import { deserializeObject, serializeObject } from '@/lib/utils/serialization/jsonSerializable'
 

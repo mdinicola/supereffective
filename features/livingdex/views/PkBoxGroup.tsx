@@ -1,8 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from 'react'
 
 import config from '@/config'
-import { getGameSetByGameId } from '@/features/common/game-sets'
-import { getPokemonEntry } from '@/features/common/pokemon'
 import { createBoxTitle } from '@/features/livingdex/repository/legacy/presets/createBoxTitle'
 import {
   DexBox,
@@ -12,6 +10,8 @@ import {
   PkFilter,
 } from '@/features/livingdex/repository/legacy/types'
 import Button from '@/lib/components/Button'
+import { getGameSetByGameId } from '@/lib/data-client/game-sets'
+import { getPokemonEntry } from '@/lib/data-client/pokemon'
 import { classNames } from '@/lib/utils/deprecated'
 import { slugify } from '@/lib/utils/strings'
 

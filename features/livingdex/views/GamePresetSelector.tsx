@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { getGameById } from '@/features/common/games'
 import { getAvailableGames } from '@/features/livingdex/repository/legacy/gameAvailability'
 import { getPresetsForGame } from '@/features/livingdex/repository/legacy/presets'
 import { PresetDex } from '@/features/livingdex/repository/legacy/presets/types'
@@ -11,6 +10,7 @@ import { useSession } from '@/features/users/auth/hooks/useSession'
 import { ButtonInternalLink } from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { UnauthenticatedBanner } from '@/lib/components/layout/panels/UnauthenticatedBanner'
+import { getGameById } from '@/lib/data-client/games'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
 

@@ -1,4 +1,4 @@
-import { getPokemonIds } from '@/features/common/pokemon'
+import { getPokemonIds } from '@/lib/data-client/pokemon'
 import { jsonDecode } from '@/lib/utils/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 import { isValidIdSchema } from '@/lib/validation/schemas'

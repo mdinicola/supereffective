@@ -1,4 +1,4 @@
-import { getSupportedGameIds } from '../../../common/games'
+import { getSupportedGameIds } from '../../../../lib/data-client/games'
 import { LoadedDexList } from './types'
 
 export function getUsedGameSets(userDexes: LoadedDexList): string[] {

@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import { TypeIcon } from '@supeffective/icons'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 
 // import { GameLabel, TypeIcon } from '@/lib/icons'
-import { getGameSetById } from '@/features/common/game-sets'
-import { PokemonEntry, PokemonEntrySearchIndex } from '@/features/common/pokemon/types'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import Button from '@/lib/components/Button'
 import { ExternLink } from '@/lib/components/Links'
+import { getGameSetById } from '@/lib/data-client/game-sets'
+import { PokemonEntry, PokemonEntrySearchIndex } from '@/lib/data-client/pokemon/types'
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 import css from './Pokedex.module.css'

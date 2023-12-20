@@ -1,6 +1,6 @@
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
-import { fetchData } from '../data-client'
+import { fetchData } from '..'
 import { LegacyGame, LegacyGameDict } from './types'
 
 export { getGameIds as getSupportedGameIds }

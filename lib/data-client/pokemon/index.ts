@@ -1,7 +1,7 @@
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 import { SimpleSearchIndex } from '@/lib/utils/search/SimpleSearchIndex'
 
-import { fetchData } from '../data-client'
+import { fetchData } from '..'
 import {
   PokemonEntry,
   PokemonEntryMap,

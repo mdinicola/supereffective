@@ -1,5 +1,5 @@
-import { fetchData } from '@/features/common/data-client'
-import { getGameSetByGameId } from '@/features/common/game-sets'
+import { fetchData } from '@/lib/data-client'
+import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
 import { PresetDex, PresetDexMap } from './types'

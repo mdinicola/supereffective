@@ -1,4 +1,4 @@
-import { getPokemonEntry, isShinyLocked } from '@/features/common/pokemon'
+import { getPokemonEntry, isShinyLocked } from '@/lib/data-client/pokemon'
 
 import { DexPokemon } from '../types'
 import { PresetDexPokemon } from './types'

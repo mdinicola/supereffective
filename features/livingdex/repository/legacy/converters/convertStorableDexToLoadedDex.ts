@@ -1,4 +1,4 @@
-import { getGameSetByGameId } from '@/features/common/game-sets'
+import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 
 import { DexBox, LoadedDex, StorableDex } from '../types'
 import { convertPokemonListToNormalized } from './convertPokemonListToNormalized'

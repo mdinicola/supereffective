@@ -1,4 +1,4 @@
-import { getGameById } from '@/features/common/games'
+import { getGameById } from '@/lib/data-client/games'
 
 import { DEX_SCHEMA_VERSION, DexBox, LoadedDex } from '../types'
 import { createBoxTitle } from './createBoxTitle'

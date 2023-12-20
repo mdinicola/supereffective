@@ -1,4 +1,4 @@
-import { getPokemonEntry, isShinyLocked } from '@/features/common/pokemon'
+import { getPokemonEntry, isShinyLocked } from '@/lib/data-client/pokemon'
 
 import { isCatchable, recalculateCounters } from '../index'
 import { DexBox, DexPokemon, LoadedDex } from '../types'

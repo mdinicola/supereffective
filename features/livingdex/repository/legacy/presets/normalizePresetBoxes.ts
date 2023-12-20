@@ -1,4 +1,4 @@
-import { getGameSetByGameId } from '@/features/common/game-sets'
+import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 
 import { NullablePresetDexPokemon, PresetDex, PresetDexBox } from './types'
 
