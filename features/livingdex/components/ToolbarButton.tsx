@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import Link from 'next/link'
+import React, { useState } from 'react'
 
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
@@ -101,7 +101,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
   )
 }
 
-type ToolbarButtonGroupChildProps = Omit<ToolbarButtonProps, 'onClick'>
+export type ToolbarButtonGroupChildProps = Omit<ToolbarButtonProps, 'onClick'>
 
 export interface ToolbarButtonGroupProps {
   initialAction: string | null

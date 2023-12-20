@@ -4,6 +4,7 @@ import {
   Settings2Icon,
   ToggleLeftIcon,
   ToggleRightIcon,
+  TrashIcon,
   WandIcon,
 } from 'lucide-react'
 import { useRouter } from 'next/compat/router'
@@ -11,12 +12,10 @@ import { NextRouter } from 'next/router'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
 
-import config from '@/config'
-import { GameLogo } from '@/features/livingdex/components/GameLogo'
 import PkImgFile from '@/features/livingdex/components/PkImgFile'
-import { DexSocialLinks } from '@/features/livingdex/components/SocialLinks'
 import {
   ToolbarButtonGroup,
+  ToolbarButtonGroupChildProps,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
 } from '@/features/livingdex/components/ToolbarButton'
@@ -25,36 +24,32 @@ import {
   convertDexFromLegacyToV4,
   convertDexFromV4ToLegacyStd,
 } from '@/features/livingdex/parser/support'
-import { isCatchable } from '@/features/livingdex/repository'
 import { convertStorableDexToLoadedDex } from '@/features/livingdex/repository/converters/convertStorableDexToLoadedDex'
 import { getPresetByIdForGame, getPresetsForGame } from '@/features/livingdex/repository/presets'
 import { normalizeDexWithPreset } from '@/features/livingdex/repository/presets/normalizeDexWithPreset'
 import { PresetDex, PresetDexMap } from '@/features/livingdex/repository/presets/types'
-import { DexBox, LoadedDex, NullableDexPokemon } from '@/features/livingdex/repository/types'
+import { LoadedDex } from '@/features/livingdex/repository/types'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import Button from '@/lib/components/Button'
-import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
-import { SiteLink } from '@/lib/components/Links'
 import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
-import { classNameIf } from '@/lib/utils/deprecated'
 import { slugify } from '@/lib/utils/strings'
 
-import { PkBoxGroup } from '../components/pkm-box/PkBoxGroup'
-import { PkBoxGroupShinyMixed } from '../components/pkm-box/PkBoxGroupShinyMixed'
 import { MarkType, SelectMode, ViewMode } from '../components/pkm-box/pkBoxTypes'
 import { LivingDexContext } from '../state/LivingDexContext'
-import styles from './LivingDexApp.module.css'
-import LivingDexToolbar from './LivingDexToolbar'
+import {
+  LivingDexToolbarStoreContext,
+  availableMarks,
+  useLivingDexToolbarStore,
+} from '../state/toolbar'
+import styles from './LivingDexToolbar.module.css'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
-type SyncState = 'changed' | 'synced'
-type SavingState = 'ready' | 'saving' | 'saved' | 'error'
 const defaultTool: ActionTool = 'catch'
 
-export interface LivingDexAppProps {
+export interface LivingDexToolbarProps {
   loadedDex: LoadedDex
   presets: PresetDexMap
   onSave?: (dex: LoadedDex, isNewDex: boolean) => void
@@ -74,24 +69,6 @@ interface ModalContent {
 }
 
 const saveTimeout = 2000
-
-// const toggleUrlParam = (param: string, value: string) => {
-//   const url = new URL(window.location.href)
-//   const params = new URLSearchParams(url.search)
-//   if (params.get(param) === value) {
-//     params.delete(param)
-//   } else {
-//     params.set(param, value)
-//   }
-//   url.search = params.toString()
-//   window.history.replaceState({}, '', url.toString())
-// }
-
-// const readUrlParam = (param: string) => {
-//   const url = new URL(window.location.href)
-//   const params = new URLSearchParams(url.search)
-//   return params.get(param)
-// }
 
 const setUrlParamRouter = (
   param: string,
@@ -127,39 +104,37 @@ const readUrlParamRouter = (
   return value as string
 }
 
-export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
+export default function LivingDexToolbar({ loadedDex, presets, onSave }: LivingDexToolbarProps) {
   const router = useRouter()
-  const initialMarkTypes: MarkType[] = String(readUrlParamRouter('marks', router, 'catch')).split(
-    ','
-  ) as MarkType[]
-  const allMarkTypes: MarkType[] = ['catch', 'shiny', 'gmax', 'alpha']
-  // const viewOnlyModeMarkTypes: MarkType[] = ['shiny', 'gmax', 'alpha']
-  const [savingState, setSavingState] = useState<SavingState>('ready')
-  const [syncState, setSyncState] = useState<SyncState>('synced')
-  const [selectMode, setSelectMode] = useState<SelectMode>('cell')
-  const [currentTool, setCurrentTool] = useState<ActionTool>(defaultTool)
+  const dexesContext = useDexesContext()
+  const livingdex = useContext(LivingDexContext)
+  const auth = useSession()
+  const toolbarStore = useLivingDexToolbarStore()
+
+  console.log('toolbarStore', toolbarStore)
+
+  // UI state
   const [showRemoveModal, setShowRemoveModal] = useState(false)
+  const [modalContent, setModalContent] = useState<ModalContent | null>(null)
+  const [saveError, setSaveError] = useState<Error | null>(null)
+
+  // Initializers
+  const dex = livingdex.state
+  const currentUser = auth.currentUser
+  const { dexesLoading, saveDex, deleteDex } = dexesContext
+
   const numBoxes = loadedDex.boxes.length || 0
   const defaultViewMode = numBoxes > 2 ? 'boxed' : 'listed'
+
   const [viewMode, setViewMode] = useState<ViewMode>(
     readUrlParamRouter('mode', router, defaultViewMode) as ViewMode
   )
-  const [modalContent, setModalContent] = useState<ModalContent | null>(null)
-  const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
-  const livingdex = useContext(LivingDexContext)
-  const [saveError, setSaveError] = useState<Error | null>(null)
-  const [showRegularBoxes, setShowRegularBoxes] = useState(
-    readUrlParamRouter('nonshiny', router, '1') === '1'
-  )
-  const [showShinyBoxes, setShowShinyBoxes] = useState(
-    readUrlParamRouter('shiny', router, undefined) === '1'
-  )
-  const [shinyAfterRegular, setShinyAfterRegular] = useState(
-    readUrlParamRouter('shinyafter', router, '0') === '1'
-  )
-  const showMixedShinies = showShinyBoxes && showRegularBoxes
 
-  const dex = livingdex.state
+  const toolbarContext: LivingDexToolbarStoreContext = {
+    dex: loadedDex,
+    dexesApi: dexesContext,
+    router: router!,
+  }
 
   const app = new Proxy(livingdex.actions, {
     get(target, prop) {
@@ -167,28 +142,21 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         return target[prop as keyof typeof livingdex.actions]
       }
       return (...args: any[]) => {
-        setSyncState('changed')
+        toolbarStore.setSyncState('changed', toolbarContext)
         return (target[prop as keyof typeof livingdex.actions] as any)(...args)
       }
     },
   })
 
-  const auth = useSession()
-  const currentUser = auth.currentUser
-  const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
+  // const [markTypes, setMarkTypes] = useState<MarkType[]>(initialMarkTypes)
   // console.log('markTypes', markTypes)
-  const { dexesLoading, saveDex, deleteDex } = useDexesContext()
-  const lastSavedAtString =
-    lastSavedAt && lastSavedAt.toLocaleDateString
-      ? `${lastSavedAt.toLocaleDateString()} ${lastSavedAt.toLocaleTimeString()}`
-      : ''
 
   const handleSavedState = () => {
-    setSyncState('synced')
-    setSavingState('saved')
-    setLastSavedAt(new Date())
+    toolbarStore.setSyncState('synced', toolbarContext)
+    toolbarStore.setSavingState('saved', toolbarContext)
+    toolbarStore.setLastSavedAt(new Date(), toolbarContext)
     setTimeout(() => {
-      setSavingState('ready')
+      toolbarStore.setSavingState('ready', toolbarContext)
     }, saveTimeout)
   }
 
@@ -200,11 +168,11 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     if (!dex.userId) {
       throw new Error('Cannot save dex without a logged in user')
     }
-    if (savingState !== 'ready') {
+    if (toolbarStore.savingState !== 'ready') {
       return
     }
 
-    setSavingState('saving')
+    toolbarStore.setSavingState('saving', toolbarContext)
 
     const isNewDex = dex.id === null || dex.id === undefined
 
@@ -212,10 +180,10 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       .then(updatedDex => {
         if (updatedDex instanceof Error) {
           console.error('Failed to save', updatedDex)
-          setSavingState('error')
+          toolbarStore.setSavingState('error', toolbarContext)
           setSaveError(updatedDex)
           setTimeout(() => {
-            setSavingState('ready')
+            toolbarStore.setSavingState('ready', toolbarContext)
           }, saveTimeout)
           return
         }
@@ -242,10 +210,10 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       })
       .catch(e => {
         console.error('Failed to save', e)
-        setSavingState('error')
+        toolbarStore.setSavingState('error', toolbarContext)
         setSaveError(e)
         setTimeout(() => {
-          setSavingState('ready')
+          toolbarStore.setSavingState('ready', toolbarContext)
         }, saveTimeout)
       })
   }
@@ -263,7 +231,11 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       return
     }
 
-    if (!auth.isAuthenticated || savingState !== 'ready' || syncState !== 'changed') {
+    if (
+      !auth.isAuthenticated ||
+      toolbarStore.savingState !== 'ready' ||
+      toolbarStore.syncState !== 'changed'
+    ) {
       return
     }
     const autoSaveTimeout = setTimeout(() => {
@@ -297,98 +269,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
 
   const gameSet = getGameSetByGameId(dex.gameId)
   const gameSymbols = gameSet.storage?.symbols || []
-  const hasShinyMode = gameSet.hasShinies
-
-  const handleBoxClick = (boxIndex: number, boxData: DexBox) => {
-    if (viewMode !== 'boxed') {
-      throw new Error('Cannot handle box click in non-boxed view mode')
-    }
-
-    if (selectMode !== 'box' || boxData.pokemon.length === 0) {
-      return
-    }
-
-    // find first pokemon in box, that is not null
-    const firstPokemon = boxData.pokemon.find(pk => pk !== null)
-    if (firstPokemon === undefined || firstPokemon === null) {
-      return
-    }
-
-    switch (currentTool) {
-      case 'catch':
-        app.catchBox(boxIndex, !firstPokemon.caught)
-        break
-      case 'shiny':
-        app.shinifyBox(boxIndex, !firstPokemon.shiny)
-        break
-      case 'alpha':
-        app.alphaizeBox(boxIndex, !firstPokemon.alpha)
-        break
-      case 'gmax':
-        app.gmaxizeBox(boxIndex, !firstPokemon.gmax)
-        break
-    }
-  }
-
-  const handlePkmClick = (
-    boxIndex: number,
-    pokemonIndex: number,
-    pokemonData: NullableDexPokemon
-  ) => {
-    if (pokemonData === null || selectMode !== 'cell') {
-      return
-    }
-    switch (currentTool) {
-      case 'catch':
-        if (!isCatchable(pokemonData)) {
-          return
-        }
-        app.catchPokemon(boxIndex, pokemonIndex, !pokemonData.caught)
-        break
-      case 'shiny':
-        if (pokemonData.shinyLocked) {
-          return
-        }
-        app.shinifyPokemon(boxIndex, pokemonIndex, !pokemonData.shiny)
-        break
-      case 'alpha':
-        app.alphaizePokemon(boxIndex, pokemonIndex, !pokemonData.alpha)
-        break
-      case 'gmax':
-        app.gmaxizePokemon(boxIndex, pokemonIndex, !pokemonData.gmax)
-        break
-    }
-  }
-
-  const handleDexTitleChange = (newTitle: string) => {
-    if (newTitle === dex.title || newTitle.length === 0) {
-      return
-    }
-
-    if (newTitle.length > config.limits.maxDexTitleSize) {
-      newTitle = newTitle.slice(0, config.limits.maxDexTitleSize)
-    }
-
-    app.setDexTitle(newTitle)
-  }
-
-  const handleBoxTitleEdit = (boxIndex: number, newTitle: string) => {
-    if (newTitle === dex.boxes[boxIndex].title || newTitle.length === 0) {
-      return
-    }
-
-    if (newTitle.length > config.limits.maxBoxTitleSize) {
-      newTitle = newTitle.slice(0, config.limits.maxBoxTitleSize)
-    }
-
-    app.setBoxTitle(boxIndex, newTitle)
-  }
 
   const handleExport = () => {
     const docSpec = convertDexFromLegacyToV4(dex)
-    // const mdContent = serializeLivingDex(docSpec, getLivingDexFormat('v4'), true)
-    // const blob = new Blob([mdContent], { type: 'text/plain;charset=utf-8' })
-
     // download as text/plain blob:
     const blob = new Blob([JSON.stringify(docSpec, undefined, 2)], {
       type: 'application/json;charset=utf-8',
@@ -396,7 +279,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     const url = URL.createObjectURL(blob)
     const element = document.createElement('a')
     element.setAttribute('href', url)
-    // element.setAttribute('download', dex.title + '.md')
     element.setAttribute('download', slugify(dex.title) + '.livingdex.json')
     element.style.display = 'none'
     document.body.appendChild(element)
@@ -443,7 +325,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           const loadedDex = convertStorableDexToLoadedDex(
             convertDexFromV4ToLegacyStd(dex.id, currentUser.uid, data)
           )
-          // loadedDex.id = undefined // TODO: this is a hack to force a new id to be generated
           app.setDex(loadedDex)
 
           setModalContent({
@@ -473,25 +354,22 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const handleSettingsToolbar = (
-    newAction: string | null,
-    prevState: string | null,
-    prevAction: string | null
+    newAction: string | null
+    // prevState: string | null,
+    // prevAction: string | null
   ) => {
     if (newAction === 'toggle-showRegularBoxes') {
-      setUrlParamRouter('nonshiny', showRegularBoxes ? '0' : '1', router)
-      setShowRegularBoxes(!showRegularBoxes)
+      toolbarStore.setShowRegularBoxes(!toolbarStore.showRegularBoxes, toolbarContext)
       return
     }
 
     if (newAction === 'toggle-showShinyBoxes') {
-      setUrlParamRouter('shiny', showShinyBoxes ? '0' : '1', router)
-      setShowShinyBoxes(!showShinyBoxes)
+      toolbarStore.setShowShinyBoxes(!toolbarStore.showShinyBoxes, toolbarContext)
       return
     }
 
     if (newAction === 'toggle-shinyAfterRegular') {
-      setUrlParamRouter('shinyafter', shinyAfterRegular ? '0' : '1', router)
-      setShinyAfterRegular(!shinyAfterRegular)
+      toolbarStore.setShinyAfterRegular(!toolbarStore.shinyAfterRegular, toolbarContext)
       return
     }
 
@@ -504,17 +382,19 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       handleExport()
       return
     }
+    if (newAction === 'delete-dex') {
+      setShowRemoveModal(true) // TODO convert to a ModalButton component
+    }
 
     if (newAction === 'toggle-marks') {
       const routerMarks = readUrlParamRouter('marks', router, undefined)
       if (!routerMarks) {
-        setUrlParamRouter('marks', allMarkTypes.join(','), router)
-        setMarkTypes(allMarkTypes)
+        toolbarStore.setMarks(availableMarks, toolbarContext)
         return
       }
 
       setUrlParamRouter('marks', undefined, router)
-      setMarkTypes([])
+      toolbarStore.setMarks([], toolbarContext)
       return
     }
   }
@@ -533,31 +413,29 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const handleSelectModeToolbar = (
-    newAction: string | null,
-    prevState: string | null,
-    prevAction: string | null
+    newAction: string | null
+    // prevState: string | null,
+    // prevAction: string | null
   ) => {
-    if (newAction === selectMode || newAction === null) {
+    if (newAction === toolbarStore.selectMode || newAction === null) {
       return
     }
-    setSelectMode(newAction as SelectMode)
-    // tracker.dexSelectModeChanged(dex, newAction)
+    toolbarStore.setSelectMode(newAction as SelectMode, toolbarContext)
   }
 
   const handleViewModeToolbar = (
-    newAction: string | null,
-    prevState: string | null,
-    prevAction: string | null
+    newAction: string | null
+    // prevState: string | null,
+    // prevAction: string | null
   ) => {
     if (newAction === viewMode || viewMode === null) {
       return
     }
-    if (selectMode === 'box') {
-      setSelectMode('cell')
+    if (toolbarStore.selectMode === 'box') {
+      toolbarStore.setSelectMode('cell', toolbarContext)
     }
     setViewMode(newAction as ViewMode)
     setUrlParamRouter('mode', newAction, router)
-    // tracker.dexViewModeChanged(dex, newAction)
   }
 
   const handleChangePresetToolbar = (
@@ -629,25 +507,20 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         preset: preset!,
       },
     })
-    // TODO tracker.dexPresetChanged(dex, newAction)
   }
 
   const handleActionToolToolbar = (newAction: string | null) => {
-    if (newAction === currentTool) {
+    if (newAction === toolbarStore.currentTool) {
       return
     }
     if (newAction === 'all-marks') {
-      setMarkTypes(allMarkTypes)
-      setUrlParamRouter('marks', allMarkTypes.join(','), router)
+      toolbarStore.setMarks(availableMarks, toolbarContext)
     } else if (newAction === 'no-marks') {
-      setMarkTypes([])
-      setUrlParamRouter('marks', '', router)
+      toolbarStore.setMarks([], toolbarContext)
     } else {
-      setMarkTypes([newAction as MarkType])
-      setUrlParamRouter('marks', newAction, router)
+      toolbarStore.setMarks([newAction as MarkType], toolbarContext)
     }
-    setCurrentTool(newAction as ActionTool)
-    // tracker.dexMarkingToolSelected(dex, newAction)
+    toolbarStore.setCurrentTool(newAction as ActionTool, toolbarContext)
   }
 
   const toolbarWrenchTools = [
@@ -657,7 +530,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       label: 'Import JSON file',
       status: '',
       className: styles.saveBtn,
-      // onClick: handleImport,
       showLabel: true,
     },
     {
@@ -666,28 +538,37 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       label: 'Export as JSON',
       status: '',
       className: styles.saveBtn,
-      // onClick: handleExport,
       showLabel: true,
     },
   ]
+
+  const deleteDexToolbarItems: Array<ToolbarButtonGroupChildProps | null> =
+    isEditable && dex.id
+      ? [
+          null,
+          {
+            actionName: 'delete-dex',
+            icon: (
+              <>
+                <TrashIcon />
+              </>
+            ),
+            label: 'Delete Dex',
+            className: styles.dangerBtn,
+            status: null,
+            showLabel: true,
+          },
+        ]
+      : []
 
   const toolbar = (
     <div id={'dex-' + dex.id} className={styles.toolbar}>
       <div className={styles.toolbarContainer}>
         <ToolbarButtonGroupGroup collapsed={true}>
-          {/* <ToolbarButton
-            actionName={null}
-            icon={'home3'}
-            href={'/apps/livingdex'}
-            label={'Go back to the list of Living Dexes'}
-            onClick={() => {
-              // tracker.dexesHomeClicked()
-            }}
-          /> */}
           {/*Todo: fix button group internal state not updating when selectMode changes (initialAction related?)*/}
           {isEditable && viewMode !== 'boxed' && (
             <ToolbarButtonGroup
-              initialAction={selectMode}
+              initialAction={toolbarStore.selectMode}
               onButtonClick={handleSelectModeToolbar}
               isDropdown
               dropdownTitle={'Selection mode'}
@@ -709,7 +590,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           )}
           {isEditable && viewMode === 'boxed' && (
             <ToolbarButtonGroup
-              initialAction={selectMode}
+              initialAction={toolbarStore.selectMode}
               onButtonClick={handleSelectModeToolbar}
               isDropdown
               dropdownTitle={'Selection mode'}
@@ -741,7 +622,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           />
           {isEditable && (
             <ToolbarButtonGroup
-              initialAction={currentTool}
+              initialAction={toolbarStore.currentTool}
               onButtonClick={handleActionToolToolbar}
               isDropdown
               dropdownTitle={'Marker tool'}
@@ -752,7 +633,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   actionName: 'catch',
                   icon: 'pkg-pokeball',
                   label: 'Caught Marker Tool',
-                }, // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
+                },
+                // {actionName: 'shiny', icon: 'pkg-shiny', label: 'Shiny Marker Tool'},
                 {
                   actionName: 'gmax',
                   icon: 'pkg-dynamax',
@@ -811,29 +693,37 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               return [
                 {
                   actionName: 'toggle-showRegularBoxes',
-                  icon: <>{showRegularBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
-                  label: showRegularBoxes ? 'Show non-shiny' : 'Show non-shiny',
-                  status: showRegularBoxes ? 'selected' : null,
+                  icon: (
+                    <>{toolbarStore.showRegularBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>
+                  ),
+                  label: toolbarStore.showRegularBoxes ? 'Show non-shiny' : 'Show non-shiny',
+                  status: toolbarStore.showRegularBoxes ? 'selected' : null,
                   title: 'Show shiny boxes mixed with the non-shiny ones',
                   className: styles.saveBtn,
                   showLabel: true,
                 },
                 {
                   actionName: 'toggle-showShinyBoxes',
-                  icon: <>{showShinyBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
-                  label: showShinyBoxes ? 'Show shiny' : 'Show shiny',
-                  status: showShinyBoxes ? 'selected' : null,
+                  icon: (
+                    <>{toolbarStore.showShinyBoxes ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>
+                  ),
+                  label: toolbarStore.showShinyBoxes ? 'Show shiny' : 'Show shiny',
+                  status: toolbarStore.showShinyBoxes ? 'selected' : null,
                   className: styles.saveBtn,
                   showLabel: true,
                 },
                 {
                   actionName: 'toggle-shinyAfterRegular',
-                  icon: <>{shinyAfterRegular ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>,
-                  label: shinyAfterRegular ? 'Shiny after non-shiny' : 'Shiny after non-shiny',
+                  icon: (
+                    <>{toolbarStore.shinyAfterRegular ? <ToggleRightIcon /> : <ToggleLeftIcon />}</>
+                  ),
+                  label: toolbarStore.shinyAfterRegular
+                    ? 'Shiny after non-shiny'
+                    : 'Shiny after non-shiny',
                   status:
-                    shinyAfterRegular && showShinyBoxes
+                    toolbarStore.shinyAfterRegular && toolbarStore.showShinyBoxes
                       ? 'selected'
-                      : showShinyBoxes
+                      : toolbarStore.showShinyBoxes
                         ? null
                         : 'disabled',
 
@@ -845,11 +735,12 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 {
                   actionName: 'toggle-marks',
                   icon: 'eye',
-                  status: markTypes.length > 0 ? 'selected' : null,
+                  status: toolbarStore.marks.length > 0 ? 'selected' : null,
                   label: 'Toggle Marks & Uncaught',
                   className: styles.saveBtn,
                   showLabel: true,
                 },
+                ...deleteDexToolbarItems,
               ]
             })()}
           />
@@ -879,16 +770,16 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                 let icon = 'floppy-disk'
                 let text: string | undefined = ''
                 let status: ToolbarButtonStatus = null
-                if (savingState === 'saving') {
+                if (toolbarStore.savingState === 'saving') {
                   // icon = undefined
                   icon = 'spinner'
                   status = 'loading'
                   text = 'Saving...'
-                } else if (savingState === 'saved') {
+                } else if (toolbarStore.savingState === 'saved') {
                   icon = 'checkmark' // 'cloud-check'
                   status = 'success'
                   text = undefined //'Saved!'
-                } else if (savingState === 'error') {
+                } else if (toolbarStore.savingState === 'error') {
                   icon = 'cross' // 'cloud-check'
                   status = 'error'
                   text = 'Error' //'Saved!'
@@ -955,7 +846,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   )
 
   let genericModal = null
-  const BoxGroupComponent = showMixedShinies ? PkBoxGroupShinyMixed : PkBoxGroup
 
   if (modalContent !== null) {
     genericModal = (
@@ -1008,163 +898,11 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     )
   }
 
-  const missingAnchor = (
-    <span className={styles.nonShinyAnchor}>
-      <SiteLink href={'/apps/livingdex/missing#g-' + dex.gameId}>
-        <i className={'icon-pkg-pokeball-outlined'} /> View Missing
-      </SiteLink>
-    </span>
-  )
-
-  const hasAllMarks = markTypes.length === allMarkTypes.length
-
   return (
     <>
-      {/* {toolbar} */}
+      {toolbar}
       {isEditable && removeDexModal}
       {genericModal !== null && genericModal}
-
-      <div className={'text-center ' + styles.toolbarApp}>
-        <div
-          className={
-            'inner-container bordered-container text-center bg-blueberry-secondary ' +
-            styles.dexHeader
-          }
-        >
-          <div className={styles.dexLogo}>
-            <GameLogo game={dex.gameId} size={160} asSwitchIcon={true} />
-          </div>
-          <div className={styles.dexInfo}>
-            <h2 className={styles.dexTitle}>
-              {isEditable && (
-                <InlineTextEditor
-                  maxLength={config.limits.maxDexTitleSize}
-                  afterEdit={handleDexTitleChange}
-                >
-                  {dex.title}
-                </InlineTextEditor>
-              )}
-              {!isEditable && dex.title}
-            </h2>
-            <div className={styles.presetName}>
-              <i>{preset?.name}</i>
-            </div>
-            <div className={styles.counters}>
-              {dex.boxes.length > 2 && (
-                <span className={styles.counter}>
-                  <i className="icon-pkg-box" /> {dex.boxes.length / 2}*
-                </span>
-              )}
-              <span className={styles.counter}>
-                <i className="icon-pkg-pokedex" /> {dex.caughtRegular} / {dex.totalRegular}
-                {dex.caughtRegular === dex.totalRegular && <i className={'icon-pkg-ribbon'} />}
-              </span>
-              {hasShinyMode && dex.totalShiny > 0 && (
-                <span className={styles.counter}>
-                  <i className="icon-pkg-shiny" /> {dex.caughtShiny} / {dex.totalShiny}
-                  {dex.caughtShiny === dex.totalShiny && <i className={'icon-pkg-ribbon'} />}
-                </span>
-              )}
-            </div>
-            <div>
-              {lastSavedAtString && (
-                <time className={styles.timestamp}>Last saved at: {lastSavedAtString}</time>
-              )}
-            </div>
-            <div>
-              {saveError && (
-                <span className={styles.errorbox}>
-                  ❌ There was an issue when saving: <br />"{String(saveError)}"
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {dex.id ? (
-          <div className={'inner-container text-center ' + styles.socialLinksBanner}>
-            <DexSocialLinks
-              shareAsOwner={isEditable}
-              dexId={dex.id}
-              className={styles.socialLinks + ' dexSocialLinks'}
-            />
-          </div>
-        ) : (
-          <>
-            <br />
-            <br />
-          </>
-        )}
-
-        {auth.isAuthenticated() && (
-          <div
-            className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
-            style={{ right: '1rem' }}
-          >
-            {missingAnchor}
-          </div>
-        )}
-
-
-
-      <LivingDexToolbar loadedDex={loadedDex} presets={presets} />
-
-        <BoxGroupComponent
-          dex={dex}
-          perPage={2}
-          showShiny={showShinyBoxes}
-          showNonShiny={showRegularBoxes}
-          shinyAfterRegular={shinyAfterRegular}
-          selectMode={selectMode}
-          viewMode={viewMode}
-          usePixelIcons={false}
-          revealPokemon={hasAllMarks}
-          editable={isEditable}
-          markTypes={markTypes}
-          onBoxTitleEdit={isEditable ? handleBoxTitleEdit : undefined}
-          onBoxClick={isEditable ? handleBoxClick : undefined}
-          onPokemonClick={isEditable ? handlePkmClick : undefined}
-        />
-
-        {isEditable && dex.id && (
-          <div className={'page-container'}>
-            <br />
-            <br />
-            <br />
-            <Button
-              onClick={() => {
-                setShowRemoveModal(true) // TODO convert to a ModalButton component
-              }}
-              style={{
-                background: 'rgba(222,21,21,0.56)',
-                border: '1px solid rgba(0,0,0.3)',
-                padding: '0.5rem',
-              }}
-            >
-              Delete Dex
-            </Button>
-          </div>
-        )}
-      </div>
-      {dex.boxes.length > 2 && (
-        <p className="text-center" style={{ maxWidth: '500px', margin: '2rem auto' }}>
-          <small>
-            <i>
-              <span>
-                <sup>(*) </sup>
-                {dex.boxes.length / 2} boxes are needed for each mode (regular and shiny), a total
-                of {dex.boxes.length} boxes.
-                <br />
-                <br />
-              </span>
-              Be aware that the maximum number of boxes for this game is {gameSet.storage?.boxes},
-              meaning that you can only store{' '}
-              {(gameSet.storage?.boxes || NaN) * (gameSet.storage?.boxCapacity || NaN)} Pokémon in
-              total + 6 in your party.
-            </i>
-          </small>
-        </p>
-      )}
     </>
   )
 }
