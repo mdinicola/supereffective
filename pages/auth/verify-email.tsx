@@ -3,14 +3,14 @@ import { useRouter } from 'next/compat/router'
 
 import { Routes } from '@/config/routes'
 import PageMeta from '@/features/pages/components/PageMeta'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import { useSignOut } from '@/features/users/auth/hooks/useSignOut'
+import { createCsrfToken } from '@/features/users/auth/serverside/createCsrfToken'
 import EmailSigninView from '@/features/users/views/EmailSigninView'
-import { useSession } from '@/lib/auth/hooks/useSession'
-import { useSignOut } from '@/lib/auth/hooks/useSignOut'
-import { createCsrfToken } from '@/lib/auth/serverside/createCsrfToken'
+import Button from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { UnauthenticatedBanner } from '@/lib/components/layout/panels/UnauthenticatedBanner'
-import Button from '@/lib/components/legacy/Button/Button'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
+import { abs_url } from '@/lib/components/Links'
 
 export default function Page({ csrfToken }: { csrfToken: string | null }) {
   const auth = useSession()

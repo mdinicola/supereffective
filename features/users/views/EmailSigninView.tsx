@@ -1,8 +1,8 @@
 import { HTMLProps } from 'react'
 
 import { Routes } from '@/config/routes'
-import Button from '@/lib/components/legacy/Button/Button'
-import { TextInput } from '@/lib/components/legacy/Input/TextInput'
+import Button from '@/lib/components/Button'
+import { TextInput } from '@/lib/components/forms/TextInput'
 
 type EmailSigninViewProps = {
   csrfToken: string | null

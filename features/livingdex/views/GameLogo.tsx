@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { getGameById } from '@/lib/repositories/games'
+import { getGameById } from '@/features/common/games'
 
 import styles from './GameLogo.module.css'
 

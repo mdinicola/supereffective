@@ -1,3 +1,13 @@
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType } from 'react'
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type ResponsiveSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'auto' | 'full'
+export type Font = 'sans' | 'comic' | 'mono'
+export type Orientation = 'vertical' | 'horizontal'
+
+export type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
+export type PropsWithRefOf<T extends ElementType> = ComponentPropsWithRef<T>
+
 export type ValueOf<T extends Array<string | number>> = T[number]
 export declare type OmitUndefined<T> = T extends undefined ? never : T
 export declare type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T

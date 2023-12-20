@@ -3,25 +3,25 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/compat/router'
 
 import { Routes } from '@/config/routes'
+import { getGameSetByGameId } from '@/features/common/game-sets'
+import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
+import { getPresets } from '@/features/livingdex/repository/legacy/presets'
+import { createDexFromPreset } from '@/features/livingdex/repository/legacy/presets/createDexFromPreset'
+import {
+  LivingDexResolvedUserLimits,
+  LoadedDex,
+} from '@/features/livingdex/repository/legacy/types'
 import { LivingDexContext } from '@/features/livingdex/state/LivingDexContext'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
 import { GamePresetSelector } from '@/features/livingdex/views/GamePresetSelector'
 import LivingDexApp from '@/features/livingdex/views/LivingDexApp'
 import PageMeta from '@/features/pages/components/PageMeta'
-import { useSession } from '@/lib/auth/hooks/useSession'
-import { getSession } from '@/lib/auth/serverside/getSession'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import { getSession } from '@/features/users/auth/serverside/getSession'
+import { ButtonInternalLink } from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { UnauthenticatedBanner } from '@/lib/components/layout/panels/UnauthenticatedBanner'
-import { ButtonInternalLink } from '@/lib/components/legacy/Button/Button'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
-import { getGameSetByGameId } from '@/lib/repositories/game-sets'
-import { getLegacyLivingDexRepository } from '@/lib/repositories/living-dexes/legacy'
-import { getPresets } from '@/lib/repositories/living-dexes/legacy/presets'
-import { createDexFromPreset } from '@/lib/repositories/living-dexes/legacy/presets/createDexFromPreset'
-import {
-  LivingDexResolvedUserLimits,
-  LoadedDex,
-} from '@/lib/repositories/living-dexes/legacy/types'
+import { abs_url } from '@/lib/components/Links'
 import { devLog } from '@/lib/utils/logger'
 
 interface PageProps {

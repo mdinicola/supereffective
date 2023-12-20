@@ -1,4 +1,4 @@
-import { generateRandomToken } from '../auth/serverside/generateRandomToken'
+import { generateRandomToken } from '../../features/users/auth/serverside/generateRandomToken'
 
 const token = generateRandomToken()
 

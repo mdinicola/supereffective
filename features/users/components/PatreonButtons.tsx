@@ -2,7 +2,7 @@ import { HTMLProps } from 'react'
 import { signIn } from 'next-auth/react'
 
 import { Routes } from '@/config/routes'
-import Button from '@/lib/components/legacy/Button/Button'
+import Button from '@/lib/components/Button'
 
 const patreonOauth2Url = 'https://www.patreon.com/oauth2'
 const patreonApiOauth2Url = 'https://www.patreon.com/api/oauth2'

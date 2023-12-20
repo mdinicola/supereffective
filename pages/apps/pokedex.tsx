@@ -1,10 +1,10 @@
+import { getPokemonEntries, getPokemonSearchIndex } from '@/features/common/pokemon'
 import PageMeta from '@/features/pages/components/PageMeta'
+import { getPageRepository } from '@/features/pages/repository/getPageRepository'
+import { PageEntry } from '@/features/pages/repository/types'
 import { Pokedex } from '@/features/pokedex/views/Pokedex'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
-import { getPageRepository } from '@/lib/repositories/pages/getPageRepository'
-import { PageEntry } from '@/lib/repositories/pages/types'
-import { getPokemonEntries, getPokemonSearchIndex } from '@/lib/repositories/pokemon'
+import { abs_url } from '@/lib/components/Links'
 
 export async function getStaticProps() {
   const pageProps = getPageRepository().getStaticProps('pokedex', 60 * 60 * 24) // 24h

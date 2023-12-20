@@ -1,9 +1,9 @@
 import React from 'react'
 
+import { Entry, EntryType } from '@/features/pages/repository/types'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { Entry, EntryType } from '@/lib/repositories/pages/types'
-import { getFullUrl } from '@/lib/utils/nextjs/urls'
-import { cleanupSpaces as clean } from '@/lib/utils/primitives/strings'
+import { cleanupSpaces as clean } from '@/lib/utils/strings'
+import { getFullUrl } from '@/lib/utils/urls'
 
 import MDXContent from '../components/MDXContent'
 import { ArticlePage } from './ArticleEntry'

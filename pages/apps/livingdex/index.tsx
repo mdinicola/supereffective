@@ -1,14 +1,14 @@
 import { GetServerSidePropsContext } from 'next'
 
+import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
+import { LivingDexResolvedUserLimits } from '@/features/livingdex/repository/legacy/types'
 import { Dashboard } from '@/features/livingdex/views/Dashboard'
 import PageMeta from '@/features/pages/components/PageMeta'
-import { getSession } from '@/lib/auth/serverside/getSession'
+import { getPageRepository } from '@/features/pages/repository/getPageRepository'
+import { PageEntry } from '@/features/pages/repository/types'
+import { getSession } from '@/features/users/auth/serverside/getSession'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
-import { getLegacyLivingDexRepository } from '@/lib/repositories/living-dexes/legacy'
-import { LivingDexResolvedUserLimits } from '@/lib/repositories/living-dexes/legacy/types'
-import { getPageRepository } from '@/lib/repositories/pages/getPageRepository'
-import { PageEntry } from '@/lib/repositories/pages/types'
+import { abs_url } from '@/lib/components/Links'
 
 const Page = ({
   entry,

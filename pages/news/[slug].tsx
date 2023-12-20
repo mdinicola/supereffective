@@ -1,9 +1,9 @@
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
 
+import { getArticleRepository } from '@/features/pages/repository/getArticleRepository'
+import { toSortedIndex } from '@/features/pages/repository/toSortedIndex'
+import { ArticleEntry, Entry } from '@/features/pages/repository/types'
 import ArticlePageView from '@/features/pages/views/ArticlePageView'
-import { getArticleRepository } from '@/lib/repositories/pages/getArticleRepository'
-import { toSortedIndex } from '@/lib/repositories/pages/toSortedIndex'
-import { ArticleEntry, Entry } from '@/lib/repositories/pages/types'
 
 export function getStaticPaths(): GetStaticPathsResult {
   const paths = toSortedIndex(getArticleRepository().getAll()).map((page: Entry) => ({

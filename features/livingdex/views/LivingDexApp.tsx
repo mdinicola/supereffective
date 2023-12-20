@@ -12,35 +12,38 @@ import {
 } from 'lucide-react'
 
 import config from '@/config'
-import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
-import { GameLogo } from '@/features/livingdex/views/GameLogo'
-import PkImgFile from '@/features/livingdex/views/PkImgFile'
-import { useSession } from '@/lib/auth/hooks/useSession'
-import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import Button from '@/lib/components/legacy/Button/Button'
-import InlineTextEditor from '@/lib/components/legacy/Input/InlineTextEditor'
-import { ExternLink, SiteLink } from '@/lib/components/legacy/Link/Links'
-import { DexSocialLinks } from '@/lib/components/legacy/SocialLinks/SocialLinks'
+import { getGameSetByGameId } from '@/features/common/game-sets'
+import { DexSocialLinks } from '@/features/livingdex/components/SocialLinks'
 import {
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
-} from '@/lib/components/legacy/Toolbar/ToolbarButton'
-import { DeserializedLivingDexDoc } from '@/lib/dex-parser'
-import { convertDexFromLegacyToV4, convertDexFromV4ToLegacyStd } from '@/lib/dex-parser/support'
-import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
-import { getGameSetByGameId } from '@/lib/repositories/game-sets'
-import { isCatchable } from '@/lib/repositories/living-dexes/legacy'
-import { convertStorableDexToLoadedDex } from '@/lib/repositories/living-dexes/legacy/converters/convertStorableDexToLoadedDex'
+} from '@/features/livingdex/components/ToolbarButton'
+import { DeserializedLivingDexDoc } from '@/features/livingdex/dex-parser'
+import {
+  convertDexFromLegacyToV4,
+  convertDexFromV4ToLegacyStd,
+} from '@/features/livingdex/dex-parser/support'
+import { isCatchable } from '@/features/livingdex/repository/legacy'
+import { convertStorableDexToLoadedDex } from '@/features/livingdex/repository/legacy/converters/convertStorableDexToLoadedDex'
 import {
   getPresetByIdForGame,
   getPresetsForGame,
-} from '@/lib/repositories/living-dexes/legacy/presets'
-import { normalizeDexWithPreset } from '@/lib/repositories/living-dexes/legacy/presets/normalizeDexWithPreset'
-import { PresetDex, PresetDexMap } from '@/lib/repositories/living-dexes/legacy/presets/types'
-import { DexBox, LoadedDex, NullableDexPokemon } from '@/lib/repositories/living-dexes/legacy/types'
-import { classNameIf } from '@/lib/utils/legacyUtils'
-import { slugify } from '@/lib/utils/primitives/strings'
+} from '@/features/livingdex/repository/legacy/presets'
+import { normalizeDexWithPreset } from '@/features/livingdex/repository/legacy/presets/normalizeDexWithPreset'
+import { PresetDex, PresetDexMap } from '@/features/livingdex/repository/legacy/presets/types'
+import { DexBox, LoadedDex, NullableDexPokemon } from '@/features/livingdex/repository/legacy/types'
+import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
+import { GameLogo } from '@/features/livingdex/views/GameLogo'
+import PkImgFile from '@/features/livingdex/views/PkImgFile'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import Button from '@/lib/components/Button'
+import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
+import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
+import { ExternLink, SiteLink } from '@/lib/components/Links'
+import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
+import { classNameIf } from '@/lib/utils/deprecated'
+import { slugify } from '@/lib/utils/strings'
 
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'

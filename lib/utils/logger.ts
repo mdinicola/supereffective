@@ -1,11 +1,15 @@
 import { log } from 'next-axiom'
 
-// Axion Environment Variables
-// NEXT_PUBLIC_AXIOM_INGEST_ENDPOINT - a unique endpoint to receive data from your project
-
-import { isProductionEnv } from './env'
+import { isDebugEnabled, isProductionEnv } from './env'
 
 export const logger = log
+
+export function dd(...args: any[]): void {
+  if (!isDebugEnabled()) {
+    return
+  }
+  devLog(...args)
+}
 
 export const devLog = (...args: any[]): void => {
   if (isProductionEnv()) {

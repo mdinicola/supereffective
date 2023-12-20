@@ -1,4 +1,4 @@
-import Button from '@/lib/components/legacy/Button/Button'
+import Button from '@/lib/components/Button'
 import PluginMDXContent from '@/lib/mdx/components/MDXContent'
 
 const mdxComponents = {

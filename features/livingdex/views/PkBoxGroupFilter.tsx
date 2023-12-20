@@ -1,5 +1,5 @@
-import { TextInput } from '@/lib/components/legacy/Input/TextInput'
-import { PkFilter, PkFilterAttribute } from '@/lib/repositories/living-dexes/legacy/types'
+import { PkFilter, PkFilterAttribute } from '@/features/livingdex/repository/legacy/types'
+import { TextInput } from '@/lib/components/forms/TextInput'
 
 import { debounceCallback } from '../utils'
 import { PkBoxGroupFilterProps } from './pkBoxTypes'

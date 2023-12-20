@@ -2,11 +2,11 @@ import { useRouter } from 'next/compat/router'
 
 import { Routes } from '@/config/routes'
 import PageMeta from '@/features/pages/components/PageMeta'
-import { useSession } from '@/lib/auth/hooks/useSession'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import { ButtonLink } from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
-import { ButtonLink } from '@/lib/components/legacy/Button/Button'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
+import { abs_url } from '@/lib/components/Links'
 import { base64Decode } from '@/lib/utils/serialization/base64'
 
 export default function Page() {

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { Routes } from '@/config/routes'
-import { useGuardedFetch } from '@/lib/auth/hooks/useGuardedFetch'
-import { LoadedDex, LoadedDexList } from '@/lib/repositories/living-dexes/legacy/types'
+import { LoadedDex, LoadedDexList } from '@/features/livingdex/repository/legacy/types'
+import { useGuardedFetch } from '@/features/users/auth/hooks/useGuardedFetch'
 import { jsonEncode } from '@/lib/utils/serialization/jsonSerializable'
 
 async function _getApiErrorResponseMessage(response: Response): Promise<string> {

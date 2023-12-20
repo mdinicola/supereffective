@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import PageMeta from '@/features/pages/components/PageMeta'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
+import { abs_url } from '@/lib/components/Links'
 
 const Page = () => {
   return (

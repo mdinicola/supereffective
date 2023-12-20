@@ -2,10 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ButtonLink } from '@/lib/components/legacy/Button/Button'
-import CommentsSection from '@/lib/components/legacy/Comments/CommentsSection'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
-import { classNameIf, classNames } from '@/lib/utils/legacyUtils'
+import { ButtonLink } from '@/lib/components/Button'
+import { abs_url } from '@/lib/components/Links'
+import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 import PageMeta, { PageMetaProps } from '../components/PageMeta'
 import styles from './ArticleEntry.module.css'
@@ -194,11 +193,6 @@ export function ArticleEntry(props: ArticleEntryProps) {
 
       {props.tags && tagPills}
 
-      {props.enableComments && (
-        <div className={containerClass(styles.comments)}>
-          <CommentsSection pageUrl={props.canonicalUrl} encodedTitle={shareText} />
-        </div>
-      )}
       {!props.enableComments && <br />}
     </article>
   )

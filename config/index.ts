@@ -1,5 +1,5 @@
 import { isDevelopmentEnv, isLocalAssetsEnabled } from '@/lib/utils/env'
-import { getBaseUrl } from '@/lib/utils/nextjs/urls'
+import { getBaseUrl } from '@/lib/utils/urls'
 
 const ASSETS_CACHE_VERSION = '20230809-01'
 const ASSETS_CACHE_VERSION_INCREMENTAL = '20230924-01'
@@ -58,6 +58,7 @@ const config = {
     },
     baseUrl: assetsCdn,
     dataUrl: dataCdn,
+    dataCacheTtl: isDevelopmentEnv() ? 1000 * 30 : 1000 * 60 * 10, // 30s (dev) or 10min (prod)
     fontsUrl: `${assetsCdn}/fonts`,
     imagesUrl: `${assetsCdn}/images`,
   },

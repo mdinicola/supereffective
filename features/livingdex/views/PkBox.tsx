@@ -1,6 +1,6 @@
 import config from '@/config'
-import InlineTextEditor from '@/lib/components/legacy/Input/InlineTextEditor'
-import { classNameIf, classNames } from '@/lib/utils/legacyUtils'
+import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
+import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 import { tabIndexKeyDownHandler } from '../utils'
 import styles from './PkBox.module.css'

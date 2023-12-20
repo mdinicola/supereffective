@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { classNameIf, classNames } from '@/lib/utils/legacyUtils'
+import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 export const LoadingBanner = ({ content }: { content?: any }) => {
   const hasContent = !!content

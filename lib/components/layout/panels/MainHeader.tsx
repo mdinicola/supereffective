@@ -6,7 +6,7 @@ import Link from 'next/link'
 import config from '@/config'
 import { UserTrayView } from '@/features/users/views/UserTrayView'
 
-import { ExternLink, SiteLink } from '../../legacy/Link/Links'
+import { ExternLink, SiteLink } from '../../Links'
 import styles from './MainHeader.module.css'
 
 export default function MainHeader() {

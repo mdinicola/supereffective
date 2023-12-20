@@ -1,6 +1,6 @@
 import { Routes } from '@/config/routes'
-import { useSession } from '@/lib/auth/hooks/useSession'
-import { SiteLink } from '@/lib/components/legacy/Link/Links'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import { SiteLink } from '@/lib/components/Links'
 
 type UserTrayViewProps = {
   activeClass?: string

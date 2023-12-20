@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 
 import baseConfig from '@/config'
-import { classNames } from '@/lib/utils/legacyUtils'
+import { classNames } from '@/lib/utils/deprecated'
 
 const variantFolder = {
   '2d': 'home2d-icon',

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
+import { LivingDexResolvedUserLimits } from '@/features/livingdex/repository/legacy/types'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
 import { GameCardList } from '@/features/livingdex/views/gameCard/GameCard'
 import { WelcomeContent } from '@/features/livingdex/views/WelcomeContent'
-import { useSession } from '@/lib/auth/hooks/useSession'
+import { useSession } from '@/features/users/auth/hooks/useSession'
+import { ButtonInternalLink } from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
-import { ButtonInternalLink } from '@/lib/components/legacy/Button/Button'
-import { LivingDexResolvedUserLimits } from '@/lib/repositories/living-dexes/legacy/types'
 
 const WelcomeContentContainer = (): JSX.Element => {
   return (

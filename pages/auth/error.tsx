@@ -4,8 +4,8 @@ import { useRouter } from 'next/compat/router'
 
 import { Routes } from '@/config/routes'
 import PageMeta from '@/features/pages/components/PageMeta'
-import { ButtonInternalLink } from '@/lib/components/legacy/Button/Button'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
+import { ButtonInternalLink } from '@/lib/components/Button'
+import { abs_url } from '@/lib/components/Links'
 
 export default function Page() {
   const router = useRouter()

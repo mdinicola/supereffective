@@ -1,12 +1,12 @@
 import { ReactElement, useEffect, useRef, useState } from 'react'
 
 import config from '@/config'
-import Button from '@/lib/components/legacy/Button/Button'
-import { getGameSetByGameId } from '@/lib/repositories/game-sets'
-import { createBoxTitle } from '@/lib/repositories/living-dexes/legacy/presets/createBoxTitle'
-import { DexBox, PkFilter } from '@/lib/repositories/living-dexes/legacy/types'
-import { getPokemonEntry } from '@/lib/repositories/pokemon'
-import { classNames } from '@/lib/utils/legacyUtils'
+import { getGameSetByGameId } from '@/features/common/game-sets'
+import { getPokemonEntry } from '@/features/common/pokemon'
+import { createBoxTitle } from '@/features/livingdex/repository/legacy/presets/createBoxTitle'
+import { DexBox, PkFilter } from '@/features/livingdex/repository/legacy/types'
+import Button from '@/lib/components/Button'
+import { classNames } from '@/lib/utils/deprecated'
 
 import { PkBox } from './PkBox'
 import styles from './PkBox.module.css'

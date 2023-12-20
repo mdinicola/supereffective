@@ -1,10 +1,10 @@
 import PageMeta from '@/features/pages/components/PageMeta'
+import { getArticleRepository } from '@/features/pages/repository/getArticleRepository'
+import { getPageRepository } from '@/features/pages/repository/getPageRepository'
+import { toSortedIndex } from '@/features/pages/repository/toSortedIndex'
+import { ArticleEntry } from '@/features/pages/repository/types'
 import ArticlePageView from '@/features/pages/views/ArticlePageView'
-import { getArticleRepository } from '@/lib/repositories/pages/getArticleRepository'
-import { getPageRepository } from '@/lib/repositories/pages/getPageRepository'
-import { toSortedIndex } from '@/lib/repositories/pages/toSortedIndex'
-import { ArticleEntry } from '@/lib/repositories/pages/types'
-import { getFullUrl } from '@/lib/utils/nextjs/urls'
+import { getFullUrl } from '@/lib/utils/urls'
 
 export async function getStaticProps() {
   const entries = toSortedIndex(getArticleRepository().getAll())

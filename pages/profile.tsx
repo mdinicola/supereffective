@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext } from 'next'
 
 import PageMeta from '@/features/pages/components/PageMeta'
+import { getSession } from '@/features/users/auth/serverside/getSession'
+import { getActivePatreonMembershipByUserId } from '@/features/users/repository/memberships'
 import { ProfileView } from '@/features/users/views/ProfileView'
-import { getSession } from '@/lib/auth/serverside/getSession'
-import { abs_url } from '@/lib/components/legacy/Link/Links'
+import { abs_url } from '@/lib/components/Links'
 import { Membership } from '@/lib/prisma/types'
-import { getActivePatreonMembershipByUserId } from '@/lib/repositories/users/memberships'
 import { serializeObject } from '@/lib/utils/serialization/jsonSerializable'
 
 const Page = ({ membership }: { membership: any | undefined }) => {

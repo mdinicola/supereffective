@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
+import { getGameSetByGameId } from '@/features/common/game-sets'
+import { LoadedDex } from '@/features/livingdex/repository/legacy/types'
 import { GameLogo } from '@/features/livingdex/views/GameLogo'
-import { getGameSetByGameId } from '@/lib/repositories/game-sets'
-import { LoadedDex } from '@/lib/repositories/living-dexes/legacy/types'
-import { classNameIf, classNames } from '@/lib/utils/legacyUtils'
+import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 import styles from './GameCard.module.css'
 

@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { legacyCanCreateMoreDexes } from '@/features/livingdex/repository/legacy'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
-import { ButtonInternalLink } from '@/lib/components/legacy/Button/Button'
-import { SiteLink } from '@/lib/components/legacy/Link/Links'
+import { ButtonInternalLink } from '@/lib/components/Button'
+import { SiteLink } from '@/lib/components/Links'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
-import { legacyCanCreateMoreDexes } from '@/lib/repositories/living-dexes/legacy'
 
 import styles from './WelcomeContent.module.css'
 

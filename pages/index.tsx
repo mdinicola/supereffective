@@ -1,5 +1,5 @@
+import { getPageRepository } from '@/features/pages/repository/getPageRepository'
 import ArticlePageView, { ArticlePageViewProps } from '@/features/pages/views/ArticlePageView'
-import { getPageRepository } from '@/lib/repositories/pages/getPageRepository'
 
 export async function getStaticProps() {
   return getPageRepository().getStaticProps('index', 60 * 15)

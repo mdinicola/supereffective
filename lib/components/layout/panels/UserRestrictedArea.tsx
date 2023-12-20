@@ -1,5 +1,5 @@
 import { Routes } from '@/config/routes'
-import { useSession } from '@/lib/auth/hooks/useSession'
+import { useSession } from '@/features/users/auth/hooks/useSession'
 
 import { LoadingBanner } from './LoadingBanner'
 import { LoadingRedirectBanner } from './LoadingRedirectBanner'

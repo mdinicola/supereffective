@@ -1,4 +1,4 @@
-import { classNameIf, classNames } from '@/lib/utils/legacyUtils'
+import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
 import { tabIndexKeyDownHandler } from '../utils'
 import styles from './PkBox.module.css'

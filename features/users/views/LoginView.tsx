@@ -3,13 +3,13 @@ import { useRouter } from 'next/compat/router'
 
 import { isSignInEnabled } from '@/config/featureFlags'
 import { Routes } from '@/config/routes'
+import { useSession } from '@/features/users/auth/hooks/useSession'
 import EmailSigninView from '@/features/users/views/EmailSigninView'
 import { OAuthButtonsView } from '@/features/users/views/OAuthButtonsView'
 import TokenSignInView from '@/features/users/views/TokenSignInView'
-import { useSession } from '@/lib/auth/hooks/useSession'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
-import { SiteLink } from '@/lib/components/legacy/Link/Links'
+import { SiteLink } from '@/lib/components/Links'
 
 export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Element {
   const router = useRouter()

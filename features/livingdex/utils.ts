@@ -1,4 +1,4 @@
-import { PkFilter } from '@/lib/repositories/living-dexes/legacy/types'
+import { PkFilter } from '@/features/livingdex/repository/legacy/types'
 
 /**
  * A simple debounce function that will call the callback after the delay

@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { apiGuard } from '@/lib/auth/serverside/apiGuard'
-import { getSession } from '@/lib/auth/serverside/getSession'
-import { AuthUser } from '@/lib/auth/types'
-import { getDexesApi } from '@/lib/repositories/living-dexes/legacy/api/endpoints/getDexesApi'
-import { saveDexApi } from '@/lib/repositories/living-dexes/legacy/api/endpoints/saveDexApi'
+import { getDexesApi } from '@/features/livingdex/repository/legacy/api/endpoints/getDexesApi'
+import { saveDexApi } from '@/features/livingdex/repository/legacy/api/endpoints/saveDexApi'
+import { apiGuard } from '@/features/users/auth/serverside/apiGuard'
+import { getSession } from '@/features/users/auth/serverside/getSession'
+import { AuthUser } from '@/features/users/auth/types'
 import { apiErrors } from '@/lib/utils/types'
 
 // TODO: convert to Edge runtime when Next-Auth getSession(ctx) supports it
