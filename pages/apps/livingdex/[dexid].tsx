@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext } from 'next'
 
-import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
-import { getPresets } from '@/features/livingdex/repository/legacy/presets'
-import { PresetDexMap } from '@/features/livingdex/repository/legacy/presets/types'
-import { LoadedDex } from '@/features/livingdex/repository/legacy/types'
+import { getLegacyLivingDexRepository } from '@/features/livingdex/repository'
+import { getPresets } from '@/features/livingdex/repository/presets'
+import { PresetDexMap } from '@/features/livingdex/repository/presets/types'
+import { LoadedDex } from '@/features/livingdex/repository/types'
 import LivingDexApp from '@/features/livingdex/views/LivingDexApp'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { abs_url } from '@/lib/components/Links'

@@ -1,8 +1,8 @@
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
-import { tabIndexKeyDownHandler } from '../utils'
 import styles from './PkBox.module.css'
 import { PkBoxCellProps } from './pkBoxTypes'
+import { tabIndexKeyDownHandler } from './utils'
 
 export function PkBoxCell(props: PkBoxCellProps) {
   const classes = classNames(

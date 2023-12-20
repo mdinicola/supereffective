@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-import { DexPokemon, NullableDexPokemon } from '@/features/livingdex/repository/legacy/types'
+import { GameLogo } from '@/features/livingdex/components/GameLogo'
+import { DexPokemon, NullableDexPokemon } from '@/features/livingdex/repository/types'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
-import { GameLogo } from '@/features/livingdex/views/GameLogo'
 import PageMeta from '@/features/pages/components/PageMeta'
 import { Pokedex } from '@/features/pokedex/views/Pokedex'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'

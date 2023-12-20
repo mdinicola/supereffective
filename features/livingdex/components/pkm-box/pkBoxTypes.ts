@@ -3,7 +3,7 @@ import {
   LoadedDex,
   NullableDexPokemon,
   PkFilter,
-} from '@/features/livingdex/repository/legacy/types'
+} from '@/features/livingdex/repository/types'
 
 export type SelectMode = 'all' | 'box' | 'cell'
 export type ViewMode = 'boxed' | 'listed'

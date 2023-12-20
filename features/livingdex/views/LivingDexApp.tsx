@@ -12,29 +12,26 @@ import {
 } from 'lucide-react'
 
 import config from '@/config'
+import { GameLogo } from '@/features/livingdex/components/GameLogo'
+import PkImgFile from '@/features/livingdex/components/PkImgFile'
 import { DexSocialLinks } from '@/features/livingdex/components/SocialLinks'
 import {
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
 } from '@/features/livingdex/components/ToolbarButton'
-import { DeserializedLivingDexDoc } from '@/features/livingdex/dex-parser'
+import { DeserializedLivingDexDoc } from '@/features/livingdex/parser'
 import {
   convertDexFromLegacyToV4,
   convertDexFromV4ToLegacyStd,
-} from '@/features/livingdex/dex-parser/support'
-import { isCatchable } from '@/features/livingdex/repository/legacy'
-import { convertStorableDexToLoadedDex } from '@/features/livingdex/repository/legacy/converters/convertStorableDexToLoadedDex'
-import {
-  getPresetByIdForGame,
-  getPresetsForGame,
-} from '@/features/livingdex/repository/legacy/presets'
-import { normalizeDexWithPreset } from '@/features/livingdex/repository/legacy/presets/normalizeDexWithPreset'
-import { PresetDex, PresetDexMap } from '@/features/livingdex/repository/legacy/presets/types'
-import { DexBox, LoadedDex, NullableDexPokemon } from '@/features/livingdex/repository/legacy/types'
+} from '@/features/livingdex/parser/support'
+import { isCatchable } from '@/features/livingdex/repository'
+import { convertStorableDexToLoadedDex } from '@/features/livingdex/repository/converters/convertStorableDexToLoadedDex'
+import { getPresetByIdForGame, getPresetsForGame } from '@/features/livingdex/repository/presets'
+import { normalizeDexWithPreset } from '@/features/livingdex/repository/presets/normalizeDexWithPreset'
+import { PresetDex, PresetDexMap } from '@/features/livingdex/repository/presets/types'
+import { DexBox, LoadedDex, NullableDexPokemon } from '@/features/livingdex/repository/types'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
-import { GameLogo } from '@/features/livingdex/views/GameLogo'
-import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import Button from '@/lib/components/Button'
 import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
@@ -45,11 +42,11 @@ import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
 import { classNameIf } from '@/lib/utils/deprecated'
 import { slugify } from '@/lib/utils/strings'
 
+import { PkBoxGroup } from '../components/pkm-box/PkBoxGroup'
+import { PkBoxGroupShinyMixed } from '../components/pkm-box/PkBoxGroupShinyMixed'
+import { MarkType, SelectMode, ViewMode } from '../components/pkm-box/pkBoxTypes'
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
-import { PkBoxGroup } from './PkBoxGroup'
-import { PkBoxGroupShinyMixed } from './PkBoxGroupShinyMixed'
-import { MarkType, SelectMode, ViewMode } from './pkBoxTypes'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
 type SyncState = 'changed' | 'synced'

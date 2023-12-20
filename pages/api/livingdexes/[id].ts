@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { getDexApi } from '@/features/livingdex/repository/legacy/api/endpoints/getDexApi'
-import { removeDexApi } from '@/features/livingdex/repository/legacy/api/endpoints/removeDexApi'
+import { getDexApi } from '@/features/livingdex/commands/getDexApi'
+import { removeDexApi } from '@/features/livingdex/commands/removeDexApi'
 import { apiGuard } from '@/features/users/auth/serverside/apiGuard'
 import { getSession } from '@/features/users/auth/serverside/getSession'
 import { apiErrors } from '@/lib/utils/types'

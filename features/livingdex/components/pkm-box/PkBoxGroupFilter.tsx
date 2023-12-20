@@ -1,8 +1,8 @@
-import { PkFilter, PkFilterAttribute } from '@/features/livingdex/repository/legacy/types'
+import { PkFilter, PkFilterAttribute } from '@/features/livingdex/repository/types'
 import { TextInput } from '@/lib/components/forms/TextInput'
 
-import { debounceCallback } from '../utils'
 import { PkBoxGroupFilterProps } from './pkBoxTypes'
+import { debounceCallback } from './utils'
 
 /**
  * @experimental This component is not yet ready for production use and will only be rendered

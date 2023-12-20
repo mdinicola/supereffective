@@ -3,9 +3,9 @@ import { jsonDecode } from '@/lib/utils/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 import { isValidIdSchema } from '@/lib/validation/schemas'
 
-import { getLegacyLivingDexRepository } from '../../index'
-import { LoadedDexSchema } from '../../schemas'
-import { LoadedDex, NullableDexPokemon } from '../../types'
+import { getLegacyLivingDexRepository } from '../repository/index'
+import { LoadedDexSchema } from '../repository/schemas'
+import { LoadedDex, NullableDexPokemon } from '../repository/types'
 
 async function _canCreateMoreDexes(dexes: LoadedDex[], currentUserId: string): Promise<boolean> {
   const limits = await getLegacyLivingDexRepository().getLimitsForUser(currentUserId)

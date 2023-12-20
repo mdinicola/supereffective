@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { LivingDexResolvedUserLimits } from '@/features/livingdex/repository/legacy/types'
+import { GameCardList } from '@/features/livingdex/components/GameCard'
+import { LivingDexResolvedUserLimits } from '@/features/livingdex/repository/types'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
-import { GameCardList } from '@/features/livingdex/views/gameCard/GameCard'
 import { WelcomeContent } from '@/features/livingdex/views/WelcomeContent'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import { ButtonInternalLink } from '@/lib/components/Button'

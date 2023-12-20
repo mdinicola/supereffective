@@ -1,4 +1,4 @@
-import { PATREON_NO_TIER, PATREON_TIERS_BY_ID, patreonCampaign } from '@/lib/patreon/config'
+import { PATREON_NO_TIER, PATREON_TIERS_BY_ID, patreonCampaign } from '@/config/patreon'
 import { PatreonTier } from '@/lib/patreon/types'
 import type { PatreonProfileResponse } from '@/lib/patreon/types-api'
 import { fetchOauthPatreonIdentity, findHighestPatreonTier } from '@/lib/patreon/utils'

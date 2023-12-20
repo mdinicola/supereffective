@@ -3,13 +3,10 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/compat/router'
 
 import { Routes } from '@/config/routes'
-import { getLegacyLivingDexRepository } from '@/features/livingdex/repository/legacy'
-import { getPresets } from '@/features/livingdex/repository/legacy/presets'
-import { createDexFromPreset } from '@/features/livingdex/repository/legacy/presets/createDexFromPreset'
-import {
-  LivingDexResolvedUserLimits,
-  LoadedDex,
-} from '@/features/livingdex/repository/legacy/types'
+import { getLegacyLivingDexRepository } from '@/features/livingdex/repository'
+import { getPresets } from '@/features/livingdex/repository/presets'
+import { createDexFromPreset } from '@/features/livingdex/repository/presets/createDexFromPreset'
+import { LivingDexResolvedUserLimits, LoadedDex } from '@/features/livingdex/repository/types'
 import { LivingDexContext } from '@/features/livingdex/state/LivingDexContext'
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
 import { GamePresetSelector } from '@/features/livingdex/views/GamePresetSelector'

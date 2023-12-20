@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Routes } from '@/config/routes'
-import { LoadedDex, LoadedDexList } from '@/features/livingdex/repository/legacy/types'
+import { LoadedDex, LoadedDexList } from '@/features/livingdex/repository/types'
 import { useGuardedFetch } from '@/features/users/auth/hooks/useGuardedFetch'
 import { jsonEncode } from '@/lib/utils/serialization/jsonSerializable'
 

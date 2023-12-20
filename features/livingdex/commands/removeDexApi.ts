@@ -1,8 +1,8 @@
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 import { isValidIdSchema } from '@/lib/validation/schemas'
 
-import { getLegacyLivingDexRepository } from '../../index'
-import { LoadedDex } from '../../types'
+import { getLegacyLivingDexRepository } from '../repository/index'
+import { LoadedDex } from '../repository/types'
 import { getDexApi } from './getDexApi'
 
 export const removeDexApi = async (dexId: string, currentUserId: string): Promise<ApiResponse> => {

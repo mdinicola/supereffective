@@ -1,12 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 
-import {
-  getPresetByIdForGame,
-  getPresetsForGame,
-} from '@/features/livingdex/repository/legacy/presets'
-import { createDexFromPreset } from '@/features/livingdex/repository/legacy/presets/createDexFromPreset'
-import { PkBoxGroup } from '@/features/livingdex/views/PkBoxGroup'
+import { PkBoxGroup } from '@/features/livingdex/components/pkm-box/PkBoxGroup'
+import { getPresetByIdForGame, getPresetsForGame } from '@/features/livingdex/repository/presets'
+import { createDexFromPreset } from '@/features/livingdex/repository/presets/createDexFromPreset'
 import PageMeta from '@/features/pages/components/PageMeta'
 import Button from '@/lib/components/Button'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'

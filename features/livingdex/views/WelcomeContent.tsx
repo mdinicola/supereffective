@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { legacyCanCreateMoreDexes } from '@/features/livingdex/repository/legacy'
-import PkImgFile from '@/features/livingdex/views/PkImgFile'
+import PkImgFile from '@/features/livingdex/components/PkImgFile'
+import { legacyCanCreateMoreDexes } from '@/features/livingdex/repository'
 import { ButtonInternalLink } from '@/lib/components/Button'
 import { SiteLink } from '@/lib/components/Links'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'

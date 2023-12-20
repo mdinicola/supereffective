@@ -1,7 +1,7 @@
+import PkImgFile from '../PkImgFile'
 import styles from './PkBox.module.css'
 import { PkBoxCell } from './PkBoxCell'
 import { PkBoxCellProps } from './pkBoxTypes'
-import PkImgFile from './PkImgFile'
 
 export function PkBoxEmptyCell(props: PkBoxCellProps & { usePixelIcons: boolean }) {
   return (

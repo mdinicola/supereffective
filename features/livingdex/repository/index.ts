@@ -1,14 +1,10 @@
-import {
-  dexToLoadedDex,
-  loadedDexToDex,
-  sanitizeDate,
-} from '@/features/livingdex/dex-parser/support'
-import { PATREON_NO_TIER } from '@/lib/patreon/config'
+import { PATREON_NO_TIER } from '@/config/patreon'
+import { dexToLoadedDex, loadedDexToDex, sanitizeDate } from '@/features/livingdex/parser/support'
 import { getPrismaClient, PrismaTypes } from '@/lib/prisma/getPrismaClient'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
-import { isShinyLocked } from '../../../../lib/data-client/pokemon'
-import { getActivePatreonMembershipByUserId } from '../../../users/repository/memberships'
+import { isShinyLocked } from '../../../lib/data-client/pokemon'
+import { getActivePatreonMembershipByUserId } from '../../users/repository/memberships'
 import {
   DexPokemon,
   LivingDexRepository,

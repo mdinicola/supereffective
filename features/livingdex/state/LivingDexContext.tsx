@@ -1,13 +1,9 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
-import { isCatchable, recalculateCounters } from '@/features/livingdex/repository/legacy'
-import { normalizeDexWithPreset } from '@/features/livingdex/repository/legacy/presets/normalizeDexWithPreset'
-import { PresetDex } from '@/features/livingdex/repository/legacy/presets/types'
-import {
-  LoadedDex,
-  LoadedDexList,
-  NullableDexPokemon,
-} from '@/features/livingdex/repository/legacy/types'
+import { isCatchable, recalculateCounters } from '@/features/livingdex/repository'
+import { normalizeDexWithPreset } from '@/features/livingdex/repository/presets/normalizeDexWithPreset'
+import { PresetDex } from '@/features/livingdex/repository/presets/types'
+import { LoadedDex, LoadedDexList, NullableDexPokemon } from '@/features/livingdex/repository/types'
 
 // ===========================
 //          TYPES

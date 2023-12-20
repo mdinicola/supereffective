@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { TypeIcon } from '@supeffective/icons'
 
-import PkImgFile from '@/features/livingdex/views/PkImgFile'
+import PkImgFile from '@/features/livingdex/components/PkImgFile'
 import Button from '@/lib/components/Button'
 import { GameLabel } from '@/lib/components/GameLabel'
 import { ExternLink } from '@/lib/components/Links'

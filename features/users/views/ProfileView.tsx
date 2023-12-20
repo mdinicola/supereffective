@@ -1,12 +1,12 @@
 import { useRouter } from 'next/compat/router'
 
 import { hasPatreonFeaturesEnabled } from '@/config/featureFlags'
+import { patreonTiers } from '@/config/patreon'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import { useSignOut } from '@/features/users/auth/hooks/useSignOut'
 import { createMembershipPlaceholder } from '@/features/users/repository/memberships'
 import Button from '@/lib/components/Button'
 import { UserRestrictedArea } from '@/lib/components/layout/panels/UserRestrictedArea'
-import { patreonTiers } from '@/lib/patreon/config'
 import { Membership } from '@/lib/prisma/types'
 
 import { PatreonButton, PatreonUnlinkButton } from '../components/PatreonButtons'

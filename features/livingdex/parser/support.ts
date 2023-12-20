@@ -5,16 +5,16 @@ import { SerializableDate } from '@/lib/utils/serialization/jsonSerializable'
 import { getLivingDexFormat, parseLivingDex, serializeLivingDex } from '.'
 import { getGameSetByGameId } from '../../../lib/data-client/game-sets'
 import { getPokemonEntry, isShinyLocked } from '../../../lib/data-client/pokemon'
-import { convertPokemonListToStorable } from '../repository/legacy/converters/convertPokemonListToStorable'
-import { getPresetByIdForGameSet, getPresets } from '../repository/legacy/presets'
-import { normalizeDexWithPreset } from '../repository/legacy/presets/normalizeDexWithPreset'
+import { convertPokemonListToStorable } from '../repository/converters/convertPokemonListToStorable'
+import { getPresetByIdForGameSet, getPresets } from '../repository/presets'
+import { normalizeDexWithPreset } from '../repository/presets/normalizeDexWithPreset'
 import {
   DEX_SCHEMA_VERSION,
   DexBox,
   LoadedDex,
   NullableDexPokemon,
   StorableDex,
-} from '../repository/legacy/types'
+} from '../repository/types'
 import {
   DeserializedLivingDexDoc,
   LIVINGDEX_DOC_SPEC_VERSION_LAST,

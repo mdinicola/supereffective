@@ -2,9 +2,9 @@ import config from '@/config'
 import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
 
-import { tabIndexKeyDownHandler } from '../utils'
 import styles from './PkBox.module.css'
 import { PkBoxProps } from './pkBoxTypes'
+import { tabIndexKeyDownHandler } from './utils'
 
 // TODO remove tabindex usage (always be = 0) and replace it with a custom data- attribute.
 

@@ -1,4 +1,4 @@
-import { patreonCampaign, patreonTiers } from './config'
+import { patreonCampaign, patreonTiers } from '../../config/patreon'
 import { PatreonTier } from './types'
 import { PatreonProfileResponse } from './types-api'
 
