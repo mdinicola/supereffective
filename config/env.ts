@@ -8,7 +8,7 @@ const serverVars = z.object({
   VERCEL_URL: z.string(), // does not have http[s]:// prefix, so cannot validate as .url()
   // next auth
   NEXTAUTH_SECRET: z.string(),
-  NEXTAUTH_URL: z.string().url().optional(),
+  NEXTAUTH_URL: z.string().url(),
   NEXTAUTH_URL_INTERNAL: z.string().url().optional(),
   // email
   EMAIL_SMTP_USER: z.string(),

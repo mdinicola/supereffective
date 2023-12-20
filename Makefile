@@ -16,7 +16,8 @@ code:
 postinstall:
 	echo "Running postinstall..."
 	if [ "$$VERCEL" = "1" ]; then exit 0; fi;
-	if [ ! -f ".env" ]; then cp .env.dist .env; fi;
+	if [ "$$VERCEL" = "true" ]; then exit 0; fi;
+	if [ ! -f ".env" ]; then cp env.dist .env; fi;
 	if [ "$$CI" = "1" ]; then exit 0; fi;
 	if [ ! -f ".husky/_/husky.sh" ]; then pnpm husky install; fi;
 	pnpm pretty:pkgjsons
