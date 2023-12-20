@@ -1,13 +1,13 @@
 @import 'reset.css';
 @import 'variables.css';
-@import '../variables.css';
+@import 'variables-theme.css';
 @import 'layout.css';
 @import 'modals.css';
 @import 'filters.css';
 @import 'tooltips.css';
 @import 'gameset.css';
 
-@import '../../../public/assets/fonts/PokeGlyphs/style.css';
+@import '../../public/assets/fonts/PokeGlyphs/style.css';
 
 @import 'icons.css';
 @import 'dexcolors.css';

@@ -1,8 +1,8 @@
 import LegacyApp from '@/lib/components/LegacyApp'
 
 //1;
-// import '@/lib/icons/styles.css'
+import '@supeffective/icons/dist/index.css'
 //2;
-import '@/lib/styles/legacy/styles.css'
+import '@/styles/styles.css'
 
 export default LegacyApp
