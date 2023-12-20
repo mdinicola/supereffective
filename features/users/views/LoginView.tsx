@@ -26,7 +26,6 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
   }
 
   if (auth.isAuthenticated() && !auth.isVerified()) {
-    // is probably a firebase user
     return (
       <LoadingRedirectBanner
         routeUri={

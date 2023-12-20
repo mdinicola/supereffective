@@ -28,7 +28,7 @@ We use the following technologies, services and tools:
 - CSS Modules for styling without styling libraries (to be integrated with TailwindCSS in v4)
 - React Context for state management (to be replaced by Redux Toolkit in v4)
 - MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
-- Next Auth, Prisma and Neon.tech PostgreSQL for authentication and dex data storage (after migrating from Firebase)
+- Next Auth, Prisma and Neon.tech PostgreSQL for authentication and dex data storage
 - Vercel (Pro tier) for hosting and deployments
 - GitHub for hosting static JSON dataset
 - CloudFlare for caching and DNS

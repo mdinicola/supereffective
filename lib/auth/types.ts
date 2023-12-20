@@ -1,7 +1,7 @@
 import { SignInResponse, SignOutResponse, useSession } from 'next-auth/react'
 
 /**
- * Basic user data, compatible with Firebase's auth User
+ * Basic user data
  */
 export type AuthUser<T = {}> = {
   /**

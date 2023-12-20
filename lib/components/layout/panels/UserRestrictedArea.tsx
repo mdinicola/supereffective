@@ -24,7 +24,6 @@ export function UserRestrictedArea({
   }
 
   if (auth.isAuthenticated() && !auth.isVerified()) {
-    // is probably a firebase user
     const redirectUri =
       Routes.VerifyEmail + '?email=' + encodeURIComponent(auth.currentUser?.email || '')
     return (

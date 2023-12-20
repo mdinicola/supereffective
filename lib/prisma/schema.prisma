@@ -62,20 +62,19 @@ model User {
   discordUsername String?   @db.VarChar(40)
 
   // relationships
-  accounts         Account[]
-  sessions         Session[]
-  firebaseAccounts FirebaseAccount[]
-  livingDexes      LivingDex[]
-  memberships      Membership[]
+  accounts    Account[]
+  sessions    Session[]
+  livingDexes LivingDex[]
+  memberships Membership[]
 }
 
 model Membership {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   patreonCampaignId String
   patreonUserId     String?
   patreonMemberId   String?
   patronStatus      String?
-  provider          String  @default("patreon") // "patreon" or "paypal"
+  provider          String    @default("patreon") // "patreon" or "paypal"
   currentTier       String
   highestTier       String
   totalContributed  Int // in cents
@@ -83,7 +82,7 @@ model Membership {
   updatedAt         DateTime
   expiresAt         DateTime? // For temporary memberships (e.g. one-time donations)
   userId            String
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // rewards
   overridenRewards       Boolean @default(false) // if true, do not override rewards when syncing memberships status with Patreon
@@ -101,35 +100,14 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model FirebaseAccount {
-  id              String      @id
-  userId          String
-  email           String?
-  emailVerified   Boolean?
-  displayName     String?
-  photoUrl        String?
-  providerId      String?
-  creationTime    DateTime?
-  lastSignInTime  DateTime?
-  lastRefreshTime DateTime?
-  livingDexes     LivingDex[]
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([email])
-}
-
 model LivingDex {
-  id                String           @id @default(cuid())
-  userId            String
-  specVer           String           @default("v4") @db.VarChar(10)
-  title             String?          @db.VarChar(255)
-  gameId            String           @db.VarChar(50)
-  data              String           @db.Text()
-  creationTime      DateTime
-  lastUpdateTime    DateTime
-  firebaseAccountId String?
-  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  firebaseAccount   FirebaseAccount? @relation(fields: [firebaseAccountId], references: [id], onDelete: Cascade)
-
-  // @@index([lastUpdateTime])
+  id             String   @id @default(cuid())
+  userId         String
+  specVer        String   @default("v4") @db.VarChar(10)
+  title          String?  @db.VarChar(255)
+  gameId         String   @db.VarChar(50)
+  data           String   @db.Text()
+  creationTime   DateTime
+  lastUpdateTime DateTime
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

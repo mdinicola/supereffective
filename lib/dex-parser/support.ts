@@ -197,7 +197,7 @@ export const findFirstPokemonInBoxes = (pokemonId: string, boxes: DexBox[]): Nul
 
 export function dexToLoadedDex(dex: LivingDex): LoadedDex {
   const dataMd = convertDexFromV4ToLegacy(dex, parseLivingDex(dex.data))
-  const loadedDex = convertFirebaseStorableDexToLoadedDex(dex.id, dataMd)
+  const loadedDex = _convertLegacyStorableDexToLoadedDex(dex.id, dataMd)
 
   // TODO: fix something wrong going on with dates in
   //  parseLivingDex,  convertDexFromV4ToLegacy or convertFirebaseStorableDexToLoadedDex
@@ -222,11 +222,10 @@ export function loadedDexToDex(userId: string, loadedDex: LoadedDex): Omit<Livin
     title: loadedDex.title,
     creationTime: loadedDex.createdAt ?? new Date(),
     lastUpdateTime: loadedDex.updatedAt ?? new Date(),
-    firebaseAccountId: null,
   }
 }
 
-export function convertFirebaseStorableDexToLoadedDex(id: string, doc: StorableDex): LoadedDex {
+function _convertLegacyStorableDexToLoadedDex(id: string, doc: StorableDex): LoadedDex {
   doc.id = id
   const presets = getPresets()
   const dex = _documentToDex(doc)
