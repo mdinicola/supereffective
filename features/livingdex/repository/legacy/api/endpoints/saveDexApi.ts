@@ -1,4 +1,4 @@
-import { fetchPokemonIds } from '@/features/common/fetch'
+import { getPokemonIds } from '@/features/common/pokemon'
 import { jsonDecode } from '@/lib/utils/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
 import { isValidIdSchema } from '@/lib/validation/schemas'
@@ -12,7 +12,7 @@ async function _canCreateMoreDexes(dexes: LoadedDex[], currentUserId: string): P
   return dexes.length < limits.maxDexes
 }
 
-const validPokemonIds = await fetchPokemonIds()
+const validPokemonIds = getPokemonIds()
 
 function sanitizeDex(dex: LoadedDex): LoadedDex {
   for (const i in dex.boxes) {

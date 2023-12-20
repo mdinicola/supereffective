@@ -1,6 +1,7 @@
 import { z, ZodType } from 'zod'
 
-import { _gameIds } from '../../common/games/ids'
+import { slugSchema } from '@/lib/validation/schemas'
+
 import errors from './errors'
 import {
   LIVINGDEX_DOC_SPEC_PROP_TYPES,
@@ -63,7 +64,7 @@ export const createLivingDexMetadataValidator = (): ZodType<LivingDexDocMeta> =>
     $id: z.string(),
     format: z.enum(LIVINGDEX_DOC_SPEC_VERSIONS),
     title: z.string(),
-    gameId: z.enum(_gameIds),
+    gameId: slugSchema,
     ownerId: z.string(), //.regex(/^@.+/),
     creationTime: z.string().datetime(),
     lastUpdateTime: z.string().datetime(),

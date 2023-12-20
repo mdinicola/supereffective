@@ -1,13 +1,23 @@
+import { fetchData } from '@/features/common/data-client'
 import { getGameSetByGameId } from '@/features/common/game-sets'
-import { fetchData } from '@/features/common/utils'
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
 import { PresetDex, PresetDexMap } from './types'
 
-const presetsJson: PresetDexMap = await fetchData('/legacy-boxpresets.min.json')
+const rawPresets: PresetDexMap = await fetchRawEntries()
+
+async function fetchRawEntries() {
+  const data: PresetDexMap = await fetchData('/legacy-boxpresets.min.json')
+
+  if (typeof data !== 'object') {
+    throw new Error('Fetch failed for legacy-boxpresets.min.json: Response was not an object')
+  }
+
+  return data
+}
 
 export const getPresets = createMemoizedCallback(() => {
-  return presetsJson as PresetDexMap
+  return rawPresets
 })
 
 export function getPresetsForGame(gameId: string): { [presetId: string]: PresetDex } {

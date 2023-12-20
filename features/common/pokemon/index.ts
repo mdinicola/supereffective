@@ -1,17 +1,32 @@
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 import { SimpleSearchIndex } from '@/lib/utils/search/SimpleSearchIndex'
 
-import { fetchData } from '../utils'
-import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry } from './types'
+import { fetchData } from '../data-client'
+import {
+  PokemonEntry,
+  PokemonEntryMap,
+  PokemonEntrySearchIndex,
+  RawLegacyPokemonEntry,
+} from './types'
 
-const rawEntries: RawPokemonEntry[] = await fetchData('/legacy-pokemon.min.json')
+const rawEntries: RawLegacyPokemonEntry[] = await fetchRawEntries()
 
-if (!Array.isArray(rawEntries)) {
-  throw new Error('Invalid data format for legacy-pokemon.min.json (via fetch)')
+async function fetchRawEntries() {
+  const data: RawLegacyPokemonEntry[] = await fetchData('/legacy-pokemon.min.json')
+
+  if (!Array.isArray(data)) {
+    throw new Error('Fetch failed for legacy-pokemon.min.json: Response was not an array')
+  }
+
+  return data
 }
 
 export const getPokemonEntries = createMemoizedCallback((): PokemonEntry[] => {
   return rawEntries.map(_transformPokemon)
+})
+
+export const getPokemonIds = createMemoizedCallback((): string[] => {
+  return getPokemonEntries().map(entry => entry.id)
 })
 
 export const getPokemonEntryMap = createMemoizedCallback((): PokemonEntryMap => {
@@ -72,15 +87,7 @@ export function isShinyLocked(pokemonId: string): boolean {
   return !getPokemonEntry(pokemonId).shiny.released
 }
 
-function _transformPokemon(pokemon: RawPokemonEntry): PokemonEntry {
-  const isUnown = pokemon.dexNum === 201
-
-  if (isUnown) {
-    // temporary fix for unown-f
-    pokemon.isFemaleForm = false
-    pokemon.hasGenderDifferences = false
-  }
-
+function _transformPokemon(pokemon: RawLegacyPokemonEntry): PokemonEntry {
   return {
     id: pokemon.id,
     nid: pokemon.nid,

@@ -1,18 +1,31 @@
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 
-import { fetchData } from '../utils'
-import { getGameIds } from './ids'
+import { fetchData } from '../data-client'
 import { LegacyGame, LegacyGameDict } from './types'
 
 export { getGameIds as getSupportedGameIds }
 
-const rawEntries: LegacyGame[] = await fetchData('/legacy-games.min.json')
+const rawEntries: LegacyGame[] = await fetchRawEntries()
+
+async function fetchRawEntries() {
+  const data: LegacyGame[] = await fetchData('/legacy-games.min.json')
+
+  if (!Array.isArray(data)) {
+    throw new Error('Fetch failed for legacy-games.min.json: Response was not an array')
+  }
+
+  return data
+}
 
 export const getGames = createMemoizedCallback((): LegacyGameDict => {
   return rawEntries.reduce((acc: any, item) => {
     acc[item.id] = item
     return acc
   }, {})
+})
+
+export const getGameIds = createMemoizedCallback((): string[] => {
+  return rawEntries.map(entry => entry.id)
 })
 
 export function getGameById(id: string): LegacyGame {
