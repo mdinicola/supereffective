@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'PokeGlyphs';
   src:
-    url('fonts/PokeGlyphs.ttf?n0ge6o') format('truetype'),
-    url('fonts/PokeGlyphs.woff?n0ge6o') format('woff'),
-    url('fonts/PokeGlyphs.svg?n0ge6o#PokeGlyphs') format('svg');
+    url('/assets/fonts/PokeGlyphs/fonts/PokeGlyphs.ttf?n0ge6o') format('truetype'),
+    url('/assets/fonts/PokeGlyphs/fonts/PokeGlyphs.woff?n0ge6o') format('woff'),
+    url('/assets/fonts/PokeGlyphs/fonts/PokeGlyphs.svg?n0ge6o#PokeGlyphs') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

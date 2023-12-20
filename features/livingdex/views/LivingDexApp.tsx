@@ -1,3 +1,7 @@
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import ReactModal from 'react-modal'
+import { useRouter } from 'next/compat/router'
+import { NextRouter } from 'next/router'
 import {
   BracesIcon,
   ListTodoIcon,
@@ -6,10 +10,6 @@ import {
   ToggleRightIcon,
   WandIcon,
 } from 'lucide-react'
-import { useRouter } from 'next/compat/router'
-import { NextRouter } from 'next/router'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import ReactModal from 'react-modal'
 
 import config from '@/config'
 import { GameLogo } from '@/features/livingdex/components/GameLogo'
@@ -1105,9 +1105,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           </div>
         )}
 
-
-
-      <LivingDexToolbar loadedDex={loadedDex} presets={presets} />
+        <LivingDexToolbar loadedDex={loadedDex} presets={presets} />
 
         <BoxGroupComponent
           dex={dex}

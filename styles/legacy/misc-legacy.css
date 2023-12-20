@@ -1,15 +1,3 @@
-@import 'reset.css';
-@import 'variables.css';
-@import 'variables-theme.css';
-@import 'layout.css';
-@import 'modals.css';
-@import 'filters.css';
-@import 'tooltips.css';
-
-@import '../public/assets/fonts/PokeGlyphs/style.css';
-
-@import 'icons.css';
-
 [class^='icon-'],
 [class*=' icon-'] {
   display: inline-block;
@@ -24,19 +12,6 @@
 
 .margin-r {
   margin-right: 0.5em !important;
-}
-
-.profile-pic {
-  display: inline-block;
-  border-radius: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.cursor-pen-emoji {
-  cursor:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✏️</text></svg>")
-      20 24,
-    auto;
 }
 
 .page .main .main-title-outlined {
@@ -92,8 +67,3 @@ img {
 img[data-nimg='fill'] {
   position: relative !important;
 }
-
-/* .dex-game {
-  background: var(--color-blueberry-dark) url('/assets/gui/bgs/patterns/pattern-ball50.png') center
-    center;
-} */

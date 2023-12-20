@@ -67,87 +67,127 @@ export const useLivingDexToolbarStore = create(
       return {
         marks: getSearchParams(QueryParams.marks, defaultMark).split(',') as MarkType[],
         setMarks: (marks, context) => {
-          return set(state => {
-            setNextRouterQueryParam(context.router, QueryParams.marks, marks.join(','))
-            return { marks }
-          })
+          return set(
+            state => {
+              setNextRouterQueryParam(context.router, QueryParams.marks, marks.join(','))
+              return { marks }
+            },
+            false,
+            'setMarks'
+          )
         },
         viewMode: getSearchParams(QueryParams.viewMode, defaultViewMode) as ViewMode,
         setViewMode: (viewMode, context) => {
-          return set(state => {
-            setNextRouterQueryParam(context.router, QueryParams.viewMode, viewMode)
-            return { viewMode }
-          })
+          return set(
+            state => {
+              setNextRouterQueryParam(context.router, QueryParams.viewMode, viewMode)
+              return { viewMode }
+            },
+            false,
+            'setViewMode'
+          )
         },
         shinyAfterRegular: getSearchParams(QueryParams.shinyAfterRegular, '1') === '1',
         setShinyAfterRegular: (shinyAfterRegular, context) => {
-          return set(state => {
-            setNextRouterQueryParam(
-              context.router,
-              QueryParams.shinyAfterRegular,
-              shinyAfterRegular ? '1' : '0'
-            )
-            return { shinyAfterRegular }
-          })
+          return set(
+            state => {
+              setNextRouterQueryParam(
+                context.router,
+                QueryParams.shinyAfterRegular,
+                shinyAfterRegular ? '1' : '0'
+              )
+              return { shinyAfterRegular }
+            },
+            false,
+            'setShinyAfterRegular'
+          )
         },
         showRegularBoxes: getSearchParams(QueryParams.showRegularBoxes, '1') === '1',
         setShowRegularBoxes: (showRegularBoxes, context) => {
-          return set(state => {
-            setNextRouterQueryParam(
-              context.router,
-              QueryParams.showRegularBoxes,
-              showRegularBoxes ? '1' : '0'
-            )
-            return { showRegularBoxes }
-          })
+          return set(
+            state => {
+              setNextRouterQueryParam(
+                context.router,
+                QueryParams.showRegularBoxes,
+                showRegularBoxes ? '1' : '0'
+              )
+              return { showRegularBoxes }
+            },
+            false,
+            'setShowRegularBoxes'
+          )
         },
         showShinyBoxes: getSearchParams(QueryParams.showShinyBoxes, '1') === '1',
         setShowShinyBoxes: (showShinyBoxes, context) => {
-          return set(state => {
-            setNextRouterQueryParam(
-              context.router,
-              QueryParams.showShinyBoxes,
-              showShinyBoxes ? '1' : '0'
-            )
-            return { showShinyBoxes }
-          })
+          return set(
+            state => {
+              setNextRouterQueryParam(
+                context.router,
+                QueryParams.showShinyBoxes,
+                showShinyBoxes ? '1' : '0'
+              )
+              return { showShinyBoxes }
+            },
+            false,
+            'setShowShinyBoxes'
+          )
         },
         savingState: 'ready',
         setSavingState: (savingState, context) => {
-          return set(state => {
-            return { savingState }
-          })
+          return set(
+            state => {
+              return { savingState }
+            },
+            false,
+            'setSavingState'
+          )
         },
         syncState: 'synced',
         setSyncState: (syncState, context) => {
-          return set(state => {
-            return { syncState }
-          })
+          return set(
+            state => {
+              return { syncState }
+            },
+            false,
+            'setSyncState'
+          )
         },
         selectMode: 'cell',
         setSelectMode: (selectMode, context) => {
-          return set(state => {
-            return { selectMode }
-          })
+          return set(
+            state => {
+              return { selectMode }
+            },
+            false,
+            'setSelectMode'
+          )
         },
         currentTool: defaultTool,
         setCurrentTool: (currentTool, context) => {
-          return set(state => {
-            return { currentTool }
-          })
+          return set(
+            state => {
+              return { currentTool }
+            },
+            false,
+            'setCurrentTool'
+          )
         },
         lastSavedAt: null,
         setLastSavedAt: (lastSavedAt, context) => {
-          return set(state => {
-            return { lastSavedAt }
-          })
+          return set(
+            state => {
+              return { lastSavedAt }
+            },
+            false,
+            'setLastSavedAt'
+          )
         },
       } satisfies LivingDexToolbarStore
     },
     {
       name: 'LivingDexToolbarStore',
       enabled: isDevelopmentEnv(),
-      store: 'localStorage',
+      // store: 'livingDexToolbarStore',
     }
   )
 )

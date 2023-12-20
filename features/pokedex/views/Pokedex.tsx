@@ -9,8 +9,8 @@ import { GameLabel } from '@/lib/components/GameLabel'
 import { ExternLink } from '@/lib/components/Links'
 import { getGameSetById } from '@/lib/data-client/game-sets'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@/lib/data-client/pokemon/types'
+import { cn } from '@/lib/utils'
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
-import { cn } from '@/lib/utils/ui'
 
 import css from './Pokedex.module.css'
 

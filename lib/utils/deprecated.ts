@@ -1,5 +1,5 @@
 /**
- * @deprecated use cn from '@/lib/utils/ui'
+ * @deprecated use cn from '@/lib/utils'
  */
 export const classNames = (...args: (string | undefined | null)[]): string => {
   // filter(Boolean) filters out falsy values: false, 0, 0, 0n, "", null, undefined, NaN
@@ -7,7 +7,7 @@ export const classNames = (...args: (string | undefined | null)[]): string => {
 }
 
 /**
- * @deprecated use cn from '@/lib/utils/ui'
+ * @deprecated use cn from '@/lib/utils'
  */
 export const classNameIf = (
   condition: boolean | undefined | null,

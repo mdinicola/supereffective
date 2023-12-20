@@ -1,7 +1,7 @@
 import { pokemonGamesMap } from '@supeffective/dataset'
 
+import { cn } from '@/lib/utils'
 import type { PropsOf, Size } from '@/lib/utils/types'
-import { cn } from '@/lib/utils/ui'
 
 import styles from './GameLabel.module.css'
 

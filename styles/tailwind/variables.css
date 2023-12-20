@@ -1,0 +1,10 @@
+/* NEOBRUTALISM style inspiration:
+// @see https://neobrutalism-components.vercel.app
+// @see https://bootcamp.uxdesign.cc/how-can-i-design-in-the-neo-brutalism-style-d85c458042de
+// @see https://www.figchallenge.com */
+@layer base {
+  :root {
+    --radius: 0.375rem;
+    --safe-area-inset-fallback: 20px;
+  }
+}
