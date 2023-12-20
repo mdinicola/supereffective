@@ -308,17 +308,6 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
     <div className={'pkBoxGroupWr'}>
       {props.showNonShiny && (
         <div className={'pkBoxGroupWr pkBoxGroupWr-regular'}>
-          {
-            <div className={'text-center pkBoxGroupWr-separator'}>
-              <div
-                id={'nonshiny'}
-                className={styles.separatorTitle + ' pkBoxGroupWr-separator-title'}
-              >
-                <i className={'icon-pkg-pokeball-outlined'} /> Pokémon{' '}
-                <i className={'icon-pkg-pokeball-outlined'} />
-              </div>
-            </div>
-          }
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
             <div
@@ -332,13 +321,6 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
       )}
       {props.showShiny && (
         <div className={'pkBoxGroupWr pkBoxGroupWr-shiny'}>
-          {
-            <div className={'text-center pkBoxGroupWr-separator'}>
-              <div id={'shiny'} className={styles.separatorTitle + ' pkBoxGroupWr-separator-title'}>
-                <i className={'icon-pkg-shiny'} /> Shiny Pokémon <i className={'icon-pkg-shiny'} />
-              </div>
-            </div>
-          }
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
             <div

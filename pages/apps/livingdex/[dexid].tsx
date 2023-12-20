@@ -19,7 +19,7 @@ const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => 
   const gameSetId = gameSet.id
 
   const containerClasses =
-    `page-container full-main-height dex-game ` +
+    `page-container full-main-height dex-game bg-blueberry-secondary ` +
     `dex-gameset-${gameSetId} dex-game-${dex.gameId} dex-preset-${dex.presetId} ` +
     `dex-boxsize-${gameSet.storage?.boxCapacity}`
 
@@ -28,7 +28,7 @@ const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => 
       <PageMeta
         metaTitle={metaTitle}
         metaDescription={metaDescription}
-        imageUrl={abs_url('/assets/livingdex.png')}
+        imageUrl={abs_url('/assets/og-image.png')}
         robots={'noindex, nofollow'}
         canonicalUrl={abs_url('/apps/livingdex/' + dex.id)}
         lang={'en'}

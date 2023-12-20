@@ -1,9 +1,9 @@
 .footer {
   position: relative;
   color: #fff;
-  background: var(--color-purple-dark);
-  box-shadow: 0 -10px 10px rgb(0 0 0 / 10%);
-  background: var(--color-black-1);
+  /* background: var(--color-purple-dark);
+  box-shadow: 0 -10px 10px rgb(0 0 0 / 10%); */
+  background: var(--color-blueberry-darker);
   text-align: left;
   line-height: 1.5;
   font-size: 0.8rem;
@@ -74,10 +74,8 @@
 /* Footer legal */
 .footer .legalBanner {
   padding: 1rem 2rem;
-  /*background-color: #333;*/
-  background: var(--color-purple-darker);
-  background: var(--color-black-0);
-  color: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   text-align: center;
   font-size: 0.7rem;
 }

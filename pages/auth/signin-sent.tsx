@@ -15,7 +15,7 @@ export default function Page() {
           lang={'en'}
         />
         <article className={'page-authored-content'}>
-          <div className={'page-container text-center bordered-container bg-white'}>
+          <div className={'page-container text-center bordered-container inner-blueberry'}>
             <h2>
               Check your email <i className="icon-email" />
             </h2>

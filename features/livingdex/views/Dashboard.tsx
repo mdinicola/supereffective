@@ -10,8 +10,8 @@ import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 
 const WelcomeContentContainer = (): JSX.Element => {
   return (
-    <div className={'page-container dex-count-0'}>
-      <WelcomeContent />
+    <div className={'page-container dex-count-0'} style={{ paddingTop: 0 }}>
+      <WelcomeContent showDescription />
     </div>
   )
 }
@@ -21,6 +21,7 @@ const AuthenticatedDashboardContainer = ({
 }: {
   limits: LivingDexResolvedUserLimits | null
 }): JSX.Element => {
+  const { isAuthenticated } = useSession()
   const { dexes, dexesLoading } = useDexesContext()
   const [listVariant, setListVariant] = useState<'grid' | 'list'>('list')
 
@@ -40,32 +41,26 @@ const AuthenticatedDashboardContainer = ({
   const canAddMoreDexes = remainingDexes > 0
 
   return (
-    <div className={'page-container dex-count-' + dexes.length}>
-      <h2 className={'text-center main-title-outlined'}>
-        <i className="icon-pkg-box" style={{ textShadow: 'none' }} /> Living Dex Tracker
-      </h2>
-      <div className="text-center" style={{ margin: '0 0 2rem 0', opacity: 1 }}>
-        <GameCardList variant={listVariant} dexes={dexes} linkable />
-      </div>
-      <p className="text-center" style={{ maxWidth: '500px', margin: '-1rem auto 2rem auto' }}>
-        <br />
-        <small>
-          <i>
-            <sup>(*) </sup> boxes required for each mode (regular or shiny).
-          </i>
-        </small>
-      </p>
-      <div className="text-center" style={{ margin: '0 0 4rem 0', opacity: 1, fontSize: '1.5rem' }}>
-        {canAddMoreDexes && (
-          <ButtonInternalLink href={'/apps/livingdex/new'} inverted={false}>
-            + Add Game
+    <div className={'page-container dex-count-' + dexes.length} style={{ paddingBlock: 0 }}>
+      <div className="inner-blueberry inner-container">
+        <h2 className={'text-center main-title-outlined'}>
+          <i className="icon-pkg-box" style={{ textShadow: 'none' }} /> Living Dex Tracker
+        </h2>
+        <div className="text-center" style={{ margin: '0 0 2rem 0', opacity: 1 }}>
+          <GameCardList variant={listVariant} dexes={dexes} linkable />
+        </div>
+        <div className="text-center" style={{ opacity: 1, fontSize: '1.5rem' }}>
+          {canAddMoreDexes && (
+            <ButtonInternalLink href={'/apps/livingdex/new'} inverted={false}>
+              + Add Game
+            </ButtonInternalLink>
+          )}
+          <ButtonInternalLink href={'/apps/livingdex/missing'} inverted={true}>
+            <i className="icon-pkg-pokeball-outlined" /> View Missing Pokémon
           </ButtonInternalLink>
-        )}
-        <ButtonInternalLink href={'/apps/livingdex/missing'} inverted={true}>
-          <i className="icon-pkg-pokeball-outlined" /> View Missing Pokémon
-        </ButtonInternalLink>
+        </div>
+        <WelcomeContent />
       </div>
-      <WelcomeContent />
     </div>
   )
 }

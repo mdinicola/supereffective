@@ -74,7 +74,7 @@ export const GamePresetSelector = ({
   return (
     <div className="page-container">
       <div className="inner-container bordered-container bg-purple-light">
-        <div className={'inner-container bg-white'}>
+        <div className={'inner-container inner-blueberry'}>
           <h2>
             <i className={'icon-pkg-box-home'} />
             Create a new Living Pokédex

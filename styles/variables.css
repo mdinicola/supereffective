@@ -61,7 +61,6 @@
   --color-violet-3: #8975d3;
   --color-violet-4: #c7baea;
   --color-main-bg: #af6dc7;
-  --color-link: var(--color-teal-1_5);
   --gradient-0: linear-gradient(206deg, #ffc7cb 11%, #c34e97 73%);
   --gradient-1: repeating-linear-gradient(213deg, #1d163a 74%, #c6e5e1 74%);
   --gradient-2: linear-gradient(280deg, #37aea5 18%, #cddcbc 99%);
@@ -125,7 +124,33 @@
   --letter-spacing-negative: -0.05em;
   --letter-spacing-large: 0.25em;
   --color-blueberry-dark: #152944;
-  --color-blueberry-medium: #004698;
+  --color-blueberry-gradient: linear-gradient(
+    var(--color-blueberry-dark),
+    var(--color-blueberry-medium)
+  );
+  --color-blueberry-gradient-inv: linear-gradient(
+    var(--color-blueberry-medium),
+    var(--color-blueberry-dark)
+  );
+  --color-blueberry-dark-alpha20: rgba(21, 41, 68, 0.2);
+  --color-blueberry-dark-alpha50: rgba(21, 41, 68, 0.5);
+  --color-blueberry-dark-alpha80: rgba(21, 41, 68, 0.8);
+  --color-blueberry-darker: #0d1929;
+  --color-blueberry-medium: #164780;
+  --color-blueberry-medium-alpha20: rgba(22, 71, 128, 0.2);
+  --color-blueberry-medium-alpha50: rgba(22, 71, 128, 0.5);
+  --color-blueberry-medium-alpha80: rgba(22, 71, 128, 0.8);
+  --color-blueberry-medium-bright: #004698;
   --color-blueberry-light: #87c5ff;
   --color-blueberry-accent: #efc718;
+  /* --color-blueberry-secondary: #10a6a7; */
+  --color-blueberry-secondary: #008898;
+  --color-blueberry-secondary-700: #063543;
+  --color-blueberry-secondary-300: #a9ebbb;
+  --color-blueberry-secondary-100: #1ca0b04d;
+  --color-link: var(--color-blueberry-accent);
+
+  /* teal2: 37aea5 */
+  --color-box-header: var(--color-teal-2);
+  --color-box-body: var(--color-teal-4);
 }

@@ -1,10 +1,13 @@
+import { SiDiscord, SiGithub, SiX as SiTwitterX } from '@icons-pack/react-simple-icons'
+
 import config from '@/config'
 
-import { ExternLink, links_to_li, SiteLink, siteLinks } from '../../Links'
+import { ExternLink, SiteLink } from '../../Links'
 import { LogoWhite } from '../LogoWhite'
 import styles from './MainFooter.module.css'
 
 export default function MainFooter() {
+  const currentYear = new Date().getFullYear()
   const titleClass = [styles.title, 'typo-compact'].join(' ')
   return (
     <footer className={styles.footer}>
@@ -14,10 +17,13 @@ export default function MainFooter() {
           <div className={styles.siteVersion}>v{config.version.num}</div>
         </div>
         <nav className={styles.mainItem}>
-          <p className={titleClass}>Articles</p>
+          <p className={titleClass}>Sections</p>
           <ul>
             <li>
-              <SiteLink href="/news">News</SiteLink>
+              <SiteLink href="/apps/livingdex">Living Dex</SiteLink>
+            </li>
+            <li>
+              <SiteLink href="/apps/pokedex">PokéDex</SiteLink>
             </li>
             <li>
               <SiteLink href="/about">About This Site</SiteLink>
@@ -26,10 +32,6 @@ export default function MainFooter() {
               <ExternLink href={config.links.roadmap}>Roadmap</ExternLink>
             </li>
           </ul>
-        </nav>
-        <nav className={styles.mainItem}>
-          <p className={titleClass}>Applications</p>
-          <ul>{links_to_li(siteLinks.pokegear, '')}</ul>
         </nav>
 
         <div className={styles.mainItem}>
@@ -77,14 +79,26 @@ export default function MainFooter() {
           <p className={titleClass}>Follow Us</p>
           <ul>
             <li className={styles.socialList}>
-              <ExternLink href={config.links.twitter}>
-                <i className="icon-brand-twitter" title="Twitter" />
+              <ExternLink
+                className={styles.brandLink}
+                href={config.links.github_site}
+                title={'Github'}
+              >
+                <SiGithub className={styles.brandIcon} size={18} />
               </ExternLink>
-              <ExternLink href={config.links.github}>
-                <i className="icon-brand-github" title="Github" />
+              <ExternLink
+                className={styles.brandLink}
+                href={config.links.discord}
+                title={'Discord'}
+              >
+                <SiDiscord className={styles.brandIcon} size={18} />
               </ExternLink>
-              <ExternLink href={config.links.discord}>
-                <i className="icon-brand-discord" title="Discord" />
+              <ExternLink
+                className={styles.brandLink}
+                href={config.links.twitter}
+                title={'Twitter/X'}
+              >
+                <SiTwitterX className={styles.brandIcon} size={18} />
               </ExternLink>
             </li>
           </ul>
@@ -93,8 +107,8 @@ export default function MainFooter() {
 
       <section className={styles.legalBanner}>
         <i>
-          &copy; 2022 SuperEffective.GG . This is a fan site and is not affiliated with The Pokémon
-          Company International, Game Freak or &copy;Nintendo.
+          &copy; {currentYear} SuperEffective.GG . This is a fan site and is not affiliated with The
+          Pokémon Company International, Game Freak or &copy; Nintendo.
         </i>
       </section>
     </footer>

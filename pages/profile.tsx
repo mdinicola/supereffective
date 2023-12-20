@@ -19,8 +19,10 @@ const Page = ({ membership }: { membership: any | undefined }) => {
         canonicalUrl={abs_url('/profile')}
         lang={'en'}
       />
-      <div className={'page-container bg-white bordered-container'}>
-        <ProfileView membership={membershipData} />
+      <div className="page-container">
+        <div className="bordered-container inner-container inner-blueberry">
+          <ProfileView membership={membershipData} />
+        </div>
       </div>
     </div>
   )

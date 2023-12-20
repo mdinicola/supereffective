@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component<any, { hasError: boolean; errorMessa
       return (
         <PageSkeleton>
           <article className={'page-authored-content'}>
-            <div className={'page-container text-center bordered-container bg-white'}>
+            <div className={'page-container text-center bordered-container inner-blueberry'}>
               <h2 style={{ color: 'red' }}>Oops, there is a client error! 😵‍💫</h2>
               <code>❌ {this.state.errorMessage}</code>
             </div>

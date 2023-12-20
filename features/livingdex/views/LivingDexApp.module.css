@@ -16,8 +16,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(134, 202, 195, 0.8);
-  border-bottom: 2px solid rgba(55, 174, 164, 0.8);
+  background-color: var(--color-blueberry-medium);
+  border-bottom: 3px solid #000;
   padding: 0 2rem;
   gap: 2rem;
 }
@@ -77,16 +77,11 @@
   top: 1em;
   gap: 1rem;
   vertical-align: baseline;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(183, 183, 183, 0.35));
+  /* background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(183, 183, 183, 0.35)); */
 
-  border: 2px solid rgba(0, 0, 0, 0.6);
+  /* border: 2px solid rgba(0, 0, 0, 0.6);
   border-radius: 1rem;
-  box-shadow: 3px 3px 0 2px rgba(0, 0, 0, 0.6);
-}
-
-.dexHeader {
-  background: rgba(243, 243, 243, 1);
-  color: #111;
+  box-shadow: 3px 3px 0 2px rgba(0, 0, 0, 0.6); */
 }
 
 .dexLogo {
@@ -123,17 +118,8 @@
   margin: 0.25rem 0 0.5rem 0;
 }
 
-span.saveBtn {
-  color: #000;
-  background: var(--color-teal);
-}
-
 a.helpBtn {
   color: rgba(0, 0, 0, 0.5);
-}
-
-span.saveBtn:hover {
-  background: var(--color-orange-light);
 }
 
 .socialLinks {
@@ -165,7 +151,7 @@ span.saveBtn:hover {
 .socialLinksBanner {
   padding: 0;
   /*background: rgba(255, 255, 255, 0.45);*/
-  color: rgba(0, 0, 0, 1);
+  color: #fff;
   margin: 0 auto 0 auto;
   font-size: 12px;
 }
@@ -244,7 +230,7 @@ span.saveBtn:hover {
 .lostPkm::before {
   content: '';
   display: block;
-  background: var(--bg-circle-shadow-gray);
+  background: var(--bg-circle-shadow-black);
   border-radius: 5rem;
   z-index: 0;
   opacity: 0.5;

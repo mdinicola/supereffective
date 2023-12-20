@@ -41,7 +41,7 @@ export default function Page({ csrfToken }: { csrfToken: string | null }) {
           lang={'en'}
         />
         <article className={'page-authored-content'}>
-          <div className={'page-container text-center bordered-container bg-white'}>
+          <div className={'page-container text-center bordered-container inner-blueberry'}>
             <h2>
               Sign In with Email <i className="icon-email" />
             </h2>

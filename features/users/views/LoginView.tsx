@@ -5,7 +5,6 @@ import { isSignInEnabled } from '@/config/featureFlags'
 import { Routes } from '@/config/routes'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import EmailSigninView from '@/features/users/views/EmailSigninView'
-import { OAuthButtonsView } from '@/features/users/views/OAuthButtonsView'
 import TokenSignInView from '@/features/users/views/TokenSignInView'
 import { LoadingBanner } from '@/lib/components/layout/panels/LoadingBanner'
 import { LoadingRedirectBanner } from '@/lib/components/layout/panels/LoadingRedirectBanner'
@@ -45,10 +44,7 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
         <h2>
           <i className={'icon-user'} /> Sign In
         </h2>
-        <p
-          className={'inner-container bg-gr-white-pattern text-center'}
-          style={{ fontSize: '1.3rem' }}
-        >
+        <p className={'inner-container inner-blueberry text-center'} style={{ fontSize: '1.3rem' }}>
           We are currently experiencing issues with our Sign In system. <br />
           Please check back later.
         </p>
@@ -61,7 +57,7 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
       <h2>
         <i className={'icon-user'} /> Sign In
       </h2>
-      <p className={'inner-container bg-gr-white-pattern text-left'}>
+      <p className={'inner-container inner-blueberry text-left'}>
         When you sign in, you'll be able to save your{' '}
         <b>
           <i className={'icon-pkg-box-home'}></i>Living Pokédex
@@ -93,7 +89,6 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
           <b>Terms and Conditions</b>
         </SiteLink>
       </p>
-      <OAuthButtonsView />
     </div>
   )
 }

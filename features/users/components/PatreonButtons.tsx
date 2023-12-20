@@ -56,7 +56,7 @@ export function PatreonButton() {
     // />
     <Button
       className="btn btn-secondary"
-      style={{ backgroundColor: '#ff424d', color: '#111', borderColor: '#141661' }}
+      style={{ padding: '5px 15px' }}
       onClick={() => {
         signIn('patreon', { callbackUrl: window.location.origin + '/profile?patreon=ok' })
       }}
@@ -85,7 +85,7 @@ export function PatreonUnlinkButton({ memberId }: { memberId: string | null }) {
         type="submit"
         name="patreonMemberId"
         value={memberId || ''}
-        style={{ color: '#ff424d', background: '#fff', borderColor: '#ff424d', padding: '4px 8px' }}
+        style={{ padding: '5px 15px' }}
       >
         Unlink Patreon account
       </Button>

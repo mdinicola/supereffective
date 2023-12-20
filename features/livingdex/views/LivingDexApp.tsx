@@ -875,7 +875,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               onButtonClick={handleSave}
               items={(() => {
                 //let icon = undefined
-                let icon = 'cloud-upload'
+                let icon = 'floppy-disk'
                 let text: string | undefined = ''
                 let status: ToolbarButtonStatus = null
                 if (savingState === 'saving') {
@@ -891,6 +891,8 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
                   icon = 'cross' // 'cloud-check'
                   status = 'error'
                   text = 'Error' //'Saved!'
+                } else if (dex.id) {
+                  return []
                 }
                 return [
                   {
@@ -1021,7 +1023,12 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
       {isEditable && removeDexModal}
       {genericModal !== null && genericModal}
       <div className={'text-center ' + styles.toolbarApp}>
-        <div className={'inner-container bordered-container text-center ' + styles.dexHeader}>
+        <div
+          className={
+            'inner-container bordered-container text-center bg-blueberry-secondary ' +
+            styles.dexHeader
+          }
+        >
           <div className={styles.dexLogo}>
             <GameLogo game={dex.gameId} size={160} asSwitchIcon={true} />
           </div>

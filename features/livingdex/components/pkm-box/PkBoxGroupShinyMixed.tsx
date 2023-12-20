@@ -249,14 +249,6 @@ export function PkBoxGroupShinyMixed(props: PkBoxGroupProps) {
   return (
     <div className={'pkBoxGroupWr'}>
       <div className={'pkBoxGroupWr pkBoxGroupWr-regular'}>
-        {
-          <div className={'text-center pkBoxGroupWr-separator'}>
-            <div className={styles.separatorTitle + ' pkBoxGroupWr-separator-title'}>
-              <i className={'icon-pkg-pokeball-outlined'} /> Pokémon{' '}
-              <i className={'icon-pkg-pokeball-outlined'} />
-            </div>
-          </div>
-        }
         <PkBoxGroupFilter onChange={handleBoxFilter} />
         <div className={classes}>
           <div className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}>

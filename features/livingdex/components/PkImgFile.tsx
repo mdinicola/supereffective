@@ -45,7 +45,7 @@ export default function PkImgFile({
   let imageSrc = `${baseConfig.assets.imagesUrl}/pokemon/${folder}/${nid}.png?v=${assetVersion}`
 
   if (nid === 'placeholder') {
-    imageSrc = '/assets/gui/placeholders/placeholder-64x64.png'
+    imageSrc = '/assets/placeholders/home3d-icon/unknown.png'
   }
 
   return (

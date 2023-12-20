@@ -34,7 +34,7 @@ const NationalLivingDexView = () => {
           'are currently storable in Pokémon HOME.'
         }
         robots={'index, follow'}
-        imageUrl={abs_url('/assets/livingdex.png')}
+        imageUrl={abs_url('/assets/og-image.png')}
         canonicalUrl={abs_url('/apps/livingdex/national')}
         lang={'en'}
       />

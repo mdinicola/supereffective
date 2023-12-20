@@ -17,8 +17,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  background: var(--color-black-1);
-  border-bottom: 2px solid var(--color-teal-2);
+  background: var(--color-blueberry-darker);
+  border-bottom: 2px solid var(--color-blueberry-medium);
 }
 
 .headerLogo {
@@ -101,17 +101,16 @@
   color: rgba(255, 255, 255, 0.88);
 }
 
-.menu a:hover,
-.menu .menuItem:hover {
-  background: var(--color-teal-2);
-  color: var(--color-black-2);
-  text-decoration: none;
+.menu a.brandLink {
+  padding: 0 0.85rem;
 }
 
+.menu a:hover,
+.menu .menuItem:hover,
 .menu a.active,
 .menu .menuItem.active {
-  background: var(--color-teal-2);
-  color: var(--color-black-2);
+  background: var(--color-blueberry-medium);
+  text-decoration: none;
 }
 
 .header :global(.mobile-only) {
@@ -220,7 +219,7 @@
     padding: 0;
     box-shadow: -10px 10px 10px rgb(0 0 0 / 10%);
 
-    background: var(--color-black-2);
+    background: var(--color-blueberry-darker);
     box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
   }
 
@@ -235,6 +234,10 @@
     border-radius: 0;
     justify-content: flex-start;
     max-width: 100vw;
+  }
+
+  .headerTop .menu a.brandLink {
+    padding: 1rem 3.5rem 1rem 1.5rem;
   }
 
   .header :global(.mobile-only) {
@@ -255,3 +258,13 @@
 .donateBtn.active i {
   color: inherit;
 }
+/* 
+.brandIcon {
+  background: #444;
+  color: #fff;
+  padding: 0.35rem;
+  font-size: 20px;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+} */

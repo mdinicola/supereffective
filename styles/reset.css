@@ -9,7 +9,7 @@
 }
 
 :root {
-  --color-theme-bg: #1a1d1f;
+  --color-theme-bg: var(--color-blueberry-darker);
 }
 
 html {
@@ -22,6 +22,7 @@ html {
 
 html,
 body {
+  overscroll-behavior: none; /* this disables pull-to-refresh and pinch-to-zoom */
   padding: 0;
   margin: 0;
   font-family:
@@ -49,4 +50,14 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+article a {
+  color: var(--color-blueberry-accent);
+  text-decoration: none;
+}
+
+hr {
+  border-color: var(--color-blueberry-light);
+  border-width: 1px 0 0 0;
 }

@@ -1,15 +1,10 @@
 .article {
   position: relative;
   text-align: initial;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
   padding: 0;
   margin: 1rem auto;
-}
-
-.article.bordered {
-  border: 4px solid #000;
-  border-radius: 1rem;
-  box-shadow: 4px 4px 0 2px black;
 }
 
 .article.withoutBanner {
@@ -131,16 +126,21 @@
 -----------------
 */
 .article .content {
-  line-height: 1.4rem;
+  line-height: 1.5;
+}
+
+.article .content ul li,
+.article .content ol li {
+  margin-bottom: 0.85rem;
 }
 
 .article .content a {
-  color: var(--color-link);
-  text-decoration: underline;
+  color: var(--color-blueberry-light);
+  text-decoration: none;
 }
 
 .article .content a:hover {
-  color: var(--color-teal-2);
+  text-decoration: underline;
 }
 
 .contentWrapper,
@@ -207,7 +207,7 @@
 }
 
 :global(.homepage) .article > figure img {
-  object-fit: contain !important;
+  /* object-fit: contain !important; */
   background-color: var(--color-teal-4);
   background-image: linear-gradient(
     45deg,
@@ -219,8 +219,8 @@
     var(--color-teal-3) 75%,
     var(--color-teal-3) 100%
   );
-  padding: 2rem;
-  padding-left: 4rem;
+  /* padding: 2rem;
+  padding-left: 4rem; */
 }
 
 .article > figure span span img {
@@ -307,11 +307,8 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .article,
-  .article.bordered {
+  .article {
     max-width: 100%;
     margin: 0;
-    border-width: 3px;
-    box-shadow: none;
   }
 }

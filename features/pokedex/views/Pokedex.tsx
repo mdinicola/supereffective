@@ -4,11 +4,13 @@ import { TypeIcon } from '@supeffective/icons'
 
 import PkImgFile from '@/features/livingdex/components/PkImgFile'
 import Button from '@/lib/components/Button'
+import { TextInput } from '@/lib/components/forms/TextInput'
 import { GameLabel } from '@/lib/components/GameLabel'
 import { ExternLink } from '@/lib/components/Links'
 import { getGameSetById } from '@/lib/data-client/game-sets'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@/lib/data-client/pokemon/types'
 import { classNameIf, classNames } from '@/lib/utils/deprecated'
+import { cn } from '@/lib/utils/ui'
 
 import css from './Pokedex.module.css'
 
@@ -17,6 +19,7 @@ export interface PokedexProps {
   pokemon: PokemonEntry[]
   pokemonSearch: PokemonEntrySearchIndex
   useSearch?: boolean
+  fixedHeight?: boolean
   showForms?: boolean
   showCounts?: boolean
   children?: React.ReactNode
@@ -225,6 +228,7 @@ export const Pokedex = ({
   pokemon,
   pokemonSearch,
   showShiny,
+  fixedHeight = false,
   showForms = false,
   showCounts = true,
   useSearch = true,
@@ -394,67 +398,50 @@ export const Pokedex = ({
         />
         {pkm.form.isFemaleForm && <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>}
         {pkm.form.isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
+        {/* <div>#{pkm.dexNum}</div>
+        <div>{pkm.name}</div> */}
       </div>
     )
   })
 
   const headerContent = (
     <div className={'text-center ' + css.docTop}>
-      <h2 className="main-title-outlined ">
-        <i className="icon-books" /> National Pokédex <small className={css.betaLabel} />
+      <h2 className="main-title-outlined " style={{ marginBottom: 0 }}>
+        <i className="icon-books" /> National Pokédex
       </h2>
-      <div className={css.intro}>
-        <p>
-          The Pokédex section has all basic information for you to check where to obtain all the
-          Pokémon species and forms from the entire game series of all generations. You can view
-          each entry by clicking on the Pokémon icon, or by searching for a Pokémon by name, number,
-          or type.
-        </p>
-        <p style={{ fontSize: '0.9rem' }}>
-          <i className="icon-help_outline icon--2x" /> Type anything or narrow-down your search by
-          including prefixes like <code>num:</code>, <code>name:</code>, <code>color:</code> and{' '}
-          <code>type:</code>. If you type for example, just "ice" it will match everything,
-          including "Jellicent". You can also enter different criteria, separated by space (in that
-          case it will search using an OR condition).
-        </p>
-      </div>
     </div>
   )
 
-  const searchContainer = (
-    <div className={'text-center search-container ' + css.docTop}>
-      <div className={css.intro}>
-        <div className={css.search}>
-          <input
-            type="search"
-            placeholder="Search by name, number or type (e.g. type:fire)"
-            value={state.search ? state.search : ''}
-            onChange={handleSearchInput}
-          />
-          <div className={css.buttons}>
-            {showCounts && (
-              <span>
-                Showing {shownSpeciesCount} species
-                {state.showForms ? `, and ${shownFormsCount} forms` : ', excluding forms'}
-              </span>
-            )}
-            <Button
-              className={css.btn}
-              onClick={() => setState({ ...state, showForms: !state.showForms })}
-            >
-              {!state.showForms && (
-                <span>
-                  <i className="icon-eye" /> Show {shownFormsCount} Forms
-                </span>
-              )}
-              {state.showForms && (
-                <span>
-                  <i className="icon-eye-blocked" /> Hide Forms
-                </span>
-              )}
-            </Button>
-          </div>
-        </div>
+  const searchPanel = (
+    <div className={'text-center'}>
+      <div className={css.searchBar}>
+        <TextInput
+          type="search"
+          placeholder="Search by name, number, type, or color"
+          value={state.search ? state.search : ''}
+          onChange={handleSearchInput}
+        />
+        <div className={css.buttons}></div>
+      </div>
+      <div className={css.countersText}>
+        {showCounts && (
+          <span>
+            Showing {shownSpeciesCount} species
+            {state.showForms
+              ? `, and ${shownFormsCount} forms.`
+              : `, excluding ${shownFormsCount} forms.`}
+          </span>
+        )}
+
+        <span
+          className={cn(css.btnToggle, {
+            [css.btnToggleActive]: state.showForms,
+          })}
+          onClick={() => setState({ ...state, showForms: !state.showForms })}
+        >
+          {!state.showForms && <span>Include forms</span>}
+          {state.showForms && <span>Exclude forms</span>}
+        </span>
       </div>
     </div>
   )
@@ -466,11 +453,18 @@ export const Pokedex = ({
       </div>
     </div>
   ) : null
-
   return (
-    <div className={classNames(css.dexApp, className)}>
+    <div
+      className={classNames(
+        css.dexApp,
+        className,
+        cn({
+          [css.fixedHeight]: fixedHeight,
+        })
+      )}
+    >
       {children ? children : headerContent}
-      {useSearch && searchContainer}
+      {useSearch && searchPanel}
 
       <div className={classes} {...rest}>
         <div className={css.grid}>

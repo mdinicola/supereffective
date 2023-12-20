@@ -48,7 +48,7 @@ export function ArticleEntry(props: ArticleEntryProps) {
   //const dateFmt = new Intl.DateTimeFormat("en-US", dateFmtOpts)
   const articleClass = [
     styles.article,
-    styles.bordered,
+    'bordered-container',
     props.isExcerpt ? styles.listEntry : styles.fullEntry,
   ].join(' ')
 
@@ -188,6 +188,7 @@ export function ArticleEntry(props: ArticleEntryProps) {
       {props.publishDate && publishDate}
 
       {props.enableSharing && socialLinks}
+      <hr style={{ margin: '2rem 0 1rem 0' }} />
 
       {contentContainer}
 

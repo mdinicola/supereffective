@@ -16,7 +16,7 @@ const Page = ({ csrfToken }: { csrfToken: string | null }) => {
         lang={'en'}
       />
       <article className={'page-authored-content'}>
-        <div className={'page-container text-center bordered-container bg-white'}>
+        <div className={'page-container text-center bordered-container inner-blueberry'}>
           <LoginView csrfToken={csrfToken} />
         </div>
       </article>

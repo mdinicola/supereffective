@@ -17,6 +17,8 @@
   --color-gray: #828282;
   --color-gray-dark: #323232;
   --color-gray-light: #b5b5b5;
+  --bg-circle-shadow-black: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 62%)
+    no-repeat center center;
   --bg-circle-shadow-gray: radial-gradient(
       circle,
       rgba(122, 122, 122, 0.65) 0%,
@@ -100,7 +102,7 @@
     var(--color-gold-light);
 
   /* General */
-  --text-color: #2c2931;
+  --text-color: var(--color-blueberry-darker);
   --color-primary: var(--color-purple);
   --color-secondary: var(--color-teal);
   /*noinspection CssUnknownTarget*/
@@ -110,8 +112,11 @@
 }
 
 .main-site-bg {
-  background: var(--color-main-bg);
-  /* background: #b762bb linear-gradient(40deg, #6b3271 0%, #c767d2 50%, #9a4d99 100%) repeat center; */
+  background: linear-gradient(var(--color-blueberry-dark), var(--color-blueberry-medium));
+  color: #fff;
+  background-repeat: no-repeat;
+  background-size: 100% 102vh;
+  background-attachment: fixed;
 }
 
 .bg-white {
@@ -212,4 +217,8 @@
 
 .bg-gr-gold-pattern {
   background: var(--bg-pattern), var(--bg-gradient-gold);
+}
+
+.fg-blueberry {
+  color: rgba(255, 255, 255, 0.8);
 }

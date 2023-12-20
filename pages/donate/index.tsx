@@ -13,7 +13,7 @@ const Page = () => {
         lang={'en'}
       />
       <div className="page-container">
-        <div className="bordered-container inner-container bg-white text-center">
+        <div className="bordered-container inner-container inner-blueberry text-center">
           <h1>Supporting this site</h1>
           <p className="text-justify">
             You can help support the development and hosting costs of this website by making a
@@ -22,12 +22,14 @@ const Page = () => {
             When you donate via Patreon, you will receive a special role on our Discord server and
             you will also get special benefits on the website, such as extra dex trackers.
             <br /> <br />
-            If you are a regular donor via Paypal, you will also have these benefits, but you will
-            need to contact us in order for us to link and grant them to your user.
+            If you are a regular donor via Paypal, you will also have these benefits, but only
+            temporarily (depending on the donation, in relation to a Patreon subscription in
+            months), and you will need to contact us in order for us to link and grant them to your
+            user.
             <br /> <br />
             Thank you for your contribution, or at least for considering it ❤️.
             <br /> <br />
-            <cite>— F. Javier Aguilar - Webmaster and Developer.</cite>
+            <cite>— Javier Aguilar - Webmaster and Developer.</cite>
           </p>
           <br />
           <p className="text-center">

@@ -30,8 +30,9 @@ export default function Page() {
           canonicalUrl={abs_url('/auth/verify-request')}
           lang={'en'}
         />
-        <article className={'page-authored-content'}>
-          <div className={'page-container text-center bordered-container bg-white'}>
+        <div className={'page-container'}>
+          <div className={'text-center bordered-container inner-container inner-blueberry'}>
+            <h2>Sign In Confirmation</h2>
             <ButtonLink href={decodedNextUrl}>
               Continue with Sign In <i className="icon-arrow-right" />
             </ButtonLink>
@@ -40,16 +41,16 @@ export default function Page() {
               style={{
                 fontSize: '0.9rem',
                 padding: '1rem',
-                background: 'var(--bg-gradient-white)',
                 marginInline: '3rem',
                 borderRadius: '1rem',
               }}
+              className="inner-blueberry"
             >
               Once you click on Continue, you will be authenticated on our website, and the Sign In
               link sent to your email will no longer be valid (it can only be used once).
             </p>
           </div>
-        </article>
+        </div>
       </div>
     )
   }

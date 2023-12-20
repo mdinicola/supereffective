@@ -30,7 +30,7 @@ export const GameCard = ({ dex, linkable }: { dex: LoadedDex; linkable: boolean 
         <div className={classNames(styles.gameCardInfo, styles.gameCardStats)}>
           {dex.boxes.length > 2 && (
             <span>
-              <i className="icon-pkg-box" /> {dex.boxes.length / 2}*
+              <i className="icon-pkg-box" /> {dex.boxes.length / 2}
             </span>
           )}
           <span>

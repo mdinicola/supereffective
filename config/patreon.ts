@@ -16,7 +16,7 @@ export const patreonTiers: PatreonTierTable = {
   [patreonCampaign.tierIds.none]: {
     tierId: patreonCampaign.tierIds.none,
     rewardId: patreonCampaign.tierIds.none,
-    name: 'General Access',
+    name: 'None',
     slug: 'none',
     description: 'Access to the default public tier.',
     tierWeight: -1,

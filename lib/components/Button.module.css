@@ -31,7 +31,7 @@
 .ctrl:hover {
   transition: all;
   transition-duration: 200ms;
-  background: var(--color-gold);
+  background: var(--color-blueberry-accent);
   text-decoration: none;
   color: #000;
 }

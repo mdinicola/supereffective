@@ -9,9 +9,9 @@
   width: 38px;
   height: 38px;
   font-size: 18px;
-  border: 1px solid var(--color-black-2);
-  background-color: var(--color-white-2);
-  color: var(--color-black-2);
+  border: 1px solid #000;
+  background-color: var(--color-blueberry-dark);
+  color: #fff;
 }
 
 .btn.withLabel {
@@ -55,16 +55,16 @@
 }
 
 .btn:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-blueberry-darker);
 }
 
 .btn:active {
-  background-color: #fff;
+  background-color: var(--color-blueberry-dark);
 }
 
 .btn.selected {
-  background-color: var(--color-pink-2);
-  color: var(--color-black-2);
+  background-color: var(--color-blueberry-accent);
+  color: #000;
 }
 
 .btnGroup {
@@ -83,7 +83,7 @@
 
 .btnGroup .btn:last-child {
   border-radius: 0 0.4rem 0.4rem 0;
-  border-right: 1px solid #606060;
+  border-right: 1px solid #000;
 }
 
 .btnGroup .btn:only-child {
@@ -98,7 +98,7 @@
 .btnGroup.dropdown .btn {
   display: flex;
   border-radius: 0.4rem;
-  border: 1px solid var(--color-black-2);
+  border: 1px solid #000;
 }
 
 .dropdown.dropdownOpen::after {
@@ -121,13 +121,13 @@
   right: -0.4rem;
   top: 100%;
   margin-top: 9px;
-  border: 2px solid var(--color-black-2);
+  border: 2px solid #000;
   display: none;
   width: auto;
-  background: #fff;
+  background: var(--color-blueberry-darker);
+  color: #fff;
   border-radius: 0.4rem;
   overflow: hidden;
-  color: #000;
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
   white-space: nowrap;
 }
@@ -137,7 +137,8 @@
 }
 
 .dropdown.dropdownOpen .dropdownTrigger {
-  background: #fff;
+  background-color: var(--color-blueberry-darker);
+  color: #fff;
 }
 
 .dropdown .dropdownOptions .btn,
@@ -148,7 +149,7 @@
   align-items: center;
   justify-content: flex-start;
   background: none;
-  color: rgba(0, 0, 0, 0.82);
+  color: rgba(255, 255, 255, 0.82);
   border: none;
   padding: 1.4rem 1rem;
   border-radius: 0;
@@ -176,13 +177,18 @@
 }
 
 .dropdown .dropdownOptions .btn.selected {
-  background: var(--color-pink-3);
+  background: var(--color-blueberry-accent);
   color: #000;
 }
 
 .dropdown .dropdownOptions .btn:hover {
-  background: var(--color-pink-1);
+  background: var(--color-blueberry-dark);
   color: #fff;
+}
+
+.dropdown .dropdownOptions .btn.selected:hover {
+  background: var(--color-gold-3);
+  color: #000;
 }
 
 .dropdown .dropdownOptions .btn i {
@@ -245,13 +251,13 @@
 .btnGroupGroupCollapsed .btn:last-child,
 .btnGroupGroupCollapsed .btnGroup:last-child .dropdownTrigger {
   border-radius: 0 0.4rem 0.4rem 0;
-  border-right: 1px solid var(--color-black-2);
+  border-right: 1px solid #000;
 }
 
 .btnGroupGroupCollapsed .btn:only-child,
 .btnGroupGroupCollapsed .btnGroup:only-child .dropdownTrigger {
   border-radius: 0.4rem;
-  border: 1px solid var(--color-black-2);
+  border: 1px solid #000;
 }
 
 .dropdown .dropdownOptions .btn {

@@ -40,13 +40,13 @@ export function ProfileView({
       <>
         <p>
           <b>Patreon Membership: </b>
-          <code style={{ color: 'var(--color-pink-2)' }}>
+          <code style={{ color: 'var(--color-blueberry-accent)' }}>
             {patreonTiers[_membership.currentTier].name}
           </code>
         </p>
         <p>
           <b>Entitled Rewards: </b>
-          <code style={{ color: 'var(--color-pink-2)' }}>
+          <code style={{ color: 'var(--color-blueberry-accent)' }}>
             {_membership.rewardMaxDexes} dexes
             {_membership.rewardFeaturedStreamer ? ', featured streamer' : ''}
           </code>
@@ -54,7 +54,7 @@ export function ProfileView({
         {hasMembership && _expirationDate && (
           <p>
             <b>Membership Expiration Date: </b>
-            <code style={{ color: 'var(--color-pink-2)' }}>
+            <code style={{ color: 'var(--color-blueberry-accent)' }}>
               {_expirationDate.toLocaleDateString()}
             </code>
           </p>
@@ -92,7 +92,7 @@ export function ProfileView({
                 <br />
               </>
             )}
-            <small style={{ fontStyle: 'italic', color: '#777' }}>
+            <small style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>
               Link your Patreon account and become a patron to unlock extras in the website and
               Discord.
             </small>
@@ -115,31 +115,36 @@ export function ProfileView({
     <UserRestrictedArea>
       <div>
         <h2>
-          Welcome,{' '}
-          <span style={{ color: 'var(--color-pink-2)' }}>{auth.currentUser?.displayName}</span>
+          <i className="icon-user" /> Profile
         </h2>
         <hr />
-        <p>
-          <b>Display Name: </b>
-          <code style={{ color: 'var(--color-pink-2)' }}>{auth.currentUser?.displayName}</code>
-        </p>
+        {auth.currentUser?.displayName && (
+          <>
+            <p>
+              <b>Display Name: </b>
+              <code style={{ color: 'var(--color-blueberry-accent)' }}>
+                {auth.currentUser?.displayName}
+              </code>
+            </p>
+          </>
+        )}
         <p>
           <b>Email: </b>
-          <code style={{ color: 'var(--color-pink-2)' }}>{auth.currentUser?.email}</code>
+          <code style={{ color: 'var(--color-blueberry-accent)' }}>{auth.currentUser?.email}</code>
         </p>
-        <hr />
         {_renderPatreonMembership()}
         <p>
           <b>Support ID: </b>
-          <code style={{ color: 'var(--color-pink-2)' }}>{auth.currentUser?.uid}</code>
+          <code style={{ color: 'var(--color-blueberry-accent)' }}>{auth.currentUser?.uid}</code>
+          <br />
+          <small style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>
+            Use this ID whenever you need help with your account, when you contact us privately. Do
+            not share publicly.
+          </small>
         </p>
         <hr />
         <div className="text-right">
           <Button onClick={onLogoutClick}>Logout</Button>
-        </div>
-        <br />
-        <div style={{ color: 'var(--color-black-3)', fontStyle: 'italic', fontSize: '0.8rem' }}>
-          This page is still a work in progress.
         </div>
       </div>
     </UserRestrictedArea>

@@ -27,7 +27,7 @@ const Page = ({
         metaTitle={entry.metaTitle}
         metaDescription={entry.metaDescription}
         robots={entry.robots}
-        imageUrl={abs_url('/assets/livingdex.png')}
+        imageUrl={abs_url('/assets/og-image.png')}
         canonicalUrl={abs_url('/apps/livingdex')}
         lang={'en'}
       />

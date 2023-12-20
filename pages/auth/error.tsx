@@ -40,7 +40,7 @@ export default function Page() {
           lang={'en'}
         />
         <article className={'page-authored-content'}>
-          <div className={'page-container text-center bordered-container bg-white'}>
+          <div className={'page-container text-center bordered-container inner-blueberry'}>
             <h2>Sign In Error</h2>
             <p>❌ {errorMessage}</p>
             <p>Try logging in again.</p>

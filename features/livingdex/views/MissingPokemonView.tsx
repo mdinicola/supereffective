@@ -157,6 +157,7 @@ const MissingPokemonView = () => {
                   pokemonSearch={pokemonSearch}
                   useSearch={missingPokemon.pokemon.length >= 50}
                   showForms={true}
+                  fixedHeight={true}
                   showCounts={true}
                   showShiny={showShiny}
                   className={styles.dex}

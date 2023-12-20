@@ -14,7 +14,7 @@ const Page = () => {
         lang={'en'}
       />
       <div className="page-container">
-        <div className="bordered-container inner-container bg-white text-center">
+        <div className="bordered-container inner-container inner-blueberry text-center">
           <p>
             <Image src={'/assets/shaymin.png'} width={195} height={166} alt="shaymin" />
           </p>
@@ -28,7 +28,7 @@ const Page = () => {
             I am currently working on ideas about how donors can get extra bonuses in the future, so
             stay tuned!
             <br /> <br />
-            <cite>F. Javier Aguilar - webmaster and developer.</cite>
+            <cite>Javier Aguilar - webmaster and developer.</cite>
           </p>
         </div>
       </div>

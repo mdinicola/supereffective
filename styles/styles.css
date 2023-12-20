@@ -9,7 +9,6 @@
 @import '../public/assets/fonts/PokeGlyphs/style.css';
 
 @import 'icons.css';
-@import 'dexcolors.css';
 
 [class^='icon-'],
 [class*=' icon-'] {
@@ -92,4 +91,9 @@ img {
 
 img[data-nimg='fill'] {
   position: relative !important;
+}
+
+.dex-game {
+  background: var(--color-blueberry-dark) url('/assets/gui/bgs/patterns/pattern-ball50.png') center
+    center;
 }

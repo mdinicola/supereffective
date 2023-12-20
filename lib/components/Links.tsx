@@ -18,26 +18,6 @@ interface NavLinkProps extends LinkProps {
   [key: string]: any
 }
 
-export const siteLinks = {
-  pokegear: [
-    {
-      url: '/apps/pokedex',
-      content: 'PokéDex (Beta)',
-      external: false,
-    },
-    {
-      url: '/apps/livingdex',
-      content: 'Living PokéDex Tracker',
-      external: false,
-    },
-    {
-      url: 'https://cdn.supeffective.com/koffing/',
-      content: 'Showdown Team Parser (Beta)',
-      external: true,
-    },
-  ],
-}
-
 export const BASE_SITE_URL: string = config.baseUrl
 
 export const abs_url = (relativePath: string) => {
@@ -75,34 +55,4 @@ export const ExternLink = ({
       {children}
     </a>
   )
-}
-
-export const links_to_li = (
-  links: Array<LinkDefinition>,
-  activeClass: string
-): Array<React.ReactNode> => {
-  return links.map((link, index) => {
-    const content = (
-      <>
-        {link.icon && <i className={link.icon} />}
-        {link.content}
-      </>
-    )
-
-    if (link.external) {
-      return (
-        <li key={index}>
-          <ExternLink href={link.url}>{content}</ExternLink>
-        </li>
-      )
-    }
-
-    return (
-      <li key={index}>
-        <SiteLink href={link.url} activeClass={activeClass}>
-          {content}
-        </SiteLink>
-      </li>
-    )
-  })
 }
