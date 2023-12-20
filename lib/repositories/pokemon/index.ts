@@ -1,5 +1,5 @@
 import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
-import { SimpleSearchIndex } from '@/lib/utils/searching/algos/SimpleSearchIndex'
+import { SimpleSearchIndex } from '@/lib/utils/search/SimpleSearchIndex'
 
 import { fetchData } from '../utils'
 import { PokemonEntry, PokemonEntryMap, PokemonEntrySearchIndex, RawPokemonEntry } from './types'

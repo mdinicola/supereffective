@@ -1,8 +1,10 @@
-import { Collection, SearchEngine, SearchWorkerAlgorithm } from '../types'
+import { SearchAlgorithm, SearchCollection, SearchEngine } from './types'
 
-export class SimpleSearchIndex<C extends Collection = Collection> implements SearchEngine {
+export class SimpleSearchIndex<C extends SearchCollection = SearchCollection>
+  implements SearchEngine
+{
   static TOKEN_SEPARATOR = ':'
-  readonly algo: SearchWorkerAlgorithm.Simple = SearchWorkerAlgorithm.Simple
+  readonly algo: SearchAlgorithm.Simple = SearchAlgorithm.Simple
   index: Map<string, string> = new Map()
 
   buildWithTokens(
@@ -120,14 +122,14 @@ export class SimpleSearchIndex<C extends Collection = Collection> implements Sea
     )
   }
 
-  searchCollection<C extends Collection>(collection: C, text: string): C {
+  searchCollection<C extends SearchCollection>(collection: C, text: string): C {
     if (!text) {
       return collection
     }
     const hits = this.search(text)
 
     if (hits.size === 0) {
-      return [] as Collection as C
+      return [] as SearchCollection as C
     }
 
     return collection.filter(item => hits.has(item.id)) as C

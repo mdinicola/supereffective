@@ -1,6 +1,6 @@
-export function waitForAllPromises() {
-  return new Promise(process.nextTick)
-}
+// export function waitForAllPromises() {
+//   return new Promise(process.nextTick)
+// }
 
 process.on('unhandledRejection', error => {
   throw error

@@ -6,7 +6,6 @@ import { CompositeAuthProvider } from '@/lib/auth/state/AuthProvider'
 
 import ErrorBoundary from './layouts/ErrorBoundary'
 import PageSkeleton from './layouts/LegacyLayout/PageSkeleton'
-import { PWAServiceWorker } from './layouts/LegacyLayout/PWAServiceWorker'
 import { SimpleAnalytics } from './layouts/SimpleAnalytics'
 
 function LegacyApp({ Component, pageProps }: AppProps | any) {
@@ -19,7 +18,6 @@ function LegacyApp({ Component, pageProps }: AppProps | any) {
               <Component {...pageProps} />
             </PageSkeleton>
             <SimpleAnalytics />
-            <PWAServiceWorker disabled />
           </ErrorBoundary>
         </LivingDexProvider>
       </LivingDexListProvider>

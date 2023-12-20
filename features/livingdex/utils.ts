@@ -1,5 +1,4 @@
 import { PkFilter } from '@/lib/repositories/living-dexes/legacy/types'
-import { getPokemonEntry } from '@/lib/repositories/pokemon'
 
 /**
  * A simple debounce function that will call the callback after the delay
@@ -13,13 +12,6 @@ export function debounceCallback(callback: Function, delay: number): Function {
     if (timer) clearTimeout(timer)
     timer = setTimeout(callback.bind(null, filter), delay)
   }
-}
-
-export const gmaxizePid = (pid: string, isGmax: boolean): string => {
-  if (!getPokemonEntry(pid).form.hasGmax) {
-    return pid
-  }
-  return isGmax ? pid.replace(/-f$/g, '') + '-gmax' : pid
 }
 
 /**

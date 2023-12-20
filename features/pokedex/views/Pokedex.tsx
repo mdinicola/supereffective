@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { TypeIcon } from '@supeffective/icons'
 
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import Button from '@/lib/components/legacy/Button/Button'
@@ -93,7 +94,7 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type1)}
               data-flow="bottom"
             >
-              {/* <TypeIcon typeId={pokemon.type1 as any} size="sm" colored filled /> */}
+              <TypeIcon typeId={pokemon.type1 as any} size="sm" colored filled />
               {pokemon.type1}
             </span>
           )}
@@ -104,7 +105,7 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type2)}
               data-flow="bottom"
             >
-              {/* <TypeIcon typeId={pokemon.type2 as any} size="sm" colored filled /> */}
+              <TypeIcon typeId={pokemon.type2 as any} size="sm" colored filled />
               {pokemon.type2}
             </span>
           )}
