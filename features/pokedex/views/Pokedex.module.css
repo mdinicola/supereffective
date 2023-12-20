@@ -302,7 +302,7 @@
   flex-wrap: wrap;
 }
 
-.gameIcons .gameset :global(.gameset-tag) {
+.gameIcons .gameset :global(.gameset-label) {
   border: 2px solid var(--dexDarkColorL);
 }
 
@@ -472,4 +472,12 @@
 .externalLinks img {
   border-radius: 4px;
   mix-blend-mode: multiply;
+}
+
+.typeIcon {
+  color: #ffffff;
+}
+
+.typeIcon svg {
+  fill: currentColor;
 }

@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { TypeIcon } from '@supeffective/icons'
 
-// import { GameLabel, TypeIcon } from '@/lib/icons'
 import PkImgFile from '@/features/livingdex/views/PkImgFile'
 import Button from '@/lib/components/Button'
+import { GameLabel } from '@/lib/components/GameLabel'
 import { ExternLink } from '@/lib/components/Links'
 import { getGameSetById } from '@/lib/data-client/game-sets'
 import { PokemonEntry, PokemonEntrySearchIndex } from '@/lib/data-client/pokemon/types'
@@ -94,8 +94,14 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type1)}
               data-flow="bottom"
             >
-              <TypeIcon typeId={pokemon.type1 as any} size="sm" colored filled />
-              {pokemon.type1}
+              <TypeIcon
+                className={css.typeIcon}
+                typeId={pokemon.type1 as any}
+                size="sm"
+                theme="light"
+                colored
+                filled
+              />
             </span>
           )}
           {pokemon.type2 && (
@@ -105,8 +111,14 @@ export const PokemonInfoPanel = ({
               data-tooltip={titleize(pokemon.type2)}
               data-flow="bottom"
             >
-              <TypeIcon typeId={pokemon.type2 as any} size="sm" colored filled />
-              {pokemon.type2}
+              <TypeIcon
+                className={css.typeIcon}
+                typeId={pokemon.type2 as any}
+                size="sm"
+                theme="light"
+                colored
+                filled
+              />
             </span>
           )}
         </div>
@@ -120,8 +132,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
-                {/* <GameLabel gameId={gameSetId} colored rounded size="sm" /> */}
-                <span>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} rounded size="sm" />
               </div>
             ))}
             {pokemon.location.eventOnlyIn.map((gameSetId: string) => (
@@ -131,8 +142,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name + ' (Event Only)'}
                 data-flow="bottom"
               >
-                {/* <GameLabel gameId={gameSetId} colored rounded size="xs" /> */}
-                <span>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} rounded size="xs" />
                 <span className={`icon-pkg-pokeball-outlined`} title="Event Only"></span>
               </div>
             ))}
@@ -151,8 +161,7 @@ export const PokemonInfoPanel = ({
                 data-tooltip={getGameSetById(gameSetId).name}
                 data-flow="bottom"
               >
-                {/* <GameLabel gameId={gameSetId} colored rounded size="xs" /> */}
-                <span>{gameSetId}</span>
+                <GameLabel gameId={gameSetId} rounded size="xs" />
               </div>
             ))}
             {pokemon.location.storableIn.length === 0 && <b>---</b>}
