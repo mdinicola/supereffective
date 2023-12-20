@@ -7,7 +7,7 @@
 @import 'tooltips.css';
 @import 'gameset.css';
 
-@import '../../public/assets/fonts/PokeGlyphs/style.css';
+@import '../public/assets/fonts/PokeGlyphs/style.css';
 
 @import 'icons.css';
 @import 'dexcolors.css';
