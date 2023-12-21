@@ -7,7 +7,7 @@
   "author": "Javi Aguilar https://itsjavi.com",
   "scripts": {
     "build": "pnpm codegen && pnpm build:nextjs && pnpm build:sitemap",
-    "build-vercel": "pnpm lint && pnpm migrate:deploy && turbo build",
+    "build-vercel": "pnpm lint && pnpm migrate:deploy && pnpm build",
     "build:nextjs": "next build",
     "build:sitemap": "next-sitemap",
     "clear-cache": "rm -rf .next .turbo",
@@ -18,7 +18,7 @@
     "dev:db": "pnpm codegen && pnpm studio:dev",
     "dev:nextjs": "PORT=3001 next dev",
     "dev:prepare": "docker-compose up -d && env-cmd pnpm migrate",
-    "format": "turbo pretty && turbo lint:fix",
+    "format": "pnpm pretty && pnpm lint:fix",
     "postinstall": "make postinstall",
     "lint": "tsc --noEmit && next lint --max-warnings=25",
     "lint:fix": "next lint --fix --max-warnings=25",
