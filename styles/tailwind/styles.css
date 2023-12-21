@@ -106,8 +106,7 @@
   }
 
   a {
-    /*color: #0070f3;*/ /* TODO set a color, and fix all others */
-    color: inherit;
+    color: var(--color-blueberry-accent);
     text-decoration: none;
   }
 
@@ -115,13 +114,41 @@
     text-decoration: underline;
   }
 
-  article a {
-    color: var(--color-blueberry-accent);
-    text-decoration: none;
+  p,
+  hr {
+    margin: 1rem 0;
   }
 
   hr {
     border-color: var(--color-blueberry-light);
     border-width: 1px 0 0 0;
+  }
+
+  article ul,
+  article ol {
+    margin: 1rem 0;
+    padding: 0 0 0 1.5rem;
+  }
+
+  article ul {
+    list-style-type: disc;
+  }
+
+  article ol {
+    list-style-type: decimal;
+  }
+
+  article ul ul,
+  article ul ol,
+  article ol ul,
+  article ol ol {
+    margin: 0;
+  }
+
+  article blockquote {
+    margin: 1rem 0;
+    padding: 0 0 0 1.5rem;
+    border-left: 0.25rem solid var(--color-blueberry-light);
+    color: var(--color-blueberry-light);
   }
 }

@@ -16,6 +16,7 @@ import { GameLogo } from '@/features/livingdex/components/GameLogo'
 import PkImgFile from '@/features/livingdex/components/PkImgFile'
 import { DexSocialLinks } from '@/features/livingdex/components/SocialLinks'
 import {
+  ToolbarButton,
   ToolbarButtonGroup,
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
@@ -34,12 +35,12 @@ import { DexBox, LoadedDex, NullableDexPokemon } from '@/features/livingdex/repo
 import { useDexesContext } from '@/features/livingdex/state/LivingDexListContext'
 import { useSession } from '@/features/users/auth/hooks/useSession'
 import Button from '@/lib/components/Button'
+import { CanvasConfetti } from '@/lib/components/CanvasConfetti'
 import InlineTextEditor from '@/lib/components/forms/InlineTextEditor'
 import { SiteLink } from '@/lib/components/Links'
 import { LoadingBanner } from '@/lib/components/panels/LoadingBanner'
 import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { useScrollToLocation } from '@/lib/hooks/useScrollToLocation'
-import { classNameIf } from '@/lib/utils/deprecated'
 import { slugify } from '@/lib/utils/strings'
 
 import { PkBoxGroup } from '../components/pkm-box/PkBoxGroup'
@@ -47,7 +48,6 @@ import { PkBoxGroupShinyMixed } from '../components/pkm-box/PkBoxGroupShinyMixed
 import { MarkType, SelectMode, ViewMode } from '../components/pkm-box/pkBoxTypes'
 import { LivingDexContext } from '../state/LivingDexContext'
 import styles from './LivingDexApp.module.css'
-import LivingDexToolbar from './LivingDexToolbar'
 
 type ActionTool = MarkType | 'all-marks' | 'no-marks' | null // | 'move' | 'delete'
 type SyncState = 'changed' | 'synced'
@@ -74,24 +74,6 @@ interface ModalContent {
 }
 
 const saveTimeout = 2000
-
-// const toggleUrlParam = (param: string, value: string) => {
-//   const url = new URL(window.location.href)
-//   const params = new URLSearchParams(url.search)
-//   if (params.get(param) === value) {
-//     params.delete(param)
-//   } else {
-//     params.set(param, value)
-//   }
-//   url.search = params.toString()
-//   window.history.replaceState({}, '', url.toString())
-// }
-
-// const readUrlParam = (param: string) => {
-//   const url = new URL(window.location.href)
-//   const params = new URLSearchParams(url.search)
-//   return params.get(param)
-// }
 
 const setUrlParamRouter = (
   param: string,
@@ -160,6 +142,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   const showMixedShinies = showShinyBoxes && showRegularBoxes
 
   const dex = livingdex.state
+  const isCreatedSuccess = readUrlParamRouter('created', router, '') === '1'
 
   const app = new Proxy(livingdex.actions, {
     get(target, prop) {
@@ -230,7 +213,7 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
         if (isNewDex) {
           app.setDex(dexWithId)
           setTimeout(() => {
-            window.location.href = `/apps/livingdex/${updatedDex.id}`
+            window.location.href = `/apps/livingdex/${updatedDex.id}?created=1`
           }, 1000)
         }
         if (onSave) {
@@ -675,15 +658,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     <div id={'dex-' + dex.id} className={styles.toolbar}>
       <div className={styles.toolbarContainer}>
         <ToolbarButtonGroupGroup collapsed={true}>
-          {/* <ToolbarButton
-            actionName={null}
-            icon={'home3'}
-            href={'/apps/livingdex'}
-            label={'Go back to the list of Living Dexes'}
-            onClick={() => {
-              // tracker.dexesHomeClicked()
-            }}
-          /> */}
           {/*Todo: fix button group internal state not updating when selectMode changes (initialAction related?)*/}
           {isEditable && viewMode !== 'boxed' && (
             <ToolbarButtonGroup
@@ -868,46 +842,66 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
               })()}
             />
           )}
+          {isEditable && (
+            <ToolbarButtonGroup
+              items={[]}
+              initialAction={null}
+              className={styles.linkToolbarBtn}
+              isMultiple
+            >
+              <ToolbarButton actionName={''}>
+                <SiteLink
+                  data-tooltip="View Missing Pokémon"
+                  data-flow="bottom"
+                  href={'/apps/livingdex/missing#g-' + dex.gameId}
+                >
+                  <i className={'icon-pkg-wild'} />
+                </SiteLink>
+              </ToolbarButton>
+            </ToolbarButtonGroup>
+          )}
         </ToolbarButtonGroupGroup>
         {isEditable && (
-          <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
-            <ToolbarButtonGroup
-              initialAction={null}
-              onButtonClick={handleSave}
-              items={(() => {
-                //let icon = undefined
-                let icon = 'floppy-disk'
-                let text: string | undefined = ''
-                let status: ToolbarButtonStatus = null
-                if (savingState === 'saving') {
-                  // icon = undefined
-                  icon = 'spinner'
-                  status = 'loading'
-                  text = 'Saving...'
-                } else if (savingState === 'saved') {
-                  icon = 'checkmark' // 'cloud-check'
-                  status = 'success'
-                  text = undefined //'Saved!'
-                } else if (savingState === 'error') {
-                  icon = 'cross' // 'cloud-check'
-                  status = 'error'
-                  text = 'Error' //'Saved!'
-                } else if (dex.id) {
-                  return []
-                }
-                return [
-                  {
-                    actionName: 'upload',
-                    icon: icon,
-                    label: text,
-                    status: status,
-                    className: styles.saveBtn,
-                    showLabel: true,
-                  },
-                ]
-              })()}
-            />
-          </ToolbarButtonGroupGroup>
+          <>
+            <ToolbarButtonGroupGroup position="right" className={styles.saveBtnGroup}>
+              <ToolbarButtonGroup
+                initialAction={null}
+                onButtonClick={handleSave}
+                items={(() => {
+                  //let icon = undefined
+                  let icon = 'floppy-disk'
+                  let text: string | undefined = ''
+                  let status: ToolbarButtonStatus = null
+                  if (savingState === 'saving') {
+                    // icon = undefined
+                    icon = 'spinner'
+                    status = 'loading'
+                    text = 'Saving...'
+                  } else if (savingState === 'saved') {
+                    icon = 'checkmark' // 'cloud-check'
+                    status = 'success'
+                    text = undefined //'Saved!'
+                  } else if (savingState === 'error') {
+                    icon = 'cross' // 'cloud-check'
+                    status = 'error'
+                    text = 'Error' //'Saved!'
+                  } else if (dex.id) {
+                    return []
+                  }
+                  return [
+                    {
+                      actionName: 'upload',
+                      icon: icon,
+                      label: text,
+                      status: status,
+                      className: styles.saveBtn,
+                      showLabel: true,
+                    },
+                  ]
+                })()}
+              />
+            </ToolbarButtonGroupGroup>
+          </>
         )}
       </div>
     </div>
@@ -1008,19 +1002,12 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
     )
   }
 
-  const missingAnchor = (
-    <span className={styles.nonShinyAnchor}>
-      <SiteLink href={'/apps/livingdex/missing#g-' + dex.gameId}>
-        <i className={'icon-pkg-pokeball-outlined'} /> View Missing
-      </SiteLink>
-    </span>
-  )
-
   const hasAllMarks = markTypes.length === allMarkTypes.length
 
   return (
     <>
-      {/* {toolbar} */}
+      {isCreatedSuccess && <CanvasConfetti />}
+      {toolbar}
       {isEditable && removeDexModal}
       {genericModal !== null && genericModal}
 
@@ -1095,17 +1082,6 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
             <br />
           </>
         )}
-
-        {auth.isAuthenticated() && (
-          <div
-            className={styles.topRightCallout + ' ' + classNameIf(isEditable, styles.withToolbar)}
-            style={{ right: '1rem' }}
-          >
-            {missingAnchor}
-          </div>
-        )}
-
-        <LivingDexToolbar loadedDex={loadedDex} presets={presets} />
 
         <BoxGroupComponent
           dex={dex}

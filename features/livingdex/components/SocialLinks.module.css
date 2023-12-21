@@ -6,9 +6,11 @@
   padding: 1rem 0;
   gap: 1rem;
   font-size: 0.8rem;
+  color: inherit;
 }
 
 .socialLink {
+  color: inherit;
   font-size: 1rem;
 }
 
@@ -47,6 +49,7 @@
 
 .permalinkCopy input {
   font-size: 10px;
+  color: #000;
 }
 
 .permalinkCopy .permalinkCopyCloseBtn {

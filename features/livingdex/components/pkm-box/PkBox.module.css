@@ -17,11 +17,12 @@
 }
 
 .listedViewMode .pkBoxGroupContent {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--color-blueberry-dark-alpha80);
   border-radius: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   gap: 3rem 2rem;
   padding: 3rem 1rem;
+  color: #fff;
 }
 
 .listedViewMode .pkBoxCell.pkBoxEmptyCell {
@@ -44,22 +45,11 @@
 
 .uncaught .pkBoxCellLabel {
   /*color: #e80000;*/
-  color: #333;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .listedViewMode .uncaught .pkBoxCellContent {
   border-radius: 1rem;
-  background: /*linear-gradient(to top left,
-  rgba(0, 0, 0, 0) 0%,
-  rgba(0, 0, 0, 0) calc(50% - 2px),
-  rgba(0, 0, 0, 0.1) 50%,
-  rgba(0, 0, 0, 0) calc(50% + 2px),
-  rgba(0, 0, 0, 0) 100%), */ rgba(
-    255,
-    255,
-    255,
-    0.3
-  );
 }
 
 .boxedViewMode .pkBoxCellLabel {
@@ -347,8 +337,7 @@
 .listedViewMode .pkBoxCell.uncaught img,
 .pkBoxCell.uncaught img {
   opacity: 0.8;
-  /*filter: grayscale(80%) contrast(1);*/
-  filter: contrast(0) brightness(0.2);
+  filter: contrast(0) brightness(0.1);
   transition:
     opacity 250ms,
     filter 250ms;
@@ -356,7 +345,6 @@
 
 .pkBoxCell.shiny.shinyLocked img {
   opacity: 0.2;
-  /*filter: grayscale(80%) contrast(1);*/
   transition:
     opacity 250ms,
     filter 250ms;

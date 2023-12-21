@@ -19,7 +19,7 @@ const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => 
   const gameSetId = gameSet.id
 
   const containerClasses =
-    `page-container full-main-height dex-game bg-ball-pattern50 ` +
+    `page-container full-main-height dex-game bg-ball-pattern10 ` +
     `dex-gameset-${gameSetId} dex-game-${dex.gameId} dex-preset-${dex.presetId} ` +
     `dex-boxsize-${gameSet.storage?.boxCapacity}`
 

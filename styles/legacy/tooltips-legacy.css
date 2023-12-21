@@ -27,10 +27,10 @@
   text-overflow: ellipsis;
   padding: 8px 12px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: #ffffff;
   z-index: 49;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
 }
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after,

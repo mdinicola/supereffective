@@ -12,6 +12,7 @@ import {
 import Button from '@/lib/components/Button'
 import { getGameSetByGameId } from '@/lib/data-client/game-sets'
 import { getPokemonEntry } from '@/lib/data-client/pokemon'
+import { cn } from '@/lib/utils'
 import { classNames } from '@/lib/utils/deprecated'
 import { slugify } from '@/lib/utils/strings'
 
@@ -304,15 +305,19 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
     styles[props.viewMode + 'ViewMode'],
     props.editable ? styles.editable : styles.nonEditable
   )
+
+  const groupContentClasses = cn(
+    styles.pkBoxGroupContent,
+    'pkBoxCount-' + boxElements.length,
+    styles[`pkBoxGroupContent-${props.viewMode}`]
+  )
   return (
     <div className={'pkBoxGroupWr'}>
       {props.showNonShiny && (
         <div className={'pkBoxGroupWr pkBoxGroupWr-regular'}>
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
-            <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}
-            >
+            <div className={groupContentClasses}>
               {pagedBoxElements}
               {loadMoreBtn}
             </div>
@@ -323,11 +328,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         <div className={'pkBoxGroupWr pkBoxGroupWr-shiny'}>
           <PkBoxGroupFilter onChange={handleBoxFilter} />
           <div className={classes}>
-            <div
-              className={[styles.pkBoxGroupContent, 'pkBoxCount-' + boxElements.length].join(' ')}
-            >
-              {pagedBoxElements}
-            </div>
+            <div className={groupContentClasses}>{pagedBoxElements}</div>
           </div>
           {loadMoreBtn}
         </div>

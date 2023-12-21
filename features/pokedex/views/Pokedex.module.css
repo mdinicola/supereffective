@@ -125,6 +125,7 @@
   text-align: center;
   overflow-x: visible;
   overflow-y: auto;
+  background: var(--color-blueberry-dark-alpha50);
   position: absolute;
   height: 100%;
   width: 100%;

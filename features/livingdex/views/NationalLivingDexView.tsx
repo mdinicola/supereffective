@@ -88,7 +88,7 @@ const NationalLivingDexView = () => {
             }
             .switch-btn {
               margin:0;
-              background-color: #333333ee;
+              background-color: var(--color-blueberry-darker);
               color:#fff;
               padding: 0.2rem 1.2rem;
               border-radius: 5rem;
@@ -106,8 +106,8 @@ const NationalLivingDexView = () => {
 
             }
             .switch-btn:hover {
-              background-color: var(--color-orange);
-              color:#fff;
+              background-color: var(--color-blueberry-accent);
+              color:#000;
               text-decoration: none;
             }
             .switch-btn.active {
@@ -141,8 +141,8 @@ const NationalLivingDexView = () => {
               margin-top:2rem;
               font-size: 1rem;
               padding: 0.7rem 2.5rem;
-              background-color: var(--color-orange);
-              color: #fff;
+              background-color: var(--color-blueberry-accent);
+              color: #000;
             }
             .hero-btn:hover{
               background-color: var(--color-orange-lighter);

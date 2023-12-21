@@ -21,12 +21,13 @@ export interface ToolbarButtonProps {
   rel?: string
   className?: string
   onClick?: (actionName: string | null) => void
-  status?: ToolbarButtonStatus
+  status?: ToolbarButtonStatus | string
   icon?: string | React.ReactNode
   label?: string
   showLabel?: boolean
+  children?: React.ReactNode
 
-  [key: string]: any
+  // [key: string]: any
 }
 
 export const ToolbarButton = (props: ToolbarButtonProps) => {
@@ -41,6 +42,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
     icon,
     label,
     showLabel,
+    children,
     ...rest
   } = props
 
@@ -84,6 +86,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
       >
         {iconElement}
         {label && showLabel && <span className={styles.label}>{label}</span>}
+        {children}
       </Link>
     )
   }
@@ -97,6 +100,7 @@ export const ToolbarButton = (props: ToolbarButtonProps) => {
     >
       {iconElement}
       {label && showLabel && <span className={styles.label}>{label}</span>}
+      {children}
     </span>
   )
 }
@@ -156,6 +160,10 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
   }
 
   const handleClick = (child: ToolbarButtonGroupChildProps) => {
+    if (child.href) {
+      return
+    }
+
     if (child.status === 'disabled') {
       return
     }
@@ -173,7 +181,7 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
     }
 
     if (onButtonClick) {
-      onButtonClick(actualAction, child.status || null, selectedAction)
+      onButtonClick(actualAction, child.status as any, selectedAction)
     }
   }
 
@@ -211,7 +219,7 @@ export const ToolbarButtonGroup = (props: ToolbarButtonGroupProps) => {
         : child.status
 
     if (icon && child.actionName === selectedAction && status === 'selected') {
-      selectedActionIcon = icon
+      selectedActionIcon = icon as any
     }
 
     return (

@@ -1,6 +1,7 @@
 import { PkFilter, PkFilterAttribute } from '@/features/livingdex/repository/types'
 import { TextInput } from '@/lib/components/forms/TextInput'
 
+import styles from './PkBoxGroupFilter.module.css'
 import { PkBoxGroupFilterProps } from './pkBoxTypes'
 import { debounceCallback } from './utils'
 
@@ -37,8 +38,9 @@ export function PkBoxGroupFilter(props: PkBoxGroupFilterProps) {
 
   return (
     <div className={'pkBoxGroupFilter'}>
-      <form>
+      <form className={styles.searchForm}>
         <TextInput
+          className={styles.searchInputWrapper}
           type="text"
           name="filter"
           placeholder={`Search by Pokémon ${ATTRIBUTE_MAP[FILTER_ATTRIBUTE]}`}
