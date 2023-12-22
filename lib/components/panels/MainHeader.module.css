@@ -167,7 +167,7 @@
   letter-spacing: 2px;
   /*background: rgba(75, 75, 75, 0.2);*/
   padding: 10px;
-  top: 10px;
+  top: 15px;
   right: calc(0px + env(titlebar-area-x, 0px));
   width: 64px;
   text-align: center;

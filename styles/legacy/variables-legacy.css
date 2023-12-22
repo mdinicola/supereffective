@@ -134,6 +134,13 @@
     var(--color-blueberry-medium),
     var(--color-blueberry-dark)
   );
+  --color-blueberry-gradient-shiny: linear-gradient(
+    var(--color-blueberry-medium),
+    var(--color-blueberry-shiny)
+  );
+  --color-blueberry-gradient-shiny-inv: linear-gradient(
+    var(--color-blueberry-shiny) var(--color-blueberry-medium)
+  );
   --color-blueberry-dark-rgb: 21, 41, 68;
   --color-blueberry-dark-alpha20: rgba(21, 41, 68, 0.2);
   --color-blueberry-dark-alpha50: rgba(21, 41, 68, 0.5);
@@ -150,6 +157,7 @@
   --color-blueberry-medium-alpha80: rgba(22, 71, 128, 0.8);
   --color-blueberry-medium-bright: #004698;
   --color-blueberry-light: #87c5ff;
+  --color-blueberry-shiny: #16c2f0;
   --color-blueberry-accent: #efc718;
   /* --color-blueberry-secondary: #10a6a7; */
   --color-blueberry-secondary: #008898;
