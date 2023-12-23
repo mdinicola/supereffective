@@ -156,9 +156,11 @@
   --color-blueberry-medium-alpha50: rgba(22, 71, 128, 0.5);
   --color-blueberry-medium-alpha80: rgba(22, 71, 128, 0.8);
   --color-blueberry-medium-bright: #004698;
+  --color-blueberry-medium-bright-rgb: 0, 70, 152;
   --color-blueberry-light: #87c5ff;
   --color-blueberry-shiny: #16c2f0;
   --color-blueberry-accent: #efc718;
+  --color-blueberry-accent-hsl: 49, 87%, 52%;
   /* --color-blueberry-secondary: #10a6a7; */
   --color-blueberry-secondary: #008898;
   --color-blueberry-secondary-700: #063543;
@@ -365,12 +367,37 @@
 }
 
 .bg-blueberry-gradient-static {
-  background: linear-gradient(var(--color-blueberry-dark), var(--color-blueberry-medium));
   color: #fff;
+  background: linear-gradient(var(--color-blueberry-dark), var(--color-blueberry-medium));
   background-repeat: no-repeat;
-  background-size: 100% 102vh;
+  background-size: 100% 102dvh;
   background-attachment: fixed;
 }
+
+@supports (-webkit-touch-callout: none) {
+  /* CSS specific to iOS devices */
+  .bg-blueberry-gradient-static {
+    /* iOS Safari doesnt support background-attachment: fixed */
+    background-repeat: repeat-y;
+    background-attachment: initial;
+    background-size: cover;
+  }
+}
+
+/* .bg-blueberry-gradient-static::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-blueberry-medium) linear-gradient(var(--color-blueberry-dark), var(--color-blueberry-medium), linear-gradient(var(--color-blueberry-dark)));
+  z-index: -1;
+  background-repeat: repeat-y;
+  background-size: 100% 100vh;
+  background-position: 50% 50%;
+ } */
 
 .bg-ball-pattern50 {
   background: url('/assets/gui/bgs/patterns/pattern-ball50.png') center center;

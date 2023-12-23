@@ -170,9 +170,10 @@ const MissingPokemonView = () => {
                     <div id={'g-' + missingPokemon.game.id} className="offset-anchor" />
                     <a href={'#g-' + missingPokemon.game.id}>
                       <GameLogo
+                        className={styles.gameLogo}
                         game={missingPokemon.game.id}
                         ext=".png"
-                        size={200}
+                        size={120}
                         asSwitchIcon={false}
                       />
                     </a>

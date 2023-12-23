@@ -373,6 +373,7 @@ export const Pokedex = ({
   })
 
   const pokemonCells = renderablePokemon.map((pkm, index) => {
+    const isMaleForm = pkm.form.isMaleForm || (pkm.form.hasGenderForms && !pkm.form.isFemaleForm)
     return (
       <div
         key={pkm.id + '_' + index}
@@ -397,7 +398,7 @@ export const Pokedex = ({
           variant="3d"
         />
         {pkm.form.isFemaleForm && <span className={'female-symbol ' + css.femaleIcon}>{'♀'}</span>}
-        {pkm.form.isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
+        {isMaleForm && <span className={'male-symbol ' + css.maleIcon}>{'♂'}</span>}
         {/* <div>#{pkm.dexNum}</div>
         <div>{pkm.name}</div> */}
       </div>
@@ -417,6 +418,9 @@ export const Pokedex = ({
       <div className={css.searchBar}>
         <TextInput
           type="search"
+          name="filter"
+          autoCorrect="off"
+          autoComplete="off"
           placeholder="Search by name, number, type, or color"
           value={state.search ? state.search : ''}
           onChange={handleSearchInput}

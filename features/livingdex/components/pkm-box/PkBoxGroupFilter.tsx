@@ -41,7 +41,9 @@ export function PkBoxGroupFilter(props: PkBoxGroupFilterProps) {
       <form className={styles.searchForm}>
         <TextInput
           className={styles.searchInputWrapper}
-          type="text"
+          type="search"
+          autoCorrect="off"
+          autoComplete="off"
           name="filter"
           placeholder={`Search by Pokémon ${ATTRIBUTE_MAP[FILTER_ATTRIBUTE]}`}
           onChange={handleFilterInput}

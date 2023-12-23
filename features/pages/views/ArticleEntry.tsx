@@ -213,6 +213,7 @@ export function ArticlePage(props: ArticlePageProps) {
       '@type': 'WebPage',
       '@id': props.canonicalUrl,
     },
+    url: props.canonicalUrl,
     headline: props.title?.replace(/"/g, '\\"'),
     image: [meta.imageUrl?.replace(/"/g, '\\"')],
     datePublished: isoDate,
@@ -227,7 +228,7 @@ export function ArticlePage(props: ArticlePageProps) {
       name: 'supereffective.gg',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://supereffective.gg/assets/logo/logo.png',
+        url: 'https://supereffective.gg/assets/logo/logo2024.png',
       },
     },
   }

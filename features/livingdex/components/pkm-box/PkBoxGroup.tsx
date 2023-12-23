@@ -176,6 +176,14 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
         cellPkm.shinyBase !== null ? styles.hasShinyBase : ''
       )
 
+      if (pkmEntry.form.hasGenderForms && !pkmEntry.form.isFemaleForm) {
+        title += ' ♂'
+      }
+
+      if (pkmEntry.form.hasGenderForms && pkmEntry.form.isFemaleForm) {
+        title += ' ♀'
+      }
+
       if (pkmEntry.form.isGmax) {
         title += ' Gigantamax'
       }

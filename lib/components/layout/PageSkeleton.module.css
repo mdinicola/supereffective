@@ -1,7 +1,7 @@
 .page {
   position: relative;
-  background-color: var(--color-main-bg);
-  color: var(--color-black-2);
+  /* background-color: var(--color-main-bg); */
+  /* color: var(--color-black-2); */
 }
 
 .main {
