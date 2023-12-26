@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+
 import errors from './errors'
 import { getLivingDexFormat } from './formats'
 import {
@@ -253,5 +255,11 @@ describe('serializeLivingDex', () => {
     const convertedDex = parseLivingDex(result)
 
     expect(convertedDex).toEqual(dex)
+  })
+
+  it('parses a full living dex from a file, correcty', () => {
+    const filename = __dirname + '/parser-data.txt'
+    const filecontent = fs.readFileSync(filename, 'utf-8')
+    parseLivingDex(filecontent)
   })
 })

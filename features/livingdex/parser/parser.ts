@@ -296,7 +296,10 @@ function parseBoxes(lines: string[], format: LivingDexDocSpecConfig): LivingDexD
       currentBox.pokemon &&
       currentBox.pokemon.length >= LIVINGDEX_MAX_BOX_CAPACITY
     ) {
-      throw new Error('Box Pokémon limit exceeded', errors.LIVINGDEX.BOX_ITEM_LIMIT_EXCEEDED)
+      throw new Error(
+        'Box Pokémon limit exceeded for box with title: ' + currentBox.title,
+        errors.LIVINGDEX.BOX_ITEM_LIMIT_EXCEEDED
+      )
     }
     const pokeData = parsePokemonProps(line, format)
     currentBox.pokemon.push(pokeData)

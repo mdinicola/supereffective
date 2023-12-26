@@ -21,13 +21,8 @@ import {
   ToolbarButtonGroupGroup,
   ToolbarButtonStatus,
 } from '@/features/livingdex/components/ToolbarButton'
-import { DeserializedLivingDexDoc } from '@/features/livingdex/parser'
-import {
-  convertDexFromLegacyToV4,
-  convertDexFromV4ToLegacyStd,
-} from '@/features/livingdex/parser/support'
+import { convertDexFromLegacyToV4 } from '@/features/livingdex/parser/support'
 import { isCatchable } from '@/features/livingdex/repository'
-import { convertStorableDexToLoadedDex } from '@/features/livingdex/repository/converters/convertStorableDexToLoadedDex'
 import { getPresetByIdForGame, getPresetsForGame } from '@/features/livingdex/repository/presets'
 import { normalizeDexWithPreset } from '@/features/livingdex/repository/presets/normalizeDexWithPreset'
 import { PresetDex, PresetDexMap } from '@/features/livingdex/repository/presets/types'
@@ -388,71 +383,66 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const handleImport = () => {
-    // open file dialog *.dex.json
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = '.json'
-    input.onchange = e => {
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) {
-        return
-      }
-      const reader = new FileReader()
-      reader.onload = e => {
-        const result = e.target?.result
-        if (typeof result !== 'string') {
-          return
-        }
-        try {
-          const data: DeserializedLivingDexDoc = JSON.parse(result)
-          data.$id = dex.id
-
-          if (data.gameId !== dex.gameId) {
-            const errMsg = `The file you selected is not a valid Living Dex file for game '${dex.gameId}'.`
-            alert('Error: ' + errMsg)
-            throw new Error(errMsg)
-          }
-
-          if (data.legacyPresetId !== dex.presetId) {
-            const errMsg = `The preset of this Dex and the one of the JSON file are different.`
-            alert('Error: ' + errMsg)
-            throw new Error(errMsg)
-          }
-
-          if (!currentUser) {
-            throw new Error('Cannot import dex if not logged in')
-          }
-
-          const loadedDex = convertStorableDexToLoadedDex(
-            convertDexFromV4ToLegacyStd(dex.id, currentUser.uid, data)
-          )
-          // loadedDex.id = undefined // TODO: this is a hack to force a new id to be generated
-          app.setDex(loadedDex)
-
-          setModalContent({
-            title: 'Import successful',
-            content: (
-              <div>
-                <p>
-                  The Living Dex has been imported successfully. You can now continue editing it.
-                </p>
-                <p>
-                  <strong>Nothing will be saved until you do some change.</strong>
-                </p>
-              </div>
-            ),
-            confirmButton: 'OK',
-            cancelButton: null,
-            prevState: { dex, preset: preset as any },
-          })
-        } catch (e) {
-          alert('The file you selected is not a valid Living Dex JSON file.')
-          throw e
-        }
-      }
-      reader.readAsText(file)
-    }
-    input.click()
+    // Disable import for now, until we have better validation
+    // const input = document.createElement('input')
+    // input.type = 'file'
+    // input.accept = '.json'
+    // input.onchange = e => {
+    //   const file = (e.target as HTMLInputElement).files?.[0]
+    //   if (!file) {
+    //     return
+    //   }
+    //   const reader = new FileReader()
+    //   reader.onload = e => {
+    //     const result = e.target?.result
+    //     if (typeof result !== 'string') {
+    //       return
+    //     }
+    //     try {
+    //       const data: DeserializedLivingDexDoc = JSON.parse(result)
+    //       data.$id = dex.id
+    //       if (data.gameId !== dex.gameId) {
+    //         const errMsg = `The file you selected is not a valid Living Dex file for game '${dex.gameId}'.`
+    //         alert('Error: ' + errMsg)
+    //         throw new Error(errMsg)
+    //       }
+    //       if (data.legacyPresetId !== dex.presetId) {
+    //         const errMsg = `The preset of this Dex and the one of the JSON file are different.`
+    //         alert('Error: ' + errMsg)
+    //         throw new Error(errMsg)
+    //       }
+    //       if (!currentUser) {
+    //         throw new Error('Cannot import dex if not logged in')
+    //       }
+    //       const loadedDex = convertStorableDexToLoadedDex(
+    //         convertDexFromV4ToLegacyStd(dex.id, currentUser.uid, data)
+    //       )
+    //       // loadedDex.id = undefined // TODO: this is a hack to force a new id to be generated
+    //       app.setDex(loadedDex)
+    //       setModalContent({
+    //         title: 'Import successful',
+    //         content: (
+    //           <div>
+    //             <p>
+    //               The Living Dex has been imported successfully. You can now continue editing it.
+    //             </p>
+    //             <p>
+    //               <strong>Nothing will be saved until you do some change.</strong>
+    //             </p>
+    //           </div>
+    //         ),
+    //         confirmButton: 'OK',
+    //         cancelButton: null,
+    //         prevState: { dex, preset: preset as any },
+    //       })
+    //     } catch (e) {
+    //       alert('The file you selected is not a valid Living Dex JSON file.')
+    //       throw e
+    //     }
+    //   }
+    //   reader.readAsText(file)
+    // }
+    // input.click()
   }
 
   const handleSettingsToolbar = (
@@ -634,15 +624,15 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
   }
 
   const toolbarWrenchTools = [
-    {
-      actionName: 'import',
-      icon: 'upload',
-      label: 'Import JSON file',
-      status: '',
-      className: styles.saveBtn,
-      // onClick: handleImport,
-      showLabel: true,
-    },
+    // {
+    //   actionName: 'import',
+    //   icon: 'upload',
+    //   label: 'Import JSON file',
+    //   status: '',
+    //   className: styles.saveBtn,
+    //   // onClick: handleImport,
+    //   showLabel: true,
+    // },
     {
       actionName: 'export',
       icon: 'download',
