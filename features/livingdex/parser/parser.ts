@@ -41,14 +41,22 @@ export function parseLivingDex(markdown: string): DeserializedLivingDexDoc {
   }
 
   const format = getLivingDexFormat(meta.format)
-  const boxes = parseBoxes(mdBoxLines, format)
+  try {
+    const boxes = parseBoxes(mdBoxLines, format)
 
-  const dex = {
-    ...meta,
-    boxes,
+    const dex = {
+      ...meta,
+      boxes,
+    }
+
+    return applyDefaultMiddlewares({ dex, format })
+  } catch (error) {
+    throw new Error(
+      `LivingDex boxes contains invalid data for dex ID '${meta.$id ?? '(new)'}' and owner ID '${
+        meta.ownerId
+      }'. Error was: "${error}"`
+    )
   }
-
-  return applyDefaultMiddlewares({ dex, format })
 }
 
 export function validateLivingDex(metadata: object, boxes: object[]): void {
