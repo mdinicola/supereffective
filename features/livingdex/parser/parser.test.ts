@@ -94,6 +94,10 @@ const dummyMarkdownBoxes: LivingDexDocBox[] = [
 
 const formatV4 = '```{"format": "v4"}```'
 
+function expect_toThrowWithCause(fn: () => any, cause: string) {
+  expect(fn).toThrow(expect.objectContaining({ cause }))
+}
+
 describe('parseLivingDex', () => {
   it('succeeds (minimal info)', async () => {
     const dex = parseLivingDex(formatV4)
@@ -114,26 +118,30 @@ describe('parseLivingDex', () => {
   })
 
   it('throws an error if JSON meta is missing', async () => {
-    expect(() => parseLivingDex('')).toThrowWithCause(errors.LIVINGDEX.INVALID_MARKDOWN.cause)
-    expect(() => parseLivingDex('- pikachu')).toThrowWithCause(
+    expect_toThrowWithCause(() => parseLivingDex(''), errors.LIVINGDEX.INVALID_MARKDOWN.cause)
+    expect_toThrowWithCause(
+      () => parseLivingDex('- pikachu'),
       errors.LIVINGDEX.INVALID_MARKDOWN.cause
     )
   })
 
   it('throws an error if JSON meta is invalid JSON', async () => {
-    expect(() => parseLivingDex('```"format": "v4"}```')).toThrowWithCause(
+    expect_toThrowWithCause(
+      () => parseLivingDex('```"format": "v4"}```'),
       errors.LIVINGDEX.INVALID_MARKDOWN.cause
     )
   })
 
   it('throws an error if format is wrong', async () => {
-    expect(() => parseLivingDex('```{"format": "v3"}```')).toThrowWithCause(
+    expect_toThrowWithCause(
+      () => parseLivingDex('```{"format": "v3"}```'),
       errors.LIVINGDEX.INVALID_FORMAT.cause
     )
   })
 
   it('throws an error if pokemon is supplied before box', async () => {
-    expect(() => parseLivingDex(formatV4 + '\n- pikachu')).toThrowWithCause(
+    expect_toThrowWithCause(
+      () => parseLivingDex(formatV4 + '\n- pikachu'),
       errors.LIVINGDEX.NO_BOXES_DETECTED.cause
     )
   })
@@ -142,7 +150,8 @@ describe('parseLivingDex', () => {
     const data = Array(LIVINGDEX_MAX_BOXES + 1)
       .fill('### Kanto 1')
       .join('\n')
-    expect(() => parseLivingDex(formatV4 + data)).toThrowWithCause(
+    expect_toThrowWithCause(
+      () => parseLivingDex(formatV4 + data),
       errors.LIVINGDEX.BOXES_LIMIT_EXCEEDED.cause
     )
   })
@@ -156,7 +165,8 @@ describe('parseLivingDex', () => {
       .fill('### Kanto 1\n' + data)
       .join('\n')
 
-    expect(() => parseLivingDex(formatV4 + dataWithBoxes)).toThrowWithCause(
+    expect_toThrowWithCause(
+      () => parseLivingDex(formatV4 + dataWithBoxes),
       errors.LIVINGDEX.BOX_ITEM_LIMIT_EXCEEDED.cause
     )
   })

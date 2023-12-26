@@ -50,12 +50,17 @@ export function parseLivingDex(markdown: string): DeserializedLivingDexDoc {
     }
 
     return applyDefaultMiddlewares({ dex, format })
-  } catch (error) {
-    throw new Error(
+  } catch (error: any) {
+    const newErr = new Error(
       `LivingDex boxes contains invalid data for dex ID '${meta.$id ?? '(new)'}' and owner ID '${
         meta.ownerId
       }'. Error was: "${error}"`
     )
+
+    newErr.stack = error.stack
+    newErr.cause = error.cause
+
+    throw newErr
   }
 }
 
