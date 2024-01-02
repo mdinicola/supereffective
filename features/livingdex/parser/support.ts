@@ -1,5 +1,6 @@
 import { LivingDex } from '@prisma/client'
 
+import { migratePokemonId } from '@/lib/data-client/migrations'
 import { SerializableDate } from '@/lib/utils/serialization/jsonSerializable'
 
 import { getLivingDexFormat, parseLivingDex, serializeLivingDex } from '.'
@@ -119,10 +120,10 @@ export function convertDexFromV4ToLegacy(
             return null
           }
 
-          const pkmEntry = getPokemonEntry(pokemon.id)
+          const pkmEntry = getPokemonEntry(migratePokemonId(pokemon.id))
 
           return {
-            pid: pokemon.id,
+            pid: pkmEntry.id,
             nid: pkmEntry.nid,
             caught: pokemon.captured,
             shiny: pokemon.shiny,

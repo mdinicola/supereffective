@@ -2,6 +2,7 @@ import createMemoizedCallback from '@/lib/utils/caching/createMemoizedCallback'
 import { SimpleSearchIndex } from '@/lib/utils/search/SimpleSearchIndex'
 
 import { fetchData } from '..'
+import { migratePokemonId } from '../migrations'
 import {
   PokemonEntry,
   PokemonEntryMap,
@@ -29,7 +30,7 @@ export const getPokemonIds = createMemoizedCallback((): string[] => {
   return getPokemonEntries().map(entry => entry.id)
 })
 
-export const getPokemonEntryMap = createMemoizedCallback((): PokemonEntryMap => {
+const _getPokemonEntryMap = createMemoizedCallback((): PokemonEntryMap => {
   const map: PokemonEntryMap = new Map<string, PokemonEntry>()
   getPokemonEntries().forEach(entry => {
     map.set(entry.id, entry)
@@ -61,26 +62,14 @@ export const getPokemonSearchIndex = createMemoizedCallback((): PokemonEntrySear
   return index
 })
 
-function _sanitizePokemonIdLookup(pokemonId: string): string {
-  const migrationMap: Record<string, string> = {
-    'maushold-four': 'maushold',
-  }
-
-  if (migrationMap[pokemonId]) {
-    return migrationMap[pokemonId]
-  }
-
-  return pokemonId
-}
-
 export function getPokemonEntry(pokemonId: string): PokemonEntry {
-  const safeId = _sanitizePokemonIdLookup(pokemonId)
-  const map = getPokemonEntryMap()
+  const safeId = migratePokemonId(pokemonId)
+  const map = _getPokemonEntryMap()
   if (map.has(safeId)) {
     return map.get(safeId)!
   }
 
-  throw new Error(`Pokemon with ID '${pokemonId}' does not exist.`)
+  throw new Error(`Pokemon with ID '${safeId}' does not exist.`)
 }
 
 export function isShinyLocked(pokemonId: string): boolean {

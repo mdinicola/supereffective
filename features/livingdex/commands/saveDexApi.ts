@@ -1,3 +1,4 @@
+import { migratePokemonId, migratePokemonNid } from '@/lib/data-client/migrations'
 import { getPokemonIds } from '@/lib/data-client/pokemon'
 import { jsonDecode } from '@/lib/utils/serialization/jsonSerializable'
 import { apiErrors, ApiResponse } from '@/lib/utils/types'
@@ -21,7 +22,13 @@ function sanitizeDex(dex: LoadedDex): LoadedDex {
 
     for (const j in box.pokemon) {
       const pkm = box.pokemon[j]
-      if (pkm && !validPokemonIds.includes(pkm.pid as any)) {
+      if (!pkm) {
+        sanitizedPokemon.push(pkm)
+        continue
+      }
+      pkm.pid = migratePokemonId(pkm.pid)
+      pkm.nid = migratePokemonNid(pkm.nid)
+      if (!validPokemonIds.includes(pkm.pid as any)) {
         // Skip entry if it has an invalid pokemon ID
         sanitizedPokemon.push(null)
         console.error(`[sanitizeDex] Invalid pokemon PID found: ${pkm.pid}`, `DEX ID: ${dex.id}`)
@@ -29,6 +36,7 @@ function sanitizeDex(dex: LoadedDex): LoadedDex {
       }
       sanitizedPokemon.push(pkm)
     }
+
     dex.boxes[i].pokemon = sanitizedPokemon
   }
 
