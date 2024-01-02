@@ -20,5 +20,5 @@
     },
     "editor.minimap.enabled": false
   },
-  "jest.jestCommandLine": "pnpm jest"
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
 }
