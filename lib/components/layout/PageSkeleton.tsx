@@ -12,7 +12,7 @@ export default function PageSkeleton({ children }: { children: React.ReactNode }
 
   return (
     <div
-      data-buildid={buildVersion}
+      data-buildver={buildVersion}
       className={[
         'page',
         styles.page,

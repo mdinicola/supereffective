@@ -22,9 +22,9 @@ async function fetchApiVersion(): Promise<{ version: string }> {
 function usePullBuildVersionInterval() {
   const [version, setVersion] = useState<string>('')
 
-  // fetchApiVersion().then(data => {
-  //   setVersion(data.version)
-  // })
+  fetchApiVersion().then(data => {
+    setVersion(data.version)
+  })
 
   useEffect(() => {
     const interval = setInterval(
