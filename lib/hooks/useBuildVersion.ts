@@ -53,7 +53,7 @@ export function useRefreshOnVersionChange() {
   const pulledVersion = usePullBuildVersionInterval()
 
   if (initialVersion === undefined) {
-    return
+    return pulledVersion
   }
 
   if (pulledVersion && pulledVersion !== initialVersion) {
@@ -63,4 +63,6 @@ export function useRefreshOnVersionChange() {
     })
     window.location.reload()
   }
+
+  return pulledVersion
 }

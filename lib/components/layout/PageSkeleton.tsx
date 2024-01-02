@@ -8,10 +8,11 @@ import MainHeader from '../panels/MainHeader'
 import styles from './PageSkeleton.module.css'
 
 export default function PageSkeleton({ children }: { children: React.ReactNode }) {
-  useRefreshOnVersionChange()
+  const buildVersion = useRefreshOnVersionChange()
 
   return (
     <div
+      data-buildid={buildVersion}
       className={[
         'page',
         styles.page,
