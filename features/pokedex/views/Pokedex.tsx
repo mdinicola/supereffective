@@ -468,6 +468,15 @@ export const Pokedex = ({
       )}
     >
       {children ? children : headerContent}
+      <article className={css.announcement}>
+        <p>
+          While we continue doing some work here, you can already try out our new Dex Tracker
+          website! It is a super fast client-based web app that doesn't require any login.
+        </p>
+        <a href="https://itsjavi.com/pokedex-tracker/" className={css.heroBtn}>
+          Go to Super Pokédex Tracker
+        </a>
+      </article>
       {useSearch && searchPanel}
 
       <div className={classes} {...rest}>

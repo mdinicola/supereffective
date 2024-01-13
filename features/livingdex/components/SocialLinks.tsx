@@ -150,11 +150,11 @@ export const DexSocialLinks = ({
 
   const ownerText =
     "Check out all Pokémon I have on my Living Dex, created with supereffective.gg 's" +
-    ' Living Pokédex Tracker app. #LivingDex #PokedexTracker #Pokemon #PokemonHOME #PokemonScarletViolet'
+    ' Living Pokédex Organizer app. #LivingDex #PokedexTracker #Pokemon #PokemonHOME #PokemonScarletViolet'
 
   const nonOwnerText =
     "Check out this Living Dex, created with supereffective.gg 's" +
-    ' Living Pokédex Tracker app. #LivingDex #PokedexTracker #Pokemon #PokemonHOME #PokemonScarletViolet'
+    ' Living Pokédex Organizer app. #LivingDex #PokedexTracker #Pokemon #PokemonHOME #PokemonScarletViolet'
 
   return (
     <SocialLinks showPermalinkBtn={true} permalink={abs_url(dexLink)} {...props}>

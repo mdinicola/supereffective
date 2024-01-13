@@ -21,7 +21,7 @@ export async function fetchData<T>(relativeUrl: string, init?: FetchInit): Promi
     ...init,
     next: {
       revalidate: config.assets.dataCacheTtl,
-      ...(init && init.next),
+      ...init?.next,
     },
   }
 

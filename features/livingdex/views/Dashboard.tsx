@@ -21,9 +21,8 @@ const AuthenticatedDashboardContainer = ({
 }: {
   limits: LivingDexResolvedUserLimits | null
 }): JSX.Element => {
-  const { isAuthenticated } = useSession()
   const { dexes, dexesLoading } = useDexesContext()
-  const [listVariant, setListVariant] = useState<'grid' | 'list'>('list')
+  const [listVariant] = useState<'grid' | 'list'>('list')
 
   if (dexesLoading) {
     return <LoadingBanner />
@@ -43,9 +42,7 @@ const AuthenticatedDashboardContainer = ({
   return (
     <div className={'page-container dex-count-' + dexes.length} style={{ paddingBlock: 0 }}>
       <div className="inner-blueberry inner-container">
-        <h2 className={'text-center main-title-outlined'}>
-          <i className="icon-pkg-box" style={{ textShadow: 'none' }} /> Living Dex Tracker
-        </h2>
+        <h2 className={'text-center main-title-outlined'}>Living Dex Tracker</h2>
         <div className="text-center" style={{ margin: '0 0 2rem 0', opacity: 1 }}>
           <GameCardList variant={listVariant} dexes={dexes} linkable />
         </div>

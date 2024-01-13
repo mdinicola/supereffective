@@ -43,10 +43,10 @@ export default function MainHeader() {
             </SiteLink>
             <SiteLink activeClass={styles.active} tabIndex={1} href="/apps/pokedex">
               <i className={'icon-books margin-r icon--2x'} />
-              Pokédex
+              Pokédex Tracker
             </SiteLink>
             <SiteLink activeClass={styles.active} tabIndex={2} href="/apps/livingdex">
-              <i className={'icon-pkg-box margin-r icon--2x'} /> Dex Tracker
+              <i className={'icon-pkg-box margin-r icon--2x'} /> Living Dex Tracker
             </SiteLink>
             <GithubLinkIcon className={styles.brandLink} tabIndex={4}>
               <span className="mobile-only">Github</span>

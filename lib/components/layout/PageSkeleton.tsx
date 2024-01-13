@@ -13,13 +13,7 @@ export default function PageSkeleton({ children }: { children: React.ReactNode }
   return (
     <div
       data-buildver={buildVersion}
-      className={[
-        'page',
-        styles.page,
-        `bdg-gr-teal-pattern`,
-        ' bg-blueberry-gradient-static',
-        'dex-tracker-ui',
-      ].join(' ')}
+      className={['page', styles.page, ' bg-blueberry-gradient-static', 'dex-tracker-ui'].join(' ')}
     >
       <MainHeader />
       <TemporaryAnnouncementBanners />
