@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactModal from 'react-modal'
+import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/compat/router'
 import { NextRouter } from 'next/router'
 import {
@@ -105,6 +106,7 @@ const readUrlParamRouter = (
 }
 
 export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAppProps) {
+  const plausible = usePlausible()
   const router = useRouter()
   const initialMarkTypes: MarkType[] = String(readUrlParamRouter('marks', router, 'catch')).split(
     ','
@@ -209,6 +211,9 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           app.setDex(dexWithId)
           setTimeout(() => {
             window.location.href = `/apps/livingdex/${updatedDex.id}?created=1`
+            plausible('dex_created', {
+              props: { game: dexWithId.gameId, preset: dexWithId.presetId },
+            })
           }, 1000)
         }
         if (onSave) {

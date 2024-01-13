@@ -3,11 +3,11 @@ export function hasDevFeaturesEnabled(): boolean {
 }
 
 export function isProductionEnv(): boolean {
-  return _getEnvName() === 'production'
+  return _getEnvName() === 'production' || _getEnvName() === 'prod'
 }
 
 export function isDevelopmentEnv(): boolean {
-  return _getEnvName() === 'development'
+  return _getEnvName() === 'development' || _getEnvName() === 'dev'
 }
 
 export function isLocalDevelopmentEnv(): boolean {
@@ -35,9 +35,9 @@ export function isClientSide(): boolean {
 
 function _getEnvName(): string {
   return (
-    process.env.VERCEL_ENV ??
     process.env.APP_ENV ??
     process.env.NEXT_PUBLIC_APP_ENV ??
+    process.env.VERCEL_ENV ??
     process.env.NODE_ENV ??
     'development'
   )
