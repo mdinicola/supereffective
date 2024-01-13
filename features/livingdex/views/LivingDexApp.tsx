@@ -212,7 +212,10 @@ export default function LivingDexApp({ loadedDex, presets, onSave }: LivingDexAp
           setTimeout(() => {
             window.location.href = `/apps/livingdex/${updatedDex.id}?created=1`
             plausible('dex_created', {
-              props: { game: dexWithId.gameId, preset: dexWithId.presetId },
+              props: {
+                livingDexGame: dexWithId.gameId,
+                livingDexPreset: `${dexWithId.gameId}--${dexWithId.presetId}`,
+              },
             })
           }, 1000)
         }
