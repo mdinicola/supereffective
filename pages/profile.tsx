@@ -9,6 +9,7 @@ import { Membership } from '@/lib/prisma/types'
 import { serializeObject } from '@/lib/utils/serialization/jsonSerializable'
 
 const Page = ({ membership }: { membership: any | undefined }) => {
+  // TODO: fix use deserializeObject
   const membershipData = membership ? serializeObject<Membership>(membership) : undefined
   return (
     <div className={'page-container'}>
