@@ -160,6 +160,7 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
 
       let slug = cellPkm.pid
       let pkmEntry = getPokemonEntry(slug)
+      let dexNum = pkmEntry.dexNum
       let title = pkmEntry.name
       let isSpecialAbilityPkm = false
       let isHiddenAbilityPkm = false // TODO support in future
@@ -215,7 +216,10 @@ export function PkBoxGroup(props: PkBoxGroupProps) {
             shiny={cellPkm.shiny}
             variant={usePixelIcons ? 'pixelart' : '3d'}
           />
-          <span className={styles.pkBoxCellLabel}>{title}</span>
+          <span className={styles.pkBoxCellLabel}>
+            {title}
+            <br />#{dexNum}
+          </span>
           {props.markTypes.includes('catch') && (
             <>
               <i

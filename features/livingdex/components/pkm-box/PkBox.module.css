@@ -6,13 +6,13 @@
 .pkBoxGroupContent {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 1rem;
 }
 
 @media only screen and (max-width: 840px) {
   .pkBoxGroupContent {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   }
 }
 
@@ -33,7 +33,6 @@
 }
 
 .pkBoxCell .pkBoxCellLabel {
-  display: none;
   text-align: center;
   font-size: 0.85rem;
   position: absolute;
@@ -187,14 +186,14 @@
 
   /* CSS grid*/
   display: grid;
-  grid-template-columns: repeat(6, minmax(32px, 14fr));
-  grid-template-rows: repeat(5, minmax(32px, 14fr));
+  grid-template-columns: repeat(6, minmax(50px, 14fr));
+  grid-template-rows: repeat(5, minmax(50px, 14fr));
   gap: 0;
 }
 
 :global(.dex-boxsize-20) .pkBoxContent {
-  grid-template-columns: repeat(5, minmax(32px, 14fr));
-  grid-template-rows: repeat(4, minmax(32px, 14fr));
+  grid-template-columns: repeat(5, minmax(50px, 14fr));
+  grid-template-rows: repeat(4, minmax(50px, 14fr));
 }
 
 :global(.pkBoxCount-1).pkBoxGroupContent .pkBoxContent {
@@ -326,6 +325,7 @@
 .pkBoxCellContent {
   position: relative;
   /*padding: 0.15rem;*/
+  margin-bottom: 4em;
 }
 
 .editable .pkBoxCell img {
