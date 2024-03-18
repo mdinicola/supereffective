@@ -3,7 +3,7 @@
   "frontMatter.framework.id": "next",
   "frontMatter.telemetry.disable": true,
   "frontMatter.framework.startCommand": "pnpm dev",
-  "frontMatter.preview.host": "http://localhost:3001",
+  "frontMatter.preview.host": "http://localhost:3000",
   "frontMatter.preview.pathName": "v2",
   "frontMatter.dashboard.openOnStart": false,
   "frontMatter.git.enabled": true,

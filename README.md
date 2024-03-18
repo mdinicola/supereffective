@@ -21,8 +21,8 @@ You will need Docker (for the local DB and mail server), Node v20 LTS and pnpm v
    then configure the database env vars in:
    - packages/database/.env
    - packages/website/.env.local
-4. Run the website in development mode: run any of: `pnpm dev`.
-5. Open http://localhost:3001 or run `pnpm open` to open the website in your browser. Other URLs:
+4. Start the services and run the website in development mode: `pnpm dev:prepare && pnpm dev`
+5. Open http://localhost:3000 or run `pnpm open` to open the website in your browser. Other URLs:
    - Dev Mail server: http://localhost:1080
 
 Or all in one command: `pnpm build && pnpm dev && pnpm open`
@@ -37,7 +37,7 @@ We use the following technologies, services and tools:
 - pnpm v8 for package management
 - Turborepo (turbo) to accelerate running scripts
 - NextJS 14 + React 18 for the website
-- CSS Modules for styling without styling libraries (but considering TailwindCSS)
+- CSS Modules for styling without styling libraries
 - React Context for state management (to be replaced by Redux Toolkit or Zustand)
 - MDX + [FrontMater CMS](https://frontmatter.codes/) as the local/static CMS
 - Next Auth, Prisma and Neon.tech PostgreSQL for authentication and dex data storage

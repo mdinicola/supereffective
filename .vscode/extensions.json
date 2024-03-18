@@ -5,8 +5,7 @@
     "christian-kohler.path-intellisense",
     "prisma.prisma",
     "eliostruyf.vscode-front-matter",
-    "pkief.material-icon-theme",
-    "zenclabs.previewjs"
+    "pkief.material-icon-theme"
   ],
   "unwantedRecommendations": ["eamodio.gitlens"]
 }
