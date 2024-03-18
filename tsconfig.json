@@ -26,6 +26,6 @@
       "lucide-react--icons/*": ["./node_modules/lucide-react/dist/esm/icons/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "blogs", "public", ".next", ".turbo", "build", "out"]
 }

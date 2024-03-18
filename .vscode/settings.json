@@ -19,6 +19,5 @@
       "other": "on"
     },
     "editor.minimap.enabled": false
-  },
-  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
+  }
 }
