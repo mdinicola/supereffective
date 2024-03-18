@@ -15,7 +15,7 @@ const serverVars = z.object({
   EMAIL_SMTP_PASSWORD: z.string(),
   EMAIL_SMTP_HOST: z.string(),
   EMAIL_SMTP_PORT: z.string(),
-  EMAIL_PROVIDER: z.enum(['resend', 'smtp']),
+  EMAIL_PROVIDER: z.enum(['resend', 'smtp', 'console']),
   EMAIL_DEFAULT_FROM: z.string().email(),
   RESEND_API_KEY: z.string(),
   // databases

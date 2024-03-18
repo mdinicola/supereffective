@@ -13,7 +13,7 @@ export type EmailProviderConfig = {
   defaultFrom: string
 }
 export type EmailProvider = {
-  id: 'smtp' | 'resend'
+  id: 'smtp' | 'resend' | 'console'
   config: EmailProviderConfig
   sendMail: EmailSender
 }

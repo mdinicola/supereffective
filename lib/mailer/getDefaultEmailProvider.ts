@@ -27,6 +27,20 @@ export function getDefaultEmailProvider(): EmailProvider {
         apiKey: envVars.RESEND_API_KEY!,
         defaultFrom,
       })
+    case 'console':
+      return {
+        id: 'console',
+        config: { defaultFrom },
+        sendMail: async message => {
+          console.log('Email sent:', {
+            from: message.from,
+            to: message.to,
+            subject: message.subject,
+            text: message.body.text,
+          })
+          return { success: true }
+        },
+      }
     default:
       if (!emailProviderId) {
         throw new Error('EMAIL_PROVIDER env var is missing')
