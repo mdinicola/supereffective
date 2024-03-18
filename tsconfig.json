@@ -1,17 +1,14 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Next.js",
   "compilerOptions": {
-    "module": "esnext",
     "target": "es2020",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -22,10 +19,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "lucide-react--icons/*": ["./node_modules/lucide-react/dist/esm/icons/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "types": ["react", "react-dom", "jest", "@types/node", "@types/bun"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "blogs", "public", ".next", ".turbo", "build", "out"]
+  "exclude": ["node_modules", "blogs", "content", "public", ".next", ".turbo", "build"]
 }

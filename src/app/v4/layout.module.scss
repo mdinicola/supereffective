@@ -1,0 +1,12 @@
+.base {
+  display: grid;
+  grid-template-rows: var(--grid-holy-grial-layout);
+  padding-top: var(--ui-header-line-height);
+  // padding-top: max(var(--ui-header-line-height), env(titlebar-area-height, 0px));
+  min-height: 100dvh;
+
+  // .bg-crystal-pattern:
+  background: url('/assets/patterns/crystals-top.png') top center;
+  background-size: 100% calc(var(--ui-header-line-height) + 2px);
+  background-repeat: repeat-x;
+}

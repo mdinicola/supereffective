@@ -11,7 +11,7 @@
         "webpack-internal:///*": "${workspaceFolder}/*"
       },
       "serverReadyAction": {
-        "pattern": "started server on .+, url: (https?://.+3000)",
+        "pattern": "started server on .+, url: (https?://.+3001)",
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
@@ -24,7 +24,7 @@
         "webpack:///*": "${workspaceFolder}/*",
         "webpack-internal:///*": "${workspaceFolder}/*"
       },
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3001"
     }
   ]
 }

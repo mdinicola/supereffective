@@ -17,16 +17,9 @@ runs:
         cache: 'pnpm'
         cache-dependency-path: './pnpm-lock.yaml'
 
-    - uses: actions/cache@v3
-      name: Setup cache for turbo
-      with:
-        path: .turbo
-        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
-        restore-keys: |
-          turbo-${{ github.job }}-${{ github.ref_name }}-
-
     - shell: bash
       run: |
+        rm -f .env && cp env.dist .env
         pnpm env use --global 20
-        pnpm install -g turbo@latest bun@latest
+        pnpm install -g bun@latest
         pnpm install --frozen-lockfile

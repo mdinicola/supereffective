@@ -95,3 +95,11 @@ ignored/
 
 # cms
 .contentlayer/
+
+certificates
+
+# app
+mdx-cache.json
+mdx-index.json
+src/styles/_variables.css
+src/styles/_variables.scss

@@ -8,12 +8,10 @@ on:
 jobs:
   publish_discord_message:
     if: >
-      contains(github.event.issue.labels.*.name, 'muted') == false &&
-      contains(github.event.issue.labels.*.name, 'wontfix') == false &&
-      contains(github.event.issue.labels.*.name, 'question') == false &&
-      contains(github.event.issue.labels.*.name, 'invalid') == false &&
-      contains(github.event.issue.labels.*.name, 'duplicate') == false &&
-      join(github.event.issue.labels.*.name) != ''
+      contains(github.event.issue.labels.*.name, 'muted') == false && contains(github.event.issue.labels.*.name,
+      'wontfix') == false && contains(github.event.issue.labels.*.name, 'question') == false &&
+      contains(github.event.issue.labels.*.name, 'invalid') == false && contains(github.event.issue.labels.*.name,
+      'duplicate') == false && join(github.event.issue.labels.*.name) != ''
     runs-on: ubuntu-latest
     permissions:
       issues: write

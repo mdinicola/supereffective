@@ -1,0 +1,25 @@
+@mixin base {
+  z-index: var(--z-index-popover);
+}
+
+.native {
+  @include base;
+
+  width: unset;
+  height: unset;
+  padding: unset;
+  background: unset;
+  background-color: unset;
+  border-width: 0;
+  inset: unset;
+  color: inherit;
+}
+
+.delegated {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.delegatedWrapper {
+  @include base;
+}

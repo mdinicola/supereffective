@@ -3,7 +3,7 @@
   "frontMatter.framework.id": "next",
   "frontMatter.telemetry.disable": true,
   "frontMatter.framework.startCommand": "pnpm dev",
-  "frontMatter.preview.host": "http://localhost:3000",
+  "frontMatter.preview.host": "http://localhost:3001",
   "frontMatter.preview.pathName": "v2",
   "frontMatter.dashboard.openOnStart": false,
   "frontMatter.git.enabled": true,
@@ -16,12 +16,12 @@
   "frontMatter.content.pageFolders": [
     {
       "title": "Articles",
-      "path": "[[workspace]]/blogs/articles",
+      "path": "[[workspace]]/content/articles",
       "contentTypes": ["Article"]
     },
     {
       "title": "Pages",
-      "path": "[[workspace]]/blogs/pages",
+      "path": "[[workspace]]/content/pages",
       "contentTypes": ["Page"]
     }
   ],

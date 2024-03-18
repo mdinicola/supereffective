@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+html,
+body {
+  background-color: var(--colors-background);
+  color: var(--colors-foreground);
+}
+
+html {
+  font-size: 18px;
+  color-scheme: dark;
+}
+
+input {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--colors-primary-900);
+  color: var(--colors-primary-50);
+  border-radius: var(--radius-sm);
+  /* left & right: */
+  padding-inline: var(--space-2);
+  /* top & bottom: */
+  padding-block: var(--space-1);
+}
+
+input,
+select,
+button,
+textarea {
+  accent-color: var(--colors-accent-500);
+}
+
+body {
+  min-width: var(--size-smallest-screen);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+[popover] {
+  display: none;
+}
+
+[popover]:where(:popover-open) {
+  display: block;
+}
+
+[popover]:where([data-unset]) {
+  width: unset;
+  height: unset;
+  padding: unset;
+  background: unset;
+  border: unset;
+  inset: unset;
+}
+
+[data-invisible] {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* HTML5 Popovers */
+button[popovertarget] svg {
+  transition: transform 100ms ease-in-out;
+}
+
+button[popovertarget]:focus svg {
+  transform: scale(1.15);
+}
+
+button svg {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* SVG Icons */
+svg[data-filled] {
+  fill: currentColor;
+}
+
+svg[data-outlined] {
+  stroke: currentColor;
+}

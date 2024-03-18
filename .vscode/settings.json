@@ -1,23 +1,20 @@
 {
-  "editor.wordWrapColumn": 100,
-  "editor.rulers": [100],
+  "editor.wordWrapColumn": 120,
+  "editor.rulers": [120],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports": "explicit",
     "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
   },
-  "[markdown]": {
-    "editor.fontSize": 14,
-    "editor.lineHeight": 26,
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 64,
-    "editor.lineNumbers": "off",
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "on",
-      "other": "on"
-    },
-    "editor.minimap.enabled": false
-  }
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

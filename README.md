@@ -15,15 +15,9 @@ You will need Docker (for the local DB and mail server), Node v20 LTS and pnpm v
 
 1. Clone the repository
 2. Install dependencies: `pnpm install`
-3. Configure your PostgreSQL DB connection strings.
-   You can use the `db` service in `docker-compose.yml` to spawn a local DB using Docker,
-   or or use a provider like Neon.tech,
-   then configure the database env vars in:
-   - packages/database/.env
-   - packages/website/.env.local
-4. Start the services and run the website in development mode: `pnpm dev:prepare && pnpm dev`
-5. Open http://localhost:3000 or run `pnpm open` to open the website in your browser. Other URLs:
-   - Dev Mail server: http://localhost:1080
+3. Run the website in development mode: run any of: `pnpm dev`.
+4. Open http://localhost:3001 or run `pnpm open` to open the website in your browser.
+5. You can register with any email. Emails will be logged in the console and also stored under `./local/mails`.
 
 Or all in one command: `pnpm build && pnpm dev && pnpm open`
 
@@ -52,26 +46,26 @@ We use the following technologies, services and tools:
 This project is a NextJS application with the following directory structure:
 
 - `blogs`: the MDX content of the website pages
-- `config`: general app config (e.g. from env vars, json files or ts code)
-- `features`: business logic in bounded contexts, following some DDD principles
-  - `/**/`: name of the domain / feature
+- `public`: static assets (for the UI and also for the CMS pages)
+- `scripts`: Maintenance or development scripts
+- `src`:
+  - `app`: Next.js App Router
+  - `components`: general reusable components
+  - `config`: general app config (e.g. from env vars, json files or ts code)
+  - `features/{name}/`: business logic in bounded contexts, following some DDD principles
     - `components`: components specific to this domain
     - `hooks`: hooks specific to this domain
     - `state`: domain state: contexts, objects and types
     - `views`: domain views: views composed with many other components
-- `lib`: generic libraries and services, or services that are not specific to a domain
-  - `components`: general reusable components
-  - `data-client`: helpers to fetch the static data from the dataset CDN, and types
+    - `lib`: services and utilities specific to this domain
   - `hooks`: generic hooks
-  - `mailer`: mail client abstraction supporting `nodemailer` and `resend.com`
-  - `mdx`: helpers to extract and load MDX content from a directory
-  - `patreon`: Patreon API client abstraction
-  - `prisma`: Prisma DB schema definition and helpers
-  - `scripts`: Maintenance or development scripts
-  - `utils`: general purpose utilities
-- `pages`: Next.js routes/pages and APIs
-- `public`: static assets (for the UI and also for the CMS pages)
-- `styles`: global css styles
+  - `lib`: generic libraries and services, or services that are not specific to a domain
+    - `pokedata`: helpers to fetch the static data from the dataset CDN, and types
+    - `mailer`: mail client abstraction supporting `local-fs` and `resend.com`
+    - `mdx`: helpers to extract and load MDX content from a directory
+    - `patreon`: Patreon API client abstraction
+    - `utils`: general purpose utilities
+  - `styles`: global css styles
 
 ## Contributing
 

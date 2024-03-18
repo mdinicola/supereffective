@@ -1,0 +1,120 @@
+@import 'variables';
+
+.base {
+  // flex flex-1 flex-row justify-between bg-primary-900 px-4 text-sm'
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--colors-primary-900);
+  font-size: var(--font-size-xs);
+
+  padding-left: var(--space-4);
+  padding-left: calc(var(--space-titlebar-area-left) + var(--space-4));
+
+  padding-right: var(--space-4);
+  padding-right: calc(var(--space-titlebar-area-right) + var(--space-4));
+}
+
+.zone {
+  display: flex;
+  flex-direction: row;
+}
+
+.desktopMainMenu {
+  // 'hidden md:flex', 'a-child-hover:bg-primary a-child-active:bg-primary'
+  display: none;
+
+  @media (min-width: $screen-md) {
+    display: flex;
+  }
+
+  a:hover,
+  a:global(.active) {
+    background-color: var(--colors-primary);
+  }
+}
+
+.mobileMainMenu {
+  // hidden text-base md:text-sm has-popover-open:flex md:!hidden fixed inset-0 bg-black/50'
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba($colors-black, 0.5);
+  font-size: var(--font-size-base);
+
+  &:has(:popover-open) {
+    display: flex;
+  }
+
+  @media (min-width: $screen-md) {
+    display: none !important;
+    font-size: var(--font-size-sm);
+  }
+}
+
+.mobileMainMenuInner {
+  /*
+  [
+    'flex flex-col bg-primary-900 shadow-right-lg',
+    'w-[320px] min-w-[320px] pt-14',
+    'a-child:px-8 a-child:py-4 a-child-hover:bg-primary a-child-active:bg-primary',
+  ],
+  */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--colors-primary-900);
+  box-shadow: var(--shadow-lg-right);
+  width: var(--size-smallest-screen);
+  min-width: var(--size-smallest-screen);
+  padding-top: var(--space-14);
+
+  a {
+    padding: var(--space-4) var(--space-8);
+
+    &:hover,
+    &:global(.active) {
+      background-color: var(--colors-primary);
+    }
+  }
+}
+
+.mobileMainMenuCloseBtn {
+  // absolute right-0 top-0 z-modal block p-4 md:!hidden
+
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: var(--z-index-modal);
+  padding: var(--space-4);
+
+  @media (min-width: $screen-md) {
+    display: none;
+  }
+}
+
+.menuToggleBtn {
+  // pr-4 md:hidden
+  padding-right: var(--space-4);
+  font-size: var(--font-size-lg);
+
+  @media (min-width: $screen-md) {
+    display: none;
+  }
+}
+
+.homeBtn {
+  // py-3 pr-3
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-1);
+  padding-right: var(--space-3);
+
+  svg {
+    //scale-110
+    transform: scale(1.1);
+  }
+}
