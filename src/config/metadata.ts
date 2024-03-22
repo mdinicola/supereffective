@@ -19,7 +19,7 @@ export const metadataConfig: Metadata = {
     {
       type: 'image/png',
       sizes: '32x32',
-      url: '/assets/favicon/favicon-32x32.png',
+      url: '/favicon/favicon-32x32.png',
     },
   ],
   applicationName: appConfig.text.pwaName,

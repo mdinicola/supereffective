@@ -79,4 +79,9 @@ For other feedback that is not related to issues, please use our [Discord server
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).
+The original content (graphics and text created by us), and the design of this website is licensed under
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Before using any material, please read the
+license and make sure you follow the terms and conditions, or contact us in case of doubt.
+
+The source code of this website is licensed under the [MIT License](./LICENSE), except all the original graphics and
+articles that you may find in this repository (which are CC like as above mentioned).

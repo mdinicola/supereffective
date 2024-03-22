@@ -38,19 +38,19 @@ export default function MainFooter() {
           <ul>
             <li>
               <SiteLink href="/donate" title={'Donate to the developer to help keep this site running'}>
-                <i className="icon-pkg-mark-heart" title="Donate" />
                 <span>Donations</span>
               </SiteLink>
             </li>
             <li>
               <ExternLink href={config.links.github_org} title={''}>
-                <i className="icon-embed2" title="Source Code" />
                 <span>Source Code</span>
               </ExternLink>
             </li>
             <li>
+              <SiteLink href="/license">Project Licenses</SiteLink>
+            </li>
+            <li>
               <ExternLink href={config.links.issue_report} title={''}>
-                <i className="icon-bug" title="Issue Report" />
                 <span>Report an issue</span>
               </ExternLink>
             </li>
@@ -61,13 +61,13 @@ export default function MainFooter() {
           <p className={titleClass}>Legal</p>
           <ul>
             <li>
-              <SiteLink href="/terms-and-conditions">Terms &amp; Conditions</SiteLink>
+              <SiteLink href="/terms-of-service">Terms of Service</SiteLink>
             </li>
             <li>
-              <SiteLink href="/legal#privacy">Privacy Policy</SiteLink>
+              <SiteLink href="/privacy-policy">Privacy Policy</SiteLink>
             </li>
             <li>
-              <SiteLink href="/legal">Legal Disclaimer</SiteLink>
+              <SiteLink href="/disclaimer">Legal Disclaimer</SiteLink>
             </li>
           </ul>
         </nav>

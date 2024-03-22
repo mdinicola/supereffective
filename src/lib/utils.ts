@@ -17,3 +17,7 @@ export function cnx<T extends Record<string, ClassValue>>(
 export function newNanoId(prefix = '', size = 7): string {
   return `${prefix}${nanoid(size)}`
 }
+
+export function mapBy<T, K extends keyof T = keyof T>(arr: T[], key: K): Record<string, T> {
+  return Object.fromEntries(arr.map((item) => [String(item[key]), item]))
+}

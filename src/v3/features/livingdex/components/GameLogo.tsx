@@ -30,7 +30,7 @@ export const GameLogo = ({
       className={cn(styles.gameLogoImg, className)}
       width={size}
       height={size}
-      src={'/assets/games/' + path + ext}
+      src={'/images/games/' + path + ext}
       alt={gameData.name}
       {...props}
     />

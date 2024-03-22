@@ -1,14 +1,15 @@
 import LayoutArticle from '@/components/layout/main/LayoutArticle'
-import appConfig from '@/config/app'
-import { fetchPokemonIndex } from '@supeffective/dataset'
+import { getPokemonData } from '@/lib/dataset/pokemon-repository'
 // import Image from 'next/image'
 
 type PageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
+export const dynamic = 'error'
+
 export default async function Page(_props: PageProps) {
-  const allPokemon = await fetchPokemonIndex(appConfig.assets.dataUrl)
+  const pokemonDataset = await getPokemonData()
 
   return (
     <article>
@@ -19,7 +20,7 @@ export default async function Page(_props: PageProps) {
             columns: 3,
           }}
         >
-          {allPokemon.map((pokemon) => (
+          {pokemonDataset.map((pokemon) => (
             <li
               key={pokemon.id}
               style={
@@ -37,7 +38,7 @@ export default async function Page(_props: PageProps) {
                   loading="lazy"
                 />
               </a> */}
-              <a href={`/v4/pokemon/${pokemon.id}`}>{pokemon.name}</a>
+              <a href={`/v4/pokemon/${pokemon.slug}`}>{pokemon.name}</a>
             </li>
           ))}
         </ul>

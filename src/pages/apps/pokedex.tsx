@@ -32,7 +32,7 @@ const Page = ({ entry }: { entry: PageEntry | null }) => {
         metaTitle={entry.metaTitle}
         metaDescription={entry.metaDescription}
         robots={entry.robots}
-        imageUrl={abs_url('/assets/og-image.png')}
+        imageUrl={abs_url('/images/og-image.png')}
         canonicalUrl={abs_url('/apps/pokedex')}
         lang={'en'}
       />

@@ -158,11 +158,11 @@ export const PokemonInfoPanel = ({
           <div className={css.title}>External Links</div>
           <div className={css.gameIcons + ` ${css.externalLinks}`}>
             <ExternLink href={`https://www.serebii.net/pokemon/${pokemon.refs.serebii}`}>
-              <Image src={'/assets/brands/serebii.png'} width={40} height={40} alt="serebii.net" title="serebii.net" />
+              <Image src={'/images/brands/serebii.png'} width={40} height={40} alt="serebii.net" title="serebii.net" />
             </ExternLink>
             <ExternLink href={`https://bulbapedia.bulbagarden.net/wiki/${pokemon.refs.bulbapedia}_(Pokémon)`}>
               <Image
-                src={'/assets/brands/bulbapedia.png'}
+                src={'/images/brands/bulbapedia.png'}
                 width={40}
                 height={40}
                 alt="bulbapedia.bulbagarden.net"
@@ -170,7 +170,7 @@ export const PokemonInfoPanel = ({
               />
             </ExternLink>
             <ExternLink href={`https://www.smogon.com/dex/sv/pokemon/${pokemon.refs.smogon}`}>
-              <Image src={'/assets/brands/smogon.png'} width={40} height={40} alt="smogon.com" title="smogon.com" />
+              <Image src={'/images/brands/smogon.png'} width={40} height={40} alt="smogon.com" title="smogon.com" />
             </ExternLink>
           </div>
         </section>

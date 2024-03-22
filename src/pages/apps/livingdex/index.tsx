@@ -21,7 +21,7 @@ const Page = ({ entry, limits }: { entry: PageEntry | null; limits: LivingDexRes
         metaTitle={entry.metaTitle}
         metaDescription={entry.metaDescription}
         robots={entry.robots}
-        imageUrl={abs_url('/assets/og-image.png')}
+        imageUrl={abs_url('/images/og-image.png')}
         canonicalUrl={abs_url('/apps/livingdex')}
         lang={'en'}
       />

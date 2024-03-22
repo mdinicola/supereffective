@@ -26,7 +26,7 @@ export default function MainHeader() {
       <div className={styles.header + (navbarOpen ? ' ' + styles.open : '')}>
         <div className={styles.headerTop}>
           <Link href="/" className={styles.headerLogo} tabIndex={0} title={config.texts.siteName}>
-            <Image src="/assets/logo/logo2024-cropped.png?v=3" width="76" height="66" alt={config.texts.siteName} />
+            <Image src="/images/logo/logo2024-cropped.png?v=3" width="76" height="66" alt={config.texts.siteName} />
             <h1 className="sr-only">
               {config.texts.siteName}
               <small>.gg</small>
@@ -72,7 +72,7 @@ export default function MainHeader() {
           </nav>
 
           <span className={styles.menuToggle} onClick={handleToggle} role="button" title="Menu" tabIndex={6}>
-            <Image src={'/assets/gui/menu-dots.png'} alt="..." fill={true} />
+            <Image src={'/images/menu-dots.png'} alt="..." fill={true} />
           </span>
         </div>
       </div>

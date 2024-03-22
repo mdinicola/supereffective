@@ -1,6 +1,6 @@
 import LayoutArticle from '@/components/layout/main/LayoutArticle'
+import { getPokemonData } from '@/lib/dataset/pokemon-repository'
 import { getAbsUrl } from '@/lib/urls'
-import { pokemonIndex } from '@supeffective/dataset'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -10,14 +10,18 @@ type PageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const pokemonDataset = await getPokemonData()
+
+export const dynamic = 'error'
+
 export async function generateStaticParams() {
-  return pokemonIndex.map((row) => ({
-    slug: row.id,
+  return pokemonDataset.map((row) => ({
+    slug: row.slug,
   }))
 }
 
 export async function generateMetadata({ params }: PageProps, _parent: ResolvingMetadata): Promise<Metadata> {
-  const record = pokemonIndex.find((p) => p.id === params.slug)
+  const record = pokemonDataset.find((p) => p.slug === params.slug)
 
   if (!record) {
     return {}
@@ -25,7 +29,7 @@ export async function generateMetadata({ params }: PageProps, _parent: Resolving
 
   const parent = await _parent
 
-  const fullUrl = getAbsUrl(`/v4/pokemon/${record.id}`)
+  const fullUrl = getAbsUrl(`/v4/pokemon/${record.slug}`)
   const metaTitle = `${record.name} - ${parent.title?.absolute}`
   const metaDescription = `${record.name}'s Pokédex entry, stats, moves, and location.`
   // const imgUrl = getPokeImgUrl(record.nid, '3d')
@@ -62,7 +66,7 @@ export default function Page({ params }: PageProps) {
     notFound()
   }
 
-  const record = pokemonIndex.find((p) => p.id === params.slug)
+  const record = pokemonDataset.find((p) => p.slug === params.slug)
   if (!record) {
     return notFound()
   }

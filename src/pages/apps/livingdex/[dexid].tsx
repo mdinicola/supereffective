@@ -28,7 +28,7 @@ const Page = ({ dexData, presets }: { dexData: any; presets: PresetDexMap }) => 
       <PageMeta
         metaTitle={metaTitle}
         metaDescription={metaDescription}
-        imageUrl={abs_url('/assets/og-image.png')}
+        imageUrl={abs_url('/images/og-image.png')}
         robots={'noindex, nofollow'}
         canonicalUrl={abs_url('/apps/livingdex/' + dex.id)}
         lang={'en'}

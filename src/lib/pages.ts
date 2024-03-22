@@ -60,7 +60,7 @@ export function buildPageJsonLd(page: MDXPage, jsonLdType: 'WebPage' | 'NewsArti
       name: 'supereffective.gg',
       logo: {
         '@type': 'ImageObject',
-        url: getAbsUrl('/assets/logo/logo2024.png'),
+        url: getAbsUrl('/images/logo/logo2024.png'),
       },
     },
   } satisfies WithContext<Thing>

@@ -21,7 +21,7 @@ const page = () => {
         </h2>
         <section>
           <Image
-            src={`/assets/gui/error404/404-00${randFrom0to4}.jpeg`}
+            src={`/images/error404/404-00${randFrom0to4}.jpeg`}
             style={{
               width: '100%',
               border: '8px solid rgba(0,0,0,0.2)',

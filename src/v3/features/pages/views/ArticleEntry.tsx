@@ -222,7 +222,7 @@ export function ArticlePage(props: ArticlePageProps) {
       name: 'supereffective.gg',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://supereffective.gg/assets/logo/logo2024.png',
+        url: 'https://supereffective.gg/images/logo/logo2024.png',
       },
     },
   }

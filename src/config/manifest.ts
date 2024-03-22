@@ -2,7 +2,7 @@ import type { WebManifest } from '@/lib/types'
 import { cssVarsConfig } from '@/styles/variables.config'
 import appConfig from './app'
 
-const icon96x96 = '/assets/favicon/favicon-96x96.png'
+const icon96x96 = '/favicon/favicon-96x96.png'
 
 /**
  * Web Manifest configuration
@@ -26,19 +26,19 @@ const manifestConfig: WebManifest = {
   categories: ['entertainment', 'games', 'utilities'],
   icons: [
     {
-      src: '/assets/favicon/favicon-48x48.png',
+      src: '/favicon/favicon-48x48.png',
       sizes: '48x48',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x48.png',
+      src: '/favicon/maskable/maskable_icon_x48.png',
       sizes: '48x48',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x72.png',
+      src: '/favicon/maskable/maskable_icon_x72.png',
       sizes: '72x72',
       type: 'image/png',
       purpose: 'maskable',
@@ -50,73 +50,73 @@ const manifestConfig: WebManifest = {
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x96.png',
+      src: '/favicon/maskable/maskable_icon_x96.png',
       sizes: '96x96',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/favicon-128x128.png',
+      src: '/favicon/favicon-128x128.png',
       sizes: '128x128',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x128.png',
+      src: '/favicon/maskable/maskable_icon_x128.png',
       sizes: '128x128',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/android-chrome-192x192.png',
+      src: '/favicon/android-chrome-192x192.png',
       sizes: '192x192',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x192.png',
+      src: '/favicon/maskable/maskable_icon_x192.png',
       sizes: '192x192',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/favicon-256x256.png',
+      src: '/favicon/favicon-256x256.png',
       sizes: '256x256',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x256.png',
+      src: '/favicon/maskable/maskable_icon_x256.png',
       sizes: '256x256',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/android-chrome-384x384.png',
+      src: '/favicon/android-chrome-384x384.png',
       sizes: '384x384',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x384.png',
+      src: '/favicon/maskable/maskable_icon_x384.png',
       sizes: '384x384',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/android-chrome-512x512.png',
+      src: '/favicon/android-chrome-512x512.png',
       sizes: '512x512',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon_x512.png',
+      src: '/favicon/maskable/maskable_icon_x512.png',
       sizes: '512x512',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/assets/favicon/maskable/maskable_icon.png',
+      src: '/favicon/maskable/maskable_icon.png',
       sizes: '1024x1024',
       type: 'image/png',
       purpose: 'maskable',
@@ -124,14 +124,14 @@ const manifestConfig: WebManifest = {
   ],
   screenshots: [
     {
-      src: '/screenshots/sv3-001.jpg',
+      src: '/images/screenshots/sv3-001.jpg',
       sizes: '1280x720',
       type: 'image/jpg',
       form_factor: 'wide',
       label: "SuperEffective's Pokédex and Tracker",
     },
     {
-      src: '/screenshots/sv3-001-mobile.jpg',
+      src: '/images/screenshots/sv3-001-mobile.jpg',
       sizes: '640x720',
       type: 'image/jpg',
       form_factor: 'narrow',

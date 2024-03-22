@@ -84,8 +84,8 @@ export function LoginView({ csrfToken }: { csrfToken: string | null }): JSX.Elem
       {tokenMode && <TokenSignInView csrfToken={csrfToken} />}
       <p style={{ fontStyle: 'italic', fontSize: '0.9rem' }}>
         By signing in, you agree to our{' '}
-        <SiteLink href={'/terms-and-conditions'}>
-          <b>Terms and Conditions</b>
+        <SiteLink href={'/terms-of-service'}>
+          <b>Terms of Service</b>
         </SiteLink>
       </p>
     </div>

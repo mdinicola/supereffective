@@ -16,6 +16,22 @@ const baseConfig = {
     includePaths: [path.join(process.cwd(), 'src', 'styles')],
   },
   reactStrictMode: true,
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/news',
+        destination: '/changelog?ref=news',
+        permanent: true,
+      },
+      // Wildcard path matching
+      {
+        source: '/news/:slug',
+        destination: '/changelog?ref=news-:slug',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {

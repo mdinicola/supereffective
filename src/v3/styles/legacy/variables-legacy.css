@@ -324,9 +324,9 @@
   --color-primary: var(--color-purple);
   --color-secondary: var(--color-teal);
   /*noinspection CssUnknownTarget*/
-  --bg-pattern: url('/assets/gui/bgs/patterns/pattern-cross-diagonal25.png') repeat;
-  --bg-pattern-strong: url('/assets/gui/bgs/patterns/pattern-cross-diagonal25.png') repeat;
-  --bg-pattern-cross: url('/assets/gui/bgs/patterns/pattern-cross.png') repeat;
+  --bg-pattern: url('/images/patterns/pattern-cross-diagonal25.png') repeat;
+  --bg-pattern-strong: url('/images/patterns/pattern-cross-diagonal25.png') repeat;
+  --bg-pattern-cross: url('/images/patterns/pattern-cross.png') repeat;
 }
 
 .bg-blueberry-gradient-static {
@@ -363,13 +363,13 @@
  } */
 
 .bg-ball-pattern50 {
-  background: url('/assets/gui/bgs/patterns/pattern-ball50.png') center center;
+  background: url('/images/patterns/pattern-ball50.png') center center;
 }
 .bg-ball-pattern25 {
-  background: url('/assets/gui/bgs/patterns/pattern-ball25.png') center center;
+  background: url('/images/patterns/pattern-ball25.png') center center;
 }
 .bg-ball-pattern10 {
-  background: url('/assets/gui/bgs/patterns/pattern-ball10.png') center center;
+  background: url('/images/patterns/pattern-ball10.png') center center;
 }
 
 .bg-white {

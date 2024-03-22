@@ -1,9 +1,9 @@
 import { fetchImgAsDataUri } from '@/lib/fetch'
 import { getAbsUrl, getPokeImgUrl } from '@/lib/urls'
 import { cssVarsConfig } from '@/styles/variables.config'
-import { pokemonIndex } from '@supeffective/dataset'
 import { ImageResponse } from 'next/og'
 
+import { getPokemonData } from '@/lib/dataset/pokemon-repository'
 import { isDevelopmentEnv } from '@/lib/env'
 import { getImageColors } from '@/lib/image-processing'
 
@@ -18,9 +18,11 @@ export const size = {
 
 export const contentType = 'image/png'
 
+const pokemonDataset = await getPokemonData()
+
 // Image generation
 export default async function Image({ params }: { params: { slug: string } }) {
-  const pkm = pokemonIndex.find((p) => p.id === params.slug)
+  const pkm = pokemonDataset.find((p) => p.slug === params.slug)
 
   if (!pkm) {
     return new ImageResponse(<div>Not found</div>, { status: 404 })
@@ -28,9 +30,9 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
   // Font
   // const interSemiBold = fetch(new URL('./Inter-SemiBold.ttf', import.meta.url)).then((res) => res.arrayBuffer())
-  const picDataUrl = await fetchImgAsDataUri(getPokeImgUrl(pkm.nid, '3d-stroke'), contentType)
-  const ballDataUrl = await fetchImgAsDataUri(getAbsUrl('/assets/gui/bgs/patterns/pattern-ball10.png'), contentType)
-  const iconDataUrl = await fetchImgAsDataUri(getAbsUrl('/assets/logo/icon.png'), contentType)
+  const picDataUrl = await fetchImgAsDataUri(getPokeImgUrl(pkm.id, '3d-stroke'), contentType)
+  const ballDataUrl = await fetchImgAsDataUri(getAbsUrl('/images/patterns/pattern-ball10.png'), contentType)
+  const iconDataUrl = await fetchImgAsDataUri(getAbsUrl('/images/logo/icon.png'), contentType)
   const ballImgSize = { w: 444, h: 330 }
 
   if (!picDataUrl || !ballDataUrl || !iconDataUrl) {
@@ -41,7 +43,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
   if (isDevelopmentEnv()) {
     console.log('pokemon/[slug]/opengraph-image', {
-      pkm: pkm.id,
+      pkm: pkm.slug,
       avgColor: picColors.avg.hexa,
       domColor: picColors.dominant.hexa,
     })
@@ -75,6 +77,12 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
   try {
     // For CSS compat. info, @see https://github.com/vercel/satori
+    const hasFormName = pkm.name !== pkm.speciesName
+    const formName = pkm.name
+      .replace(pkm.speciesName, '')
+      .replace(/(\(|\)| - )/g, '')
+      .trim()
+
     return new ImageResponse(
       <div
         style={{
@@ -125,8 +133,13 @@ export default async function Image({ params }: { params: { slug: string } }) {
           alt=""
         />
         <div style={{ zIndex: 123, maxWidth: '600px', fontWeight: 'bold', textShadow: '6px 6px black' }}>
-          {pkm.name}
+          {pkm.speciesName}
         </div>
+        {hasFormName && (
+          <div style={{ fontSize: 48, maxWidth: '600px', fontWeight: 'semibold', textShadow: '5px 5px black' }}>
+            {formName}
+          </div>
+        )}
       </div>,
       // ImageResponse options
       {

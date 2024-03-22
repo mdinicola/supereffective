@@ -8,7 +8,7 @@
   white-space: nowrap;
   --pattern-height: 6px;
   background: rgba(var(--color-blueberry-darker-rgb), 0.6);
-  /* background: url('/assets/patterns2/crystals5.png?s') top left;
+  /* background: url('/images/patterns2/crystals5.png?s') top left;
   background-size: 500px 200px; */
 }
 
@@ -23,10 +23,7 @@
   align-items: stretch;
   background: rgba(var(--color-blueberry-darker-rgb), 1);
   z-index: 1;
-  /* border-image: url('/assets/gui/bgs/pattern-geometric2.jpg') 12 2;
-  border-image-slice: 1;
-  border-bottom-width: 20px;
-  border-bottom-style: solid; */
+
   border-bottom: 2px solid var(--color-blueberry-medium);
 }
 
@@ -37,7 +34,7 @@
   left: 0;
   width: 100%;
   height: var(--pattern-height);
-  background: url('/assets/patterns/crystals5.png?s') top left;
+  background: url('/images/patterns/crystals5.png?s') top left;
   opacity: 0.8;
   background-size: 200px 100px;
   /* border-bottom: 2px solid var(--color-blueberry-dark); */

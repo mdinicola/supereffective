@@ -43,7 +43,7 @@ export const WelcomeContent = ({ showDescription }: { showDescription?: boolean 
               <i className={'icon-pkg-box-home'} /> Living Pokédex Tracker
             </h2>
             <div className="inner-blueberry inner-container text-center">
-              <Image src={'/assets/pokedex.png'} width={246} height={203} alt="pokedex" />
+              <Image src={'/images/pokedex.png'} width={246} height={203} alt="pokedex" />
             </div>
             Track your Living Pokédex for any game and share your progress in your social media with{' '}
             <b>Supereffective's Dex Tracker</b>. You will be able to track your progress for all <b>main series</b>{' '}

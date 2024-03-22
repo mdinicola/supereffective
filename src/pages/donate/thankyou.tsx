@@ -16,7 +16,7 @@ const Page = () => {
       <div className="page-container">
         <div className="bordered-container inner-container inner-blueberry text-center">
           <p>
-            <Image src={'/assets/shaymin.png'} width={195} height={166} alt="shaymin" />
+            <Image src={'/images/shaymin.png'} width={195} height={166} alt="shaymin" />
           </p>
           <h1>Thank You!</h1>
           <p className="text-justify">

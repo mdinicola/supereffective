@@ -98,16 +98,16 @@ export default function LayoutFooter(props: LayoutFooterProps) {
           <h2 className={cls.h2}>Legal</h2>
           <ul className={cls.ul}>
             <li>
-              <Link href="/v4/terms">Terms of Service</Link>
+              <Link href="/v4/terms-of-service">Terms of Service</Link>
             </li>
             <li>
-              <Link href="/v4/privacy">Privacy Policy</Link>
+              <Link href="/v4/privacy-policy">Privacy Policy</Link>
             </li>
             <li>
               <Link href="/v4/disclaimer">Legal Disclaimer</Link>
             </li>
             <li>
-              <Link href="/v4/privacy">Manage Cookies</Link>
+              <Link href="/v4/license">License</Link>
             </li>
           </ul>
         </div>
@@ -116,7 +116,7 @@ export default function LayoutFooter(props: LayoutFooterProps) {
         &copy; SuperEffective.gg 2021-{currentYear}. This fan site is not associated in any way with Pokémon or The
         Pokémon Company International, or Nintendo.{' '}
         {/* Pokémon and All Respective Names are Trademark & &copy; of Nintendo 1996-{currentYear} */}
-        <Link href="/v4/licenses">[more]</Link>
+        <Link href="/v4/disclaimer">[more]</Link>
       </div>
     </footer>
   )
