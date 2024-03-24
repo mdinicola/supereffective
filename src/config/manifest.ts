@@ -2,7 +2,7 @@ import type { WebManifest } from '@/lib/types'
 import { cssVarsConfig } from '@/styles/variables.config'
 import appConfig from './app'
 
-const icon96x96 = '/favicon/favicon-96x96.png'
+const faviconUrl = '/images/pwa/favicon-196.png'
 
 /**
  * Web Manifest configuration
@@ -14,7 +14,7 @@ const manifestConfig: WebManifest = {
   description: appConfig.text.pwaDescription,
   theme_color: cssVarsConfig.colors.primary.pwaTheme,
   background_color: cssVarsConfig.colors.primary.pwaTheme,
-  start_url: './v4',
+  start_url: './',
   lang: 'en-US',
   orientation: 'portrait',
   display: 'standalone',
@@ -26,119 +26,84 @@ const manifestConfig: WebManifest = {
   categories: ['entertainment', 'games', 'utilities'],
   icons: [
     {
-      src: '/favicon/favicon-48x48.png',
-      sizes: '48x48',
-      type: 'image/png',
-      purpose: 'any',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x48.png',
-      sizes: '48x48',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x72.png',
-      sizes: '72x72',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: icon96x96,
-      sizes: '96x96',
-      type: 'image/png',
-      purpose: 'any',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x96.png',
-      sizes: '96x96',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/favicon-128x128.png',
-      sizes: '128x128',
-      type: 'image/png',
-      purpose: 'any',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x128.png',
-      sizes: '128x128',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/android-chrome-192x192.png',
+      src: '/images/pwa/manifest-icon-192.maskable.png',
       sizes: '192x192',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/favicon/maskable/maskable_icon_x192.png',
+      src: '/images/pwa/manifest-icon-192.maskable.png',
       sizes: '192x192',
       type: 'image/png',
       purpose: 'maskable',
     },
     {
-      src: '/favicon/favicon-256x256.png',
-      sizes: '256x256',
-      type: 'image/png',
-      purpose: 'any',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x256.png',
-      sizes: '256x256',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/android-chrome-384x384.png',
-      sizes: '384x384',
-      type: 'image/png',
-      purpose: 'any',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon_x384.png',
-      sizes: '384x384',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/android-chrome-512x512.png',
+      src: '/images/pwa/manifest-icon-512.maskable.png',
       sizes: '512x512',
       type: 'image/png',
       purpose: 'any',
     },
     {
-      src: '/favicon/maskable/maskable_icon_x512.png',
+      src: '/images/pwa/manifest-icon-512.maskable.png',
       sizes: '512x512',
-      type: 'image/png',
-      purpose: 'maskable',
-    },
-    {
-      src: '/favicon/maskable/maskable_icon.png',
-      sizes: '1024x1024',
       type: 'image/png',
       purpose: 'maskable',
     },
   ],
+  /*
+  By default, screenshots created with https://progressier.com/pwa-screenshots-generator
+  are 1080x1920 pixels in .jpg format. 
+  
+  The official specs don't require a specific size. The width and height of your screenshots 
+  must be at least 370px and at most 3840px. The maximum dimension can't be more than 
+  2.3 times as long as the minimum dimension. So screenshots can be landscape, square or portrait. 
+  However, every screenshot in a set must have the same aspect ratio. Only JPG and PNG image 
+  formats are supported.
+  */
   screenshots: [
     {
-      src: '/images/screenshots/sv3-001.jpg',
-      sizes: '1280x720',
-      type: 'image/jpg',
-      form_factor: 'wide',
-      label: "SuperEffective's Pokédex and Tracker",
-    },
-    {
-      src: '/images/screenshots/sv3-001-mobile.jpg',
-      sizes: '640x720',
+      src: '/images/screenshots/v3-mobile-1.jpg',
+      sizes: '1080x1920',
       type: 'image/jpg',
       form_factor: 'narrow',
-      label: "SuperEffective's Living Dex Tracker",
+      label: 'A complete Pokédex and Livingdex Tracker',
+    },
+    {
+      src: '/images/screenshots/v3-mobile-2.jpg',
+      sizes: '1080x1920',
+      type: 'image/jpg',
+      form_factor: 'narrow',
+      label: 'Supporting all main-series games',
+    },
+    {
+      src: '/images/screenshots/v3-mobile-3.jpg',
+      sizes: '1080x1920',
+      type: 'image/jpg',
+      form_factor: 'narrow',
+      label: 'All the essential information you need in one place',
+    },
+    {
+      src: '/images/screenshots/v3-desktop.jpg',
+      sizes: '2560x1440',
+      type: 'image/jpg',
+      form_factor: 'wide',
+      label: 'SuperEffective, The complete Pokédex and Livingdex Tracker',
     },
   ],
   shortcuts: [
+    {
+      name: 'LivingDex',
+      short_name: 'LivingDex',
+      description: 'Living Dexes page',
+      url: '/apps/livingdex',
+      icons: [
+        {
+          src: faviconUrl,
+          sizes: '196x196',
+          type: 'image/png',
+        },
+      ],
+    },
     {
       name: 'Pokédex',
       short_name: 'Pokédex',
@@ -146,21 +111,8 @@ const manifestConfig: WebManifest = {
       url: '/apps/pokedex',
       icons: [
         {
-          src: icon96x96,
-          sizes: '96x96',
-          type: 'image/png',
-        },
-      ],
-    },
-    {
-      name: 'Living Dexes',
-      short_name: 'LivingDex',
-      description: 'Living Dexes page',
-      url: '/apps/livingdex',
-      icons: [
-        {
-          src: icon96x96,
-          sizes: '96x96',
+          src: faviconUrl,
+          sizes: '196x196',
           type: 'image/png',
         },
       ],
@@ -172,8 +124,8 @@ const manifestConfig: WebManifest = {
       url: '/apps/livingdex/missing',
       icons: [
         {
-          src: icon96x96,
-          sizes: '96x96',
+          src: faviconUrl,
+          sizes: '196x196',
           type: 'image/png',
         },
       ],

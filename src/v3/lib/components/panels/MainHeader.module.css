@@ -46,17 +46,16 @@
   align-items: center;
   padding: 0 1rem;
   z-index: 2;
+  /* mix-blend-mode: screen; */
 }
 
 .headerLogo img {
   display: inline-block;
   vertical-align: middle;
-  height: 64px;
+  height: 56px;
   width: auto;
   margin: 8px 0 0 0;
   transition: all 0.2s ease-in-out;
-  mix-blend-mode: color-burn;
-  filter: saturate(1) contrast(1) hue-rotate(120deg);
 }
 
 .headerLogo:hover img {
@@ -247,8 +246,10 @@
     box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
   }
 
-  .headerTop .menu.open {
-    display: block;
+  .headerTop .menu.open { 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .headerTop .menu a {

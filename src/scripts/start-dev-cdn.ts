@@ -1,9 +1,9 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import { $ } from 'bun'
 import { Hono } from 'hono'
 import { serveStatic } from 'hono/bun'
 import { cors } from 'hono/cors'
+import fs from 'node:fs'
+import path from 'node:path'
 
 const cdnDir = path.join('./.local', 'cdn')
 if (!fs.existsSync(cdnDir)) {
@@ -42,7 +42,7 @@ for (const repo of repos) {
 const app = new Hono()
 app.use(
   cors({
-    origin: (origin) => origin, // Allow all origins
+    origin: (origin) => origin ?? '*', // Allow all origins by default
     allowHeaders: ['Content-Type'],
     allowMethods: ['GET', 'OPTIONS'],
     exposeHeaders: ['Content-Length'],

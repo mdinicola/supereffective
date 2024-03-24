@@ -54,13 +54,19 @@ export function buildPageJsonLd(page: MDXPage, jsonLdType: 'WebPage' | 'NewsArti
       '@type': 'Person',
       name: 'Javi Aguilar',
       url: getAbsUrl('/about'),
+      contactPoint: {
+        '@type': 'ContactPoint',
+      },
     },
     publisher: {
       '@type': 'Organization',
       name: 'supereffective.gg',
       logo: {
         '@type': 'ImageObject',
-        url: getAbsUrl('/images/logo/logo2024.png'),
+        url: getAbsUrl('/images/logo/logo.png'),
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
       },
     },
   } satisfies WithContext<Thing>

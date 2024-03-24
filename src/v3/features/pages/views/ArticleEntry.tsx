@@ -216,14 +216,20 @@ export function ArticlePage(props: ArticlePageProps) {
       '@type': 'Person',
       name: 'Javi Aguilar',
       url: 'https://supereffective.gg/about',
+      contactPoint: {
+        '@type': 'ContactPoint'
+      }
     },
     publisher: {
       '@type': 'Organization',
       name: 'supereffective.gg',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://supereffective.gg/images/logo/logo2024.png',
+        url: 'https://supereffective.gg/images/logo/logo.png',
       },
+      contactPoint: {
+        '@type': 'ContactPoint'
+      }
     },
   }
   const jsonLdArticleStr = JSON.stringify(jsonLdArticle, null, 0)

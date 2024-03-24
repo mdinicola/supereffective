@@ -26,7 +26,7 @@ export default function MainHeader() {
       <div className={styles.header + (navbarOpen ? ' ' + styles.open : '')}>
         <div className={styles.headerTop}>
           <Link href="/" className={styles.headerLogo} tabIndex={0} title={config.texts.siteName}>
-            <Image src="/images/logo/logo2024-cropped.png?v=3" width="76" height="66" alt={config.texts.siteName} />
+            <Image src="/images/logo/icon.svg" width="72" height="72" alt={config.texts.siteName} />
             <h1 className="sr-only">
               {config.texts.siteName}
               <small>.gg</small>

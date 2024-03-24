@@ -22,6 +22,8 @@ module.exports = {
     '/donate/thankyou',
     '/profile',
     '/auth/*',
+    '/v4',
+    '/v4/*',
   ],
   // ...other options
 }
